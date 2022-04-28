@@ -1,0 +1,49 @@
+
+select * from V_REFERENCIAS;
+
+select * from V_RECEPCIONES_CAB;
+select * from V_RECEPCIONES_LIN;
+
+select * from V_ORDEN_SALIDA_CAB;
+select * from ORDEN_SALIDA_LIN;
+
+select * from PALETS;
+
+select * from V_MOVIMIENTOS_PICKING
+
+select * from UBICACIONES
+
+
+BEGIN
+	DECLARE @C INT;
+	SET @C = 0
+
+	--TABLA PARA RECORRER: REFERENCIAS
+	SELECT * INTO #TEMP FROM REFERENCIAS
+
+	DECLARE @ID VARCHAR(30)
+
+	--RECORRER COPIA DE LA TABLA
+	WHILE EXISTS (SELECT * FROM #TEMP)
+	BEGIN
+		--SE RECOGEN LOS DATOS DE LA FILA ACTUAL
+		SELECT TOP 1 @ID = COD_REFERENCIA FROM #TEMP
+		----------------------------------------------
+
+
+		--CODIGO REALIZADO POR BUCLE
+		SET @C = @C + 2
+
+
+
+		----------------------------------------------
+		--IR BORRANDO FILAS PARA SALIR DEL BUCLE
+		DELETE FROM #TEMP WHERE COD_REFERENCIA = @ID
+	END
+
+	SELECT @C
+
+	DROP TABLE #TEMP
+END
+
+

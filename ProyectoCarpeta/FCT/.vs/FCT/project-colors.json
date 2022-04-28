@@ -1,0 +1,31 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "f2d88fde-3773-4d7e-ad41-a18df7c25939": {
+      "ProjectGuid": "f2d88fde-3773-4d7e-ad41-a18df7c25939",
+      "DisplayName": "FCT",
+      "ColorIndex": 0
+    },
+    "6d5e9aac-508e-407a-84ff-54d27d0673cf": {
+      "ProjectGuid": "6d5e9aac-508e-407a-84ff-54d27d0673cf",
+      "DisplayName": "FCT.Cliente.UI",
+      "ColorIndex": 1
+    },
+    "cd4a076a-7273-4001-a0be-2188e06ede22": {
+      "ProjectGuid": "cd4a076a-7273-4001-a0be-2188e06ede22",
+      "DisplayName": "FCT.GestionICP.UI",
+      "ColorIndex": 2
+    },
+    "b2798a22-9f37-4ea0-b0fe-3f752dc299ab": {
+      "ProjectGuid": "b2798a22-9f37-4ea0-b0fe-3f752dc299ab",
+      "DisplayName": "FCT.Negocio",
+      "ColorIndex": 3
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Archivos varios",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 4
+}

@@ -1,0 +1,14 @@
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Negocio\bin\Debug\FCT.Negocio.dll.config
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Negocio\bin\Debug\FCT.Negocio.dll
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Negocio\bin\Debug\FCT.Negocio.pdb
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Negocio\bin\Debug\EntityFramework.dll
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Negocio\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Negocio\bin\Debug\EntityFramework.xml
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Negocio\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Negocio\obj\Debug\FCT.Negocio.csproj.AssemblyReference.cache
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Negocio\obj\Debug\FCT.Negocio.Properties.Resources.resources
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Negocio\obj\Debug\FCT.Negocio.csproj.GenerateResource.cache
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Negocio\obj\Debug\FCT.Negocio.csproj.CoreCompileInputs.cache
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Negocio\obj\Debug\FCT.Negocio.csproj.CopyComplete
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Negocio\obj\Debug\FCT.Negocio.dll
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Negocio\obj\Debug\FCT.Negocio.pdb
