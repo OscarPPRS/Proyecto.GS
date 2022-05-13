@@ -1,8 +1,6 @@
 ALTER PROCEDURE PA_GENERAR_ETIQUETA
 	
-	@COD_REFERENCIA VARCHAR(30),
 	@COD_PALET INT,
-	@CANTIDAD INT,
 
 
 	@INVOKER	INT,		-- ESTE PARÁMETRO LO DEBEN TENER TODOS LOS PAS
@@ -26,7 +24,15 @@ BEGIN TRY
 	----------------------------------------------------------------------------------------------------------------------------------------------
 	
 	DECLARE @TEXTO_ETIQUETA VARCHAR (4000),
-		@COD_PALET_FORMATEADO VARCHAR(8)
+		@COD_PALET_FORMATEADO VARCHAR(8),
+		@CANTIDAD INT,
+		@COD_REFERENCIA VARCHAR(30);
+
+		SELECT @CANTIDAD = CANTIDAD, @COD_REFERENCIA = COD_REFERENCIA
+		FROM PALETS
+		WHERE COD_PALET = @COD_PALET
+
+
 
 	SET @COD_PALET_FORMATEADO = Right(replicate('0',8) + convert(varchar(8), @COD_PALET), 8);
 

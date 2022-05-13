@@ -49,7 +49,7 @@ namespace FCT.Cliente.UI
 
 				try
 				{
-					File.Copy(xtraOpenFileDialog1.FileName.ToString(), Path.GetDirectoryName(Application.ExecutablePath) + rutaGuardado);
+					File.Copy(xtraOpenFileDialog1.FileName.ToString(), "\\\\m2d96\\Publico" + rutaGuardado);
 				}
 				catch (Exception)
 				{
@@ -85,17 +85,17 @@ namespace FCT.Cliente.UI
 				
 				actualizarGrid();
 				textEditPrecio.Text = "";
-				textEditDescripcion.Text = "";				
-					try
-					{
-						File.Copy(xtraOpenFileDialog1.FileName.ToString(), Path.GetDirectoryName(Application.ExecutablePath) + rutaGuardado);
-						pictureEditVisualizar.Image = Image.FromFile(Application.StartupPath + ruta);
-					}
-					catch
-					{
-						
-					}
-						rutaGuardado = null;
+				textEditDescripcion.Text = "";
+				try
+				{
+					File.Copy(xtraOpenFileDialog1.FileName.ToString(), "\\\\m2d96\\Publico" + rutaGuardado);
+						pictureEditVisualizar.Image = Image.FromFile("\\\\m2d96\\Publico" + ruta);
+				}
+						catch
+				{
+
+				}
+			rutaGuardado = null;
 						pictureEditCambiar.Image = null;
 						xtraOpenFileDialog1.FileName = "";
 			}
@@ -117,7 +117,7 @@ namespace FCT.Cliente.UI
 			if (!String.IsNullOrEmpty(xtraOpenFileDialog1.FileName.ToString()))
 			{
 				pictureEditCambiar.Image = Image.FromFile(xtraOpenFileDialog1.FileName.ToString());
-				rutaGuardado = "\\..\\..\\..\\Recursos\\img\\" + FuncionesAuxiliares.randomString(8) + ".jpeg";
+				rutaGuardado = "\\Recursos\\img\\" + FuncionesAuxiliares.randomString(8) + ".jpeg";
 			}
 
 		}
@@ -132,7 +132,7 @@ namespace FCT.Cliente.UI
 
 				try
 				{
-				if (vista.IMAGEN != null) { pictureEditVisualizar.Image = Image.FromFile(Application.StartupPath + vista.IMAGEN); }
+				if (vista.IMAGEN != null) { pictureEditVisualizar.Image = Image.FromFile("\\\\m2d96\\Publico" + vista.IMAGEN); }
 				else { pictureEditVisualizar.Image = null; }
 				}
 				catch (Exception)
@@ -168,9 +168,12 @@ namespace FCT.Cliente.UI
 
 		public void actualizarGrid()
 		{
-			vISTAREFERENCIASBindingSource.DataSource = Consultas.gridCatalogoReferencias(formContenedor.idEmpresa);
+			vISTAREFERENCIASBindingSource.DataSource = CargarGrids.catalogoReferencias(formContenedor.idEmpresa);
 		}
 
-		
+		private void simpleButtonActualizar_Click(object sender, EventArgs e)
+		{
+			actualizarGrid();
+		}
 	}
 }

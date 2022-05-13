@@ -1,4 +1,6 @@
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\bin\Debug\FCT.GestionICP.UI.exe.config
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\bin\Debug\FCT.GestionICP.UI.exe.manifest
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\bin\Debug\FCT.GestionICP.UI.application
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\bin\Debug\FCT.GestionICP.UI.exe
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\bin\Debug\FCT.GestionICP.UI.pdb
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\bin\Debug\DevExpress.Data.Desktop.v21.2.dll
@@ -99,12 +101,18 @@ C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\bin\Debug\ru\
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.csproj.AssemblyReference.cache
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.csproj.SuggestedBindingRedirects.cache
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.Formularios.formContenedor.resources
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.Formularios.formGestionPalets.resources
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.Formularios.formIncidenciasPedidos.resources
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.Formularios.formPicking.resources
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.Formularios.formRecepcionar.resources
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.Formularios.formRevision.resources
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.Formularios.formUbicarRecepciones.resources
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.Properties.Resources.resources
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.csproj.GenerateResource.cache
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.exe.licenses
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.csproj.CoreCompileInputs.cache
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.exe.manifest
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.application
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.csproj.CopyComplete
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.exe
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.GestionICP.UI\obj\Debug\FCT.GestionICP.UI.pdb

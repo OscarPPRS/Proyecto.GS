@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formReferencias));
 			this.simpleButtonImagen = new DevExpress.XtraEditors.SimpleButton();
 			this.gridControlReferencias = new DevExpress.XtraGrid.GridControl();
 			this.vISTAREFERENCIASBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -51,6 +52,11 @@
 			this.xtraOpenFileDialog1 = new DevExpress.XtraEditors.XtraOpenFileDialog(this.components);
 			this.textEditDescripcion = new DevExpress.XtraEditors.TextEdit();
 			this.pictureEditCambiar = new DevExpress.XtraEditors.PictureEdit();
+			this.simpleButtonActualizar = new DevExpress.XtraEditors.SimpleButton();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+			this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+			this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlReferencias)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.vISTAREFERENCIASBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -58,12 +64,13 @@
 			((System.ComponentModel.ISupportInitialize)(this.textEditPrecio.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditDescripcion.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureEditCambiar.Properties)).BeginInit();
+			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// simpleButtonImagen
 			// 
 			this.simpleButtonImagen.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.simpleButtonImagen.Location = new System.Drawing.Point(1490, 426);
+			this.simpleButtonImagen.Location = new System.Drawing.Point(138, 284);
 			this.simpleButtonImagen.Name = "simpleButtonImagen";
 			this.simpleButtonImagen.Size = new System.Drawing.Size(157, 27);
 			this.simpleButtonImagen.TabIndex = 87;
@@ -74,10 +81,11 @@
 			// 
 			this.gridControlReferencias.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.gridControlReferencias.DataSource = this.vISTAREFERENCIASBindingSource;
-			this.gridControlReferencias.Location = new System.Drawing.Point(571, 12);
+			this.gridControlReferencias.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridControlReferencias.Location = new System.Drawing.Point(483, 167);
 			this.gridControlReferencias.MainView = this.gridView1;
 			this.gridControlReferencias.Name = "gridControlReferencias";
-			this.gridControlReferencias.Size = new System.Drawing.Size(784, 831);
+			this.gridControlReferencias.Size = new System.Drawing.Size(784, 782);
 			this.gridControlReferencias.TabIndex = 86;
 			this.gridControlReferencias.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -88,6 +96,14 @@
 			// 
 			// gridView1
 			// 
+			this.gridView1.Appearance.Empty.BackColor = System.Drawing.Color.Transparent;
+			this.gridView1.Appearance.Empty.Options.UseBackColor = true;
+			this.gridView1.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
+			this.gridView1.Appearance.Row.BackColor = System.Drawing.Color.Transparent;
+			this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridView1.Appearance.Row.Options.UseBackColor = true;
+			this.gridView1.Appearance.Row.Options.UseFont = true;
 			this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colCOD_REFERENCIA,
             this.colID_EMPRESA,
@@ -168,35 +184,43 @@
 			// labelControl3
 			// 
 			this.labelControl3.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.labelControl3.Location = new System.Drawing.Point(1460, 547);
+			this.labelControl3.Appearance.Font = new System.Drawing.Font("Lemon/Milk", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl3.Appearance.Options.UseFont = true;
+			this.labelControl3.Location = new System.Drawing.Point(74, 387);
 			this.labelControl3.Name = "labelControl3";
-			this.labelControl3.Size = new System.Drawing.Size(29, 13);
+			this.labelControl3.Size = new System.Drawing.Size(69, 27);
 			this.labelControl3.TabIndex = 85;
 			this.labelControl3.Text = "Precio";
 			// 
 			// labelControl2
 			// 
 			this.labelControl2.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.labelControl2.Location = new System.Drawing.Point(1460, 490);
+			this.labelControl2.Appearance.Font = new System.Drawing.Font("Lemon/Milk", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl2.Appearance.Options.UseFont = true;
+			this.labelControl2.Location = new System.Drawing.Point(74, 330);
 			this.labelControl2.Name = "labelControl2";
-			this.labelControl2.Size = new System.Drawing.Size(54, 13);
+			this.labelControl2.Size = new System.Drawing.Size(125, 27);
 			this.labelControl2.TabIndex = 84;
 			this.labelControl2.Text = "Descripción";
 			// 
 			// pictureEditVisualizar
 			// 
 			this.pictureEditVisualizar.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.pictureEditVisualizar.Location = new System.Drawing.Point(186, 114);
+			this.pictureEditVisualizar.Location = new System.Drawing.Point(78, 281);
 			this.pictureEditVisualizar.Name = "pictureEditVisualizar";
+			this.pictureEditVisualizar.Properties.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(34)))), ((int)(((byte)(64)))));
+			this.pictureEditVisualizar.Properties.Appearance.Options.UseBackColor = true;
+			this.pictureEditVisualizar.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+			this.pictureEditVisualizar.Properties.NullText = " ";
 			this.pictureEditVisualizar.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
 			this.pictureEditVisualizar.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
-			this.pictureEditVisualizar.Size = new System.Drawing.Size(363, 620);
+			this.pictureEditVisualizar.Size = new System.Drawing.Size(363, 570);
 			this.pictureEditVisualizar.TabIndex = 83;
 			// 
 			// textEditPrecio
 			// 
 			this.textEditPrecio.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.textEditPrecio.Location = new System.Drawing.Point(1570, 544);
+			this.textEditPrecio.Location = new System.Drawing.Point(223, 394);
 			this.textEditPrecio.Name = "textEditPrecio";
 			this.textEditPrecio.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
 			this.textEditPrecio.Properties.MaskSettings.Set("mask", "c");
@@ -206,31 +230,37 @@
 			// simpleButtonCambiarEstado
 			// 
 			this.simpleButtonCambiarEstado.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.simpleButtonCambiarEstado.Location = new System.Drawing.Point(1653, 608);
+			this.simpleButtonCambiarEstado.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonCambiarEstado.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonCambiarEstado.ImageOptions.Image")));
+			this.simpleButtonCambiarEstado.Location = new System.Drawing.Point(1595, 766);
 			this.simpleButtonCambiarEstado.Name = "simpleButtonCambiarEstado";
-			this.simpleButtonCambiarEstado.Size = new System.Drawing.Size(126, 50);
+			this.simpleButtonCambiarEstado.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+			this.simpleButtonCambiarEstado.Size = new System.Drawing.Size(57, 65);
 			this.simpleButtonCambiarEstado.TabIndex = 82;
-			this.simpleButtonCambiarEstado.Text = "Cambiar disponibilidad";
 			this.simpleButtonCambiarEstado.Click += new System.EventHandler(this.clickCambiarEstadoReferencia);
 			// 
 			// simpleButtonModificar
 			// 
 			this.simpleButtonModificar.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.simpleButtonModificar.Location = new System.Drawing.Point(1521, 608);
+			this.simpleButtonModificar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonModificar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonModificar.ImageOptions.Image")));
+			this.simpleButtonModificar.Location = new System.Drawing.Point(1484, 768);
 			this.simpleButtonModificar.Name = "simpleButtonModificar";
-			this.simpleButtonModificar.Size = new System.Drawing.Size(126, 50);
+			this.simpleButtonModificar.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+			this.simpleButtonModificar.Size = new System.Drawing.Size(58, 61);
 			this.simpleButtonModificar.TabIndex = 81;
-			this.simpleButtonModificar.Text = "Modificar selección";
 			this.simpleButtonModificar.Click += new System.EventHandler(this.simpleButtonModificar_Click);
 			// 
 			// simpleButtonAnadir
 			// 
 			this.simpleButtonAnadir.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.simpleButtonAnadir.Location = new System.Drawing.Point(1389, 608);
+			this.simpleButtonAnadir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonAnadir.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonAnadir.ImageOptions.Image")));
+			this.simpleButtonAnadir.Location = new System.Drawing.Point(1382, 770);
 			this.simpleButtonAnadir.Name = "simpleButtonAnadir";
-			this.simpleButtonAnadir.Size = new System.Drawing.Size(126, 50);
+			this.simpleButtonAnadir.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+			this.simpleButtonAnadir.Size = new System.Drawing.Size(55, 57);
 			this.simpleButtonAnadir.TabIndex = 80;
-			this.simpleButtonAnadir.Text = "Añadir nueva referencia";
 			this.simpleButtonAnadir.Click += new System.EventHandler(this.simpleButtonAnadir_Click);
 			// 
 			// xtraOpenFileDialog1
@@ -240,7 +270,7 @@
 			// textEditDescripcion
 			// 
 			this.textEditDescripcion.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.textEditDescripcion.Location = new System.Drawing.Point(1570, 487);
+			this.textEditDescripcion.Location = new System.Drawing.Point(223, 337);
 			this.textEditDescripcion.Name = "textEditDescripcion";
 			this.textEditDescripcion.Size = new System.Drawing.Size(124, 20);
 			this.textEditDescripcion.TabIndex = 88;
@@ -248,31 +278,96 @@
 			// pictureEditCambiar
 			// 
 			this.pictureEditCambiar.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.pictureEditCambiar.Location = new System.Drawing.Point(1490, 178);
+			this.pictureEditCambiar.Location = new System.Drawing.Point(138, 46);
 			this.pictureEditCambiar.Name = "pictureEditCambiar";
 			this.pictureEditCambiar.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
 			this.pictureEditCambiar.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
 			this.pictureEditCambiar.Size = new System.Drawing.Size(157, 232);
 			this.pictureEditCambiar.TabIndex = 89;
 			// 
+			// simpleButtonActualizar
+			// 
+			this.simpleButtonActualizar.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.simpleButtonActualizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonActualizar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonActualizar.ImageOptions.Image")));
+			this.simpleButtonActualizar.Location = new System.Drawing.Point(422, 167);
+			this.simpleButtonActualizar.Name = "simpleButtonActualizar";
+			this.simpleButtonActualizar.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+			this.simpleButtonActualizar.Size = new System.Drawing.Size(55, 56);
+			this.simpleButtonActualizar.TabIndex = 90;
+			this.simpleButtonActualizar.Click += new System.EventHandler(this.simpleButtonActualizar_Click);
+			// 
+			// panel1
+			// 
+			this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(179)))), ((int)(((byte)(53)))));
+			this.panel1.Controls.Add(this.pictureEditCambiar);
+			this.panel1.Controls.Add(this.textEditPrecio);
+			this.panel1.Controls.Add(this.labelControl2);
+			this.panel1.Controls.Add(this.textEditDescripcion);
+			this.panel1.Controls.Add(this.simpleButtonImagen);
+			this.panel1.Controls.Add(this.labelControl3);
+			this.panel1.Location = new System.Drawing.Point(1294, 281);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(435, 479);
+			this.panel1.TabIndex = 92;
+			// 
+			// labelControl1
+			// 
+			this.labelControl1.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.labelControl1.Appearance.Font = new System.Drawing.Font("Lemon/Milk", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl1.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(179)))), ((int)(((byte)(53)))));
+			this.labelControl1.Appearance.Options.UseFont = true;
+			this.labelControl1.Appearance.Options.UseForeColor = true;
+			this.labelControl1.Location = new System.Drawing.Point(211, 222);
+			this.labelControl1.Name = "labelControl1";
+			this.labelControl1.Size = new System.Drawing.Size(88, 41);
+			this.labelControl1.TabIndex = 93;
+			this.labelControl1.Text = "Visor";
+			// 
+			// labelControl4
+			// 
+			this.labelControl4.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.labelControl4.Appearance.Font = new System.Drawing.Font("Lemon/Milk", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl4.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(179)))), ((int)(((byte)(53)))));
+			this.labelControl4.Appearance.Options.UseFont = true;
+			this.labelControl4.Appearance.Options.UseForeColor = true;
+			this.labelControl4.Location = new System.Drawing.Point(1368, 222);
+			this.labelControl4.Name = "labelControl4";
+			this.labelControl4.Size = new System.Drawing.Size(297, 41);
+			this.labelControl4.TabIndex = 94;
+			this.labelControl4.Text = "Editar referencias";
+			// 
+			// labelControl5
+			// 
+			this.labelControl5.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.labelControl5.Appearance.Font = new System.Drawing.Font("Lemon/Milk", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl5.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(179)))), ((int)(((byte)(53)))));
+			this.labelControl5.Appearance.Options.UseFont = true;
+			this.labelControl5.Appearance.Options.UseForeColor = true;
+			this.labelControl5.Location = new System.Drawing.Point(161, 40);
+			this.labelControl5.Name = "labelControl5";
+			this.labelControl5.Size = new System.Drawing.Size(189, 41);
+			this.labelControl5.TabIndex = 96;
+			this.labelControl5.Text = "REFERENCIAS";
+			// 
 			// formReferencias
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1814, 855);
-			this.Controls.Add(this.pictureEditCambiar);
-			this.Controls.Add(this.textEditDescripcion);
-			this.Controls.Add(this.simpleButtonImagen);
-			this.Controls.Add(this.gridControlReferencias);
-			this.Controls.Add(this.simpleButtonAnadir);
-			this.Controls.Add(this.labelControl3);
-			this.Controls.Add(this.simpleButtonModificar);
-			this.Controls.Add(this.labelControl2);
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(34)))), ((int)(((byte)(64)))));
+			this.ClientSize = new System.Drawing.Size(1814, 1036);
+			this.Controls.Add(this.labelControl5);
+			this.Controls.Add(this.labelControl4);
 			this.Controls.Add(this.simpleButtonCambiarEstado);
+			this.Controls.Add(this.labelControl1);
+			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.simpleButtonModificar);
+			this.Controls.Add(this.simpleButtonActualizar);
+			this.Controls.Add(this.gridControlReferencias);
 			this.Controls.Add(this.pictureEditVisualizar);
-			this.Controls.Add(this.textEditPrecio);
+			this.Controls.Add(this.simpleButtonAnadir);
 			this.Name = "formReferencias";
-			this.Text = "Referencias";
 			this.Load += new System.EventHandler(this.formMenu_Load);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlReferencias)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.vISTAREFERENCIASBindingSource)).EndInit();
@@ -281,6 +376,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.textEditPrecio.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditDescripcion.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureEditCambiar.Properties)).EndInit();
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -309,5 +406,10 @@
 		private DevExpress.XtraGrid.Columns.GridColumn colSTOCK;
 		private DevExpress.XtraEditors.TextEdit textEditDescripcion;
 		private DevExpress.XtraEditors.PictureEdit pictureEditCambiar;
+		private DevExpress.XtraEditors.SimpleButton simpleButtonActualizar;
+		private System.Windows.Forms.Panel panel1;
+		private DevExpress.XtraEditors.LabelControl labelControl1;
+		private DevExpress.XtraEditors.LabelControl labelControl4;
+		private DevExpress.XtraEditors.LabelControl labelControl5;
 	}
 }

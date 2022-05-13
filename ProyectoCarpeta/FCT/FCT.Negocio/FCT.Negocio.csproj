@@ -79,9 +79,7 @@
     <Compile Include="FN_FECHA_GT_Result.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="INCIDENCIAS_PALETS.cs">
-      <DependentUpon>Modelo.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Llamadas a base de datos\CargarGrids.cs" />
     <Compile Include="Llamadas a base de datos\Consultas.cs" />
     <Compile Include="Llamadas a base de datos\ProcedimientosAlmacenados.cs" />
     <Compile Include="Modelo.Context.cs">
@@ -99,13 +97,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Modelo.edmx</DependentUpon>
     </Compile>
+    <Compile Include="MOVIMIENTOS_PICKING.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MOVIMIENTOS_PICKING_LOG.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="ORDEN_SALIDA_CAB.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ORDEN_SALIDA_INCIDENCIAS.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="ORDEN_SALIDA_LIN.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="PALETS.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PALETS_INCIDENCIAS.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="PAT_Result.cs">
@@ -124,7 +134,19 @@
     <Compile Include="UBICACIONES.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
-    <Compile Include="USUARIOS.cs">
+    <Compile Include="V_MOVIMIENTOS_PICKING.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_ORDEN_SALIDA_CAB.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_ORDEN_SALIDA_INCIDENCIAS.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_ORDEN_SALIDA_LIN.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="V_PALETS.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
     <Compile Include="V_RECEPCIONES_CAB.cs">

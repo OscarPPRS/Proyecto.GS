@@ -8,13 +8,15 @@ namespace FCT.GestionICP.UI
 {
 	public partial class LineaAviso
 	{
-		public LineaAviso(int albaran, int cod_linea, string cod_referencia, int cantidadBuena, int cantidadMala, string descripcion_referencia)
+		public LineaAviso(int albaran, int cod_linea, string cod_referencia, int cantidadBuena, int cantidadMala, int excedente, int falta, string descripcion_referencia)
 		{
 			this.albaran = albaran;
 			this.cod_linea = cod_linea;
 			this.cod_referencia = cod_referencia;
 			this.cantidadBuena = cantidadBuena;
 			this.cantidadMala = cantidadMala;
+			this.excedente = excedente;
+			this.falta = falta;
 			this.descripcion_referencia = descripcion_referencia;
 		}
 
@@ -23,6 +25,8 @@ namespace FCT.GestionICP.UI
 		public string cod_referencia { get; set; }
 		public int cantidadBuena { get; set; }
 		public int cantidadMala { get; set; }
+		public int excedente { get; set; }
+		public int falta { get; set; }
 		public string descripcion_referencia { get; set; }
 	}
 }

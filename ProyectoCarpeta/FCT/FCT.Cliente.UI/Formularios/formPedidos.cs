@@ -41,7 +41,7 @@ namespace FCT.Cliente.UI.Formularios
 		private void actualizarGrids()
 		{
 
-			vISTAREFERENCIASBindingSource.DataSource = Negocio.Consultas.gridReferenciasAvisos(formContenedor.idEmpresa);
+			vISTAREFERENCIASBindingSource.DataSource = Negocio.CargarGrids.referenciasAvisos(formContenedor.idEmpresa);
 			lineaPedidoBindingSource.DataSource = lineasGrid;
 
 		}
@@ -116,7 +116,7 @@ namespace FCT.Cliente.UI.Formularios
 
 				int cod = r.Next(999999999);
 
-				CabeceraPedido cab = new CabeceraPedido(cod, 1, Consultas.nombreEmpresa(formContenedor.idEmpresa), textEditDireccion.Text, textEditCodigoPostal.Text,
+				CabeceraPedido cab = new CabeceraPedido(cod, 1, formContenedor.idEmpresa, textEditDireccion.Text, textEditCodigoPostal.Text,
 				textEditPoblacion.Text, textEditProvincia.Text, textEditTelefono.Text, DateTime.Now.ToShortDateString(), lineasGrid.ToList());
 
 				textEditDireccion.Text = "";
@@ -130,7 +130,7 @@ namespace FCT.Cliente.UI.Formularios
 				//Serializa el archivo y lo guarda
 				try
 				{
-					using (Stream stream = File.Open(Application.StartupPath + "\\..\\..\\..\\Recursos\\data\\pedidos\\guardados\\" + nombreArchivo + ".dat", FileMode.Create))
+					using (Stream stream = File.Open("\\\\m2d96\\Publico" + "\\Recursos\\data\\pedidos\\guardados\\" + nombreArchivo + ".dat", FileMode.Create))
 					{
 						BinaryFormatter formatter = new BinaryFormatter();
 
@@ -154,7 +154,7 @@ namespace FCT.Cliente.UI.Formularios
 			listBoxControlPedidos.Items.Clear();
 			try
 			{
-				var archivos = Directory.GetFiles(Application.StartupPath + "\\..\\..\\..\\Recursos\\data\\pedidos\\guardados\\", "*.dat");
+				var archivos = Directory.GetFiles("\\\\m2d96\\Publico\\Recursos\\data\\pedidos\\guardados\\", "*.dat");
 				foreach (var a in archivos)
 				{
 					using (Stream stream = File.Open(a, FileMode.Open))
@@ -162,7 +162,7 @@ namespace FCT.Cliente.UI.Formularios
 
 						BinaryFormatter formatter = new BinaryFormatter();
 						CabeceraPedido cab = (CabeceraPedido)formatter.Deserialize(stream);
-						if (cab.nombre_cliente == Consultas.nombreEmpresa(formContenedor.idEmpresa))
+						if (cab.nombre_cliente == formContenedor.idEmpresa)
 						{
 							listBoxControlPedidos.Items.Add(cab);
 						}
@@ -192,7 +192,7 @@ namespace FCT.Cliente.UI.Formularios
 
 				try
 				{
-					File.Delete(Application.StartupPath + "\\..\\..\\..\\Recursos\\data\\pedidos\\guardados\\" + listBoxControlPedidos.SelectedItem + ".dat");
+					File.Delete("\\\\m2d96\\Publico\\Recursos\\data\\pedidos\\guardados\\" + listBoxControlPedidos.SelectedItem + ".dat");
 				}
 				catch (Exception)
 				{
@@ -209,7 +209,6 @@ namespace FCT.Cliente.UI.Formularios
 
 				lineasGrid.Clear();
 
-
 				//Codigo de los botones para desactivarlos tras eliminar una referencia
 				if (listBoxControlPedidos.SelectedIndex >= 0)
 				{
@@ -223,6 +222,7 @@ namespace FCT.Cliente.UI.Formularios
 					simpleButtonModificarPedido.Enabled = false;
 					simpleButtonEliminarPedido.Enabled = false;
 				}
+
 			}
 
 		}
@@ -243,7 +243,6 @@ namespace FCT.Cliente.UI.Formularios
 				simpleButtonModificarPedido.Enabled = false;
 				simpleButtonEliminarPedido.Enabled = false;
 			}
-
 
 			try
 			{
@@ -278,7 +277,7 @@ namespace FCT.Cliente.UI.Formularios
 
 				cab.lineasPedido = lineasGrid.ToList();
 
-				using (Stream stream = File.Create(Application.StartupPath + "\\..\\..\\..\\Recursos\\data\\pedidos\\guardados\\" + cab.cod_peticion + ".dat")) { 
+				using (Stream stream = File.Create("\\\\m2d96\\Publico\\Recursos\\data\\pedidos\\guardados\\" + cab.cod_peticion + ".dat")) { 
 				BinaryFormatter formatter = new BinaryFormatter();
 
 				formatter.Serialize(stream, cab);
@@ -312,8 +311,36 @@ namespace FCT.Cliente.UI.Formularios
 				bool hayStock = true;
 				foreach (LineaPedido l in cab.lineasPedido)
 				{
+					
+					//Recorre los archivos traspasados para revisar si la suma de esas cantidades supera al stock
 
-					if (l.cantidad > Consultas.stock(l.cod_referencia))
+					foreach (string archivo in Directory.EnumerateFiles("\\\\m2d96\\Publico\\Recursos\\data\\pedidos\\traspasados\\", "*.dat"))
+					{
+						string peticion;
+						using (Stream stream = File.Open(archivo, FileMode.Open))
+						{
+
+							BinaryFormatter formatter = new BinaryFormatter();
+							CabeceraPedido cab2 = (CabeceraPedido)formatter.Deserialize(stream);
+
+							peticion = cab2.cod_peticion.ToString();
+
+							foreach (LineaPedido lin in cab2.lineasPedido)
+							{
+
+								if(l.cod_referencia == lin.cod_referencia){
+
+									l.cantidad += lin.cantidad;
+
+								}
+							}
+
+						}
+					}
+
+					//Comprueba la cantidad para ver si hay stock suficiente
+
+						if (l.cantidad > Consultas.stock(l.cod_referencia))
 					{
 						hayStock = false;
 						faltaStock.Add(l.descripcion_referencia);
@@ -327,8 +354,8 @@ namespace FCT.Cliente.UI.Formularios
 					try
 					{
 
-						File.Move(Application.StartupPath + "\\..\\..\\..\\Recursos\\data\\pedidos\\guardados\\" + cab.cod_peticion + ".dat",
-									Application.StartupPath + "\\..\\..\\..\\Recursos\\data\\pedidos\\traspasados\\" + cab.cod_peticion + ".dat");
+						File.Move("\\\\m2d96\\Publico\\Recursos\\data\\pedidos\\guardados\\" + cab.cod_peticion + ".dat",
+									"\\\\m2d96\\Publico\\Recursos\\data\\pedidos\\traspasados\\" + cab.cod_peticion + ".dat");
 
 					}
 					catch (Exception)
@@ -372,6 +399,11 @@ namespace FCT.Cliente.UI.Formularios
 			{
 				simpleButtonQuitarLinea.Enabled = false;
 			}
+		}
+
+		private void simpleButtonActualizar_Click(object sender, EventArgs e)
+		{
+			actualizarGrids();
 		}
 	}
 }

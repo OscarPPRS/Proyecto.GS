@@ -22,10 +22,11 @@ namespace FCT.Negocio
     
         public int ALBARAN { get; set; }
         public Nullable<int> ESTADO { get; set; }
-        public string PROVEEDOR { get; set; }
+        public Nullable<int> ID_EMPRESA { get; set; }
         public Nullable<System.DateTime> FECH_CREACION { get; set; }
         public Nullable<System.DateTime> FECH_LLEGADA { get; set; }
     
+        public virtual EMPRESAS EMPRESAS { get; set; }
         public virtual ESTADOS_RECEPCION ESTADOS_RECEPCION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RECEPCIONES_LIN> RECEPCIONES_LIN { get; set; }

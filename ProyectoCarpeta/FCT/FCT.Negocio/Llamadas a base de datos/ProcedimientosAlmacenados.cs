@@ -25,14 +25,14 @@ namespace FCT.Negocio
 			}
 		}
 
-		public static void recepcionesCabeceras(int invoker,int albaran, int estado, string proveedor, DateTime fechaCreacion, DateTime fechaLlegada)
+		public static void recepcionesCabeceras(int invoker,int? albaran, int? estado, int? idEmpresa, DateTime? fechaCreacion, DateTime? fechaLlegada)
 		{
 
 			using (BDEntities bd = new BDEntities())
 			{
 				ObjectParameter retcode = new ObjectParameter("RETCODE", typeof(int));
 				ObjectParameter mensaje = new ObjectParameter("MENSAJE", typeof(string));
-				bd.PA_RECEPCIONES_CAB(albaran, estado, proveedor, fechaCreacion, fechaLlegada, invoker, retcode, mensaje);
+				bd.PA_RECEPCIONES_CAB(albaran, estado, idEmpresa, fechaCreacion, fechaLlegada, invoker, retcode, mensaje);
 			}
 		}
 
@@ -53,7 +53,7 @@ namespace FCT.Negocio
 			{
 				ObjectParameter retcode = new ObjectParameter("RETCODE", typeof(int));
 				ObjectParameter mensaje = new ObjectParameter("MENSAJE", typeof(string));
-				bd.PA_PALETS(codReferencia, codEstado, cantidad, albaran, invoker, retcode, mensaje);
+				bd.PA_PALETS(codReferencia, codEstado, cantidad, albaran, null, null,invoker, retcode, mensaje);
 			}
 		}
 
@@ -68,15 +68,15 @@ namespace FCT.Negocio
 			}
 		}
 
-		public static void salidasCabeceras(int invoker, int peticion, int estado, string nombreCliente, string direccionEntrega, 
-		string codigoPostal, string poblacion, string provincia, string telefono, DateTime fechaCreacion)
+		public static void salidasCabeceras(int invoker, int peticion, int estado, int? idEmpresa, string direccionEntrega, 
+		string codigoPostal, string poblacion, string provincia, string telefono, DateTime? fechaCreacion)
 		{
 
 			using (BDEntities bd = new BDEntities())
 			{
 				ObjectParameter retcode = new ObjectParameter("RETCODE", typeof(int));
 				ObjectParameter mensaje = new ObjectParameter("MENSAJE", typeof(string));
-				bd.PA_ORDEN_SALIDA_CAB(peticion, estado, nombreCliente, direccionEntrega,codigoPostal,poblacion,provincia,telefono,fechaCreacion, invoker, retcode, mensaje);
+				bd.PA_ORDEN_SALIDA_CAB(peticion, estado, idEmpresa, direccionEntrega,codigoPostal,poblacion,provincia,telefono,fechaCreacion, invoker, retcode, mensaje);
 			}
 		}
 
@@ -89,5 +89,37 @@ namespace FCT.Negocio
 				bd.PA_ORDEN_SALIDA_LIN(peticion, codLinea, codReferencia, cantidad, invoker, retcode, mensaje);
 			}
 		}
+
+		public static void movimientosPicking(int invoker, int peticion, int codLinea, int codMovimiento)
+		{
+			using (BDEntities bd = new BDEntities())
+			{
+				ObjectParameter retcode = new ObjectParameter("RETCODE", typeof(int));
+				ObjectParameter mensaje = new ObjectParameter("MENSAJE", typeof(string));
+				bd.PA_MOVIMIENTOS_PICKING(peticion, codLinea, codMovimiento, invoker, retcode, mensaje);
+			}
+		}
+
+		public static void salidasIncidencias(int invoker, int peticion, string descripcion)
+		{
+			using (BDEntities bd = new BDEntities())
+			{
+				ObjectParameter retcode = new ObjectParameter("RETCODE", typeof(int));
+				ObjectParameter mensaje = new ObjectParameter("MENSAJE", typeof(string));
+				bd.PA_ORDEN_SALIDA_INCIDENCIAS(peticion, descripcion, invoker, retcode, mensaje);
+			}
+		}
+
+		public static void gestionarPalets(int invoker, int codPalet, string ubicacionNueva, int codPaletAbsorbido, int cantidadPartida)
+		{
+			using (BDEntities bd = new BDEntities())
+			{
+				ObjectParameter retcode = new ObjectParameter("RETCODE", typeof(int));
+				ObjectParameter mensaje = new ObjectParameter("MENSAJE", typeof(string));
+				bd.PA_GESTIONAR_PALETS(codPalet, ubicacionNueva, codPaletAbsorbido, cantidadPartida, invoker, retcode, mensaje);
+			}
+		}
+
+
 	}
 }

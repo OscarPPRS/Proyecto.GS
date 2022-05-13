@@ -1,4 +1,6 @@
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\bin\Debug\FCT.Cliente.UI.exe.config
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\bin\Debug\FCT.Cliente.UI.exe.manifest
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\bin\Debug\FCT.Cliente.UI.application
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\bin\Debug\FCT.Cliente.UI.exe
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\bin\Debug\FCT.Cliente.UI.pdb
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\bin\Debug\DevExpress.Data.Desktop.v21.2.dll
@@ -110,11 +112,14 @@ C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\obj\Debug\FCT.Cl
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\obj\Debug\FCT.Cliente.UI.Formularios.formPedidos.resources
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\obj\Debug\FCT.Cliente.UI.Formularios.formRecepciones.resources
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\obj\Debug\FCT.Cliente.UI.formReferencias.resources
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\obj\Debug\FCT.Cliente.UI.Formularios.formVisorPedidos.resources
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\obj\Debug\FCT.Cliente.UI.Formularios.formVisorRecepciones.resources
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\obj\Debug\FCT.Cliente.UI.Properties.Resources.resources
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\obj\Debug\FCT.Cliente.UI.csproj.GenerateResource.cache
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\obj\Debug\FCT.Cliente.UI.exe.licenses
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\obj\Debug\FCT.Cliente.UI.csproj.CoreCompileInputs.cache
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\obj\Debug\FCT.Cliente.UI.exe.manifest
+C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\obj\Debug\FCT.Cliente.UI.application
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\obj\Debug\FCT.Cliente.UI.csproj.CopyComplete
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\obj\Debug\FCT.Cliente.UI.exe
 C:\Users\practicas\Documents\ProyectoCarpeta\FCT\FCT.Cliente.UI\obj\Debug\FCT.Cliente.UI.pdb

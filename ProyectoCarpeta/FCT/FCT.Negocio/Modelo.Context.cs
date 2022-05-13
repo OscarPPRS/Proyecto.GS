@@ -31,23 +31,27 @@ namespace FCT.Negocio
         public virtual DbSet<ESTADOS_ORDEN_SALIDA> ESTADOS_ORDEN_SALIDA { get; set; }
         public virtual DbSet<ESTADOS_PALETS> ESTADOS_PALETS { get; set; }
         public virtual DbSet<ESTADOS_RECEPCION> ESTADOS_RECEPCION { get; set; }
-        public virtual DbSet<INCIDENCIAS_PALETS> INCIDENCIAS_PALETS { get; set; }
+        public virtual DbSet<MOVIMIENTOS_PICKING> MOVIMIENTOS_PICKING { get; set; }
+        public virtual DbSet<MOVIMIENTOS_PICKING_LOG> MOVIMIENTOS_PICKING_LOG { get; set; }
         public virtual DbSet<ORDEN_SALIDA_CAB> ORDEN_SALIDA_CAB { get; set; }
+        public virtual DbSet<ORDEN_SALIDA_INCIDENCIAS> ORDEN_SALIDA_INCIDENCIAS { get; set; }
         public virtual DbSet<ORDEN_SALIDA_LIN> ORDEN_SALIDA_LIN { get; set; }
         public virtual DbSet<PALETS> PALETS { get; set; }
+        public virtual DbSet<PALETS_INCIDENCIAS> PALETS_INCIDENCIAS { get; set; }
         public virtual DbSet<RECEPCIONES_CAB> RECEPCIONES_CAB { get; set; }
         public virtual DbSet<RECEPCIONES_LIN> RECEPCIONES_LIN { get; set; }
         public virtual DbSet<REFERENCIAS> REFERENCIAS { get; set; }
         public virtual DbSet<UBICACIONES> UBICACIONES { get; set; }
-        public virtual DbSet<USUARIOS> USUARIOS { get; set; }
+        public virtual DbSet<V_MOVIMIENTOS_PICKING> V_MOVIMIENTOS_PICKING { get; set; }
+        public virtual DbSet<V_ORDEN_SALIDA_CAB> V_ORDEN_SALIDA_CAB { get; set; }
+        public virtual DbSet<V_ORDEN_SALIDA_LIN> V_ORDEN_SALIDA_LIN { get; set; }
+        public virtual DbSet<V_RECEPCIONES_CAB> V_RECEPCIONES_CAB { get; set; }
+        public virtual DbSet<V_RECEPCIONES_LIN> V_RECEPCIONES_LIN { get; set; }
         public virtual DbSet<V_REFERENCIAS> V_REFERENCIAS { get; set; }
         public virtual DbSet<V_SQL> V_SQL { get; set; }
         public virtual DbSet<V_SQL_FICHEROS> V_SQL_FICHEROS { get; set; }
-        public virtual DbSet<V_RECEPCIONES_CAB> V_RECEPCIONES_CAB { get; set; }
-        public virtual DbSet<V_RECEPCIONES_LIN> V_RECEPCIONES_LIN { get; set; }
-        public virtual DbSet<MOVIMIENTOS_PICKING> MOVIMIENTOS_PICKING { get; set; }
-        public virtual DbSet<V_MOVIMIENTOS_PICKING> V_MOVIMIENTOS_PICKING { get; set; }
-        public virtual DbSet<V_ORDEN_SALIDA_CAB> V_ORDEN_SALIDA_CAB { get; set; }
+        public virtual DbSet<V_PALETS> V_PALETS { get; set; }
+        public virtual DbSet<V_ORDEN_SALIDA_INCIDENCIAS> V_ORDEN_SALIDA_INCIDENCIAS { get; set; }
     
         [DbFunction("BDEntities", "FN_FECHA_GT")]
         public virtual IQueryable<FN_FECHA_GT_Result> FN_FECHA_GT(Nullable<System.DateTime> fECHA, string tIME_ZONE_DESTINO)
@@ -61,6 +65,27 @@ namespace FCT.Negocio
                 new ObjectParameter("TIME_ZONE_DESTINO", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FN_FECHA_GT_Result>("[BDEntities].[FN_FECHA_GT](@FECHA, @TIME_ZONE_DESTINO)", fECHAParameter, tIME_ZONE_DESTINOParameter);
+        }
+    
+        public virtual int PA_EMAIL_RECEPCIONES(string dESTINATARIOS, string aSUNTO_EMAIL, Nullable<int> aLBARAN, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var dESTINATARIOSParameter = dESTINATARIOS != null ?
+                new ObjectParameter("DESTINATARIOS", dESTINATARIOS) :
+                new ObjectParameter("DESTINATARIOS", typeof(string));
+    
+            var aSUNTO_EMAILParameter = aSUNTO_EMAIL != null ?
+                new ObjectParameter("ASUNTO_EMAIL", aSUNTO_EMAIL) :
+                new ObjectParameter("ASUNTO_EMAIL", typeof(string));
+    
+            var aLBARANParameter = aLBARAN.HasValue ?
+                new ObjectParameter("ALBARAN", aLBARAN) :
+                new ObjectParameter("ALBARAN", typeof(int));
+    
+            var iNVOKERParameter = iNVOKER.HasValue ?
+                new ObjectParameter("INVOKER", iNVOKER) :
+                new ObjectParameter("INVOKER", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_EMAIL_RECEPCIONES", dESTINATARIOSParameter, aSUNTO_EMAILParameter, aLBARANParameter, iNVOKERParameter, rETCODE, mENSAJE);
         }
     
         public virtual int PA_ENVIAR_DBMAIL(string dESTINATARIOS, string tEXTO_EMAIL, string aSUNTO_EMAIL, string pERFIL_EMAIL, string dESTINATARIOS_CC, string dESTINATARIOS_CCO, string fORMATO_EMAIL, string iMPORTANCIA_EMAIL, string cONFIDENCIALIDAD, string aRCHIVOS_ADJUNTOS, Nullable<bool> oCULTAR_TEXTO, string rEPLY_TO)
@@ -116,6 +141,19 @@ namespace FCT.Negocio
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_ENVIAR_DBMAIL", dESTINATARIOSParameter, tEXTO_EMAILParameter, aSUNTO_EMAILParameter, pERFIL_EMAILParameter, dESTINATARIOS_CCParameter, dESTINATARIOS_CCOParameter, fORMATO_EMAILParameter, iMPORTANCIA_EMAILParameter, cONFIDENCIALIDADParameter, aRCHIVOS_ADJUNTOSParameter, oCULTAR_TEXTOParameter, rEPLY_TOParameter);
         }
     
+        public virtual int PA_GENERAR_ETIQUETA(Nullable<int> cOD_PALET, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var cOD_PALETParameter = cOD_PALET.HasValue ?
+                new ObjectParameter("COD_PALET", cOD_PALET) :
+                new ObjectParameter("COD_PALET", typeof(int));
+    
+            var iNVOKERParameter = iNVOKER.HasValue ?
+                new ObjectParameter("INVOKER", iNVOKER) :
+                new ObjectParameter("INVOKER", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_GENERAR_ETIQUETA", cOD_PALETParameter, iNVOKERParameter, rETCODE, mENSAJE);
+        }
+    
         public virtual ObjectResult<string> PA_INF_TABLA(string objname)
         {
             var objnameParameter = objname != null ?
@@ -123,6 +161,201 @@ namespace FCT.Negocio
                 new ObjectParameter("objname", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("PA_INF_TABLA", objnameParameter);
+        }
+    
+        public virtual int PA_MOVIMIENTOS_PICKING(Nullable<int> cOD_PETICION, Nullable<int> cOD_LINEA, Nullable<int> cOD_MOVIMIENTO, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var cOD_PETICIONParameter = cOD_PETICION.HasValue ?
+                new ObjectParameter("COD_PETICION", cOD_PETICION) :
+                new ObjectParameter("COD_PETICION", typeof(int));
+    
+            var cOD_LINEAParameter = cOD_LINEA.HasValue ?
+                new ObjectParameter("COD_LINEA", cOD_LINEA) :
+                new ObjectParameter("COD_LINEA", typeof(int));
+    
+            var cOD_MOVIMIENTOParameter = cOD_MOVIMIENTO.HasValue ?
+                new ObjectParameter("COD_MOVIMIENTO", cOD_MOVIMIENTO) :
+                new ObjectParameter("COD_MOVIMIENTO", typeof(int));
+    
+            var iNVOKERParameter = iNVOKER.HasValue ?
+                new ObjectParameter("INVOKER", iNVOKER) :
+                new ObjectParameter("INVOKER", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MOVIMIENTOS_PICKING", cOD_PETICIONParameter, cOD_LINEAParameter, cOD_MOVIMIENTOParameter, iNVOKERParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_ORDEN_SALIDA_CAB(Nullable<int> cOD_PETICION, Nullable<int> eSTADO, Nullable<int> iD_EMPRESA, string dIRECCION_ENTREGA, string cOD_POSTAL, string pOBLACION, string pROVINCIA, string tELEFONO, Nullable<System.DateTime> fECH_CREACION, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var cOD_PETICIONParameter = cOD_PETICION.HasValue ?
+                new ObjectParameter("COD_PETICION", cOD_PETICION) :
+                new ObjectParameter("COD_PETICION", typeof(int));
+    
+            var eSTADOParameter = eSTADO.HasValue ?
+                new ObjectParameter("ESTADO", eSTADO) :
+                new ObjectParameter("ESTADO", typeof(int));
+    
+            var iD_EMPRESAParameter = iD_EMPRESA.HasValue ?
+                new ObjectParameter("ID_EMPRESA", iD_EMPRESA) :
+                new ObjectParameter("ID_EMPRESA", typeof(int));
+    
+            var dIRECCION_ENTREGAParameter = dIRECCION_ENTREGA != null ?
+                new ObjectParameter("DIRECCION_ENTREGA", dIRECCION_ENTREGA) :
+                new ObjectParameter("DIRECCION_ENTREGA", typeof(string));
+    
+            var cOD_POSTALParameter = cOD_POSTAL != null ?
+                new ObjectParameter("COD_POSTAL", cOD_POSTAL) :
+                new ObjectParameter("COD_POSTAL", typeof(string));
+    
+            var pOBLACIONParameter = pOBLACION != null ?
+                new ObjectParameter("POBLACION", pOBLACION) :
+                new ObjectParameter("POBLACION", typeof(string));
+    
+            var pROVINCIAParameter = pROVINCIA != null ?
+                new ObjectParameter("PROVINCIA", pROVINCIA) :
+                new ObjectParameter("PROVINCIA", typeof(string));
+    
+            var tELEFONOParameter = tELEFONO != null ?
+                new ObjectParameter("TELEFONO", tELEFONO) :
+                new ObjectParameter("TELEFONO", typeof(string));
+    
+            var fECH_CREACIONParameter = fECH_CREACION.HasValue ?
+                new ObjectParameter("FECH_CREACION", fECH_CREACION) :
+                new ObjectParameter("FECH_CREACION", typeof(System.DateTime));
+    
+            var iNVOKERParameter = iNVOKER.HasValue ?
+                new ObjectParameter("INVOKER", iNVOKER) :
+                new ObjectParameter("INVOKER", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_ORDEN_SALIDA_CAB", cOD_PETICIONParameter, eSTADOParameter, iD_EMPRESAParameter, dIRECCION_ENTREGAParameter, cOD_POSTALParameter, pOBLACIONParameter, pROVINCIAParameter, tELEFONOParameter, fECH_CREACIONParameter, iNVOKERParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_ORDEN_SALIDA_INCIDENCIAS(Nullable<int> cOD_PETICION, string dESCRIPCION, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var cOD_PETICIONParameter = cOD_PETICION.HasValue ?
+                new ObjectParameter("COD_PETICION", cOD_PETICION) :
+                new ObjectParameter("COD_PETICION", typeof(int));
+    
+            var dESCRIPCIONParameter = dESCRIPCION != null ?
+                new ObjectParameter("DESCRIPCION", dESCRIPCION) :
+                new ObjectParameter("DESCRIPCION", typeof(string));
+    
+            var iNVOKERParameter = iNVOKER.HasValue ?
+                new ObjectParameter("INVOKER", iNVOKER) :
+                new ObjectParameter("INVOKER", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_ORDEN_SALIDA_INCIDENCIAS", cOD_PETICIONParameter, dESCRIPCIONParameter, iNVOKERParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_ORDEN_SALIDA_LIN(Nullable<int> cOD_PETICION, Nullable<int> cOD_LINEA, string cOD_REFERENCIA, Nullable<int> cANTIDAD, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var cOD_PETICIONParameter = cOD_PETICION.HasValue ?
+                new ObjectParameter("COD_PETICION", cOD_PETICION) :
+                new ObjectParameter("COD_PETICION", typeof(int));
+    
+            var cOD_LINEAParameter = cOD_LINEA.HasValue ?
+                new ObjectParameter("COD_LINEA", cOD_LINEA) :
+                new ObjectParameter("COD_LINEA", typeof(int));
+    
+            var cOD_REFERENCIAParameter = cOD_REFERENCIA != null ?
+                new ObjectParameter("COD_REFERENCIA", cOD_REFERENCIA) :
+                new ObjectParameter("COD_REFERENCIA", typeof(string));
+    
+            var cANTIDADParameter = cANTIDAD.HasValue ?
+                new ObjectParameter("CANTIDAD", cANTIDAD) :
+                new ObjectParameter("CANTIDAD", typeof(int));
+    
+            var iNVOKERParameter = iNVOKER.HasValue ?
+                new ObjectParameter("INVOKER", iNVOKER) :
+                new ObjectParameter("INVOKER", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_ORDEN_SALIDA_LIN", cOD_PETICIONParameter, cOD_LINEAParameter, cOD_REFERENCIAParameter, cANTIDADParameter, iNVOKERParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_PALETS(string cOD_REFERENCIA, Nullable<int> cOD_ESTADO, Nullable<int> cANTIDAD, Nullable<int> aLBARAN, Nullable<int> pETICION, Nullable<int> cOD_PALET_PADRE, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var cOD_REFERENCIAParameter = cOD_REFERENCIA != null ?
+                new ObjectParameter("COD_REFERENCIA", cOD_REFERENCIA) :
+                new ObjectParameter("COD_REFERENCIA", typeof(string));
+    
+            var cOD_ESTADOParameter = cOD_ESTADO.HasValue ?
+                new ObjectParameter("COD_ESTADO", cOD_ESTADO) :
+                new ObjectParameter("COD_ESTADO", typeof(int));
+    
+            var cANTIDADParameter = cANTIDAD.HasValue ?
+                new ObjectParameter("CANTIDAD", cANTIDAD) :
+                new ObjectParameter("CANTIDAD", typeof(int));
+    
+            var aLBARANParameter = aLBARAN.HasValue ?
+                new ObjectParameter("ALBARAN", aLBARAN) :
+                new ObjectParameter("ALBARAN", typeof(int));
+    
+            var pETICIONParameter = pETICION.HasValue ?
+                new ObjectParameter("PETICION", pETICION) :
+                new ObjectParameter("PETICION", typeof(int));
+    
+            var cOD_PALET_PADREParameter = cOD_PALET_PADRE.HasValue ?
+                new ObjectParameter("COD_PALET_PADRE", cOD_PALET_PADRE) :
+                new ObjectParameter("COD_PALET_PADRE", typeof(int));
+    
+            var iNVOKERParameter = iNVOKER.HasValue ?
+                new ObjectParameter("INVOKER", iNVOKER) :
+                new ObjectParameter("INVOKER", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_PALETS", cOD_REFERENCIAParameter, cOD_ESTADOParameter, cANTIDADParameter, aLBARANParameter, pETICIONParameter, cOD_PALET_PADREParameter, iNVOKERParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_RECEPCIONES_CAB(Nullable<int> aLBARAN, Nullable<int> eSTADO, Nullable<int> iD_EMPRESA, Nullable<System.DateTime> fECH_CREACION, Nullable<System.DateTime> fECH_LLEGADA, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var aLBARANParameter = aLBARAN.HasValue ?
+                new ObjectParameter("ALBARAN", aLBARAN) :
+                new ObjectParameter("ALBARAN", typeof(int));
+    
+            var eSTADOParameter = eSTADO.HasValue ?
+                new ObjectParameter("ESTADO", eSTADO) :
+                new ObjectParameter("ESTADO", typeof(int));
+    
+            var iD_EMPRESAParameter = iD_EMPRESA.HasValue ?
+                new ObjectParameter("ID_EMPRESA", iD_EMPRESA) :
+                new ObjectParameter("ID_EMPRESA", typeof(int));
+    
+            var fECH_CREACIONParameter = fECH_CREACION.HasValue ?
+                new ObjectParameter("FECH_CREACION", fECH_CREACION) :
+                new ObjectParameter("FECH_CREACION", typeof(System.DateTime));
+    
+            var fECH_LLEGADAParameter = fECH_LLEGADA.HasValue ?
+                new ObjectParameter("FECH_LLEGADA", fECH_LLEGADA) :
+                new ObjectParameter("FECH_LLEGADA", typeof(System.DateTime));
+    
+            var iNVOKERParameter = iNVOKER.HasValue ?
+                new ObjectParameter("INVOKER", iNVOKER) :
+                new ObjectParameter("INVOKER", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_RECEPCIONES_CAB", aLBARANParameter, eSTADOParameter, iD_EMPRESAParameter, fECH_CREACIONParameter, fECH_LLEGADAParameter, iNVOKERParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_RECEPCIONES_LIN(Nullable<int> aLBARAN, Nullable<int> cOD_LINEA, string cOD_REFERENCIA, Nullable<int> cANTIDAD, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var aLBARANParameter = aLBARAN.HasValue ?
+                new ObjectParameter("ALBARAN", aLBARAN) :
+                new ObjectParameter("ALBARAN", typeof(int));
+    
+            var cOD_LINEAParameter = cOD_LINEA.HasValue ?
+                new ObjectParameter("COD_LINEA", cOD_LINEA) :
+                new ObjectParameter("COD_LINEA", typeof(int));
+    
+            var cOD_REFERENCIAParameter = cOD_REFERENCIA != null ?
+                new ObjectParameter("COD_REFERENCIA", cOD_REFERENCIA) :
+                new ObjectParameter("COD_REFERENCIA", typeof(string));
+    
+            var cANTIDADParameter = cANTIDAD.HasValue ?
+                new ObjectParameter("CANTIDAD", cANTIDAD) :
+                new ObjectParameter("CANTIDAD", typeof(int));
+    
+            var iNVOKERParameter = iNVOKER.HasValue ?
+                new ObjectParameter("INVOKER", iNVOKER) :
+                new ObjectParameter("INVOKER", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_RECEPCIONES_LIN", aLBARANParameter, cOD_LINEAParameter, cOD_REFERENCIAParameter, cANTIDADParameter, iNVOKERParameter, rETCODE, mENSAJE);
         }
     
         public virtual int PA_REFERENCIAS(string cOD_REFERENCIA, Nullable<int> iD_EMPRESA, string dES_REFERENCIA, Nullable<double> pRECIO, string iMAGEN, Nullable<bool> eSTADO, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
@@ -254,291 +487,29 @@ namespace FCT.Negocio
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PAT_Result>("PAT", tABLAParameter);
         }
     
-        public virtual int PA_INSERTAR_RECEPCIONES_CAB(Nullable<int> aLBARAN, Nullable<int> eSTADO, string pROVEEDOR, Nullable<System.DateTime> fECH_CREACION, Nullable<System.DateTime> fECH_LLEGADA, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        public virtual int PA_GESTIONAR_PALETS(Nullable<int> cOD_PALET, string cOD_UBICACION_NUEVA, Nullable<int> cOD_PALET_ABSORBIDO, Nullable<int> cANTIDAD_PARTIDA, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
         {
-            var aLBARANParameter = aLBARAN.HasValue ?
-                new ObjectParameter("ALBARAN", aLBARAN) :
-                new ObjectParameter("ALBARAN", typeof(int));
-    
-            var eSTADOParameter = eSTADO.HasValue ?
-                new ObjectParameter("ESTADO", eSTADO) :
-                new ObjectParameter("ESTADO", typeof(int));
-    
-            var pROVEEDORParameter = pROVEEDOR != null ?
-                new ObjectParameter("PROVEEDOR", pROVEEDOR) :
-                new ObjectParameter("PROVEEDOR", typeof(string));
-    
-            var fECH_CREACIONParameter = fECH_CREACION.HasValue ?
-                new ObjectParameter("FECH_CREACION", fECH_CREACION) :
-                new ObjectParameter("FECH_CREACION", typeof(System.DateTime));
-    
-            var fECH_LLEGADAParameter = fECH_LLEGADA.HasValue ?
-                new ObjectParameter("FECH_LLEGADA", fECH_LLEGADA) :
-                new ObjectParameter("FECH_LLEGADA", typeof(System.DateTime));
-    
-            var iNVOKERParameter = iNVOKER.HasValue ?
-                new ObjectParameter("INVOKER", iNVOKER) :
-                new ObjectParameter("INVOKER", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_INSERTAR_RECEPCIONES_CAB", aLBARANParameter, eSTADOParameter, pROVEEDORParameter, fECH_CREACIONParameter, fECH_LLEGADAParameter, iNVOKERParameter, rETCODE, mENSAJE);
-        }
-    
-        public virtual int PA_INSERTAR_RECEPCIONES_LIN(Nullable<int> aLBARAN, Nullable<int> cOD_LINEA, string cOD_REFERENCIA, Nullable<int> cANTIDAD, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
-        {
-            var aLBARANParameter = aLBARAN.HasValue ?
-                new ObjectParameter("ALBARAN", aLBARAN) :
-                new ObjectParameter("ALBARAN", typeof(int));
-    
-            var cOD_LINEAParameter = cOD_LINEA.HasValue ?
-                new ObjectParameter("COD_LINEA", cOD_LINEA) :
-                new ObjectParameter("COD_LINEA", typeof(int));
-    
-            var cOD_REFERENCIAParameter = cOD_REFERENCIA != null ?
-                new ObjectParameter("COD_REFERENCIA", cOD_REFERENCIA) :
-                new ObjectParameter("COD_REFERENCIA", typeof(string));
-    
-            var cANTIDADParameter = cANTIDAD.HasValue ?
-                new ObjectParameter("CANTIDAD", cANTIDAD) :
-                new ObjectParameter("CANTIDAD", typeof(int));
-    
-            var iNVOKERParameter = iNVOKER.HasValue ?
-                new ObjectParameter("INVOKER", iNVOKER) :
-                new ObjectParameter("INVOKER", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_INSERTAR_RECEPCIONES_LIN", aLBARANParameter, cOD_LINEAParameter, cOD_REFERENCIAParameter, cANTIDADParameter, iNVOKERParameter, rETCODE, mENSAJE);
-        }
-    
-        public virtual int PA_INSERTAR_PALETS(string cOD_REFERENCIA, Nullable<int> cOD_ESTADO, Nullable<int> cANTIDAD, Nullable<int> aLBARAN, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
-        {
-            var cOD_REFERENCIAParameter = cOD_REFERENCIA != null ?
-                new ObjectParameter("COD_REFERENCIA", cOD_REFERENCIA) :
-                new ObjectParameter("COD_REFERENCIA", typeof(string));
-    
-            var cOD_ESTADOParameter = cOD_ESTADO.HasValue ?
-                new ObjectParameter("COD_ESTADO", cOD_ESTADO) :
-                new ObjectParameter("COD_ESTADO", typeof(int));
-    
-            var cANTIDADParameter = cANTIDAD.HasValue ?
-                new ObjectParameter("CANTIDAD", cANTIDAD) :
-                new ObjectParameter("CANTIDAD", typeof(int));
-    
-            var aLBARANParameter = aLBARAN.HasValue ?
-                new ObjectParameter("ALBARAN", aLBARAN) :
-                new ObjectParameter("ALBARAN", typeof(int));
-    
-            var iNVOKERParameter = iNVOKER.HasValue ?
-                new ObjectParameter("INVOKER", iNVOKER) :
-                new ObjectParameter("INVOKER", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_INSERTAR_PALETS", cOD_REFERENCIAParameter, cOD_ESTADOParameter, cANTIDADParameter, aLBARANParameter, iNVOKERParameter, rETCODE, mENSAJE);
-        }
-    
-        public virtual int PA_GENERAR_ETIQUETA(string cOD_REFERENCIA, Nullable<int> cOD_PALET, Nullable<int> cANTIDAD, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
-        {
-            var cOD_REFERENCIAParameter = cOD_REFERENCIA != null ?
-                new ObjectParameter("COD_REFERENCIA", cOD_REFERENCIA) :
-                new ObjectParameter("COD_REFERENCIA", typeof(string));
-    
             var cOD_PALETParameter = cOD_PALET.HasValue ?
                 new ObjectParameter("COD_PALET", cOD_PALET) :
                 new ObjectParameter("COD_PALET", typeof(int));
     
-            var cANTIDADParameter = cANTIDAD.HasValue ?
-                new ObjectParameter("CANTIDAD", cANTIDAD) :
-                new ObjectParameter("CANTIDAD", typeof(int));
+            var cOD_UBICACION_NUEVAParameter = cOD_UBICACION_NUEVA != null ?
+                new ObjectParameter("COD_UBICACION_NUEVA", cOD_UBICACION_NUEVA) :
+                new ObjectParameter("COD_UBICACION_NUEVA", typeof(string));
+    
+            var cOD_PALET_ABSORBIDOParameter = cOD_PALET_ABSORBIDO.HasValue ?
+                new ObjectParameter("COD_PALET_ABSORBIDO", cOD_PALET_ABSORBIDO) :
+                new ObjectParameter("COD_PALET_ABSORBIDO", typeof(int));
+    
+            var cANTIDAD_PARTIDAParameter = cANTIDAD_PARTIDA.HasValue ?
+                new ObjectParameter("CANTIDAD_PARTIDA", cANTIDAD_PARTIDA) :
+                new ObjectParameter("CANTIDAD_PARTIDA", typeof(int));
     
             var iNVOKERParameter = iNVOKER.HasValue ?
                 new ObjectParameter("INVOKER", iNVOKER) :
                 new ObjectParameter("INVOKER", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_GENERAR_ETIQUETA", cOD_REFERENCIAParameter, cOD_PALETParameter, cANTIDADParameter, iNVOKERParameter, rETCODE, mENSAJE);
-        }
-    
-        public virtual int PA_RECEPCIONES_CAB(Nullable<int> aLBARAN, Nullable<int> eSTADO, string pROVEEDOR, Nullable<System.DateTime> fECH_CREACION, Nullable<System.DateTime> fECH_LLEGADA, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
-        {
-            var aLBARANParameter = aLBARAN.HasValue ?
-                new ObjectParameter("ALBARAN", aLBARAN) :
-                new ObjectParameter("ALBARAN", typeof(int));
-    
-            var eSTADOParameter = eSTADO.HasValue ?
-                new ObjectParameter("ESTADO", eSTADO) :
-                new ObjectParameter("ESTADO", typeof(int));
-    
-            var pROVEEDORParameter = pROVEEDOR != null ?
-                new ObjectParameter("PROVEEDOR", pROVEEDOR) :
-                new ObjectParameter("PROVEEDOR", typeof(string));
-    
-            var fECH_CREACIONParameter = fECH_CREACION.HasValue ?
-                new ObjectParameter("FECH_CREACION", fECH_CREACION) :
-                new ObjectParameter("FECH_CREACION", typeof(System.DateTime));
-    
-            var fECH_LLEGADAParameter = fECH_LLEGADA.HasValue ?
-                new ObjectParameter("FECH_LLEGADA", fECH_LLEGADA) :
-                new ObjectParameter("FECH_LLEGADA", typeof(System.DateTime));
-    
-            var iNVOKERParameter = iNVOKER.HasValue ?
-                new ObjectParameter("INVOKER", iNVOKER) :
-                new ObjectParameter("INVOKER", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_RECEPCIONES_CAB", aLBARANParameter, eSTADOParameter, pROVEEDORParameter, fECH_CREACIONParameter, fECH_LLEGADAParameter, iNVOKERParameter, rETCODE, mENSAJE);
-        }
-    
-        public virtual int PA_RECEPCIONES_LIN(Nullable<int> aLBARAN, Nullable<int> cOD_LINEA, string cOD_REFERENCIA, Nullable<int> cANTIDAD, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
-        {
-            var aLBARANParameter = aLBARAN.HasValue ?
-                new ObjectParameter("ALBARAN", aLBARAN) :
-                new ObjectParameter("ALBARAN", typeof(int));
-    
-            var cOD_LINEAParameter = cOD_LINEA.HasValue ?
-                new ObjectParameter("COD_LINEA", cOD_LINEA) :
-                new ObjectParameter("COD_LINEA", typeof(int));
-    
-            var cOD_REFERENCIAParameter = cOD_REFERENCIA != null ?
-                new ObjectParameter("COD_REFERENCIA", cOD_REFERENCIA) :
-                new ObjectParameter("COD_REFERENCIA", typeof(string));
-    
-            var cANTIDADParameter = cANTIDAD.HasValue ?
-                new ObjectParameter("CANTIDAD", cANTIDAD) :
-                new ObjectParameter("CANTIDAD", typeof(int));
-    
-            var iNVOKERParameter = iNVOKER.HasValue ?
-                new ObjectParameter("INVOKER", iNVOKER) :
-                new ObjectParameter("INVOKER", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_RECEPCIONES_LIN", aLBARANParameter, cOD_LINEAParameter, cOD_REFERENCIAParameter, cANTIDADParameter, iNVOKERParameter, rETCODE, mENSAJE);
-        }
-    
-        public virtual int PA_PALETS(string cOD_REFERENCIA, Nullable<int> cOD_ESTADO, Nullable<int> cANTIDAD, Nullable<int> aLBARAN, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
-        {
-            var cOD_REFERENCIAParameter = cOD_REFERENCIA != null ?
-                new ObjectParameter("COD_REFERENCIA", cOD_REFERENCIA) :
-                new ObjectParameter("COD_REFERENCIA", typeof(string));
-    
-            var cOD_ESTADOParameter = cOD_ESTADO.HasValue ?
-                new ObjectParameter("COD_ESTADO", cOD_ESTADO) :
-                new ObjectParameter("COD_ESTADO", typeof(int));
-    
-            var cANTIDADParameter = cANTIDAD.HasValue ?
-                new ObjectParameter("CANTIDAD", cANTIDAD) :
-                new ObjectParameter("CANTIDAD", typeof(int));
-    
-            var aLBARANParameter = aLBARAN.HasValue ?
-                new ObjectParameter("ALBARAN", aLBARAN) :
-                new ObjectParameter("ALBARAN", typeof(int));
-    
-            var iNVOKERParameter = iNVOKER.HasValue ?
-                new ObjectParameter("INVOKER", iNVOKER) :
-                new ObjectParameter("INVOKER", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_PALETS", cOD_REFERENCIAParameter, cOD_ESTADOParameter, cANTIDADParameter, aLBARANParameter, iNVOKERParameter, rETCODE, mENSAJE);
-        }
-    
-        public virtual int PA_EMAIL_RECEPCIONES(string dESTINATARIOS, string aSUNTO_EMAIL, Nullable<int> aLBARAN, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
-        {
-            var dESTINATARIOSParameter = dESTINATARIOS != null ?
-                new ObjectParameter("DESTINATARIOS", dESTINATARIOS) :
-                new ObjectParameter("DESTINATARIOS", typeof(string));
-    
-            var aSUNTO_EMAILParameter = aSUNTO_EMAIL != null ?
-                new ObjectParameter("ASUNTO_EMAIL", aSUNTO_EMAIL) :
-                new ObjectParameter("ASUNTO_EMAIL", typeof(string));
-    
-            var aLBARANParameter = aLBARAN.HasValue ?
-                new ObjectParameter("ALBARAN", aLBARAN) :
-                new ObjectParameter("ALBARAN", typeof(int));
-    
-            var iNVOKERParameter = iNVOKER.HasValue ?
-                new ObjectParameter("INVOKER", iNVOKER) :
-                new ObjectParameter("INVOKER", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_EMAIL_RECEPCIONES", dESTINATARIOSParameter, aSUNTO_EMAILParameter, aLBARANParameter, iNVOKERParameter, rETCODE, mENSAJE);
-        }
-    
-        public virtual int PA_ORDEN_SALIDA_CAB(Nullable<int> cOD_PETICION, Nullable<int> eSTADO, string nOMBRE_CLIENTE, string dIRECCION_ENTREGA, string cOD_POSTAL, string pOBLACION, string pROVINCIA, string tELEFONO, Nullable<System.DateTime> fECH_CREACION, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
-        {
-            var cOD_PETICIONParameter = cOD_PETICION.HasValue ?
-                new ObjectParameter("COD_PETICION", cOD_PETICION) :
-                new ObjectParameter("COD_PETICION", typeof(int));
-    
-            var eSTADOParameter = eSTADO.HasValue ?
-                new ObjectParameter("ESTADO", eSTADO) :
-                new ObjectParameter("ESTADO", typeof(int));
-    
-            var nOMBRE_CLIENTEParameter = nOMBRE_CLIENTE != null ?
-                new ObjectParameter("NOMBRE_CLIENTE", nOMBRE_CLIENTE) :
-                new ObjectParameter("NOMBRE_CLIENTE", typeof(string));
-    
-            var dIRECCION_ENTREGAParameter = dIRECCION_ENTREGA != null ?
-                new ObjectParameter("DIRECCION_ENTREGA", dIRECCION_ENTREGA) :
-                new ObjectParameter("DIRECCION_ENTREGA", typeof(string));
-    
-            var cOD_POSTALParameter = cOD_POSTAL != null ?
-                new ObjectParameter("COD_POSTAL", cOD_POSTAL) :
-                new ObjectParameter("COD_POSTAL", typeof(string));
-    
-            var pOBLACIONParameter = pOBLACION != null ?
-                new ObjectParameter("POBLACION", pOBLACION) :
-                new ObjectParameter("POBLACION", typeof(string));
-    
-            var pROVINCIAParameter = pROVINCIA != null ?
-                new ObjectParameter("PROVINCIA", pROVINCIA) :
-                new ObjectParameter("PROVINCIA", typeof(string));
-    
-            var tELEFONOParameter = tELEFONO != null ?
-                new ObjectParameter("TELEFONO", tELEFONO) :
-                new ObjectParameter("TELEFONO", typeof(string));
-    
-            var fECH_CREACIONParameter = fECH_CREACION.HasValue ?
-                new ObjectParameter("FECH_CREACION", fECH_CREACION) :
-                new ObjectParameter("FECH_CREACION", typeof(System.DateTime));
-    
-            var iNVOKERParameter = iNVOKER.HasValue ?
-                new ObjectParameter("INVOKER", iNVOKER) :
-                new ObjectParameter("INVOKER", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_ORDEN_SALIDA_CAB", cOD_PETICIONParameter, eSTADOParameter, nOMBRE_CLIENTEParameter, dIRECCION_ENTREGAParameter, cOD_POSTALParameter, pOBLACIONParameter, pROVINCIAParameter, tELEFONOParameter, fECH_CREACIONParameter, iNVOKERParameter, rETCODE, mENSAJE);
-        }
-    
-        public virtual int PA_ORDEN_SALIDA_LIN(Nullable<int> cOD_PETICION, Nullable<int> cOD_LINEA, string cOD_REFERENCIA, Nullable<int> cANTIDAD, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
-        {
-            var cOD_PETICIONParameter = cOD_PETICION.HasValue ?
-                new ObjectParameter("COD_PETICION", cOD_PETICION) :
-                new ObjectParameter("COD_PETICION", typeof(int));
-    
-            var cOD_LINEAParameter = cOD_LINEA.HasValue ?
-                new ObjectParameter("COD_LINEA", cOD_LINEA) :
-                new ObjectParameter("COD_LINEA", typeof(int));
-    
-            var cOD_REFERENCIAParameter = cOD_REFERENCIA != null ?
-                new ObjectParameter("COD_REFERENCIA", cOD_REFERENCIA) :
-                new ObjectParameter("COD_REFERENCIA", typeof(string));
-    
-            var cANTIDADParameter = cANTIDAD.HasValue ?
-                new ObjectParameter("CANTIDAD", cANTIDAD) :
-                new ObjectParameter("CANTIDAD", typeof(int));
-    
-            var iNVOKERParameter = iNVOKER.HasValue ?
-                new ObjectParameter("INVOKER", iNVOKER) :
-                new ObjectParameter("INVOKER", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_ORDEN_SALIDA_LIN", cOD_PETICIONParameter, cOD_LINEAParameter, cOD_REFERENCIAParameter, cANTIDADParameter, iNVOKERParameter, rETCODE, mENSAJE);
-        }
-    
-        public virtual int PA_MOVIMIENTOS_PICKING(Nullable<int> cOD_PETICION, Nullable<int> cOD_PALET, Nullable<int> iNVOKER, ObjectParameter rETCODE, ObjectParameter mENSAJE)
-        {
-            var cOD_PETICIONParameter = cOD_PETICION.HasValue ?
-                new ObjectParameter("COD_PETICION", cOD_PETICION) :
-                new ObjectParameter("COD_PETICION", typeof(int));
-    
-            var cOD_PALETParameter = cOD_PALET.HasValue ?
-                new ObjectParameter("COD_PALET", cOD_PALET) :
-                new ObjectParameter("COD_PALET", typeof(int));
-    
-            var iNVOKERParameter = iNVOKER.HasValue ?
-                new ObjectParameter("INVOKER", iNVOKER) :
-                new ObjectParameter("INVOKER", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MOVIMIENTOS_PICKING", cOD_PETICIONParameter, cOD_PALETParameter, iNVOKERParameter, rETCODE, mENSAJE);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_GESTIONAR_PALETS", cOD_PALETParameter, cOD_UBICACION_NUEVAParameter, cOD_PALET_ABSORBIDOParameter, cANTIDAD_PARTIDAParameter, iNVOKERParameter, rETCODE, mENSAJE);
         }
     }
 }

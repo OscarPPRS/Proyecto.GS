@@ -17,7 +17,8 @@ namespace FCT.Negocio
         public int COD_PETICION { get; set; }
         public Nullable<int> ESTADO { get; set; }
         public string DES_ESTADO { get; set; }
-        public string NOMBRE_CLIENTE { get; set; }
+        public Nullable<int> ID_EMPRESA { get; set; }
+        public string DES_EMPRESA { get; set; }
         public string DIRECCION_ENTREGA { get; set; }
         public string COD_POSTAL { get; set; }
         public string POBLACION { get; set; }

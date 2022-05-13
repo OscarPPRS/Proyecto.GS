@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b4f75246881b43e984e552a6fd655be3" Name="Diagram1">
+        <EntityTypeShape EntityType="BDModel.EMPRESAS" Width="1.5" PointX="0.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.ESTADOS_ORDEN_SALIDA" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.ESTADOS_PALETS" Width="1.5" PointX="3" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.ESTADOS_RECEPCION" Width="1.5" PointX="3.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.MOVIMIENTOS_PICKING" Width="1.5" PointX="7.5" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.MOVIMIENTOS_PICKING_LOG" Width="1.5" PointX="10.5" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.ORDEN_SALIDA_CAB" Width="1.5" PointX="3" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.ORDEN_SALIDA_INCIDENCIAS" Width="1.5" PointX="5.25" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.ORDEN_SALIDA_LIN" Width="1.5" PointX="8.25" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.PALETS" Width="1.5" PointX="5.25" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.PALETS_INCIDENCIAS" Width="1.5" PointX="7.5" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.RECEPCIONES_CAB" Width="1.5" PointX="6" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.RECEPCIONES_LIN" Width="1.5" PointX="10.25" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.REFERENCIAS" Width="1.5" PointX="3" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.UBICACIONES" Width="1.5" PointX="3" PointY="28" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.V_MOVIMIENTOS_PICKING" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.V_ORDEN_SALIDA_CAB" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.V_ORDEN_SALIDA_LIN" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.V_RECEPCIONES_CAB" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.V_RECEPCIONES_LIN" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.V_REFERENCIAS" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.V_SQL" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDModel.V_SQL_FICHEROS" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="BDModel.ORDEN_SALIDA_CAB_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.RECEPCIONES_CAB_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.REFERENCIAS_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.ORDEN_SALIDA_CAB_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.PALETS_fk2" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.RECEPCIONES_CAB_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.MOVIMIENTOS_PICKING_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.MOVIMIENTOS_PICKING_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.MOVIMIENTOS_PICKING_LOG_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.MOVIMIENTOS_PICKING_LOG_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.MOVIMIENTOS_PICKING_LOG_fk2" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.ORDEN_SALIDA_INCIDENCIAS_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.ORDEN_SALIDA_LIN_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.ORDEN_SALIDA_LIN_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.INCIDENCIAS_PALETS_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.PALETS_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.PALETS_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.PALETS_fk3" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.RECEPCIONES_LIN_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="BDModel.RECEPCIONES_LIN_fk1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BDModel.V_PALETS" Width="1.5" PointX="9.375" PointY="4.75" />
+        <EntityTypeShape EntityType="BDModel.V_ORDEN_SALIDA_INCIDENCIAS" Width="1.5" PointX="10.375" PointY="9.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

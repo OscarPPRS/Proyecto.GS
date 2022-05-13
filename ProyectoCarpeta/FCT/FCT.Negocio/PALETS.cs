@@ -17,8 +17,10 @@ namespace FCT.Negocio
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PALETS()
         {
-            this.INCIDENCIAS_PALETS = new HashSet<INCIDENCIAS_PALETS>();
             this.MOVIMIENTOS_PICKING = new HashSet<MOVIMIENTOS_PICKING>();
+            this.MOVIMIENTOS_PICKING_LOG = new HashSet<MOVIMIENTOS_PICKING_LOG>();
+            this.PALETS_INCIDENCIAS = new HashSet<PALETS_INCIDENCIAS>();
+            this.PALETS1 = new HashSet<PALETS>();
         }
     
         public int COD_PALET { get; set; }
@@ -29,13 +31,20 @@ namespace FCT.Negocio
         public Nullable<int> CANTIDAD { get; set; }
         public Nullable<int> ALBARAN_RECEPCION { get; set; }
         public string ETIQUETA { get; set; }
+        public Nullable<int> PETICION_SALIDA { get; set; }
+        public Nullable<int> PALET_PADRE { get; set; }
     
         public virtual ESTADOS_PALETS ESTADOS_PALETS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<INCIDENCIAS_PALETS> INCIDENCIAS_PALETS { get; set; }
+        public virtual ICollection<MOVIMIENTOS_PICKING> MOVIMIENTOS_PICKING { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MOVIMIENTOS_PICKING_LOG> MOVIMIENTOS_PICKING_LOG { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PALETS_INCIDENCIAS> PALETS_INCIDENCIAS { get; set; }
         public virtual REFERENCIAS REFERENCIAS { get; set; }
         public virtual UBICACIONES UBICACIONES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MOVIMIENTOS_PICKING> MOVIMIENTOS_PICKING { get; set; }
+        public virtual ICollection<PALETS> PALETS1 { get; set; }
+        public virtual PALETS PALETS2 { get; set; }
     }
 }

@@ -4,13 +4,16 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="FCT_SOPORTE2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="EMPRESAS">
           <Key>
             <PropertyRef Name="ID_EMPRESA" />
           </Key>
           <Property Name="ID_EMPRESA" Type="int" Nullable="false" />
           <Property Name="DES_EMPRESA" Type="varchar" MaxLength="50" />
+          <Property Name="NOM_USUARIO" Type="varchar" MaxLength="30" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="30" />
+          <Property Name="LOGO" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="ESTADOS_ORDEN_SALIDA">
           <Key>
@@ -33,14 +36,6 @@
           <Property Name="COD_ESTADO" Type="int" Nullable="false" />
           <Property Name="DES_ESTADO" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="INCIDENCIAS_PALETS">
-          <Key>
-            <PropertyRef Name="ID_INCIDENCIA" />
-          </Key>
-          <Property Name="ID_INCIDENCIA" Type="int" Nullable="false" />
-          <Property Name="COD_PALET" Type="int" />
-          <Property Name="DESC_INCIDENCIA" Type="varchar" MaxLength="500" />
-        </EntityType>
         <EntityType Name="MOVIMIENTOS_PICKING">
           <Key>
             <PropertyRef Name="COD_MOVIMIENTO" />
@@ -52,19 +47,39 @@
           <Property Name="REALIZADO" Type="bit" />
           <Property Name="CANTIDAD" Type="int" />
         </EntityType>
+        <EntityType Name="MOVIMIENTOS_PICKING_LOG">
+          <Key>
+            <PropertyRef Name="COD_MOVIMIENTO_LOG" />
+          </Key>
+          <Property Name="COD_MOVIMIENTO_LOG" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_PETICION" Type="int" />
+          <Property Name="COD_PALET" Type="int" />
+          <Property Name="FECH_REALIZACION" Type="date" />
+          <Property Name="CANTIDAD" Type="int" />
+          <Property Name="UBICACION" Type="varchar" MaxLength="30" />
+        </EntityType>
         <EntityType Name="ORDEN_SALIDA_CAB">
           <Key>
             <PropertyRef Name="COD_PETICION" />
           </Key>
           <Property Name="COD_PETICION" Type="int" Nullable="false" />
           <Property Name="ESTADO" Type="int" />
-          <Property Name="NOMBRE_CLIENTE" Type="varchar" MaxLength="50" />
+          <Property Name="ID_EMPRESA" Type="int" />
           <Property Name="DIRECCION_ENTREGA" Type="varchar" MaxLength="300" />
           <Property Name="COD_POSTAL" Type="varchar" MaxLength="10" />
           <Property Name="POBLACION" Type="varchar" MaxLength="100" />
           <Property Name="PROVINCIA" Type="varchar" MaxLength="100" />
           <Property Name="TELEFONO" Type="varchar" MaxLength="20" />
           <Property Name="FECH_CREACION" Type="date" />
+        </EntityType>
+        <EntityType Name="ORDEN_SALIDA_INCIDENCIAS">
+          <Key>
+            <PropertyRef Name="ID_INCIDENCIA" />
+          </Key>
+          <Property Name="ID_INCIDENCIA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_PETICION" Type="int" />
+          <Property Name="DES_INCIDENCIA" Type="varchar" MaxLength="500" />
+          <Property Name="RESUELTA" Type="bit" />
         </EntityType>
         <EntityType Name="ORDEN_SALIDA_LIN">
           <Key>
@@ -88,6 +103,16 @@
           <Property Name="CANTIDAD" Type="int" />
           <Property Name="ALBARAN_RECEPCION" Type="int" />
           <Property Name="ETIQUETA" Type="varchar" MaxLength="4000" />
+          <Property Name="PETICION_SALIDA" Type="int" />
+          <Property Name="PALET_PADRE" Type="int" />
+        </EntityType>
+        <EntityType Name="PALETS_INCIDENCIAS">
+          <Key>
+            <PropertyRef Name="ID_INCIDENCIA" />
+          </Key>
+          <Property Name="ID_INCIDENCIA" Type="int" Nullable="false" />
+          <Property Name="COD_PALET" Type="int" />
+          <Property Name="DESC_INCIDENCIA" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="RECEPCIONES_CAB">
           <Key>
@@ -95,7 +120,7 @@
           </Key>
           <Property Name="ALBARAN" Type="int" Nullable="false" />
           <Property Name="ESTADO" Type="int" />
-          <Property Name="PROVEEDOR" Type="varchar" MaxLength="50" />
+          <Property Name="ID_EMPRESA" Type="int" />
           <Property Name="FECH_CREACION" Type="date" />
           <Property Name="FECH_LLEGADA" Type="date" />
         </EntityType>
@@ -131,26 +156,23 @@
           <Property Name="POSICION" Type="varchar" MaxLength="30" />
           <Property Name="LLENA" Type="bit" />
         </EntityType>
-        <EntityType Name="USUARIOS">
-          <Key>
-            <PropertyRef Name="NOM_USUARIO" />
-          </Key>
-          <Property Name="NOM_USUARIO" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="ID_EMPRESA" Type="int" Nullable="false" />
-          <Property Name="PASSWORD" Type="varchar" MaxLength="30" Nullable="false" />
-        </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_MOVIMIENTOS_PICKING' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="V_MOVIMIENTOS_PICKING">
           <Key>
             <PropertyRef Name="COD_MOVIMIENTO" />
+            
           </Key>
           <Property Name="COD_MOVIMIENTO" Type="int" Nullable="false" />
           <Property Name="COD_PETICION" Type="int" />
           <Property Name="COD_PALET" Type="int" />
           <Property Name="COD_REFERENCIA" Type="varchar" MaxLength="30" />
           <Property Name="DES_REFERENCIA" Type="varchar" MaxLength="500" />
-          <Property Name="UBICACION" Type="varchar" MaxLength="30" />
+          <Property Name="UBICACION" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="CALLE" Type="varchar" MaxLength="60" />
+          <Property Name="POSICION" Type="varchar" MaxLength="30" />
+          <Property Name="CANTIDAD" Type="int" />
+          <Property Name="REALIZADO" Type="bit" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_ORDEN_SALIDA_CAB' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -161,7 +183,8 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_ORDEN_SALIDA_CAB' no tien
           <Property Name="COD_PETICION" Type="int" Nullable="false" />
           <Property Name="ESTADO" Type="int" />
           <Property Name="DES_ESTADO" Type="varchar" MaxLength="200" />
-          <Property Name="NOMBRE_CLIENTE" Type="varchar" MaxLength="50" />
+          <Property Name="ID_EMPRESA" Type="int" />
+          <Property Name="DES_EMPRESA" Type="varchar" MaxLength="50" />
           <Property Name="DIRECCION_ENTREGA" Type="varchar" MaxLength="300" />
           <Property Name="COD_POSTAL" Type="varchar" MaxLength="10" />
           <Property Name="POBLACION" Type="varchar" MaxLength="100" />
@@ -169,6 +192,56 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_ORDEN_SALIDA_CAB' no tien
           <Property Name="TELEFONO" Type="varchar" MaxLength="20" />
           <Property Name="FECH_CREACION" Type="date" />
           <Property Name="CANTIDAD_LINEAS" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_ORDEN_SALIDA_INCIDENCIAS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_ORDEN_SALIDA_INCIDENCIAS">
+          <Key>
+            <PropertyRef Name="ID_INCIDENCIA" />
+          </Key>
+          <Property Name="ID_INCIDENCIA" Type="int" Nullable="false" />
+          <Property Name="DES_INCIDENCIA" Type="varchar" MaxLength="500" />
+          <Property Name="ESTADO" Type="int" />
+          <Property Name="COD_PETICION" Type="int" />
+          <Property Name="ID_EMPRESA" Type="int" />
+          <Property Name="DIRECCION_ENTREGA" Type="varchar" MaxLength="300" />
+          <Property Name="COD_POSTAL" Type="varchar" MaxLength="10" />
+          <Property Name="POBLACION" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_ORDEN_SALIDA_LIN' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_ORDEN_SALIDA_LIN">
+          <Key>
+            <PropertyRef Name="COD_PETICION" />
+            <PropertyRef Name="COD_LINEA" />
+          </Key>
+          <Property Name="COD_PETICION" Type="int" Nullable="false" />
+          <Property Name="COD_LINEA" Type="int" Nullable="false" />
+          <Property Name="COD_REFERENCIA" Type="varchar" MaxLength="30" />
+          <Property Name="DES_REFERENCIA" Type="varchar" MaxLength="500" />
+          <Property Name="CANTIDAD" Type="int" />
+          <Property Name="PRECIO" Type="float" />
+          <Property Name="STOCK" Type="int" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_PALETS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="V_PALETS">
+          <Key>
+            <PropertyRef Name="COD_PALET" />
+          </Key>
+          <Property Name="COD_PALET" Type="int" Nullable="false" />
+          <Property Name="DESC_ESTADO" Type="varchar" MaxLength="200" />
+          <Property Name="COD_ESTADO" Type="int" />
+          <Property Name="COD_REFERENCIA" Type="varchar" MaxLength="30" />
+          <Property Name="CANTIDAD" Type="int" />
+          <Property Name="UBICACION" Type="varchar" MaxLength="30" />
+          <Property Name="DESC_UBICACION" Type="varchar" MaxLength="200" />
+          <Property Name="CALLE" Type="varchar" MaxLength="60" />
+          <Property Name="POSICION" Type="varchar" MaxLength="30" />
+          <Property Name="FECH_INSERT" Type="date" />
+          <Property Name="ALBARAN_RECEPCION" Type="int" />
+          <Property Name="PETICION_SALIDA" Type="int" />
+          <Property Name="PALET_PADRE" Type="int" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_RECEPCIONES_CAB' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -179,7 +252,8 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_RECEPCIONES_CAB' no tiene
           <Property Name="ALBARAN" Type="int" Nullable="false" />
           <Property Name="ESTADO" Type="int" />
           <Property Name="DES_ESTADO" Type="varchar" MaxLength="50" />
-          <Property Name="PROVEEDOR" Type="varchar" MaxLength="50" />
+          <Property Name="ID_EMPRESA" Type="int" />
+          <Property Name="DES_EMPRESA" Type="varchar" MaxLength="50" />
           <Property Name="FECH_CREACION" Type="date" />
           <Property Name="FECH_LLEGADA" Type="date" />
           <Property Name="CANTIDAD_LINEAS" Type="int" />
@@ -271,12 +345,12 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
         </EntityType>
         <Association Name="INCIDENCIAS_PALETS_fk0">
           <End Role="PALETS" Type="Self.PALETS" Multiplicity="0..1" />
-          <End Role="INCIDENCIAS_PALETS" Type="Self.INCIDENCIAS_PALETS" Multiplicity="*" />
+          <End Role="PALETS_INCIDENCIAS" Type="Self.PALETS_INCIDENCIAS" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PALETS">
               <PropertyRef Name="COD_PALET" />
             </Principal>
-            <Dependent Role="INCIDENCIAS_PALETS">
+            <Dependent Role="PALETS_INCIDENCIAS">
               <PropertyRef Name="COD_PALET" />
             </Dependent>
           </ReferentialConstraint>
@@ -305,6 +379,42 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="MOVIMIENTOS_PICKING_LOG_fk0">
+          <End Role="ORDEN_SALIDA_CAB" Type="Self.ORDEN_SALIDA_CAB" Multiplicity="0..1" />
+          <End Role="MOVIMIENTOS_PICKING_LOG" Type="Self.MOVIMIENTOS_PICKING_LOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_SALIDA_CAB">
+              <PropertyRef Name="COD_PETICION" />
+            </Principal>
+            <Dependent Role="MOVIMIENTOS_PICKING_LOG">
+              <PropertyRef Name="COD_PETICION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MOVIMIENTOS_PICKING_LOG_fk1">
+          <End Role="PALETS" Type="Self.PALETS" Multiplicity="0..1" />
+          <End Role="MOVIMIENTOS_PICKING_LOG" Type="Self.MOVIMIENTOS_PICKING_LOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PALETS">
+              <PropertyRef Name="COD_PALET" />
+            </Principal>
+            <Dependent Role="MOVIMIENTOS_PICKING_LOG">
+              <PropertyRef Name="COD_PALET" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MOVIMIENTOS_PICKING_LOG_fk2">
+          <End Role="UBICACIONES" Type="Self.UBICACIONES" Multiplicity="0..1" />
+          <End Role="MOVIMIENTOS_PICKING_LOG" Type="Self.MOVIMIENTOS_PICKING_LOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UBICACIONES">
+              <PropertyRef Name="COD_UBICACION" />
+            </Principal>
+            <Dependent Role="MOVIMIENTOS_PICKING_LOG">
+              <PropertyRef Name="UBICACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="ORDEN_SALIDA_CAB_fk0">
           <End Role="ESTADOS_ORDEN_SALIDA" Type="Self.ESTADOS_ORDEN_SALIDA" Multiplicity="0..1" />
           <End Role="ORDEN_SALIDA_CAB" Type="Self.ORDEN_SALIDA_CAB" Multiplicity="*" />
@@ -314,6 +424,30 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             </Principal>
             <Dependent Role="ORDEN_SALIDA_CAB">
               <PropertyRef Name="ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ORDEN_SALIDA_CAB_fk1">
+          <End Role="EMPRESAS" Type="Self.EMPRESAS" Multiplicity="0..1" />
+          <End Role="ORDEN_SALIDA_CAB" Type="Self.ORDEN_SALIDA_CAB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESAS">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="ORDEN_SALIDA_CAB">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ORDEN_SALIDA_INCIDENCIAS_fk0">
+          <End Role="ORDEN_SALIDA_CAB" Type="Self.ORDEN_SALIDA_CAB" Multiplicity="0..1" />
+          <End Role="ORDEN_SALIDA_INCIDENCIAS" Type="Self.ORDEN_SALIDA_INCIDENCIAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_SALIDA_CAB">
+              <PropertyRef Name="COD_PETICION" />
+            </Principal>
+            <Dependent Role="ORDEN_SALIDA_INCIDENCIAS">
+              <PropertyRef Name="COD_PETICION" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -377,6 +511,18 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="PALETS_fk3">
+          <End Role="PALETS" Type="Self.PALETS" Multiplicity="0..1" />
+          <End Role="PALETS1" Type="Self.PALETS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PALETS">
+              <PropertyRef Name="COD_PALET" />
+            </Principal>
+            <Dependent Role="PALETS1">
+              <PropertyRef Name="PALET_PADRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="RECEPCIONES_CAB_fk0">
           <End Role="ESTADOS_RECEPCION" Type="Self.ESTADOS_RECEPCION" Multiplicity="0..1" />
           <End Role="RECEPCIONES_CAB" Type="Self.RECEPCIONES_CAB" Multiplicity="*" />
@@ -386,6 +532,18 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             </Principal>
             <Dependent Role="RECEPCIONES_CAB">
               <PropertyRef Name="ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RECEPCIONES_CAB_fk1">
+          <End Role="EMPRESAS" Type="Self.EMPRESAS" Multiplicity="0..1" />
+          <End Role="RECEPCIONES_CAB" Type="Self.RECEPCIONES_CAB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESAS">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="RECEPCIONES_CAB">
+              <PropertyRef Name="ID_EMPRESA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -425,19 +583,10 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="USUARIOS_fk0">
-          <End Role="EMPRESAS" Type="Self.EMPRESAS" Multiplicity="1" />
-          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPRESAS">
-              <PropertyRef Name="ID_EMPRESA" />
-            </Principal>
-            <Dependent Role="USUARIOS">
-              <PropertyRef Name="ID_EMPRESA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Function Name="COMPROBAR_STOCK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+        <Function Name="COMPROBAR_DISPONIBILIDAD_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+          <Parameter Name="PETICION" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CONSULTAR_STOCK_REFERENCIA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
           <Parameter Name="COD_REFERENCIA" Type="varchar" Mode="In" />
         </Function>
         <Function Name="FN_CONEXION_ACTUAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
@@ -476,9 +625,16 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
           <Parameter Name="REPLY_TO" Type="varchar" Mode="In" />
         </Function>
         <Function Name="PA_GENERAR_ETIQUETA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="COD_REFERENCIA" Type="varchar" Mode="In" />
           <Parameter Name="COD_PALET" Type="int" Mode="In" />
-          <Parameter Name="CANTIDAD" Type="int" Mode="In" />
+          <Parameter Name="INVOKER" Type="int" Mode="In" />
+          <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+          <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="PA_GESTIONAR_PALETS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="COD_PALET" Type="int" Mode="In" />
+          <Parameter Name="COD_UBICACION_NUEVA" Type="varchar" Mode="In" />
+          <Parameter Name="COD_PALET_ABSORBIDO" Type="int" Mode="In" />
+          <Parameter Name="CANTIDAD_PARTIDA" Type="int" Mode="In" />
           <Parameter Name="INVOKER" Type="int" Mode="In" />
           <Parameter Name="RETCODE" Type="int" Mode="InOut" />
           <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
@@ -488,7 +644,8 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
         </Function>
         <Function Name="PA_MOVIMIENTOS_PICKING" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="COD_PETICION" Type="int" Mode="In" />
-          <Parameter Name="COD_PALET" Type="int" Mode="In" />
+          <Parameter Name="COD_LINEA" Type="int" Mode="In" />
+          <Parameter Name="COD_MOVIMIENTO" Type="int" Mode="In" />
           <Parameter Name="INVOKER" Type="int" Mode="In" />
           <Parameter Name="RETCODE" Type="int" Mode="InOut" />
           <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
@@ -496,13 +653,20 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
         <Function Name="PA_ORDEN_SALIDA_CAB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="COD_PETICION" Type="int" Mode="In" />
           <Parameter Name="ESTADO" Type="int" Mode="In" />
-          <Parameter Name="NOMBRE_CLIENTE" Type="varchar" Mode="In" />
+          <Parameter Name="ID_EMPRESA" Type="int" Mode="In" />
           <Parameter Name="DIRECCION_ENTREGA" Type="varchar" Mode="In" />
           <Parameter Name="COD_POSTAL" Type="varchar" Mode="In" />
           <Parameter Name="POBLACION" Type="varchar" Mode="In" />
           <Parameter Name="PROVINCIA" Type="varchar" Mode="In" />
           <Parameter Name="TELEFONO" Type="varchar" Mode="In" />
           <Parameter Name="FECH_CREACION" Type="date" Mode="In" />
+          <Parameter Name="INVOKER" Type="int" Mode="In" />
+          <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+          <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="PA_ORDEN_SALIDA_INCIDENCIAS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="COD_PETICION" Type="int" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="varchar" Mode="In" />
           <Parameter Name="INVOKER" Type="int" Mode="In" />
           <Parameter Name="RETCODE" Type="int" Mode="InOut" />
           <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
@@ -521,6 +685,8 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
           <Parameter Name="COD_ESTADO" Type="int" Mode="In" />
           <Parameter Name="CANTIDAD" Type="int" Mode="In" />
           <Parameter Name="ALBARAN" Type="int" Mode="In" />
+          <Parameter Name="PETICION" Type="int" Mode="In" />
+          <Parameter Name="COD_PALET_PADRE" Type="int" Mode="In" />
           <Parameter Name="INVOKER" Type="int" Mode="In" />
           <Parameter Name="RETCODE" Type="int" Mode="InOut" />
           <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
@@ -528,7 +694,7 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
         <Function Name="PA_RECEPCIONES_CAB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ALBARAN" Type="int" Mode="In" />
           <Parameter Name="ESTADO" Type="int" Mode="In" />
-          <Parameter Name="PROVEEDOR" Type="varchar" Mode="In" />
+          <Parameter Name="ID_EMPRESA" Type="int" Mode="In" />
           <Parameter Name="FECH_CREACION" Type="date" Mode="In" />
           <Parameter Name="FECH_LLEGADA" Type="date" Mode="In" />
           <Parameter Name="INVOKER" Type="int" Mode="In" />
@@ -585,21 +751,22 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
         <Function Name="PAT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="TABLA" Type="varchar" Mode="In" />
         </Function>
-        <EntityContainer Name="FCT_SOPORTE2ModelStoreContainer">
+        <EntityContainer Name="BDModelStoreContainer">
           <EntitySet Name="EMPRESAS" EntityType="Self.EMPRESAS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ESTADOS_ORDEN_SALIDA" EntityType="Self.ESTADOS_ORDEN_SALIDA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ESTADOS_PALETS" EntityType="Self.ESTADOS_PALETS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ESTADOS_RECEPCION" EntityType="Self.ESTADOS_RECEPCION" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="INCIDENCIAS_PALETS" EntityType="Self.INCIDENCIAS_PALETS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MOVIMIENTOS_PICKING" EntityType="Self.MOVIMIENTOS_PICKING" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MOVIMIENTOS_PICKING_LOG" EntityType="Self.MOVIMIENTOS_PICKING_LOG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ORDEN_SALIDA_CAB" EntityType="Self.ORDEN_SALIDA_CAB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDEN_SALIDA_INCIDENCIAS" EntityType="Self.ORDEN_SALIDA_INCIDENCIAS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ORDEN_SALIDA_LIN" EntityType="Self.ORDEN_SALIDA_LIN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PALETS" EntityType="Self.PALETS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PALETS_INCIDENCIAS" EntityType="Self.PALETS_INCIDENCIAS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RECEPCIONES_CAB" EntityType="Self.RECEPCIONES_CAB" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RECEPCIONES_LIN" EntityType="Self.RECEPCIONES_LIN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="REFERENCIAS" EntityType="Self.REFERENCIAS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UBICACIONES" EntityType="Self.UBICACIONES" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="V_MOVIMIENTOS_PICKING" EntityType="Self.V_MOVIMIENTOS_PICKING" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [V_MOVIMIENTOS_PICKING].[COD_MOVIMIENTO] AS [COD_MOVIMIENTO], 
@@ -607,7 +774,11 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
     [V_MOVIMIENTOS_PICKING].[COD_PALET] AS [COD_PALET], 
     [V_MOVIMIENTOS_PICKING].[COD_REFERENCIA] AS [COD_REFERENCIA], 
     [V_MOVIMIENTOS_PICKING].[DES_REFERENCIA] AS [DES_REFERENCIA], 
-    [V_MOVIMIENTOS_PICKING].[UBICACION] AS [UBICACION]
+    [V_MOVIMIENTOS_PICKING].[UBICACION] AS [UBICACION], 
+    [V_MOVIMIENTOS_PICKING].[CALLE] AS [CALLE], 
+    [V_MOVIMIENTOS_PICKING].[POSICION] AS [POSICION], 
+    [V_MOVIMIENTOS_PICKING].[CANTIDAD] AS [CANTIDAD], 
+    [V_MOVIMIENTOS_PICKING].[REALIZADO] AS [REALIZADO]
     FROM [dbo].[V_MOVIMIENTOS_PICKING] AS [V_MOVIMIENTOS_PICKING]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_ORDEN_SALIDA_CAB" EntityType="Self.V_ORDEN_SALIDA_CAB" store:Type="Views" store:Schema="dbo">
@@ -615,7 +786,8 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
     [V_ORDEN_SALIDA_CAB].[COD_PETICION] AS [COD_PETICION], 
     [V_ORDEN_SALIDA_CAB].[ESTADO] AS [ESTADO], 
     [V_ORDEN_SALIDA_CAB].[DES_ESTADO] AS [DES_ESTADO], 
-    [V_ORDEN_SALIDA_CAB].[NOMBRE_CLIENTE] AS [NOMBRE_CLIENTE], 
+    [V_ORDEN_SALIDA_CAB].[ID_EMPRESA] AS [ID_EMPRESA], 
+    [V_ORDEN_SALIDA_CAB].[DES_EMPRESA] AS [DES_EMPRESA], 
     [V_ORDEN_SALIDA_CAB].[DIRECCION_ENTREGA] AS [DIRECCION_ENTREGA], 
     [V_ORDEN_SALIDA_CAB].[COD_POSTAL] AS [COD_POSTAL], 
     [V_ORDEN_SALIDA_CAB].[POBLACION] AS [POBLACION], 
@@ -625,12 +797,53 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
     [V_ORDEN_SALIDA_CAB].[CANTIDAD_LINEAS] AS [CANTIDAD_LINEAS]
     FROM [dbo].[V_ORDEN_SALIDA_CAB] AS [V_ORDEN_SALIDA_CAB]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="V_ORDEN_SALIDA_INCIDENCIAS" EntityType="Self.V_ORDEN_SALIDA_INCIDENCIAS" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_ORDEN_SALIDA_INCIDENCIAS].[ID_INCIDENCIA] AS [ID_INCIDENCIA], 
+    [V_ORDEN_SALIDA_INCIDENCIAS].[DES_INCIDENCIA] AS [DES_INCIDENCIA], 
+    [V_ORDEN_SALIDA_INCIDENCIAS].[ESTADO] AS [ESTADO], 
+    [V_ORDEN_SALIDA_INCIDENCIAS].[COD_PETICION] AS [COD_PETICION], 
+    [V_ORDEN_SALIDA_INCIDENCIAS].[ID_EMPRESA] AS [ID_EMPRESA], 
+    [V_ORDEN_SALIDA_INCIDENCIAS].[DIRECCION_ENTREGA] AS [DIRECCION_ENTREGA], 
+    [V_ORDEN_SALIDA_INCIDENCIAS].[COD_POSTAL] AS [COD_POSTAL], 
+    [V_ORDEN_SALIDA_INCIDENCIAS].[POBLACION] AS [POBLACION]
+    FROM [dbo].[V_ORDEN_SALIDA_INCIDENCIAS] AS [V_ORDEN_SALIDA_INCIDENCIAS]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_ORDEN_SALIDA_LIN" EntityType="Self.V_ORDEN_SALIDA_LIN" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_ORDEN_SALIDA_LIN].[COD_PETICION] AS [COD_PETICION], 
+    [V_ORDEN_SALIDA_LIN].[COD_LINEA] AS [COD_LINEA], 
+    [V_ORDEN_SALIDA_LIN].[COD_REFERENCIA] AS [COD_REFERENCIA], 
+    [V_ORDEN_SALIDA_LIN].[DES_REFERENCIA] AS [DES_REFERENCIA], 
+    [V_ORDEN_SALIDA_LIN].[CANTIDAD] AS [CANTIDAD], 
+    [V_ORDEN_SALIDA_LIN].[PRECIO] AS [PRECIO], 
+    [V_ORDEN_SALIDA_LIN].[STOCK] AS [STOCK]
+    FROM [dbo].[V_ORDEN_SALIDA_LIN] AS [V_ORDEN_SALIDA_LIN]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_PALETS" EntityType="Self.V_PALETS" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_PALETS].[COD_PALET] AS [COD_PALET], 
+    [V_PALETS].[DESC_ESTADO] AS [DESC_ESTADO], 
+    [V_PALETS].[COD_ESTADO] AS [COD_ESTADO], 
+    [V_PALETS].[COD_REFERENCIA] AS [COD_REFERENCIA], 
+    [V_PALETS].[CANTIDAD] AS [CANTIDAD], 
+    [V_PALETS].[UBICACION] AS [UBICACION], 
+    [V_PALETS].[DESC_UBICACION] AS [DESC_UBICACION], 
+    [V_PALETS].[CALLE] AS [CALLE], 
+    [V_PALETS].[POSICION] AS [POSICION], 
+    [V_PALETS].[FECH_INSERT] AS [FECH_INSERT], 
+    [V_PALETS].[ALBARAN_RECEPCION] AS [ALBARAN_RECEPCION], 
+    [V_PALETS].[PETICION_SALIDA] AS [PETICION_SALIDA], 
+    [V_PALETS].[PALET_PADRE] AS [PALET_PADRE]
+    FROM [dbo].[V_PALETS] AS [V_PALETS]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="V_RECEPCIONES_CAB" EntityType="Self.V_RECEPCIONES_CAB" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [V_RECEPCIONES_CAB].[ALBARAN] AS [ALBARAN], 
     [V_RECEPCIONES_CAB].[ESTADO] AS [ESTADO], 
     [V_RECEPCIONES_CAB].[DES_ESTADO] AS [DES_ESTADO], 
-    [V_RECEPCIONES_CAB].[PROVEEDOR] AS [PROVEEDOR], 
+    [V_RECEPCIONES_CAB].[ID_EMPRESA] AS [ID_EMPRESA], 
+    [V_RECEPCIONES_CAB].[DES_EMPRESA] AS [DES_EMPRESA], 
     [V_RECEPCIONES_CAB].[FECH_CREACION] AS [FECH_CREACION], 
     [V_RECEPCIONES_CAB].[FECH_LLEGADA] AS [FECH_LLEGADA], 
     [V_RECEPCIONES_CAB].[CANTIDAD_LINEAS] AS [CANTIDAD_LINEAS]
@@ -698,7 +911,7 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
           </EntitySet>
           <AssociationSet Name="INCIDENCIAS_PALETS_fk0" Association="Self.INCIDENCIAS_PALETS_fk0">
             <End Role="PALETS" EntitySet="PALETS" />
-            <End Role="INCIDENCIAS_PALETS" EntitySet="INCIDENCIAS_PALETS" />
+            <End Role="PALETS_INCIDENCIAS" EntitySet="PALETS_INCIDENCIAS" />
           </AssociationSet>
           <AssociationSet Name="MOVIMIENTOS_PICKING_fk0" Association="Self.MOVIMIENTOS_PICKING_fk0">
             <End Role="ORDEN_SALIDA_CAB" EntitySet="ORDEN_SALIDA_CAB" />
@@ -708,9 +921,29 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             <End Role="PALETS" EntitySet="PALETS" />
             <End Role="MOVIMIENTOS_PICKING" EntitySet="MOVIMIENTOS_PICKING" />
           </AssociationSet>
+          <AssociationSet Name="MOVIMIENTOS_PICKING_LOG_fk0" Association="Self.MOVIMIENTOS_PICKING_LOG_fk0">
+            <End Role="ORDEN_SALIDA_CAB" EntitySet="ORDEN_SALIDA_CAB" />
+            <End Role="MOVIMIENTOS_PICKING_LOG" EntitySet="MOVIMIENTOS_PICKING_LOG" />
+          </AssociationSet>
+          <AssociationSet Name="MOVIMIENTOS_PICKING_LOG_fk1" Association="Self.MOVIMIENTOS_PICKING_LOG_fk1">
+            <End Role="PALETS" EntitySet="PALETS" />
+            <End Role="MOVIMIENTOS_PICKING_LOG" EntitySet="MOVIMIENTOS_PICKING_LOG" />
+          </AssociationSet>
+          <AssociationSet Name="MOVIMIENTOS_PICKING_LOG_fk2" Association="Self.MOVIMIENTOS_PICKING_LOG_fk2">
+            <End Role="UBICACIONES" EntitySet="UBICACIONES" />
+            <End Role="MOVIMIENTOS_PICKING_LOG" EntitySet="MOVIMIENTOS_PICKING_LOG" />
+          </AssociationSet>
           <AssociationSet Name="ORDEN_SALIDA_CAB_fk0" Association="Self.ORDEN_SALIDA_CAB_fk0">
             <End Role="ESTADOS_ORDEN_SALIDA" EntitySet="ESTADOS_ORDEN_SALIDA" />
             <End Role="ORDEN_SALIDA_CAB" EntitySet="ORDEN_SALIDA_CAB" />
+          </AssociationSet>
+          <AssociationSet Name="ORDEN_SALIDA_CAB_fk1" Association="Self.ORDEN_SALIDA_CAB_fk1">
+            <End Role="EMPRESAS" EntitySet="EMPRESAS" />
+            <End Role="ORDEN_SALIDA_CAB" EntitySet="ORDEN_SALIDA_CAB" />
+          </AssociationSet>
+          <AssociationSet Name="ORDEN_SALIDA_INCIDENCIAS_fk0" Association="Self.ORDEN_SALIDA_INCIDENCIAS_fk0">
+            <End Role="ORDEN_SALIDA_CAB" EntitySet="ORDEN_SALIDA_CAB" />
+            <End Role="ORDEN_SALIDA_INCIDENCIAS" EntitySet="ORDEN_SALIDA_INCIDENCIAS" />
           </AssociationSet>
           <AssociationSet Name="ORDEN_SALIDA_LIN_fk0" Association="Self.ORDEN_SALIDA_LIN_fk0">
             <End Role="ORDEN_SALIDA_CAB" EntitySet="ORDEN_SALIDA_CAB" />
@@ -732,8 +965,16 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             <End Role="ESTADOS_PALETS" EntitySet="ESTADOS_PALETS" />
             <End Role="PALETS" EntitySet="PALETS" />
           </AssociationSet>
+          <AssociationSet Name="PALETS_fk3" Association="Self.PALETS_fk3">
+            <End Role="PALETS" EntitySet="PALETS" />
+            <End Role="PALETS1" EntitySet="PALETS" />
+          </AssociationSet>
           <AssociationSet Name="RECEPCIONES_CAB_fk0" Association="Self.RECEPCIONES_CAB_fk0">
             <End Role="ESTADOS_RECEPCION" EntitySet="ESTADOS_RECEPCION" />
+            <End Role="RECEPCIONES_CAB" EntitySet="RECEPCIONES_CAB" />
+          </AssociationSet>
+          <AssociationSet Name="RECEPCIONES_CAB_fk1" Association="Self.RECEPCIONES_CAB_fk1">
+            <End Role="EMPRESAS" EntitySet="EMPRESAS" />
             <End Role="RECEPCIONES_CAB" EntitySet="RECEPCIONES_CAB" />
           </AssociationSet>
           <AssociationSet Name="RECEPCIONES_LIN_fk0" Association="Self.RECEPCIONES_LIN_fk0">
@@ -748,15 +989,11 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             <End Role="EMPRESAS" EntitySet="EMPRESAS" />
             <End Role="REFERENCIAS" EntitySet="REFERENCIAS" />
           </AssociationSet>
-          <AssociationSet Name="USUARIOS_fk0" Association="Self.USUARIOS_fk0">
-            <End Role="EMPRESAS" EntitySet="EMPRESAS" />
-            <End Role="USUARIOS" EntitySet="USUARIOS" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="FCT_SOPORTE2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="BDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <ComplexType Name="FN_FECHA_GT_Result">
           <Property Name="FECHA" Type="DateTime" />
         </ComplexType>
@@ -765,17 +1002,21 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             <PropertyRef Name="ID_EMPRESA" />
           </Key>
           <Property Name="ID_EMPRESA" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="REFERENCIAS" Relationship="Self.REFERENCIAS_fk0" FromRole="EMPRESAS" ToRole="REFERENCIAS" />
-          <NavigationProperty Name="USUARIOS" Relationship="Self.USUARIOS_fk0" FromRole="EMPRESAS" ToRole="USUARIOS" />
           <Property Name="DES_EMPRESA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ORDEN_SALIDA_CAB" Relationship="Self.ORDEN_SALIDA_CAB_fk1" FromRole="EMPRESAS" ToRole="ORDEN_SALIDA_CAB" />
+          <NavigationProperty Name="RECEPCIONES_CAB" Relationship="Self.RECEPCIONES_CAB_fk1" FromRole="EMPRESAS" ToRole="RECEPCIONES_CAB" />
+          <NavigationProperty Name="REFERENCIAS" Relationship="Self.REFERENCIAS_fk0" FromRole="EMPRESAS" ToRole="REFERENCIAS" />
+          <Property Name="NOM_USUARIO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LOGO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ESTADOS_ORDEN_SALIDA">
           <Key>
             <PropertyRef Name="COD_ESTADO" />
           </Key>
           <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ORDEN_SALIDA_CAB" Relationship="Self.ORDEN_SALIDA_CAB_fk0" FromRole="ESTADOS_ORDEN_SALIDA" ToRole="ORDEN_SALIDA_CAB" />
           <Property Name="DES_ESTADO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ORDEN_SALIDA_CAB" Relationship="Self.ORDEN_SALIDA_CAB_fk0" FromRole="ESTADOS_ORDEN_SALIDA" ToRole="ORDEN_SALIDA_CAB" />
         </EntityType>
         <EntityType Name="ESTADOS_PALETS">
           <Key>
@@ -793,14 +1034,32 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
           <Property Name="DES_ESTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="RECEPCIONES_CAB" Relationship="Self.RECEPCIONES_CAB_fk0" FromRole="ESTADOS_RECEPCION" ToRole="RECEPCIONES_CAB" />
         </EntityType>
-        <EntityType Name="INCIDENCIAS_PALETS">
+        <EntityType Name="MOVIMIENTOS_PICKING">
           <Key>
-            <PropertyRef Name="ID_INCIDENCIA" />
+            <PropertyRef Name="COD_MOVIMIENTO" />
           </Key>
-          <Property Name="ID_INCIDENCIA" Type="Int32" Nullable="false" />
+          <Property Name="COD_MOVIMIENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_PETICION" Type="Int32" />
           <Property Name="COD_PALET" Type="Int32" />
-          <Property Name="DESC_INCIDENCIA" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PALETS" Relationship="Self.INCIDENCIAS_PALETS_fk0" FromRole="INCIDENCIAS_PALETS" ToRole="PALETS" />
+          <Property Name="FECH_REALIZACION" Type="DateTime" Precision="0" />
+          <Property Name="REALIZADO" Type="Boolean" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <NavigationProperty Name="ORDEN_SALIDA_CAB" Relationship="Self.MOVIMIENTOS_PICKING_fk0" FromRole="MOVIMIENTOS_PICKING" ToRole="ORDEN_SALIDA_CAB" />
+          <NavigationProperty Name="PALETS" Relationship="Self.MOVIMIENTOS_PICKING_fk1" FromRole="MOVIMIENTOS_PICKING" ToRole="PALETS" />
+        </EntityType>
+        <EntityType Name="MOVIMIENTOS_PICKING_LOG">
+          <Key>
+            <PropertyRef Name="COD_MOVIMIENTO_LOG" />
+          </Key>
+          <Property Name="COD_MOVIMIENTO_LOG" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_PETICION" Type="Int32" />
+          <Property Name="COD_PALET" Type="Int32" />
+          <Property Name="FECH_REALIZACION" Type="DateTime" Precision="0" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <Property Name="UBICACION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ORDEN_SALIDA_CAB" Relationship="Self.MOVIMIENTOS_PICKING_LOG_fk0" FromRole="MOVIMIENTOS_PICKING_LOG" ToRole="ORDEN_SALIDA_CAB" />
+          <NavigationProperty Name="PALETS" Relationship="Self.MOVIMIENTOS_PICKING_LOG_fk1" FromRole="MOVIMIENTOS_PICKING_LOG" ToRole="PALETS" />
+          <NavigationProperty Name="UBICACIONES" Relationship="Self.MOVIMIENTOS_PICKING_LOG_fk2" FromRole="MOVIMIENTOS_PICKING_LOG" ToRole="UBICACIONES" />
         </EntityType>
         <EntityType Name="ORDEN_SALIDA_CAB">
           <Key>
@@ -808,16 +1067,29 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
           </Key>
           <Property Name="COD_PETICION" Type="Int32" Nullable="false" />
           <Property Name="ESTADO" Type="Int32" />
-          <Property Name="NOMBRE_CLIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_EMPRESA" Type="Int32" />
           <Property Name="DIRECCION_ENTREGA" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="COD_POSTAL" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="POBLACION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="PROVINCIA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="FECH_CREACION" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="EMPRESAS" Relationship="Self.ORDEN_SALIDA_CAB_fk1" FromRole="ORDEN_SALIDA_CAB" ToRole="EMPRESAS" />
           <NavigationProperty Name="ESTADOS_ORDEN_SALIDA" Relationship="Self.ORDEN_SALIDA_CAB_fk0" FromRole="ORDEN_SALIDA_CAB" ToRole="ESTADOS_ORDEN_SALIDA" />
+          <NavigationProperty Name="MOVIMIENTOS_PICKING" Relationship="Self.MOVIMIENTOS_PICKING_fk0" FromRole="ORDEN_SALIDA_CAB" ToRole="MOVIMIENTOS_PICKING" />
+          <NavigationProperty Name="MOVIMIENTOS_PICKING_LOG" Relationship="Self.MOVIMIENTOS_PICKING_LOG_fk0" FromRole="ORDEN_SALIDA_CAB" ToRole="MOVIMIENTOS_PICKING_LOG" />
+          <NavigationProperty Name="ORDEN_SALIDA_INCIDENCIAS" Relationship="Self.ORDEN_SALIDA_INCIDENCIAS_fk0" FromRole="ORDEN_SALIDA_CAB" ToRole="ORDEN_SALIDA_INCIDENCIAS" />
           <NavigationProperty Name="ORDEN_SALIDA_LIN" Relationship="Self.ORDEN_SALIDA_LIN_fk0" FromRole="ORDEN_SALIDA_CAB" ToRole="ORDEN_SALIDA_LIN" />
-          <NavigationProperty Name="MOVIMIENTOS_PICKING" Relationship="FCT_SOPORTE2Model.MOVIMIENTOS_PICKING_fk0" FromRole="ORDEN_SALIDA_CAB" ToRole="MOVIMIENTOS_PICKING" />
+        </EntityType>
+        <EntityType Name="ORDEN_SALIDA_INCIDENCIAS">
+          <Key>
+            <PropertyRef Name="ID_INCIDENCIA" />
+          </Key>
+          <Property Name="ID_INCIDENCIA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_PETICION" Type="Int32" />
+          <Property Name="DES_INCIDENCIA" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="RESUELTA" Type="Boolean" />
+          <NavigationProperty Name="ORDEN_SALIDA_CAB" Relationship="Self.ORDEN_SALIDA_INCIDENCIAS_fk0" FromRole="ORDEN_SALIDA_INCIDENCIAS" ToRole="ORDEN_SALIDA_CAB" />
         </EntityType>
         <EntityType Name="ORDEN_SALIDA_LIN">
           <Key>
@@ -841,13 +1113,27 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
           <Property Name="COD_ESTADO" Type="Int32" />
           <Property Name="FECH_INSERT" Type="DateTime" Precision="0" />
           <Property Name="CANTIDAD" Type="Int32" />
-          <NavigationProperty Name="ESTADOS_PALETS" Relationship="Self.PALETS_fk2" FromRole="PALETS" ToRole="ESTADOS_PALETS" />
-          <NavigationProperty Name="INCIDENCIAS_PALETS" Relationship="Self.INCIDENCIAS_PALETS_fk0" FromRole="PALETS" ToRole="INCIDENCIAS_PALETS" />
-          <NavigationProperty Name="REFERENCIAS" Relationship="Self.PALETS_fk0" FromRole="PALETS" ToRole="REFERENCIAS" />
-          <NavigationProperty Name="UBICACIONES" Relationship="Self.PALETS_fk1" FromRole="PALETS" ToRole="UBICACIONES" />
           <Property Name="ALBARAN_RECEPCION" Type="Int32" />
           <Property Name="ETIQUETA" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="MOVIMIENTOS_PICKING" Relationship="FCT_SOPORTE2Model.MOVIMIENTOS_PICKING_fk1" FromRole="PALETS" ToRole="MOVIMIENTOS_PICKING" />
+          <Property Name="PETICION_SALIDA" Type="Int32" />
+          <Property Name="PALET_PADRE" Type="Int32" />
+          <NavigationProperty Name="ESTADOS_PALETS" Relationship="Self.PALETS_fk2" FromRole="PALETS" ToRole="ESTADOS_PALETS" />
+          <NavigationProperty Name="MOVIMIENTOS_PICKING" Relationship="Self.MOVIMIENTOS_PICKING_fk1" FromRole="PALETS" ToRole="MOVIMIENTOS_PICKING" />
+          <NavigationProperty Name="MOVIMIENTOS_PICKING_LOG" Relationship="Self.MOVIMIENTOS_PICKING_LOG_fk1" FromRole="PALETS" ToRole="MOVIMIENTOS_PICKING_LOG" />
+          <NavigationProperty Name="PALETS_INCIDENCIAS" Relationship="Self.INCIDENCIAS_PALETS_fk0" FromRole="PALETS" ToRole="PALETS_INCIDENCIAS" />
+          <NavigationProperty Name="REFERENCIAS" Relationship="Self.PALETS_fk0" FromRole="PALETS" ToRole="REFERENCIAS" />
+          <NavigationProperty Name="UBICACIONES" Relationship="Self.PALETS_fk1" FromRole="PALETS" ToRole="UBICACIONES" />
+          <NavigationProperty Name="PALETS1" Relationship="Self.PALETS_fk3" FromRole="PALETS" ToRole="PALETS1" />
+          <NavigationProperty Name="PALETS2" Relationship="Self.PALETS_fk3" FromRole="PALETS1" ToRole="PALETS" />
+        </EntityType>
+        <EntityType Name="PALETS_INCIDENCIAS">
+          <Key>
+            <PropertyRef Name="ID_INCIDENCIA" />
+          </Key>
+          <Property Name="ID_INCIDENCIA" Type="Int32" Nullable="false" />
+          <Property Name="COD_PALET" Type="Int32" />
+          <Property Name="DESC_INCIDENCIA" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PALETS" Relationship="Self.INCIDENCIAS_PALETS_fk0" FromRole="PALETS_INCIDENCIAS" ToRole="PALETS" />
         </EntityType>
         <EntityType Name="RECEPCIONES_CAB">
           <Key>
@@ -855,9 +1141,10 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
           </Key>
           <Property Name="ALBARAN" Type="Int32" Nullable="false" />
           <Property Name="ESTADO" Type="Int32" />
-          <Property Name="PROVEEDOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_EMPRESA" Type="Int32" />
           <Property Name="FECH_CREACION" Type="DateTime" Precision="0" />
           <Property Name="FECH_LLEGADA" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="EMPRESAS" Relationship="Self.RECEPCIONES_CAB_fk1" FromRole="RECEPCIONES_CAB" ToRole="EMPRESAS" />
           <NavigationProperty Name="ESTADOS_RECEPCION" Relationship="Self.RECEPCIONES_CAB_fk0" FromRole="RECEPCIONES_CAB" ToRole="ESTADOS_RECEPCION" />
           <NavigationProperty Name="RECEPCIONES_LIN" Relationship="Self.RECEPCIONES_LIN_fk0" FromRole="RECEPCIONES_CAB" ToRole="RECEPCIONES_LIN" />
         </EntityType>
@@ -898,16 +1185,79 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
           <Property Name="CALLE" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="POSICION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="LLENA" Type="Boolean" />
+          <NavigationProperty Name="MOVIMIENTOS_PICKING_LOG" Relationship="Self.MOVIMIENTOS_PICKING_LOG_fk2" FromRole="UBICACIONES" ToRole="MOVIMIENTOS_PICKING_LOG" />
           <NavigationProperty Name="PALETS" Relationship="Self.PALETS_fk1" FromRole="UBICACIONES" ToRole="PALETS" />
         </EntityType>
-        <EntityType Name="USUARIOS">
+        <EntityType Name="V_MOVIMIENTOS_PICKING">
           <Key>
-            <PropertyRef Name="NOM_USUARIO" />
+            <PropertyRef Name="COD_MOVIMIENTO" />
           </Key>
-          <Property Name="NOM_USUARIO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ID_EMPRESA" Type="Int32" Nullable="false" />
-          <Property Name="PASSWORD" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="EMPRESAS" Relationship="Self.USUARIOS_fk0" FromRole="USUARIOS" ToRole="EMPRESAS" />
+          <Property Name="COD_MOVIMIENTO" Type="Int32" Nullable="false" />
+          <Property Name="COD_PETICION" Type="Int32" />
+          <Property Name="COD_PALET" Type="Int32" />
+          <Property Name="COD_REFERENCIA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DES_REFERENCIA" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="UBICACION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CALLE" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="POSICION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <Property Name="REALIZADO" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="V_ORDEN_SALIDA_CAB">
+          <Key>
+            <PropertyRef Name="COD_PETICION" />
+          </Key>
+          <Property Name="COD_PETICION" Type="Int32" Nullable="false" />
+          <Property Name="ESTADO" Type="Int32" />
+          <Property Name="DES_ESTADO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ID_EMPRESA" Type="Int32" />
+          <Property Name="DES_EMPRESA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECCION_ENTREGA" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="COD_POSTAL" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="POBLACION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PROVINCIA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FECH_CREACION" Type="DateTime" Precision="0" />
+          <Property Name="CANTIDAD_LINEAS" Type="Int32" />
+        </EntityType>
+        <EntityType Name="V_ORDEN_SALIDA_LIN">
+          <Key>
+            <PropertyRef Name="COD_PETICION" />
+            <PropertyRef Name="COD_LINEA" />
+          </Key>
+          <Property Name="COD_PETICION" Type="Int32" Nullable="false" />
+          <Property Name="COD_LINEA" Type="Int32" Nullable="false" />
+          <Property Name="COD_REFERENCIA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DES_REFERENCIA" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <Property Name="PRECIO" Type="Double" />
+          <Property Name="STOCK" Type="Int32" />
+        </EntityType>
+        <EntityType Name="V_RECEPCIONES_CAB">
+          <Key>
+            <PropertyRef Name="ALBARAN" />
+          </Key>
+          <Property Name="ALBARAN" Type="Int32" Nullable="false" />
+          <Property Name="ESTADO" Type="Int32" />
+          <Property Name="DES_ESTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_EMPRESA" Type="Int32" />
+          <Property Name="DES_EMPRESA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FECH_CREACION" Type="DateTime" Precision="0" />
+          <Property Name="FECH_LLEGADA" Type="DateTime" Precision="0" />
+          <Property Name="CANTIDAD_LINEAS" Type="Int32" />
+        </EntityType>
+        <EntityType Name="V_RECEPCIONES_LIN">
+          <Key>
+            <PropertyRef Name="ALBARAN" />
+            <PropertyRef Name="COD_LINEA" />
+          </Key>
+          <Property Name="ALBARAN" Type="Int32" Nullable="false" />
+          <Property Name="COD_LINEA" Type="Int32" Nullable="false" />
+          <Property Name="COD_REFERENCIA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DES_REFERENCIA" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <Property Name="PRECIO" Type="Double" />
+          <Property Name="STOCK" Type="Int32" />
         </EntityType>
         <EntityType Name="V_REFERENCIAS">
           <Key>
@@ -973,6 +1323,30 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
           <Property Name="LIBRE_MB" Type="Int32" />
           <Property Name="PORCENTAJE_LIBRE" Type="Int32" />
         </EntityType>
+        <Association Name="ORDEN_SALIDA_CAB_fk1">
+          <End Role="EMPRESAS" Type="Self.EMPRESAS" Multiplicity="0..1" />
+          <End Role="ORDEN_SALIDA_CAB" Type="Self.ORDEN_SALIDA_CAB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESAS">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="ORDEN_SALIDA_CAB">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RECEPCIONES_CAB_fk1">
+          <End Role="EMPRESAS" Type="Self.EMPRESAS" Multiplicity="0..1" />
+          <End Role="RECEPCIONES_CAB" Type="Self.RECEPCIONES_CAB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESAS">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Principal>
+            <Dependent Role="RECEPCIONES_CAB">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="REFERENCIAS_fk0">
           <End Role="EMPRESAS" Type="Self.EMPRESAS" Multiplicity="0..1" />
           <End Role="REFERENCIAS" Type="Self.REFERENCIAS" Multiplicity="*" />
@@ -981,18 +1355,6 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
               <PropertyRef Name="ID_EMPRESA" />
             </Principal>
             <Dependent Role="REFERENCIAS">
-              <PropertyRef Name="ID_EMPRESA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="USUARIOS_fk0">
-          <End Role="EMPRESAS" Type="Self.EMPRESAS" Multiplicity="1" />
-          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EMPRESAS">
-              <PropertyRef Name="ID_EMPRESA" />
-            </Principal>
-            <Dependent Role="USUARIOS">
               <PropertyRef Name="ID_EMPRESA" />
             </Dependent>
           </ReferentialConstraint>
@@ -1033,15 +1395,75 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="INCIDENCIAS_PALETS_fk0">
+        <Association Name="MOVIMIENTOS_PICKING_fk0">
+          <End Role="ORDEN_SALIDA_CAB" Type="Self.ORDEN_SALIDA_CAB" Multiplicity="0..1" />
+          <End Role="MOVIMIENTOS_PICKING" Type="Self.MOVIMIENTOS_PICKING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_SALIDA_CAB">
+              <PropertyRef Name="COD_PETICION" />
+            </Principal>
+            <Dependent Role="MOVIMIENTOS_PICKING">
+              <PropertyRef Name="COD_PETICION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MOVIMIENTOS_PICKING_fk1">
           <End Role="PALETS" Type="Self.PALETS" Multiplicity="0..1" />
-          <End Role="INCIDENCIAS_PALETS" Type="Self.INCIDENCIAS_PALETS" Multiplicity="*" />
+          <End Role="MOVIMIENTOS_PICKING" Type="Self.MOVIMIENTOS_PICKING" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PALETS">
               <PropertyRef Name="COD_PALET" />
             </Principal>
-            <Dependent Role="INCIDENCIAS_PALETS">
+            <Dependent Role="MOVIMIENTOS_PICKING">
               <PropertyRef Name="COD_PALET" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MOVIMIENTOS_PICKING_LOG_fk0">
+          <End Role="ORDEN_SALIDA_CAB" Type="Self.ORDEN_SALIDA_CAB" Multiplicity="0..1" />
+          <End Role="MOVIMIENTOS_PICKING_LOG" Type="Self.MOVIMIENTOS_PICKING_LOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_SALIDA_CAB">
+              <PropertyRef Name="COD_PETICION" />
+            </Principal>
+            <Dependent Role="MOVIMIENTOS_PICKING_LOG">
+              <PropertyRef Name="COD_PETICION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MOVIMIENTOS_PICKING_LOG_fk1">
+          <End Role="PALETS" Type="Self.PALETS" Multiplicity="0..1" />
+          <End Role="MOVIMIENTOS_PICKING_LOG" Type="Self.MOVIMIENTOS_PICKING_LOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PALETS">
+              <PropertyRef Name="COD_PALET" />
+            </Principal>
+            <Dependent Role="MOVIMIENTOS_PICKING_LOG">
+              <PropertyRef Name="COD_PALET" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MOVIMIENTOS_PICKING_LOG_fk2">
+          <End Role="UBICACIONES" Type="Self.UBICACIONES" Multiplicity="0..1" />
+          <End Role="MOVIMIENTOS_PICKING_LOG" Type="Self.MOVIMIENTOS_PICKING_LOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UBICACIONES">
+              <PropertyRef Name="COD_UBICACION" />
+            </Principal>
+            <Dependent Role="MOVIMIENTOS_PICKING_LOG">
+              <PropertyRef Name="UBICACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ORDEN_SALIDA_INCIDENCIAS_fk0">
+          <End Role="ORDEN_SALIDA_CAB" Type="Self.ORDEN_SALIDA_CAB" Multiplicity="0..1" />
+          <End Role="ORDEN_SALIDA_INCIDENCIAS" Type="Self.ORDEN_SALIDA_INCIDENCIAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_SALIDA_CAB">
+              <PropertyRef Name="COD_PETICION" />
+            </Principal>
+            <Dependent Role="ORDEN_SALIDA_INCIDENCIAS">
+              <PropertyRef Name="COD_PETICION" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1069,6 +1491,18 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="INCIDENCIAS_PALETS_fk0">
+          <End Role="PALETS" Type="Self.PALETS" Multiplicity="0..1" />
+          <End Role="PALETS_INCIDENCIAS" Type="Self.PALETS_INCIDENCIAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PALETS">
+              <PropertyRef Name="COD_PALET" />
+            </Principal>
+            <Dependent Role="PALETS_INCIDENCIAS">
+              <PropertyRef Name="COD_PALET" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="PALETS_fk0">
           <End Role="REFERENCIAS" Type="Self.REFERENCIAS" Multiplicity="0..1" />
           <End Role="PALETS" Type="Self.PALETS" Multiplicity="*" />
@@ -1090,6 +1524,18 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             </Principal>
             <Dependent Role="PALETS">
               <PropertyRef Name="UBICACION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PALETS_fk3">
+          <End Role="PALETS" Type="Self.PALETS" Multiplicity="0..1" />
+          <End Role="PALETS1" Type="Self.PALETS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PALETS">
+              <PropertyRef Name="COD_PALET" />
+            </Principal>
+            <Dependent Role="PALETS1">
+              <PropertyRef Name="PALET_PADRE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1122,25 +1568,36 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
           <EntitySet Name="ESTADOS_ORDEN_SALIDA" EntityType="Self.ESTADOS_ORDEN_SALIDA" />
           <EntitySet Name="ESTADOS_PALETS" EntityType="Self.ESTADOS_PALETS" />
           <EntitySet Name="ESTADOS_RECEPCION" EntityType="Self.ESTADOS_RECEPCION" />
-          <EntitySet Name="INCIDENCIAS_PALETS" EntityType="Self.INCIDENCIAS_PALETS" />
+          <EntitySet Name="MOVIMIENTOS_PICKING" EntityType="Self.MOVIMIENTOS_PICKING" />
+          <EntitySet Name="MOVIMIENTOS_PICKING_LOG" EntityType="Self.MOVIMIENTOS_PICKING_LOG" />
           <EntitySet Name="ORDEN_SALIDA_CAB" EntityType="Self.ORDEN_SALIDA_CAB" />
+          <EntitySet Name="ORDEN_SALIDA_INCIDENCIAS" EntityType="Self.ORDEN_SALIDA_INCIDENCIAS" />
           <EntitySet Name="ORDEN_SALIDA_LIN" EntityType="Self.ORDEN_SALIDA_LIN" />
           <EntitySet Name="PALETS" EntityType="Self.PALETS" />
+          <EntitySet Name="PALETS_INCIDENCIAS" EntityType="Self.PALETS_INCIDENCIAS" />
           <EntitySet Name="RECEPCIONES_CAB" EntityType="Self.RECEPCIONES_CAB" />
           <EntitySet Name="RECEPCIONES_LIN" EntityType="Self.RECEPCIONES_LIN" />
           <EntitySet Name="REFERENCIAS" EntityType="Self.REFERENCIAS" />
           <EntitySet Name="UBICACIONES" EntityType="Self.UBICACIONES" />
-          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" />
+          <EntitySet Name="V_MOVIMIENTOS_PICKING" EntityType="Self.V_MOVIMIENTOS_PICKING" />
+          <EntitySet Name="V_ORDEN_SALIDA_CAB" EntityType="Self.V_ORDEN_SALIDA_CAB" />
+          <EntitySet Name="V_ORDEN_SALIDA_LIN" EntityType="Self.V_ORDEN_SALIDA_LIN" />
+          <EntitySet Name="V_RECEPCIONES_CAB" EntityType="Self.V_RECEPCIONES_CAB" />
+          <EntitySet Name="V_RECEPCIONES_LIN" EntityType="Self.V_RECEPCIONES_LIN" />
           <EntitySet Name="V_REFERENCIAS" EntityType="Self.V_REFERENCIAS" />
           <EntitySet Name="V_SQL" EntityType="Self.V_SQL" />
           <EntitySet Name="V_SQL_FICHEROS" EntityType="Self.V_SQL_FICHEROS" />
+          <AssociationSet Name="ORDEN_SALIDA_CAB_fk1" Association="Self.ORDEN_SALIDA_CAB_fk1">
+            <End Role="EMPRESAS" EntitySet="EMPRESAS" />
+            <End Role="ORDEN_SALIDA_CAB" EntitySet="ORDEN_SALIDA_CAB" />
+          </AssociationSet>
+          <AssociationSet Name="RECEPCIONES_CAB_fk1" Association="Self.RECEPCIONES_CAB_fk1">
+            <End Role="EMPRESAS" EntitySet="EMPRESAS" />
+            <End Role="RECEPCIONES_CAB" EntitySet="RECEPCIONES_CAB" />
+          </AssociationSet>
           <AssociationSet Name="REFERENCIAS_fk0" Association="Self.REFERENCIAS_fk0">
             <End Role="EMPRESAS" EntitySet="EMPRESAS" />
             <End Role="REFERENCIAS" EntitySet="REFERENCIAS" />
-          </AssociationSet>
-          <AssociationSet Name="USUARIOS_fk0" Association="Self.USUARIOS_fk0">
-            <End Role="EMPRESAS" EntitySet="EMPRESAS" />
-            <End Role="USUARIOS" EntitySet="USUARIOS" />
           </AssociationSet>
           <AssociationSet Name="ORDEN_SALIDA_CAB_fk0" Association="Self.ORDEN_SALIDA_CAB_fk0">
             <End Role="ESTADOS_ORDEN_SALIDA" EntitySet="ESTADOS_ORDEN_SALIDA" />
@@ -1154,9 +1611,29 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             <End Role="ESTADOS_RECEPCION" EntitySet="ESTADOS_RECEPCION" />
             <End Role="RECEPCIONES_CAB" EntitySet="RECEPCIONES_CAB" />
           </AssociationSet>
-          <AssociationSet Name="INCIDENCIAS_PALETS_fk0" Association="Self.INCIDENCIAS_PALETS_fk0">
+          <AssociationSet Name="MOVIMIENTOS_PICKING_fk0" Association="Self.MOVIMIENTOS_PICKING_fk0">
+            <End Role="ORDEN_SALIDA_CAB" EntitySet="ORDEN_SALIDA_CAB" />
+            <End Role="MOVIMIENTOS_PICKING" EntitySet="MOVIMIENTOS_PICKING" />
+          </AssociationSet>
+          <AssociationSet Name="MOVIMIENTOS_PICKING_fk1" Association="Self.MOVIMIENTOS_PICKING_fk1">
             <End Role="PALETS" EntitySet="PALETS" />
-            <End Role="INCIDENCIAS_PALETS" EntitySet="INCIDENCIAS_PALETS" />
+            <End Role="MOVIMIENTOS_PICKING" EntitySet="MOVIMIENTOS_PICKING" />
+          </AssociationSet>
+          <AssociationSet Name="MOVIMIENTOS_PICKING_LOG_fk0" Association="Self.MOVIMIENTOS_PICKING_LOG_fk0">
+            <End Role="ORDEN_SALIDA_CAB" EntitySet="ORDEN_SALIDA_CAB" />
+            <End Role="MOVIMIENTOS_PICKING_LOG" EntitySet="MOVIMIENTOS_PICKING_LOG" />
+          </AssociationSet>
+          <AssociationSet Name="MOVIMIENTOS_PICKING_LOG_fk1" Association="Self.MOVIMIENTOS_PICKING_LOG_fk1">
+            <End Role="PALETS" EntitySet="PALETS" />
+            <End Role="MOVIMIENTOS_PICKING_LOG" EntitySet="MOVIMIENTOS_PICKING_LOG" />
+          </AssociationSet>
+          <AssociationSet Name="MOVIMIENTOS_PICKING_LOG_fk2" Association="Self.MOVIMIENTOS_PICKING_LOG_fk2">
+            <End Role="UBICACIONES" EntitySet="UBICACIONES" />
+            <End Role="MOVIMIENTOS_PICKING_LOG" EntitySet="MOVIMIENTOS_PICKING_LOG" />
+          </AssociationSet>
+          <AssociationSet Name="ORDEN_SALIDA_INCIDENCIAS_fk0" Association="Self.ORDEN_SALIDA_INCIDENCIAS_fk0">
+            <End Role="ORDEN_SALIDA_CAB" EntitySet="ORDEN_SALIDA_CAB" />
+            <End Role="ORDEN_SALIDA_INCIDENCIAS" EntitySet="ORDEN_SALIDA_INCIDENCIAS" />
           </AssociationSet>
           <AssociationSet Name="ORDEN_SALIDA_LIN_fk0" Association="Self.ORDEN_SALIDA_LIN_fk0">
             <End Role="ORDEN_SALIDA_CAB" EntitySet="ORDEN_SALIDA_CAB" />
@@ -1166,6 +1643,10 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             <End Role="REFERENCIAS" EntitySet="REFERENCIAS" />
             <End Role="ORDEN_SALIDA_LIN" EntitySet="ORDEN_SALIDA_LIN" />
           </AssociationSet>
+          <AssociationSet Name="INCIDENCIAS_PALETS_fk0" Association="Self.INCIDENCIAS_PALETS_fk0">
+            <End Role="PALETS" EntitySet="PALETS" />
+            <End Role="PALETS_INCIDENCIAS" EntitySet="PALETS_INCIDENCIAS" />
+          </AssociationSet>
           <AssociationSet Name="PALETS_fk0" Association="Self.PALETS_fk0">
             <End Role="REFERENCIAS" EntitySet="REFERENCIAS" />
             <End Role="PALETS" EntitySet="PALETS" />
@@ -1173,6 +1654,10 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
           <AssociationSet Name="PALETS_fk1" Association="Self.PALETS_fk1">
             <End Role="UBICACIONES" EntitySet="UBICACIONES" />
             <End Role="PALETS" EntitySet="PALETS" />
+          </AssociationSet>
+          <AssociationSet Name="PALETS_fk3" Association="Self.PALETS_fk3">
+            <End Role="PALETS" EntitySet="PALETS" />
+            <End Role="PALETS1" EntitySet="PALETS" />
           </AssociationSet>
           <AssociationSet Name="RECEPCIONES_LIN_fk0" Association="Self.RECEPCIONES_LIN_fk0">
             <End Role="RECEPCIONES_CAB" EntitySet="RECEPCIONES_CAB" />
@@ -1182,9 +1667,17 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             <End Role="REFERENCIAS" EntitySet="REFERENCIAS" />
             <End Role="RECEPCIONES_LIN" EntitySet="RECEPCIONES_LIN" />
           </AssociationSet>
-          <FunctionImport Name="FN_FECHA_GT" IsComposable="true" ReturnType="Collection(FCT_SOPORTE2Model.FN_FECHA_GT_Result)">
+          <FunctionImport Name="FN_FECHA_GT" IsComposable="true" ReturnType="Collection(BDModel.FN_FECHA_GT_Result)">
             <Parameter Name="FECHA" Mode="In" Type="DateTime" />
             <Parameter Name="TIME_ZONE_DESTINO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PA_EMAIL_RECEPCIONES">
+            <Parameter Name="DESTINATARIOS" Mode="In" Type="String" />
+            <Parameter Name="ASUNTO_EMAIL" Mode="In" Type="String" />
+            <Parameter Name="ALBARAN" Mode="In" Type="Int32" />
+            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
+            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
           </FunctionImport>
           <FunctionImport Name="PA_ENVIAR_DBMAIL">
             <Parameter Name="DESTINATARIOS" Mode="In" Type="String" />
@@ -1200,8 +1693,82 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             <Parameter Name="OCULTAR_TEXTO" Mode="In" Type="Boolean" />
             <Parameter Name="REPLY_TO" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="PA_GENERAR_ETIQUETA">
+            <Parameter Name="COD_PALET" Mode="In" Type="Int32" />
+            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
+            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="PA_INF_TABLA" ReturnType="Collection(String)">
           <Parameter Name="objname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PA_MOVIMIENTOS_PICKING">
+            <Parameter Name="COD_PETICION" Mode="In" Type="Int32" />
+            <Parameter Name="COD_LINEA" Mode="In" Type="Int32" />
+            <Parameter Name="COD_MOVIMIENTO" Mode="In" Type="Int32" />
+            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
+            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PA_ORDEN_SALIDA_CAB">
+            <Parameter Name="COD_PETICION" Mode="In" Type="Int32" />
+            <Parameter Name="ESTADO" Mode="In" Type="Int32" />
+            <Parameter Name="ID_EMPRESA" Mode="In" Type="Int32" />
+            <Parameter Name="DIRECCION_ENTREGA" Mode="In" Type="String" />
+            <Parameter Name="COD_POSTAL" Mode="In" Type="String" />
+            <Parameter Name="POBLACION" Mode="In" Type="String" />
+            <Parameter Name="PROVINCIA" Mode="In" Type="String" />
+            <Parameter Name="TELEFONO" Mode="In" Type="String" />
+            <Parameter Name="FECH_CREACION" Mode="In" Type="DateTime" />
+            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
+            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PA_ORDEN_SALIDA_INCIDENCIAS">
+            <Parameter Name="COD_PETICION" Mode="In" Type="Int32" />
+            <Parameter Name="DESCRIPCION" Mode="In" Type="String" />
+            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
+            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PA_ORDEN_SALIDA_LIN">
+            <Parameter Name="COD_PETICION" Mode="In" Type="Int32" />
+            <Parameter Name="COD_LINEA" Mode="In" Type="Int32" />
+            <Parameter Name="COD_REFERENCIA" Mode="In" Type="String" />
+            <Parameter Name="CANTIDAD" Mode="In" Type="Int32" />
+            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
+            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PA_PALETS">
+            <Parameter Name="COD_REFERENCIA" Mode="In" Type="String" />
+            <Parameter Name="COD_ESTADO" Mode="In" Type="Int32" />
+            <Parameter Name="CANTIDAD" Mode="In" Type="Int32" />
+            <Parameter Name="ALBARAN" Mode="In" Type="Int32" />
+            <Parameter Name="PETICION" Mode="In" Type="Int32" />
+            <Parameter Name="COD_PALET_PADRE" Mode="In" Type="Int32" />
+            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
+            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PA_RECEPCIONES_CAB">
+            <Parameter Name="ALBARAN" Mode="In" Type="Int32" />
+            <Parameter Name="ESTADO" Mode="In" Type="Int32" />
+            <Parameter Name="ID_EMPRESA" Mode="In" Type="Int32" />
+            <Parameter Name="FECH_CREACION" Mode="In" Type="DateTime" />
+            <Parameter Name="FECH_LLEGADA" Mode="In" Type="DateTime" />
+            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
+            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PA_RECEPCIONES_LIN">
+            <Parameter Name="ALBARAN" Mode="In" Type="Int32" />
+            <Parameter Name="COD_LINEA" Mode="In" Type="Int32" />
+            <Parameter Name="COD_REFERENCIA" Mode="In" Type="String" />
+            <Parameter Name="CANTIDAD" Mode="In" Type="Int32" />
+            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
+            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
           </FunctionImport>
           <FunctionImport Name="PA_REFERENCIAS">
             <Parameter Name="COD_REFERENCIA" Mode="In" Type="String" />
@@ -1241,124 +1808,20 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
           <FunctionImport Name="PASE">
           <Parameter Name="TABLA" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="PAT" ReturnType="Collection(FCT_SOPORTE2Model.PAT_Result)">
+          <FunctionImport Name="PAT" ReturnType="Collection(BDModel.PAT_Result)">
           <Parameter Name="TABLA" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="PA_INSERTAR_RECEPCIONES_CAB">
-            <Parameter Name="ALBARAN" Mode="In" Type="Int32" />
-            <Parameter Name="ESTADO" Mode="In" Type="Int32" />
-            <Parameter Name="PROVEEDOR" Mode="In" Type="String" />
-            <Parameter Name="FECH_CREACION" Mode="In" Type="DateTime" />
-            <Parameter Name="FECH_LLEGADA" Mode="In" Type="DateTime" />
-            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
-            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
-            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="PA_INSERTAR_RECEPCIONES_LIN">
-            <Parameter Name="ALBARAN" Mode="In" Type="Int32" />
-            <Parameter Name="COD_LINEA" Mode="In" Type="Int32" />
-            <Parameter Name="COD_REFERENCIA" Mode="In" Type="String" />
-            <Parameter Name="CANTIDAD" Mode="In" Type="Int32" />
-            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
-            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
-            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="PA_INSERTAR_PALETS">
-            <Parameter Name="COD_REFERENCIA" Mode="In" Type="String" />
-            <Parameter Name="COD_ESTADO" Mode="In" Type="Int32" />
-            <Parameter Name="CANTIDAD" Mode="In" Type="Int32" />
-            <Parameter Name="ALBARAN" Mode="In" Type="Int32" />
-            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
-            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
-            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="PA_GENERAR_ETIQUETA">
-            <Parameter Name="COD_REFERENCIA" Mode="In" Type="String" />
+          <FunctionImport Name="PA_GESTIONAR_PALETS">
             <Parameter Name="COD_PALET" Mode="In" Type="Int32" />
-            <Parameter Name="CANTIDAD" Mode="In" Type="Int32" />
+            <Parameter Name="COD_UBICACION_NUEVA" Mode="In" Type="String" />
+            <Parameter Name="COD_PALET_ABSORBIDO" Mode="In" Type="Int32" />
+            <Parameter Name="CANTIDAD_PARTIDA" Mode="In" Type="Int32" />
             <Parameter Name="INVOKER" Mode="In" Type="Int32" />
             <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
             <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="PA_RECEPCIONES_CAB">
-            <Parameter Name="ALBARAN" Mode="In" Type="Int32" />
-            <Parameter Name="ESTADO" Mode="In" Type="Int32" />
-            <Parameter Name="PROVEEDOR" Mode="In" Type="String" />
-            <Parameter Name="FECH_CREACION" Mode="In" Type="DateTime" />
-            <Parameter Name="FECH_LLEGADA" Mode="In" Type="DateTime" />
-            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
-            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
-            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="PA_RECEPCIONES_LIN">
-            <Parameter Name="ALBARAN" Mode="In" Type="Int32" />
-            <Parameter Name="COD_LINEA" Mode="In" Type="Int32" />
-            <Parameter Name="COD_REFERENCIA" Mode="In" Type="String" />
-            <Parameter Name="CANTIDAD" Mode="In" Type="Int32" />
-            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
-            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
-            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="PA_PALETS">
-            <Parameter Name="COD_REFERENCIA" Mode="In" Type="String" />
-            <Parameter Name="COD_ESTADO" Mode="In" Type="Int32" />
-            <Parameter Name="CANTIDAD" Mode="In" Type="Int32" />
-            <Parameter Name="ALBARAN" Mode="In" Type="Int32" />
-            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
-            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
-            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
-          </FunctionImport>
-          <EntitySet Name="V_RECEPCIONES_CAB" EntityType="FCT_SOPORTE2Model.V_RECEPCIONES_CAB" />
-          <EntitySet Name="V_RECEPCIONES_LIN" EntityType="FCT_SOPORTE2Model.V_RECEPCIONES_LIN" />
-          <FunctionImport Name="PA_EMAIL_RECEPCIONES">
-            <Parameter Name="DESTINATARIOS" Mode="In" Type="String" />
-            <Parameter Name="ASUNTO_EMAIL" Mode="In" Type="String" />
-            <Parameter Name="ALBARAN" Mode="In" Type="Int32" />
-            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
-            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
-            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="PA_ORDEN_SALIDA_CAB">
-            <Parameter Name="COD_PETICION" Mode="In" Type="Int32" />
-            <Parameter Name="ESTADO" Mode="In" Type="Int32" />
-            <Parameter Name="NOMBRE_CLIENTE" Mode="In" Type="String" />
-            <Parameter Name="DIRECCION_ENTREGA" Mode="In" Type="String" />
-            <Parameter Name="COD_POSTAL" Mode="In" Type="String" />
-            <Parameter Name="POBLACION" Mode="In" Type="String" />
-            <Parameter Name="PROVINCIA" Mode="In" Type="String" />
-            <Parameter Name="TELEFONO" Mode="In" Type="String" />
-            <Parameter Name="FECH_CREACION" Mode="In" Type="DateTime" />
-            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
-            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
-            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="PA_ORDEN_SALIDA_LIN">
-            <Parameter Name="COD_PETICION" Mode="In" Type="Int32" />
-            <Parameter Name="COD_LINEA" Mode="In" Type="Int32" />
-            <Parameter Name="COD_REFERENCIA" Mode="In" Type="String" />
-            <Parameter Name="CANTIDAD" Mode="In" Type="Int32" />
-            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
-            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
-            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
-          </FunctionImport>
-          <EntitySet Name="MOVIMIENTOS_PICKING" EntityType="FCT_SOPORTE2Model.MOVIMIENTOS_PICKING" />
-          <EntitySet Name="V_MOVIMIENTOS_PICKING" EntityType="FCT_SOPORTE2Model.V_MOVIMIENTOS_PICKING" />
-          <EntitySet Name="V_ORDEN_SALIDA_CAB" EntityType="FCT_SOPORTE2Model.V_ORDEN_SALIDA_CAB" />
-          <AssociationSet Name="MOVIMIENTOS_PICKING_fk0" Association="FCT_SOPORTE2Model.MOVIMIENTOS_PICKING_fk0">
-            <End Role="ORDEN_SALIDA_CAB" EntitySet="ORDEN_SALIDA_CAB" />
-            <End Role="MOVIMIENTOS_PICKING" EntitySet="MOVIMIENTOS_PICKING" />
-          </AssociationSet>
-          <AssociationSet Name="MOVIMIENTOS_PICKING_fk1" Association="FCT_SOPORTE2Model.MOVIMIENTOS_PICKING_fk1">
-            <End Role="PALETS" EntitySet="PALETS" />
-            <End Role="MOVIMIENTOS_PICKING" EntitySet="MOVIMIENTOS_PICKING" />
-          </AssociationSet>
-          <FunctionImport Name="PA_MOVIMIENTOS_PICKING">
-            <Parameter Name="COD_PETICION" Mode="In" Type="Int32" />
-            <Parameter Name="COD_PALET" Mode="In" Type="Int32" />
-            <Parameter Name="INVOKER" Mode="In" Type="Int32" />
-            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
-            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
-          </FunctionImport>
+          <EntitySet Name="V_PALETS" EntityType="BDModel.V_PALETS" />
+          <EntitySet Name="V_ORDEN_SALIDA_INCIDENCIAS" EntityType="BDModel.V_ORDEN_SALIDA_INCIDENCIAS" />
         </EntityContainer>
         <ComplexType Name="PAT_Result">
           <Property Type="String" Name="TABLA" Nullable="false" MaxLength="128" />
@@ -1381,119 +1844,64 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
           <Property Type="Int32" Name="object_id" Nullable="true" />
           <Property Type="Int32" Name="data_space_id" Nullable="true" />
         </ComplexType>
-        <EntityType Name="V_RECEPCIONES_CAB">
+        <EntityType Name="V_PALETS">
           <Key>
-            <PropertyRef Name="ALBARAN" />
+            <PropertyRef Name="COD_PALET" />
           </Key>
-          <Property Name="ALBARAN" Type="Int32" Nullable="false" />
-          <Property Name="ESTADO" Type="Int32" />
-          <Property Name="DES_ESTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PROVEEDOR" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FECH_CREACION" Type="DateTime" Precision="0" />
-          <Property Name="FECH_LLEGADA" Type="DateTime" Precision="0" />
-          <Property Name="CANTIDAD_LINEAS" Type="Int32" />
-        </EntityType>
-        <EntityType Name="V_RECEPCIONES_LIN">
-          <Key>
-            <PropertyRef Name="ALBARAN" />
-            <PropertyRef Name="COD_LINEA" />
-          </Key>
-          <Property Name="ALBARAN" Type="Int32" Nullable="false" />
-          <Property Name="COD_LINEA" Type="Int32" Nullable="false" />
+          <Property Name="COD_PALET" Type="Int32" Nullable="false" />
+          <Property Name="COD_ESTADO" Type="Int32" />
+          <Property Name="DESC_ESTADO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="COD_REFERENCIA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="DES_REFERENCIA" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="CANTIDAD" Type="Int32" />
-          <Property Name="PRECIO" Type="Double" />
-          <Property Name="STOCK" Type="Int32" />
-        </EntityType>
-        <EntityType Name="MOVIMIENTOS_PICKING">
-          <Key>
-            <PropertyRef Name="COD_MOVIMIENTO" />
-          </Key>
-          <Property Name="COD_MOVIMIENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="COD_PETICION" Type="Int32" />
-          <Property Name="COD_PALET" Type="Int32" />
-          <Property Name="FECH_REALIZACION" Type="DateTime" Precision="0" />
-          <Property Name="REALIZADO" Type="Boolean" />
-          <Property Name="CANTIDAD" Type="Int32" />
-          <NavigationProperty Name="ORDEN_SALIDA_CAB" Relationship="FCT_SOPORTE2Model.MOVIMIENTOS_PICKING_fk0" FromRole="MOVIMIENTOS_PICKING" ToRole="ORDEN_SALIDA_CAB" />
-          <NavigationProperty Name="PALETS" Relationship="FCT_SOPORTE2Model.MOVIMIENTOS_PICKING_fk1" FromRole="MOVIMIENTOS_PICKING" ToRole="PALETS" />
-        </EntityType>
-        <EntityType Name="V_MOVIMIENTOS_PICKING">
-          <Key>
-            <PropertyRef Name="COD_MOVIMIENTO" />
-          </Key>
-          <Property Name="COD_MOVIMIENTO" Type="Int32" Nullable="false" />
-          <Property Name="COD_PETICION" Type="Int32" />
-          <Property Name="COD_PALET" Type="Int32" />
-          <Property Name="COD_REFERENCIA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="DES_REFERENCIA" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="UBICACION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DESC_UBICACION" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="CALLE" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="POSICION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FECH_INSERT" Type="DateTime" Precision="0" />
+          <Property Name="ALBARAN_RECEPCION" Type="Int32" />
+          <Property Name="PETICION_SALIDA" Type="Int32" />
+          <Property Name="PALET_PADRE" Type="Int32" />
         </EntityType>
-        <EntityType Name="V_ORDEN_SALIDA_CAB">
+        <EntityType Name="V_ORDEN_SALIDA_INCIDENCIAS">
           <Key>
-            <PropertyRef Name="COD_PETICION" />
+            <PropertyRef Name="ID_INCIDENCIA" />
           </Key>
-          <Property Name="COD_PETICION" Type="Int32" Nullable="false" />
-          <Property Name="ESTADO" Type="Int32" />
-          <Property Name="DES_ESTADO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="NOMBRE_CLIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ID_INCIDENCIA" Type="Int32" Nullable="false" />
+          <Property Name="COD_PETICION" Type="Int32" />
+          <Property Name="ID_EMPRESA" Type="Int32" />
           <Property Name="DIRECCION_ENTREGA" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="COD_POSTAL" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="POBLACION" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PROVINCIA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="TELEFONO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="FECH_CREACION" Type="DateTime" Precision="0" />
-          <Property Name="CANTIDAD_LINEAS" Type="Int32" />
+          <Property Name="DES_INCIDENCIA" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="Int32" />
         </EntityType>
-        <Association Name="MOVIMIENTOS_PICKING_fk0">
-          <End Type="FCT_SOPORTE2Model.ORDEN_SALIDA_CAB" Role="ORDEN_SALIDA_CAB" Multiplicity="0..1" />
-          <End Type="FCT_SOPORTE2Model.MOVIMIENTOS_PICKING" Role="MOVIMIENTOS_PICKING" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORDEN_SALIDA_CAB">
-              <PropertyRef Name="COD_PETICION" />
-            </Principal>
-            <Dependent Role="MOVIMIENTOS_PICKING">
-              <PropertyRef Name="COD_PETICION" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="MOVIMIENTOS_PICKING_fk1">
-          <End Type="FCT_SOPORTE2Model.PALETS" Role="PALETS" Multiplicity="0..1" />
-          <End Type="FCT_SOPORTE2Model.MOVIMIENTOS_PICKING" Role="MOVIMIENTOS_PICKING" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PALETS">
-              <PropertyRef Name="COD_PALET" />
-            </Principal>
-            <Dependent Role="MOVIMIENTOS_PICKING">
-              <PropertyRef Name="COD_PALET" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FCT_SOPORTE2ModelStoreContainer" CdmEntityContainer="BDEntities">
+        <EntityContainerMapping StorageEntityContainer="BDModelStoreContainer" CdmEntityContainer="BDEntities">
           <EntitySetMapping Name="EMPRESAS">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.EMPRESAS">
+            <EntityTypeMapping TypeName="BDModel.EMPRESAS">
               <MappingFragment StoreEntitySet="EMPRESAS">
-                <ScalarProperty Name="DES_EMPRESA" ColumnName="DES_EMPRESA" />
+                <ScalarProperty Name="LOGO" ColumnName="LOGO" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="NOM_USUARIO" ColumnName="NOM_USUARIO" />
                 <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+                <ScalarProperty Name="DES_EMPRESA" ColumnName="DES_EMPRESA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ESTADOS_ORDEN_SALIDA">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.ESTADOS_ORDEN_SALIDA">
+            <EntityTypeMapping TypeName="BDModel.ESTADOS_ORDEN_SALIDA">
               <MappingFragment StoreEntitySet="ESTADOS_ORDEN_SALIDA">
-                <ScalarProperty Name="DES_ESTADO" ColumnName="DES_ESTADO" />
                 <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
+                <ScalarProperty Name="DES_ESTADO" ColumnName="DES_ESTADO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ESTADOS_PALETS">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.ESTADOS_PALETS">
+            <EntityTypeMapping TypeName="BDModel.ESTADOS_PALETS">
               <MappingFragment StoreEntitySet="ESTADOS_PALETS">
                 <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
                 <ScalarProperty Name="DESC_ESTADO" ColumnName="DESC_ESTADO" />
@@ -1501,28 +1909,43 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ESTADOS_RECEPCION">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.ESTADOS_RECEPCION">
+            <EntityTypeMapping TypeName="BDModel.ESTADOS_RECEPCION">
               <MappingFragment StoreEntitySet="ESTADOS_RECEPCION">
                 <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
                 <ScalarProperty Name="DES_ESTADO" ColumnName="DES_ESTADO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="INCIDENCIAS_PALETS">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.INCIDENCIAS_PALETS">
-              <MappingFragment StoreEntitySet="INCIDENCIAS_PALETS">
-                <ScalarProperty Name="ID_INCIDENCIA" ColumnName="ID_INCIDENCIA" />
+          <EntitySetMapping Name="MOVIMIENTOS_PICKING">
+            <EntityTypeMapping TypeName="BDModel.MOVIMIENTOS_PICKING">
+              <MappingFragment StoreEntitySet="MOVIMIENTOS_PICKING">
+                <ScalarProperty Name="COD_MOVIMIENTO" ColumnName="COD_MOVIMIENTO" />
+                <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
                 <ScalarProperty Name="COD_PALET" ColumnName="COD_PALET" />
-                <ScalarProperty Name="DESC_INCIDENCIA" ColumnName="DESC_INCIDENCIA" />
+                <ScalarProperty Name="FECH_REALIZACION" ColumnName="FECH_REALIZACION" />
+                <ScalarProperty Name="REALIZADO" ColumnName="REALIZADO" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MOVIMIENTOS_PICKING_LOG">
+            <EntityTypeMapping TypeName="BDModel.MOVIMIENTOS_PICKING_LOG">
+              <MappingFragment StoreEntitySet="MOVIMIENTOS_PICKING_LOG">
+                <ScalarProperty Name="COD_MOVIMIENTO_LOG" ColumnName="COD_MOVIMIENTO_LOG" />
+                <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
+                <ScalarProperty Name="COD_PALET" ColumnName="COD_PALET" />
+                <ScalarProperty Name="FECH_REALIZACION" ColumnName="FECH_REALIZACION" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ORDEN_SALIDA_CAB">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.ORDEN_SALIDA_CAB">
+            <EntityTypeMapping TypeName="BDModel.ORDEN_SALIDA_CAB">
               <MappingFragment StoreEntitySet="ORDEN_SALIDA_CAB">
                 <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
                 <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
-                <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
+                <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
                 <ScalarProperty Name="DIRECCION_ENTREGA" ColumnName="DIRECCION_ENTREGA" />
                 <ScalarProperty Name="COD_POSTAL" ColumnName="COD_POSTAL" />
                 <ScalarProperty Name="POBLACION" ColumnName="POBLACION" />
@@ -1532,8 +1955,18 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ORDEN_SALIDA_INCIDENCIAS">
+            <EntityTypeMapping TypeName="BDModel.ORDEN_SALIDA_INCIDENCIAS">
+              <MappingFragment StoreEntitySet="ORDEN_SALIDA_INCIDENCIAS">
+                <ScalarProperty Name="ID_INCIDENCIA" ColumnName="ID_INCIDENCIA" />
+                <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
+                <ScalarProperty Name="DES_INCIDENCIA" ColumnName="DES_INCIDENCIA" />
+                <ScalarProperty Name="RESUELTA" ColumnName="RESUELTA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ORDEN_SALIDA_LIN">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.ORDEN_SALIDA_LIN">
+            <EntityTypeMapping TypeName="BDModel.ORDEN_SALIDA_LIN">
               <MappingFragment StoreEntitySet="ORDEN_SALIDA_LIN">
                 <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
                 <ScalarProperty Name="COD_LINEA" ColumnName="COD_LINEA" />
@@ -1543,32 +1976,43 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PALETS">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.PALETS">
+            <EntityTypeMapping TypeName="BDModel.PALETS">
               <MappingFragment StoreEntitySet="PALETS">
-                <ScalarProperty Name="ETIQUETA" ColumnName="ETIQUETA" />
-                <ScalarProperty Name="ALBARAN_RECEPCION" ColumnName="ALBARAN_RECEPCION" />
                 <ScalarProperty Name="COD_PALET" ColumnName="COD_PALET" />
                 <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
                 <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
                 <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
                 <ScalarProperty Name="FECH_INSERT" ColumnName="FECH_INSERT" />
                 <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="ALBARAN_RECEPCION" ColumnName="ALBARAN_RECEPCION" />
+                <ScalarProperty Name="ETIQUETA" ColumnName="ETIQUETA" />
+                <ScalarProperty Name="PETICION_SALIDA" ColumnName="PETICION_SALIDA" />
+                <ScalarProperty Name="PALET_PADRE" ColumnName="PALET_PADRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PALETS_INCIDENCIAS">
+            <EntityTypeMapping TypeName="BDModel.PALETS_INCIDENCIAS">
+              <MappingFragment StoreEntitySet="PALETS_INCIDENCIAS">
+                <ScalarProperty Name="ID_INCIDENCIA" ColumnName="ID_INCIDENCIA" />
+                <ScalarProperty Name="COD_PALET" ColumnName="COD_PALET" />
+                <ScalarProperty Name="DESC_INCIDENCIA" ColumnName="DESC_INCIDENCIA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RECEPCIONES_CAB">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.RECEPCIONES_CAB">
+            <EntityTypeMapping TypeName="BDModel.RECEPCIONES_CAB">
               <MappingFragment StoreEntitySet="RECEPCIONES_CAB">
                 <ScalarProperty Name="ALBARAN" ColumnName="ALBARAN" />
                 <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
-                <ScalarProperty Name="PROVEEDOR" ColumnName="PROVEEDOR" />
+                <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
                 <ScalarProperty Name="FECH_CREACION" ColumnName="FECH_CREACION" />
                 <ScalarProperty Name="FECH_LLEGADA" ColumnName="FECH_LLEGADA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RECEPCIONES_LIN">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.RECEPCIONES_LIN">
+            <EntityTypeMapping TypeName="BDModel.RECEPCIONES_LIN">
               <MappingFragment StoreEntitySet="RECEPCIONES_LIN">
                 <ScalarProperty Name="ALBARAN" ColumnName="ALBARAN" />
                 <ScalarProperty Name="COD_LINEA" ColumnName="COD_LINEA" />
@@ -1578,7 +2022,7 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="REFERENCIAS">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.REFERENCIAS">
+            <EntityTypeMapping TypeName="BDModel.REFERENCIAS">
               <MappingFragment StoreEntitySet="REFERENCIAS">
                 <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
                 <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
@@ -1591,7 +2035,7 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UBICACIONES">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.UBICACIONES">
+            <EntityTypeMapping TypeName="BDModel.UBICACIONES">
               <MappingFragment StoreEntitySet="UBICACIONES">
                 <ScalarProperty Name="COD_UBICACION" ColumnName="COD_UBICACION" />
                 <ScalarProperty Name="DESC_UBICACION" ColumnName="DESC_UBICACION" />
@@ -1601,17 +2045,82 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="USUARIOS">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.USUARIOS">
-              <MappingFragment StoreEntitySet="USUARIOS">
-                <ScalarProperty Name="NOM_USUARIO" ColumnName="NOM_USUARIO" />
+          <EntitySetMapping Name="V_MOVIMIENTOS_PICKING">
+            <EntityTypeMapping TypeName="BDModel.V_MOVIMIENTOS_PICKING">
+              <MappingFragment StoreEntitySet="V_MOVIMIENTOS_PICKING">
+                <ScalarProperty Name="COD_MOVIMIENTO" ColumnName="COD_MOVIMIENTO" />
+                <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
+                <ScalarProperty Name="COD_PALET" ColumnName="COD_PALET" />
+                <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
+                <ScalarProperty Name="DES_REFERENCIA" ColumnName="DES_REFERENCIA" />
+                <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
+                <ScalarProperty Name="CALLE" ColumnName="CALLE" />
+                <ScalarProperty Name="POSICION" ColumnName="POSICION" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="REALIZADO" ColumnName="REALIZADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_ORDEN_SALIDA_CAB">
+            <EntityTypeMapping TypeName="BDModel.V_ORDEN_SALIDA_CAB">
+              <MappingFragment StoreEntitySet="V_ORDEN_SALIDA_CAB">
+                <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="DES_ESTADO" ColumnName="DES_ESTADO" />
                 <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
-                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="DES_EMPRESA" ColumnName="DES_EMPRESA" />
+                <ScalarProperty Name="DIRECCION_ENTREGA" ColumnName="DIRECCION_ENTREGA" />
+                <ScalarProperty Name="COD_POSTAL" ColumnName="COD_POSTAL" />
+                <ScalarProperty Name="POBLACION" ColumnName="POBLACION" />
+                <ScalarProperty Name="PROVINCIA" ColumnName="PROVINCIA" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="FECH_CREACION" ColumnName="FECH_CREACION" />
+                <ScalarProperty Name="CANTIDAD_LINEAS" ColumnName="CANTIDAD_LINEAS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_ORDEN_SALIDA_LIN">
+            <EntityTypeMapping TypeName="BDModel.V_ORDEN_SALIDA_LIN">
+              <MappingFragment StoreEntitySet="V_ORDEN_SALIDA_LIN">
+                <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
+                <ScalarProperty Name="COD_LINEA" ColumnName="COD_LINEA" />
+                <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
+                <ScalarProperty Name="DES_REFERENCIA" ColumnName="DES_REFERENCIA" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+                <ScalarProperty Name="STOCK" ColumnName="STOCK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RECEPCIONES_CAB">
+            <EntityTypeMapping TypeName="BDModel.V_RECEPCIONES_CAB">
+              <MappingFragment StoreEntitySet="V_RECEPCIONES_CAB">
+                <ScalarProperty Name="ALBARAN" ColumnName="ALBARAN" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="DES_ESTADO" ColumnName="DES_ESTADO" />
+                <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+                <ScalarProperty Name="DES_EMPRESA" ColumnName="DES_EMPRESA" />
+                <ScalarProperty Name="FECH_CREACION" ColumnName="FECH_CREACION" />
+                <ScalarProperty Name="FECH_LLEGADA" ColumnName="FECH_LLEGADA" />
+                <ScalarProperty Name="CANTIDAD_LINEAS" ColumnName="CANTIDAD_LINEAS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_RECEPCIONES_LIN">
+            <EntityTypeMapping TypeName="BDModel.V_RECEPCIONES_LIN">
+              <MappingFragment StoreEntitySet="V_RECEPCIONES_LIN">
+                <ScalarProperty Name="ALBARAN" ColumnName="ALBARAN" />
+                <ScalarProperty Name="COD_LINEA" ColumnName="COD_LINEA" />
+                <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
+                <ScalarProperty Name="DES_REFERENCIA" ColumnName="DES_REFERENCIA" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+                <ScalarProperty Name="STOCK" ColumnName="STOCK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="V_REFERENCIAS">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.V_REFERENCIAS">
+            <EntityTypeMapping TypeName="BDModel.V_REFERENCIAS">
               <MappingFragment StoreEntitySet="V_REFERENCIAS">
                 <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
                 <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
@@ -1625,7 +2134,7 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="V_SQL">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.V_SQL">
+            <EntityTypeMapping TypeName="BDModel.V_SQL">
               <MappingFragment StoreEntitySet="V_SQL">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TABLA" ColumnName="TABLA" />
@@ -1653,7 +2162,7 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="V_SQL_FICHEROS">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.V_SQL_FICHEROS">
+            <EntityTypeMapping TypeName="BDModel.V_SQL_FICHEROS">
               <MappingFragment StoreEntitySet="V_SQL_FICHEROS">
                 <ScalarProperty Name="BBDD" ColumnName="BBDD" />
                 <ScalarProperty Name="FICHERO" ColumnName="FICHERO" />
@@ -1665,26 +2174,35 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionName="FCT_SOPORTE2Model.Store.FN_FECHA_GT" FunctionImportName="FN_FECHA_GT">
+          <FunctionImportMapping FunctionName="BDModel.Store.FN_FECHA_GT" FunctionImportName="FN_FECHA_GT">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="FCT_SOPORTE2Model.FN_FECHA_GT_Result">
+              <ComplexTypeMapping TypeName="BDModel.FN_FECHA_GT_Result">
                 <ScalarProperty Name="FECHA" ColumnName="FECHA" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="PA_ENVIAR_DBMAIL" FunctionName="FCT_SOPORTE2Model.Store.PA_ENVIAR_DBMAIL" />
-          <FunctionImportMapping FunctionImportName="PA_INF_TABLA" FunctionName="FCT_SOPORTE2Model.Store.PA_INF_TABLA" />
-          <FunctionImportMapping FunctionImportName="PA_REFERENCIAS" FunctionName="FCT_SOPORTE2Model.Store.PA_REFERENCIAS" />
-          <FunctionImportMapping FunctionImportName="PA_SQLD" FunctionName="FCT_SOPORTE2Model.Store.PA_SQLD" />
-          <FunctionImportMapping FunctionImportName="PAB" FunctionName="FCT_SOPORTE2Model.Store.PAB" />
-          <FunctionImportMapping FunctionImportName="PACE" FunctionName="FCT_SOPORTE2Model.Store.PACE" />
-          <FunctionImportMapping FunctionImportName="PAF" FunctionName="FCT_SOPORTE2Model.Store.PAF" />
-          <FunctionImportMapping FunctionImportName="PAH" FunctionName="FCT_SOPORTE2Model.Store.PAH" />
-          <FunctionImportMapping FunctionImportName="PAP" FunctionName="FCT_SOPORTE2Model.Store.PAP" />
-          <FunctionImportMapping FunctionImportName="PASE" FunctionName="FCT_SOPORTE2Model.Store.PASE" />
-          <FunctionImportMapping FunctionImportName="PAT" FunctionName="FCT_SOPORTE2Model.Store.PAT">
+          <FunctionImportMapping FunctionImportName="PA_EMAIL_RECEPCIONES" FunctionName="BDModel.Store.PA_EMAIL_RECEPCIONES" />
+          <FunctionImportMapping FunctionImportName="PA_ENVIAR_DBMAIL" FunctionName="BDModel.Store.PA_ENVIAR_DBMAIL" />
+          <FunctionImportMapping FunctionImportName="PA_GENERAR_ETIQUETA" FunctionName="BDModel.Store.PA_GENERAR_ETIQUETA" />
+          <FunctionImportMapping FunctionImportName="PA_INF_TABLA" FunctionName="BDModel.Store.PA_INF_TABLA" />
+          <FunctionImportMapping FunctionImportName="PA_MOVIMIENTOS_PICKING" FunctionName="BDModel.Store.PA_MOVIMIENTOS_PICKING" />
+          <FunctionImportMapping FunctionImportName="PA_ORDEN_SALIDA_CAB" FunctionName="BDModel.Store.PA_ORDEN_SALIDA_CAB" />
+          <FunctionImportMapping FunctionImportName="PA_ORDEN_SALIDA_INCIDENCIAS" FunctionName="BDModel.Store.PA_ORDEN_SALIDA_INCIDENCIAS" />
+          <FunctionImportMapping FunctionImportName="PA_ORDEN_SALIDA_LIN" FunctionName="BDModel.Store.PA_ORDEN_SALIDA_LIN" />
+          <FunctionImportMapping FunctionImportName="PA_PALETS" FunctionName="BDModel.Store.PA_PALETS" />
+          <FunctionImportMapping FunctionImportName="PA_RECEPCIONES_CAB" FunctionName="BDModel.Store.PA_RECEPCIONES_CAB" />
+          <FunctionImportMapping FunctionImportName="PA_RECEPCIONES_LIN" FunctionName="BDModel.Store.PA_RECEPCIONES_LIN" />
+          <FunctionImportMapping FunctionImportName="PA_REFERENCIAS" FunctionName="BDModel.Store.PA_REFERENCIAS" />
+          <FunctionImportMapping FunctionImportName="PA_SQLD" FunctionName="BDModel.Store.PA_SQLD" />
+          <FunctionImportMapping FunctionImportName="PAB" FunctionName="BDModel.Store.PAB" />
+          <FunctionImportMapping FunctionImportName="PACE" FunctionName="BDModel.Store.PACE" />
+          <FunctionImportMapping FunctionImportName="PAF" FunctionName="BDModel.Store.PAF" />
+          <FunctionImportMapping FunctionImportName="PAH" FunctionName="BDModel.Store.PAH" />
+          <FunctionImportMapping FunctionImportName="PAP" FunctionName="BDModel.Store.PAP" />
+          <FunctionImportMapping FunctionImportName="PASE" FunctionName="BDModel.Store.PASE" />
+          <FunctionImportMapping FunctionImportName="PAT" FunctionName="BDModel.Store.PAT">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="FCT_SOPORTE2Model.PAT_Result">
+              <ComplexTypeMapping TypeName="BDModel.PAT_Result">
                 <ScalarProperty Name="TABLA" ColumnName="TABLA" />
                 <ScalarProperty Name="CAMPO" ColumnName="CAMPO" />
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
@@ -1707,81 +2225,40 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="PA_GENERAR_ETIQUETA" FunctionName="FCT_SOPORTE2Model.Store.PA_GENERAR_ETIQUETA" />
-          <FunctionImportMapping FunctionImportName="PA_RECEPCIONES_CAB" FunctionName="FCT_SOPORTE2Model.Store.PA_RECEPCIONES_CAB" />
-          <FunctionImportMapping FunctionImportName="PA_RECEPCIONES_LIN" FunctionName="FCT_SOPORTE2Model.Store.PA_RECEPCIONES_LIN" />
-          <FunctionImportMapping FunctionImportName="PA_PALETS" FunctionName="FCT_SOPORTE2Model.Store.PA_PALETS" />
-          <EntitySetMapping Name="V_RECEPCIONES_CAB">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.V_RECEPCIONES_CAB">
-              <MappingFragment StoreEntitySet="V_RECEPCIONES_CAB">
-                <ScalarProperty Name="CANTIDAD_LINEAS" ColumnName="CANTIDAD_LINEAS" />
-                <ScalarProperty Name="FECH_LLEGADA" ColumnName="FECH_LLEGADA" />
-                <ScalarProperty Name="FECH_CREACION" ColumnName="FECH_CREACION" />
-                <ScalarProperty Name="PROVEEDOR" ColumnName="PROVEEDOR" />
-                <ScalarProperty Name="DES_ESTADO" ColumnName="DES_ESTADO" />
-                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
-                <ScalarProperty Name="ALBARAN" ColumnName="ALBARAN" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_RECEPCIONES_LIN">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.V_RECEPCIONES_LIN">
-              <MappingFragment StoreEntitySet="V_RECEPCIONES_LIN">
-                <ScalarProperty Name="STOCK" ColumnName="STOCK" />
-                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
-                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
-                <ScalarProperty Name="DES_REFERENCIA" ColumnName="DES_REFERENCIA" />
-                <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
-                <ScalarProperty Name="COD_LINEA" ColumnName="COD_LINEA" />
-                <ScalarProperty Name="ALBARAN" ColumnName="ALBARAN" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="PA_EMAIL_RECEPCIONES" FunctionName="FCT_SOPORTE2Model.Store.PA_EMAIL_RECEPCIONES" />
-          <FunctionImportMapping FunctionImportName="PA_ORDEN_SALIDA_CAB" FunctionName="FCT_SOPORTE2Model.Store.PA_ORDEN_SALIDA_CAB" />
-          <FunctionImportMapping FunctionImportName="PA_ORDEN_SALIDA_LIN" FunctionName="FCT_SOPORTE2Model.Store.PA_ORDEN_SALIDA_LIN" />
-          <EntitySetMapping Name="MOVIMIENTOS_PICKING">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.MOVIMIENTOS_PICKING">
-              <MappingFragment StoreEntitySet="MOVIMIENTOS_PICKING">
-                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
-                <ScalarProperty Name="REALIZADO" ColumnName="REALIZADO" />
-                <ScalarProperty Name="FECH_REALIZACION" ColumnName="FECH_REALIZACION" />
-                <ScalarProperty Name="COD_PALET" ColumnName="COD_PALET" />
-                <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
-                <ScalarProperty Name="COD_MOVIMIENTO" ColumnName="COD_MOVIMIENTO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="V_MOVIMIENTOS_PICKING">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.V_MOVIMIENTOS_PICKING">
-              <MappingFragment StoreEntitySet="V_MOVIMIENTOS_PICKING">
+          <FunctionImportMapping FunctionImportName="PA_GESTIONAR_PALETS" FunctionName="BDModel.Store.PA_GESTIONAR_PALETS" />
+          <EntitySetMapping Name="V_PALETS">
+            <EntityTypeMapping TypeName="BDModel.V_PALETS">
+              <MappingFragment StoreEntitySet="V_PALETS">
+                <ScalarProperty Name="PALET_PADRE" ColumnName="PALET_PADRE" />
+                <ScalarProperty Name="PETICION_SALIDA" ColumnName="PETICION_SALIDA" />
+                <ScalarProperty Name="ALBARAN_RECEPCION" ColumnName="ALBARAN_RECEPCION" />
+                <ScalarProperty Name="FECH_INSERT" ColumnName="FECH_INSERT" />
+                <ScalarProperty Name="POSICION" ColumnName="POSICION" />
+                <ScalarProperty Name="CALLE" ColumnName="CALLE" />
+                <ScalarProperty Name="DESC_UBICACION" ColumnName="DESC_UBICACION" />
                 <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
-                <ScalarProperty Name="DES_REFERENCIA" ColumnName="DES_REFERENCIA" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
                 <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
+                <ScalarProperty Name="DESC_ESTADO" ColumnName="DESC_ESTADO" />
+                <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
                 <ScalarProperty Name="COD_PALET" ColumnName="COD_PALET" />
-                <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
-                <ScalarProperty Name="COD_MOVIMIENTO" ColumnName="COD_MOVIMIENTO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="V_ORDEN_SALIDA_CAB">
-            <EntityTypeMapping TypeName="FCT_SOPORTE2Model.V_ORDEN_SALIDA_CAB">
-              <MappingFragment StoreEntitySet="V_ORDEN_SALIDA_CAB">
-                <ScalarProperty Name="CANTIDAD_LINEAS" ColumnName="CANTIDAD_LINEAS" />
-                <ScalarProperty Name="FECH_CREACION" ColumnName="FECH_CREACION" />
-                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
-                <ScalarProperty Name="PROVINCIA" ColumnName="PROVINCIA" />
+          <EntitySetMapping Name="V_ORDEN_SALIDA_INCIDENCIAS">
+            <EntityTypeMapping TypeName="BDModel.V_ORDEN_SALIDA_INCIDENCIAS">
+              <MappingFragment StoreEntitySet="V_ORDEN_SALIDA_INCIDENCIAS">
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="DES_INCIDENCIA" ColumnName="DES_INCIDENCIA" />
                 <ScalarProperty Name="POBLACION" ColumnName="POBLACION" />
                 <ScalarProperty Name="COD_POSTAL" ColumnName="COD_POSTAL" />
                 <ScalarProperty Name="DIRECCION_ENTREGA" ColumnName="DIRECCION_ENTREGA" />
-                <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
-                <ScalarProperty Name="DES_ESTADO" ColumnName="DES_ESTADO" />
-                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
                 <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
+                <ScalarProperty Name="ID_INCIDENCIA" ColumnName="ID_INCIDENCIA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="PA_MOVIMIENTOS_PICKING" FunctionName="FCT_SOPORTE2Model.Store.PA_MOVIMIENTOS_PICKING" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

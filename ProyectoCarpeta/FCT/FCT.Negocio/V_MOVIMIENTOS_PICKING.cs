@@ -20,5 +20,9 @@ namespace FCT.Negocio
         public string COD_REFERENCIA { get; set; }
         public string DES_REFERENCIA { get; set; }
         public string UBICACION { get; set; }
+        public string CALLE { get; set; }
+        public string POSICION { get; set; }
+        public Nullable<int> CANTIDAD { get; set; }
+        public Nullable<bool> REALIZADO { get; set; }
     }
 }

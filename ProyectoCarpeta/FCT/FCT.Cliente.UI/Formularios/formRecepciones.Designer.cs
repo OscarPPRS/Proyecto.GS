@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formRecepciones));
 			this.simpleButtonAnadirLinea = new DevExpress.XtraEditors.SimpleButton();
 			this.spinEditCantidad = new DevExpress.XtraEditors.SpinEdit();
 			this.simpleButtonQuitarLinea = new DevExpress.XtraEditors.SimpleButton();
@@ -54,8 +55,10 @@
 			this.colcantidad = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.coldescripcion_referencia = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridViewRecepciones = new DevExpress.XtraGrid.Views.Grid.GridView();
-			this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
 			this.textEditFechaLlegada = new DevExpress.XtraEditors.TextEdit();
+			this.simpleButtonActualizar = new DevExpress.XtraEditors.SimpleButton();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.spinEditCantidad.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.vISTAREFERENCIASBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewReferencias)).BeginInit();
@@ -65,15 +68,19 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridViewRecepciones1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewRecepciones)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditFechaLlegada.Properties)).BeginInit();
+			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// simpleButtonAnadirLinea
 			// 
-			this.simpleButtonAnadirLinea.Location = new System.Drawing.Point(946, 386);
+			this.simpleButtonAnadirLinea.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonAnadirLinea.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonAnadirLinea.ImageOptions.Image")));
+			this.simpleButtonAnadirLinea.Location = new System.Drawing.Point(842, 526);
 			this.simpleButtonAnadirLinea.Name = "simpleButtonAnadirLinea";
-			this.simpleButtonAnadirLinea.Size = new System.Drawing.Size(114, 39);
+			this.simpleButtonAnadirLinea.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+			this.simpleButtonAnadirLinea.Size = new System.Drawing.Size(99, 67);
 			this.simpleButtonAnadirLinea.TabIndex = 2;
-			this.simpleButtonAnadirLinea.Text = "Añadir línea\r\n de aviso ->";
+			this.simpleButtonAnadirLinea.Text = " ";
 			this.simpleButtonAnadirLinea.Click += new System.EventHandler(this.simpleButtonAnadirLinea_Click);
 			// 
 			// spinEditCantidad
@@ -83,40 +90,48 @@
             0,
             0,
             0});
-			this.spinEditCantidad.Location = new System.Drawing.Point(946, 340);
+			this.spinEditCantidad.Location = new System.Drawing.Point(842, 500);
 			this.spinEditCantidad.Name = "spinEditCantidad";
 			this.spinEditCantidad.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.spinEditCantidad.Size = new System.Drawing.Size(114, 20);
+			this.spinEditCantidad.Size = new System.Drawing.Size(99, 20);
 			this.spinEditCantidad.TabIndex = 3;
 			// 
 			// simpleButtonQuitarLinea
 			// 
-			this.simpleButtonQuitarLinea.Location = new System.Drawing.Point(1370, 685);
+			this.simpleButtonQuitarLinea.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonQuitarLinea.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonQuitarLinea.ImageOptions.Image")));
+			this.simpleButtonQuitarLinea.Location = new System.Drawing.Point(1635, 526);
 			this.simpleButtonQuitarLinea.Name = "simpleButtonQuitarLinea";
-			this.simpleButtonQuitarLinea.Size = new System.Drawing.Size(142, 39);
+			this.simpleButtonQuitarLinea.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+			this.simpleButtonQuitarLinea.Size = new System.Drawing.Size(57, 56);
 			this.simpleButtonQuitarLinea.TabIndex = 4;
-			this.simpleButtonQuitarLinea.Text = "Quitar línea seleccionada";
+			this.simpleButtonQuitarLinea.Text = " ";
 			this.simpleButtonQuitarLinea.Click += new System.EventHandler(this.simpleButtonQuitarLinea_Click);
 			// 
 			// simpleButtonGenerarAviso
 			// 
 			this.simpleButtonGenerarAviso.Appearance.Font = new System.Drawing.Font("Tahoma", 20F);
 			this.simpleButtonGenerarAviso.Appearance.Options.UseFont = true;
-			this.simpleButtonGenerarAviso.Location = new System.Drawing.Point(1486, 60);
+			this.simpleButtonGenerarAviso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonGenerarAviso.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonGenerarAviso.ImageOptions.Image")));
+			this.simpleButtonGenerarAviso.Location = new System.Drawing.Point(1520, 143);
 			this.simpleButtonGenerarAviso.Name = "simpleButtonGenerarAviso";
-			this.simpleButtonGenerarAviso.Size = new System.Drawing.Size(231, 80);
+			this.simpleButtonGenerarAviso.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+			this.simpleButtonGenerarAviso.Size = new System.Drawing.Size(109, 101);
 			this.simpleButtonGenerarAviso.TabIndex = 5;
-			this.simpleButtonGenerarAviso.Text = "GENERAR AVISO";
+			this.simpleButtonGenerarAviso.Text = " ";
 			this.simpleButtonGenerarAviso.Click += new System.EventHandler(this.simpleButtonGenerarAviso_Click);
 			// 
 			// labelControl1
 			// 
-			this.labelControl1.Location = new System.Drawing.Point(896, 93);
+			this.labelControl1.Appearance.Font = new System.Drawing.Font("Lemon/Milk", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl1.Appearance.Options.UseFont = true;
+			this.labelControl1.Location = new System.Drawing.Point(69, 23);
 			this.labelControl1.Name = "labelControl1";
-			this.labelControl1.Size = new System.Drawing.Size(85, 13);
+			this.labelControl1.Size = new System.Drawing.Size(183, 27);
 			this.labelControl1.TabIndex = 7;
-			this.labelControl1.Text = "Fecha de llegada:";
+			this.labelControl1.Text = "Fecha de llegada";
 			// 
 			// vISTAREFERENCIASBindingSource
 			// 
@@ -198,10 +213,10 @@
 			// gridControlReferencias
 			// 
 			this.gridControlReferencias.DataSource = this.vISTAREFERENCIASBindingSource;
-			this.gridControlReferencias.Location = new System.Drawing.Point(236, 201);
+			this.gridControlReferencias.Location = new System.Drawing.Point(133, 265);
 			this.gridControlReferencias.MainView = this.gridViewReferencias;
 			this.gridControlReferencias.Name = "gridControlReferencias";
-			this.gridControlReferencias.Size = new System.Drawing.Size(666, 466);
+			this.gridControlReferencias.Size = new System.Drawing.Size(666, 611);
 			this.gridControlReferencias.TabIndex = 9;
 			this.gridControlReferencias.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewReferencias});
@@ -209,10 +224,10 @@
 			// gridControlPedidos
 			// 
 			this.gridControlPedidos.DataSource = this.lineaAvisoBindingSource;
-			this.gridControlPedidos.Location = new System.Drawing.Point(1112, 201);
+			this.gridControlPedidos.Location = new System.Drawing.Point(991, 265);
 			this.gridControlPedidos.MainView = this.gridViewRecepciones1;
 			this.gridControlPedidos.Name = "gridControlPedidos";
-			this.gridControlPedidos.Size = new System.Drawing.Size(638, 466);
+			this.gridControlPedidos.Size = new System.Drawing.Size(638, 611);
 			this.gridControlPedidos.TabIndex = 10;
 			this.gridControlPedidos.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewRecepciones1,
@@ -277,17 +292,9 @@
 			this.gridViewRecepciones.OptionsBehavior.Editable = false;
 			this.gridViewRecepciones.OptionsBehavior.ReadOnly = true;
 			// 
-			// labelControl2
-			// 
-			this.labelControl2.Location = new System.Drawing.Point(957, 321);
-			this.labelControl2.Name = "labelControl2";
-			this.labelControl2.Size = new System.Drawing.Size(85, 13);
-			this.labelControl2.TabIndex = 11;
-			this.labelControl2.Text = "Cantidad a añadir";
-			// 
 			// textEditFechaLlegada
 			// 
-			this.textEditFechaLlegada.Location = new System.Drawing.Point(1001, 90);
+			this.textEditFechaLlegada.Location = new System.Drawing.Point(107, 68);
 			this.textEditFechaLlegada.Name = "textEditFechaLlegada";
 			this.textEditFechaLlegada.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.DateTimeMaskManager));
 			this.textEditFechaLlegada.Properties.MaskSettings.Set("mask", "d");
@@ -296,22 +303,57 @@
 			this.textEditFechaLlegada.Size = new System.Drawing.Size(111, 20);
 			this.textEditFechaLlegada.TabIndex = 12;
 			// 
+			// simpleButtonActualizar
+			// 
+			this.simpleButtonActualizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonActualizar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonActualizar.ImageOptions.Image")));
+			this.simpleButtonActualizar.Location = new System.Drawing.Point(65, 526);
+			this.simpleButtonActualizar.Name = "simpleButtonActualizar";
+			this.simpleButtonActualizar.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+			this.simpleButtonActualizar.Size = new System.Drawing.Size(62, 56);
+			this.simpleButtonActualizar.TabIndex = 13;
+			this.simpleButtonActualizar.Text = " ";
+			this.simpleButtonActualizar.Click += new System.EventHandler(this.simpleButtonActualizar_Click);
+			// 
+			// panel1
+			// 
+			this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(179)))), ((int)(((byte)(53)))));
+			this.panel1.Controls.Add(this.textEditFechaLlegada);
+			this.panel1.Controls.Add(this.labelControl1);
+			this.panel1.Location = new System.Drawing.Point(731, 109);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(322, 119);
+			this.panel1.TabIndex = 14;
+			// 
+			// labelControl4
+			// 
+			this.labelControl4.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.labelControl4.Appearance.Font = new System.Drawing.Font("Lemon/Milk", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl4.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(179)))), ((int)(((byte)(53)))));
+			this.labelControl4.Appearance.Options.UseFont = true;
+			this.labelControl4.Appearance.Options.UseForeColor = true;
+			this.labelControl4.Location = new System.Drawing.Point(133, 40);
+			this.labelControl4.Name = "labelControl4";
+			this.labelControl4.Size = new System.Drawing.Size(293, 41);
+			this.labelControl4.TabIndex = 95;
+			this.labelControl4.Text = "AVISOS DE LLEGADA";
+			// 
 			// formRecepciones
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1790, 902);
-			this.Controls.Add(this.textEditFechaLlegada);
-			this.Controls.Add(this.labelControl2);
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(34)))), ((int)(((byte)(64)))));
+			this.ClientSize = new System.Drawing.Size(1790, 1000);
+			this.Controls.Add(this.labelControl4);
+			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.simpleButtonActualizar);
 			this.Controls.Add(this.gridControlPedidos);
 			this.Controls.Add(this.gridControlReferencias);
-			this.Controls.Add(this.labelControl1);
 			this.Controls.Add(this.simpleButtonGenerarAviso);
 			this.Controls.Add(this.simpleButtonQuitarLinea);
 			this.Controls.Add(this.spinEditCantidad);
 			this.Controls.Add(this.simpleButtonAnadirLinea);
 			this.Name = "formRecepciones";
-			this.Text = "Recepciones";
 			this.Load += new System.EventHandler(this.formRecepciones_Load);
 			((System.ComponentModel.ISupportInitialize)(this.spinEditCantidad.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.vISTAREFERENCIASBindingSource)).EndInit();
@@ -322,6 +364,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridViewRecepciones1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewRecepciones)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditFechaLlegada.Properties)).EndInit();
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -345,7 +389,6 @@
 		private DevExpress.XtraGrid.GridControl gridControlReferencias;
 		private DevExpress.XtraGrid.GridControl gridControlPedidos;
 		private System.Windows.Forms.BindingSource lineaAvisoBindingSource;
-		private DevExpress.XtraEditors.LabelControl labelControl2;
 		private DevExpress.XtraGrid.Columns.GridColumn colSTOCK;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewRecepciones;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewRecepciones1;
@@ -355,5 +398,8 @@
 		private DevExpress.XtraGrid.Columns.GridColumn colcantidad;
 		private DevExpress.XtraGrid.Columns.GridColumn coldescripcion_referencia;
 		private DevExpress.XtraEditors.TextEdit textEditFechaLlegada;
+		private DevExpress.XtraEditors.SimpleButton simpleButtonActualizar;
+		private System.Windows.Forms.Panel panel1;
+		private DevExpress.XtraEditors.LabelControl labelControl4;
 	}
 }

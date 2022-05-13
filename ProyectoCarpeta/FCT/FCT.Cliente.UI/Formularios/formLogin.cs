@@ -1,9 +1,12 @@
-﻿using System;
+﻿using FCT.Negocio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,11 +29,6 @@ namespace FCT.Cliente.UI
 				System.Windows.Forms.MessageBox.Show("Usuario o contraseña inválidos.");
 			}
 
-			else if (result == 1)
-			{
-				//Lanzar app de oficina
-			}
-
 			else 
 			{
 				formContenedor form = new formContenedor(result);
@@ -38,5 +36,7 @@ namespace FCT.Cliente.UI
 				this.Hide();
 			}
 		}
+
+		
 	}
 }

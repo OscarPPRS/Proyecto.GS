@@ -17,13 +17,15 @@ namespace FCT.Negocio
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ORDEN_SALIDA_CAB()
         {
-            this.ORDEN_SALIDA_LIN = new HashSet<ORDEN_SALIDA_LIN>();
             this.MOVIMIENTOS_PICKING = new HashSet<MOVIMIENTOS_PICKING>();
+            this.MOVIMIENTOS_PICKING_LOG = new HashSet<MOVIMIENTOS_PICKING_LOG>();
+            this.ORDEN_SALIDA_INCIDENCIAS = new HashSet<ORDEN_SALIDA_INCIDENCIAS>();
+            this.ORDEN_SALIDA_LIN = new HashSet<ORDEN_SALIDA_LIN>();
         }
     
         public int COD_PETICION { get; set; }
         public Nullable<int> ESTADO { get; set; }
-        public string NOMBRE_CLIENTE { get; set; }
+        public Nullable<int> ID_EMPRESA { get; set; }
         public string DIRECCION_ENTREGA { get; set; }
         public string COD_POSTAL { get; set; }
         public string POBLACION { get; set; }
@@ -31,10 +33,15 @@ namespace FCT.Negocio
         public string TELEFONO { get; set; }
         public Nullable<System.DateTime> FECH_CREACION { get; set; }
     
+        public virtual EMPRESAS EMPRESAS { get; set; }
         public virtual ESTADOS_ORDEN_SALIDA ESTADOS_ORDEN_SALIDA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ORDEN_SALIDA_LIN> ORDEN_SALIDA_LIN { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MOVIMIENTOS_PICKING> MOVIMIENTOS_PICKING { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MOVIMIENTOS_PICKING_LOG> MOVIMIENTOS_PICKING_LOG { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ORDEN_SALIDA_INCIDENCIAS> ORDEN_SALIDA_INCIDENCIAS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ORDEN_SALIDA_LIN> ORDEN_SALIDA_LIN { get; set; }
     }
 }

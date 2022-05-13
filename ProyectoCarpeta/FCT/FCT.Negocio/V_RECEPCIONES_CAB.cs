@@ -17,7 +17,8 @@ namespace FCT.Negocio
         public int ALBARAN { get; set; }
         public Nullable<int> ESTADO { get; set; }
         public string DES_ESTADO { get; set; }
-        public string PROVEEDOR { get; set; }
+        public Nullable<int> ID_EMPRESA { get; set; }
+        public string DES_EMPRESA { get; set; }
         public Nullable<System.DateTime> FECH_CREACION { get; set; }
         public Nullable<System.DateTime> FECH_LLEGADA { get; set; }
         public Nullable<int> CANTIDAD_LINEAS { get; set; }

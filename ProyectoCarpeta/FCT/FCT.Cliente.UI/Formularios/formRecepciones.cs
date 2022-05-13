@@ -35,7 +35,7 @@ namespace FCT.Cliente.UI.Formularios
 
 		private void actualizarGrids() {
 
-			vISTAREFERENCIASBindingSource.DataSource = Consultas.gridReferenciasAvisos(formContenedor.idEmpresa);
+			vISTAREFERENCIASBindingSource.DataSource = CargarGrids.referenciasAvisos(formContenedor.idEmpresa);
 			lineaAvisoBindingSource.DataSource = lineasGrid;	
 		}
 
@@ -110,13 +110,13 @@ namespace FCT.Cliente.UI.Formularios
 					Random r = new Random();
 					string pedido;
 					string albaran = r.Next(999999999).ToString();
-					string proveedor = Consultas.nombreEmpresa(formContenedor.idEmpresa);
+					int proveedor = formContenedor.idEmpresa;
 
-					pedido = albaran + "#" + "1" + "#" + proveedor + "#" + DateTime.Now.ToShortDateString() + "#" + textEditFechaLlegada.Text;
+					pedido = albaran + "#" + "1" + "#" + proveedor.ToString() + "#" + DateTime.Now.ToShortDateString() + "#" + textEditFechaLlegada.Text;
 
 					try
 					{
-						using (StreamWriter escribir = new StreamWriter(Application.StartupPath + "\\..\\..\\..\\Recursos\\data\\avisos\\pendientes\\" + albaran + ".txt"))
+						using (StreamWriter escribir = new StreamWriter("\\\\m2d96\\Publico" + "\\Recursos\\data\\avisos\\pendientes\\" + albaran + ".txt"))
 						{
 							escribir.WriteLine(pedido);
 							foreach (LineaAviso l in lineasGrid)
@@ -152,6 +152,11 @@ namespace FCT.Cliente.UI.Formularios
 					simpleButtonQuitarLinea.Enabled = false;
 				}
 			
+		}
+
+		private void simpleButtonActualizar_Click(object sender, EventArgs e)
+		{
+			actualizarGrids();
 		}
 	}
 }

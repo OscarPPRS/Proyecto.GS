@@ -15,6 +15,22 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>\\AWORK186\Publico\FCT - PRACTICAS\Oscar Lopez\ICP\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,6 +50,18 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>84EEDB179161B3989DF9A1B21F1DC829FE1A5628</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>FCT.GestionICP.UI_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.Desktop.v21.2, Version=21.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -72,6 +100,18 @@
     <Compile Include="Formularios\formContenedor.Designer.cs">
       <DependentUpon>formContenedor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\formGestionPalets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\formGestionPalets.Designer.cs">
+      <DependentUpon>formGestionPalets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\formIncidenciasPedidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\formIncidenciasPedidos.Designer.cs">
+      <DependentUpon>formIncidenciasPedidos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\formPicking.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,16 +124,41 @@
     <Compile Include="Formularios\formRecepcionar.Designer.cs">
       <DependentUpon>formRecepcionar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\formRevision.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\formRevision.Designer.cs">
+      <DependentUpon>formRevision.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\formUbicarRecepciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\formUbicarRecepciones.Designer.cs">
+      <DependentUpon>formUbicarRecepciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recursos\FuncionesAuxiliares.cs" />
     <EmbeddedResource Include="Formularios\formContenedor.resx">
       <DependentUpon>formContenedor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\formGestionPalets.resx">
+      <DependentUpon>formGestionPalets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\formIncidenciasPedidos.resx">
+      <DependentUpon>formIncidenciasPedidos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\formPicking.resx">
       <DependentUpon>formPicking.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\formRecepcionar.resx">
       <DependentUpon>formRecepcionar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\formRevision.resx">
+      <DependentUpon>formRevision.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\formUbicarRecepciones.resx">
+      <DependentUpon>formUbicarRecepciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -105,9 +170,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="FCT.GestionICP.UI_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\FCT.Negocio.RECEPCIONES_LIN.datasource" />
     <None Include="Properties\DataSources\FCT.Negocio.V_AVISOS.datasource" />
+    <None Include="Properties\DataSources\FCT.Negocio.V_MOVIMIENTOS_PICKING.datasource" />
+    <None Include="Properties\DataSources\FCT.Negocio.V_ORDEN_SALIDA_CAB.datasource" />
+    <None Include="Properties\DataSources\FCT.Negocio.V_ORDEN_SALIDA_INCIDENCIAS.datasource" />
+    <None Include="Properties\DataSources\FCT.Negocio.V_ORDEN_SALIDA_LIN.datasource" />
+    <None Include="Properties\DataSources\FCT.Negocio.V_PALETS.datasource" />
     <None Include="Properties\DataSources\FCT.Negocio.V_RECEPCIONES_LIN.datasource" />
     <None Include="Properties\DataSources\LineaAviso.datasource" />
     <None Include="Properties\Settings.settings">
@@ -124,13 +195,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\FCT.Negocio\FCT.Negocio.csproj">
       <Project>{b2798a22-9f37-4ea0-b0fe-3f752dc299ab}</Project>
       <Name>FCT.Negocio</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

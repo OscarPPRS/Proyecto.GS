@@ -1,24 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="FCT_SOPORTE2ModelStoreContainer" CdmEntityContainer="BDEntities">
+  <EntityContainerMapping StorageEntityContainer="BDModelStoreContainer" CdmEntityContainer="BDEntities">
     <EntitySetMapping Name="EMPRESAS">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.EMPRESAS">
+      <EntityTypeMapping TypeName="BDModel.EMPRESAS">
         <MappingFragment StoreEntitySet="EMPRESAS">
-          <ScalarProperty Name="DES_EMPRESA" ColumnName="DES_EMPRESA" />
+          <ScalarProperty Name="LOGO" ColumnName="LOGO" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="NOM_USUARIO" ColumnName="NOM_USUARIO" />
           <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+          <ScalarProperty Name="DES_EMPRESA" ColumnName="DES_EMPRESA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ESTADOS_ORDEN_SALIDA">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.ESTADOS_ORDEN_SALIDA">
+      <EntityTypeMapping TypeName="BDModel.ESTADOS_ORDEN_SALIDA">
         <MappingFragment StoreEntitySet="ESTADOS_ORDEN_SALIDA">
-          <ScalarProperty Name="DES_ESTADO" ColumnName="DES_ESTADO" />
           <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
+          <ScalarProperty Name="DES_ESTADO" ColumnName="DES_ESTADO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ESTADOS_PALETS">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.ESTADOS_PALETS">
+      <EntityTypeMapping TypeName="BDModel.ESTADOS_PALETS">
         <MappingFragment StoreEntitySet="ESTADOS_PALETS">
           <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
           <ScalarProperty Name="DESC_ESTADO" ColumnName="DESC_ESTADO" />
@@ -26,28 +29,43 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ESTADOS_RECEPCION">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.ESTADOS_RECEPCION">
+      <EntityTypeMapping TypeName="BDModel.ESTADOS_RECEPCION">
         <MappingFragment StoreEntitySet="ESTADOS_RECEPCION">
           <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
           <ScalarProperty Name="DES_ESTADO" ColumnName="DES_ESTADO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="INCIDENCIAS_PALETS">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.INCIDENCIAS_PALETS">
-        <MappingFragment StoreEntitySet="INCIDENCIAS_PALETS">
-          <ScalarProperty Name="ID_INCIDENCIA" ColumnName="ID_INCIDENCIA" />
+    <EntitySetMapping Name="MOVIMIENTOS_PICKING">
+      <EntityTypeMapping TypeName="BDModel.MOVIMIENTOS_PICKING">
+        <MappingFragment StoreEntitySet="MOVIMIENTOS_PICKING">
+          <ScalarProperty Name="COD_MOVIMIENTO" ColumnName="COD_MOVIMIENTO" />
+          <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
           <ScalarProperty Name="COD_PALET" ColumnName="COD_PALET" />
-          <ScalarProperty Name="DESC_INCIDENCIA" ColumnName="DESC_INCIDENCIA" />
+          <ScalarProperty Name="FECH_REALIZACION" ColumnName="FECH_REALIZACION" />
+          <ScalarProperty Name="REALIZADO" ColumnName="REALIZADO" />
+          <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MOVIMIENTOS_PICKING_LOG">
+      <EntityTypeMapping TypeName="BDModel.MOVIMIENTOS_PICKING_LOG">
+        <MappingFragment StoreEntitySet="MOVIMIENTOS_PICKING_LOG">
+          <ScalarProperty Name="COD_MOVIMIENTO_LOG" ColumnName="COD_MOVIMIENTO_LOG" />
+          <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
+          <ScalarProperty Name="COD_PALET" ColumnName="COD_PALET" />
+          <ScalarProperty Name="FECH_REALIZACION" ColumnName="FECH_REALIZACION" />
+          <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+          <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ORDEN_SALIDA_CAB">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.ORDEN_SALIDA_CAB">
+      <EntityTypeMapping TypeName="BDModel.ORDEN_SALIDA_CAB">
         <MappingFragment StoreEntitySet="ORDEN_SALIDA_CAB">
           <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
           <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
-          <ScalarProperty Name="NOMBRE_CLIENTE" ColumnName="NOMBRE_CLIENTE" />
+          <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
           <ScalarProperty Name="DIRECCION_ENTREGA" ColumnName="DIRECCION_ENTREGA" />
           <ScalarProperty Name="COD_POSTAL" ColumnName="COD_POSTAL" />
           <ScalarProperty Name="POBLACION" ColumnName="POBLACION" />
@@ -57,8 +75,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ORDEN_SALIDA_INCIDENCIAS">
+      <EntityTypeMapping TypeName="BDModel.ORDEN_SALIDA_INCIDENCIAS">
+        <MappingFragment StoreEntitySet="ORDEN_SALIDA_INCIDENCIAS">
+          <ScalarProperty Name="ID_INCIDENCIA" ColumnName="ID_INCIDENCIA" />
+          <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
+          <ScalarProperty Name="DES_INCIDENCIA" ColumnName="DES_INCIDENCIA" />
+          <ScalarProperty Name="RESUELTA" ColumnName="RESUELTA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ORDEN_SALIDA_LIN">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.ORDEN_SALIDA_LIN">
+      <EntityTypeMapping TypeName="BDModel.ORDEN_SALIDA_LIN">
         <MappingFragment StoreEntitySet="ORDEN_SALIDA_LIN">
           <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
           <ScalarProperty Name="COD_LINEA" ColumnName="COD_LINEA" />
@@ -68,32 +96,43 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PALETS">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.PALETS">
+      <EntityTypeMapping TypeName="BDModel.PALETS">
         <MappingFragment StoreEntitySet="PALETS">
-          <ScalarProperty Name="ETIQUETA" ColumnName="ETIQUETA" />
-          <ScalarProperty Name="ALBARAN_RECEPCION" ColumnName="ALBARAN_RECEPCION" />
           <ScalarProperty Name="COD_PALET" ColumnName="COD_PALET" />
           <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
           <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
           <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
           <ScalarProperty Name="FECH_INSERT" ColumnName="FECH_INSERT" />
           <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+          <ScalarProperty Name="ALBARAN_RECEPCION" ColumnName="ALBARAN_RECEPCION" />
+          <ScalarProperty Name="ETIQUETA" ColumnName="ETIQUETA" />
+          <ScalarProperty Name="PETICION_SALIDA" ColumnName="PETICION_SALIDA" />
+          <ScalarProperty Name="PALET_PADRE" ColumnName="PALET_PADRE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PALETS_INCIDENCIAS">
+      <EntityTypeMapping TypeName="BDModel.PALETS_INCIDENCIAS">
+        <MappingFragment StoreEntitySet="PALETS_INCIDENCIAS">
+          <ScalarProperty Name="ID_INCIDENCIA" ColumnName="ID_INCIDENCIA" />
+          <ScalarProperty Name="COD_PALET" ColumnName="COD_PALET" />
+          <ScalarProperty Name="DESC_INCIDENCIA" ColumnName="DESC_INCIDENCIA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="RECEPCIONES_CAB">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.RECEPCIONES_CAB">
+      <EntityTypeMapping TypeName="BDModel.RECEPCIONES_CAB">
         <MappingFragment StoreEntitySet="RECEPCIONES_CAB">
           <ScalarProperty Name="ALBARAN" ColumnName="ALBARAN" />
           <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
-          <ScalarProperty Name="PROVEEDOR" ColumnName="PROVEEDOR" />
+          <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
           <ScalarProperty Name="FECH_CREACION" ColumnName="FECH_CREACION" />
           <ScalarProperty Name="FECH_LLEGADA" ColumnName="FECH_LLEGADA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="RECEPCIONES_LIN">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.RECEPCIONES_LIN">
+      <EntityTypeMapping TypeName="BDModel.RECEPCIONES_LIN">
         <MappingFragment StoreEntitySet="RECEPCIONES_LIN">
           <ScalarProperty Name="ALBARAN" ColumnName="ALBARAN" />
           <ScalarProperty Name="COD_LINEA" ColumnName="COD_LINEA" />
@@ -103,7 +142,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="REFERENCIAS">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.REFERENCIAS">
+      <EntityTypeMapping TypeName="BDModel.REFERENCIAS">
         <MappingFragment StoreEntitySet="REFERENCIAS">
           <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
           <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
@@ -116,7 +155,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UBICACIONES">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.UBICACIONES">
+      <EntityTypeMapping TypeName="BDModel.UBICACIONES">
         <MappingFragment StoreEntitySet="UBICACIONES">
           <ScalarProperty Name="COD_UBICACION" ColumnName="COD_UBICACION" />
           <ScalarProperty Name="DESC_UBICACION" ColumnName="DESC_UBICACION" />
@@ -126,17 +165,82 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="USUARIOS">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.USUARIOS">
-        <MappingFragment StoreEntitySet="USUARIOS">
-          <ScalarProperty Name="NOM_USUARIO" ColumnName="NOM_USUARIO" />
+    <EntitySetMapping Name="V_MOVIMIENTOS_PICKING">
+      <EntityTypeMapping TypeName="BDModel.V_MOVIMIENTOS_PICKING">
+        <MappingFragment StoreEntitySet="V_MOVIMIENTOS_PICKING">
+          <ScalarProperty Name="COD_MOVIMIENTO" ColumnName="COD_MOVIMIENTO" />
+          <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
+          <ScalarProperty Name="COD_PALET" ColumnName="COD_PALET" />
+          <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
+          <ScalarProperty Name="DES_REFERENCIA" ColumnName="DES_REFERENCIA" />
+          <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
+          <ScalarProperty Name="CALLE" ColumnName="CALLE" />
+          <ScalarProperty Name="POSICION" ColumnName="POSICION" />
+          <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+          <ScalarProperty Name="REALIZADO" ColumnName="REALIZADO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_ORDEN_SALIDA_CAB">
+      <EntityTypeMapping TypeName="BDModel.V_ORDEN_SALIDA_CAB">
+        <MappingFragment StoreEntitySet="V_ORDEN_SALIDA_CAB">
+          <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+          <ScalarProperty Name="DES_ESTADO" ColumnName="DES_ESTADO" />
           <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
-          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="DES_EMPRESA" ColumnName="DES_EMPRESA" />
+          <ScalarProperty Name="DIRECCION_ENTREGA" ColumnName="DIRECCION_ENTREGA" />
+          <ScalarProperty Name="COD_POSTAL" ColumnName="COD_POSTAL" />
+          <ScalarProperty Name="POBLACION" ColumnName="POBLACION" />
+          <ScalarProperty Name="PROVINCIA" ColumnName="PROVINCIA" />
+          <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+          <ScalarProperty Name="FECH_CREACION" ColumnName="FECH_CREACION" />
+          <ScalarProperty Name="CANTIDAD_LINEAS" ColumnName="CANTIDAD_LINEAS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_ORDEN_SALIDA_LIN">
+      <EntityTypeMapping TypeName="BDModel.V_ORDEN_SALIDA_LIN">
+        <MappingFragment StoreEntitySet="V_ORDEN_SALIDA_LIN">
+          <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
+          <ScalarProperty Name="COD_LINEA" ColumnName="COD_LINEA" />
+          <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
+          <ScalarProperty Name="DES_REFERENCIA" ColumnName="DES_REFERENCIA" />
+          <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+          <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+          <ScalarProperty Name="STOCK" ColumnName="STOCK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_RECEPCIONES_CAB">
+      <EntityTypeMapping TypeName="BDModel.V_RECEPCIONES_CAB">
+        <MappingFragment StoreEntitySet="V_RECEPCIONES_CAB">
+          <ScalarProperty Name="ALBARAN" ColumnName="ALBARAN" />
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+          <ScalarProperty Name="DES_ESTADO" ColumnName="DES_ESTADO" />
+          <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+          <ScalarProperty Name="DES_EMPRESA" ColumnName="DES_EMPRESA" />
+          <ScalarProperty Name="FECH_CREACION" ColumnName="FECH_CREACION" />
+          <ScalarProperty Name="FECH_LLEGADA" ColumnName="FECH_LLEGADA" />
+          <ScalarProperty Name="CANTIDAD_LINEAS" ColumnName="CANTIDAD_LINEAS" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_RECEPCIONES_LIN">
+      <EntityTypeMapping TypeName="BDModel.V_RECEPCIONES_LIN">
+        <MappingFragment StoreEntitySet="V_RECEPCIONES_LIN">
+          <ScalarProperty Name="ALBARAN" ColumnName="ALBARAN" />
+          <ScalarProperty Name="COD_LINEA" ColumnName="COD_LINEA" />
+          <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
+          <ScalarProperty Name="DES_REFERENCIA" ColumnName="DES_REFERENCIA" />
+          <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+          <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+          <ScalarProperty Name="STOCK" ColumnName="STOCK" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="V_REFERENCIAS">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.V_REFERENCIAS">
+      <EntityTypeMapping TypeName="BDModel.V_REFERENCIAS">
         <MappingFragment StoreEntitySet="V_REFERENCIAS">
           <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
           <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
@@ -150,7 +254,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="V_SQL">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.V_SQL">
+      <EntityTypeMapping TypeName="BDModel.V_SQL">
         <MappingFragment StoreEntitySet="V_SQL">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="TABLA" ColumnName="TABLA" />
@@ -178,7 +282,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="V_SQL_FICHEROS">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.V_SQL_FICHEROS">
+      <EntityTypeMapping TypeName="BDModel.V_SQL_FICHEROS">
         <MappingFragment StoreEntitySet="V_SQL_FICHEROS">
           <ScalarProperty Name="BBDD" ColumnName="BBDD" />
           <ScalarProperty Name="FICHERO" ColumnName="FICHERO" />
@@ -190,26 +294,35 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionName="FCT_SOPORTE2Model.Store.FN_FECHA_GT" FunctionImportName="FN_FECHA_GT">
+    <FunctionImportMapping FunctionName="BDModel.Store.FN_FECHA_GT" FunctionImportName="FN_FECHA_GT">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="FCT_SOPORTE2Model.FN_FECHA_GT_Result">
+        <ComplexTypeMapping TypeName="BDModel.FN_FECHA_GT_Result">
           <ScalarProperty Name="FECHA" ColumnName="FECHA" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="PA_ENVIAR_DBMAIL" FunctionName="FCT_SOPORTE2Model.Store.PA_ENVIAR_DBMAIL" />
-    <FunctionImportMapping FunctionImportName="PA_INF_TABLA" FunctionName="FCT_SOPORTE2Model.Store.PA_INF_TABLA" />
-    <FunctionImportMapping FunctionImportName="PA_REFERENCIAS" FunctionName="FCT_SOPORTE2Model.Store.PA_REFERENCIAS" />
-    <FunctionImportMapping FunctionImportName="PA_SQLD" FunctionName="FCT_SOPORTE2Model.Store.PA_SQLD" />
-    <FunctionImportMapping FunctionImportName="PAB" FunctionName="FCT_SOPORTE2Model.Store.PAB" />
-    <FunctionImportMapping FunctionImportName="PACE" FunctionName="FCT_SOPORTE2Model.Store.PACE" />
-    <FunctionImportMapping FunctionImportName="PAF" FunctionName="FCT_SOPORTE2Model.Store.PAF" />
-    <FunctionImportMapping FunctionImportName="PAH" FunctionName="FCT_SOPORTE2Model.Store.PAH" />
-    <FunctionImportMapping FunctionImportName="PAP" FunctionName="FCT_SOPORTE2Model.Store.PAP" />
-    <FunctionImportMapping FunctionImportName="PASE" FunctionName="FCT_SOPORTE2Model.Store.PASE" />
-    <FunctionImportMapping FunctionImportName="PAT" FunctionName="FCT_SOPORTE2Model.Store.PAT">
+    <FunctionImportMapping FunctionImportName="PA_EMAIL_RECEPCIONES" FunctionName="BDModel.Store.PA_EMAIL_RECEPCIONES" />
+    <FunctionImportMapping FunctionImportName="PA_ENVIAR_DBMAIL" FunctionName="BDModel.Store.PA_ENVIAR_DBMAIL" />
+    <FunctionImportMapping FunctionImportName="PA_GENERAR_ETIQUETA" FunctionName="BDModel.Store.PA_GENERAR_ETIQUETA" />
+    <FunctionImportMapping FunctionImportName="PA_INF_TABLA" FunctionName="BDModel.Store.PA_INF_TABLA" />
+    <FunctionImportMapping FunctionImportName="PA_MOVIMIENTOS_PICKING" FunctionName="BDModel.Store.PA_MOVIMIENTOS_PICKING" />
+    <FunctionImportMapping FunctionImportName="PA_ORDEN_SALIDA_CAB" FunctionName="BDModel.Store.PA_ORDEN_SALIDA_CAB" />
+    <FunctionImportMapping FunctionImportName="PA_ORDEN_SALIDA_INCIDENCIAS" FunctionName="BDModel.Store.PA_ORDEN_SALIDA_INCIDENCIAS" />
+    <FunctionImportMapping FunctionImportName="PA_ORDEN_SALIDA_LIN" FunctionName="BDModel.Store.PA_ORDEN_SALIDA_LIN" />
+    <FunctionImportMapping FunctionImportName="PA_PALETS" FunctionName="BDModel.Store.PA_PALETS" />
+    <FunctionImportMapping FunctionImportName="PA_RECEPCIONES_CAB" FunctionName="BDModel.Store.PA_RECEPCIONES_CAB" />
+    <FunctionImportMapping FunctionImportName="PA_RECEPCIONES_LIN" FunctionName="BDModel.Store.PA_RECEPCIONES_LIN" />
+    <FunctionImportMapping FunctionImportName="PA_REFERENCIAS" FunctionName="BDModel.Store.PA_REFERENCIAS" />
+    <FunctionImportMapping FunctionImportName="PA_SQLD" FunctionName="BDModel.Store.PA_SQLD" />
+    <FunctionImportMapping FunctionImportName="PAB" FunctionName="BDModel.Store.PAB" />
+    <FunctionImportMapping FunctionImportName="PACE" FunctionName="BDModel.Store.PACE" />
+    <FunctionImportMapping FunctionImportName="PAF" FunctionName="BDModel.Store.PAF" />
+    <FunctionImportMapping FunctionImportName="PAH" FunctionName="BDModel.Store.PAH" />
+    <FunctionImportMapping FunctionImportName="PAP" FunctionName="BDModel.Store.PAP" />
+    <FunctionImportMapping FunctionImportName="PASE" FunctionName="BDModel.Store.PASE" />
+    <FunctionImportMapping FunctionImportName="PAT" FunctionName="BDModel.Store.PAT">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="FCT_SOPORTE2Model.PAT_Result">
+        <ComplexTypeMapping TypeName="BDModel.PAT_Result">
           <ScalarProperty Name="TABLA" ColumnName="TABLA" />
           <ScalarProperty Name="CAMPO" ColumnName="CAMPO" />
           <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
@@ -232,38 +345,39 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="PA_GENERAR_ETIQUETA" FunctionName="FCT_SOPORTE2Model.Store.PA_GENERAR_ETIQUETA" />
-    <FunctionImportMapping FunctionImportName="PA_RECEPCIONES_CAB" FunctionName="FCT_SOPORTE2Model.Store.PA_RECEPCIONES_CAB" />
-    <FunctionImportMapping FunctionImportName="PA_RECEPCIONES_LIN" FunctionName="FCT_SOPORTE2Model.Store.PA_RECEPCIONES_LIN" />
-    <FunctionImportMapping FunctionImportName="PA_PALETS" FunctionName="FCT_SOPORTE2Model.Store.PA_PALETS" />
-    <EntitySetMapping Name="V_RECEPCIONES_CAB">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.V_RECEPCIONES_CAB">
-        <MappingFragment StoreEntitySet="V_RECEPCIONES_CAB">
-          <ScalarProperty Name="CANTIDAD_LINEAS" ColumnName="CANTIDAD_LINEAS" />
-          <ScalarProperty Name="FECH_LLEGADA" ColumnName="FECH_LLEGADA" />
-          <ScalarProperty Name="FECH_CREACION" ColumnName="FECH_CREACION" />
-          <ScalarProperty Name="PROVEEDOR" ColumnName="PROVEEDOR" />
-          <ScalarProperty Name="DES_ESTADO" ColumnName="DES_ESTADO" />
-          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
-          <ScalarProperty Name="ALBARAN" ColumnName="ALBARAN" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="V_RECEPCIONES_LIN">
-      <EntityTypeMapping TypeName="FCT_SOPORTE2Model.V_RECEPCIONES_LIN">
-        <MappingFragment StoreEntitySet="V_RECEPCIONES_LIN">
-          <ScalarProperty Name="STOCK" ColumnName="STOCK" />
-          <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+    <FunctionImportMapping FunctionImportName="PA_GESTIONAR_PALETS" FunctionName="BDModel.Store.PA_GESTIONAR_PALETS" />
+    <EntitySetMapping Name="V_PALETS">
+      <EntityTypeMapping TypeName="BDModel.V_PALETS">
+        <MappingFragment StoreEntitySet="V_PALETS">
+          <ScalarProperty Name="PALET_PADRE" ColumnName="PALET_PADRE" />
+          <ScalarProperty Name="PETICION_SALIDA" ColumnName="PETICION_SALIDA" />
+          <ScalarProperty Name="ALBARAN_RECEPCION" ColumnName="ALBARAN_RECEPCION" />
+          <ScalarProperty Name="FECH_INSERT" ColumnName="FECH_INSERT" />
+          <ScalarProperty Name="POSICION" ColumnName="POSICION" />
+          <ScalarProperty Name="CALLE" ColumnName="CALLE" />
+          <ScalarProperty Name="DESC_UBICACION" ColumnName="DESC_UBICACION" />
+          <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
           <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
-          <ScalarProperty Name="DES_REFERENCIA" ColumnName="DES_REFERENCIA" />
           <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
-          <ScalarProperty Name="COD_LINEA" ColumnName="COD_LINEA" />
-          <ScalarProperty Name="ALBARAN" ColumnName="ALBARAN" />
+          <ScalarProperty Name="DESC_ESTADO" ColumnName="DESC_ESTADO" />
+          <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
+          <ScalarProperty Name="COD_PALET" ColumnName="COD_PALET" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="PA_EMAIL_RECEPCIONES" FunctionName="FCT_SOPORTE2Model.Store.PA_EMAIL_RECEPCIONES" />
-    <FunctionImportMapping FunctionImportName="PA_ORDEN_SALIDA_CAB" FunctionName="FCT_SOPORTE2Model.Store.PA_ORDEN_SALIDA_CAB" />
-    <FunctionImportMapping FunctionImportName="PA_ORDEN_SALIDA_LIN" FunctionName="FCT_SOPORTE2Model.Store.PA_ORDEN_SALIDA_LIN" />
+    <EntitySetMapping Name="V_ORDEN_SALIDA_INCIDENCIAS">
+      <EntityTypeMapping TypeName="BDModel.V_ORDEN_SALIDA_INCIDENCIAS">
+        <MappingFragment StoreEntitySet="V_ORDEN_SALIDA_INCIDENCIAS">
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+          <ScalarProperty Name="DES_INCIDENCIA" ColumnName="DES_INCIDENCIA" />
+          <ScalarProperty Name="POBLACION" ColumnName="POBLACION" />
+          <ScalarProperty Name="COD_POSTAL" ColumnName="COD_POSTAL" />
+          <ScalarProperty Name="DIRECCION_ENTREGA" ColumnName="DIRECCION_ENTREGA" />
+          <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+          <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
+          <ScalarProperty Name="ID_INCIDENCIA" ColumnName="ID_INCIDENCIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formPedidos));
 			this.gridControlPedidos = new DevExpress.XtraGrid.GridControl();
 			this.lineaPedidoBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.gridViewPedidos = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -68,6 +68,9 @@
 			this.simpleButtonEliminarPedido = new DevExpress.XtraEditors.SimpleButton();
 			this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
 			this.simpleButtonTraspaso = new DevExpress.XtraEditors.SimpleButton();
+			this.simpleButtonActualizar = new DevExpress.XtraEditors.SimpleButton();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlPedidos)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.lineaPedidoBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewPedidos)).BeginInit();
@@ -81,20 +84,14 @@
 			((System.ComponentModel.ISupportInitialize)(this.textEditPoblacion.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditCodigoPostal.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.listBoxControlPedidos)).BeginInit();
+			this.panel1.SuspendLayout();
 			this.SuspendLayout();
-			// 
-			// labelControl2
-			// 
-			this.labelControl2.Location = new System.Drawing.Point(1072, 335);
-			this.labelControl2.Name = "labelControl2";
-			this.labelControl2.Size = new System.Drawing.Size(85, 13);
-			this.labelControl2.TabIndex = 17;
-			this.labelControl2.Text = "Cantidad a añadir";
 			// 
 			// gridControlPedidos
 			// 
+			this.gridControlPedidos.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.gridControlPedidos.DataSource = this.lineaPedidoBindingSource;
-			this.gridControlPedidos.Location = new System.Drawing.Point(1265, 211);
+			this.gridControlPedidos.Location = new System.Drawing.Point(1124, 270);
 			this.gridControlPedidos.MainView = this.gridViewPedidos;
 			this.gridControlPedidos.Name = "gridControlPedidos";
 			this.gridControlPedidos.Size = new System.Drawing.Size(508, 466);
@@ -156,11 +153,12 @@
 			// 
 			// gridControlReferencias
 			// 
+			this.gridControlReferencias.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.gridControlReferencias.DataSource = this.vISTAREFERENCIASBindingSource;
-			this.gridControlReferencias.Location = new System.Drawing.Point(259, 211);
+			this.gridControlReferencias.Location = new System.Drawing.Point(135, 270);
 			this.gridControlReferencias.MainView = this.gridViewReferencias;
 			this.gridControlReferencias.Name = "gridControlReferencias";
-			this.gridControlReferencias.Size = new System.Drawing.Size(717, 466);
+			this.gridControlReferencias.Size = new System.Drawing.Size(744, 466);
 			this.gridControlReferencias.TabIndex = 15;
 			this.gridControlReferencias.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewReferencias});
@@ -244,104 +242,125 @@
 			// 
 			// simpleButtonQuitarLinea
 			// 
-			this.simpleButtonQuitarLinea.Location = new System.Drawing.Point(1631, 698);
+			this.simpleButtonQuitarLinea.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.simpleButtonQuitarLinea.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonQuitarLinea.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonQuitarLinea.ImageOptions.Image")));
+			this.simpleButtonQuitarLinea.Location = new System.Drawing.Point(1648, 460);
 			this.simpleButtonQuitarLinea.Name = "simpleButtonQuitarLinea";
-			this.simpleButtonQuitarLinea.Size = new System.Drawing.Size(142, 39);
+			this.simpleButtonQuitarLinea.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+			this.simpleButtonQuitarLinea.Size = new System.Drawing.Size(54, 58);
 			this.simpleButtonQuitarLinea.TabIndex = 14;
-			this.simpleButtonQuitarLinea.Text = "Quitar línea seleccionada";
 			this.simpleButtonQuitarLinea.Click += new System.EventHandler(this.simpleButtonQuitarLinea_Click);
 			// 
 			// spinEditCantidad
 			// 
+			this.spinEditCantidad.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.spinEditCantidad.EditValue = new decimal(new int[] {
             0,
             0,
             0,
             0});
-			this.spinEditCantidad.Location = new System.Drawing.Point(1061, 354);
+			this.spinEditCantidad.Location = new System.Drawing.Point(945, 447);
 			this.spinEditCantidad.Name = "spinEditCantidad";
 			this.spinEditCantidad.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-			this.spinEditCantidad.Size = new System.Drawing.Size(114, 20);
+			this.spinEditCantidad.Size = new System.Drawing.Size(108, 20);
 			this.spinEditCantidad.TabIndex = 13;
 			// 
 			// simpleButtonAnadirLinea
 			// 
-			this.simpleButtonAnadirLinea.Location = new System.Drawing.Point(1061, 400);
+			this.simpleButtonAnadirLinea.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.simpleButtonAnadirLinea.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonAnadirLinea.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonAnadirLinea.ImageOptions.Image")));
+			this.simpleButtonAnadirLinea.Location = new System.Drawing.Point(945, 473);
 			this.simpleButtonAnadirLinea.Name = "simpleButtonAnadirLinea";
-			this.simpleButtonAnadirLinea.Size = new System.Drawing.Size(114, 39);
+			this.simpleButtonAnadirLinea.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+			this.simpleButtonAnadirLinea.ShowFocusRectangle = DevExpress.Utils.DefaultBoolean.False;
+			this.simpleButtonAnadirLinea.Size = new System.Drawing.Size(108, 45);
 			this.simpleButtonAnadirLinea.TabIndex = 12;
-			this.simpleButtonAnadirLinea.Text = "Añadir línea\r\n de pedido ->";
 			this.simpleButtonAnadirLinea.Click += new System.EventHandler(this.simpleButtonAnadirLinea_Click);
 			// 
 			// simpleButtonGuardarPedido
 			// 
+			this.simpleButtonGuardarPedido.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.simpleButtonGuardarPedido.Appearance.Font = new System.Drawing.Font("Tahoma", 20F);
 			this.simpleButtonGuardarPedido.Appearance.Options.UseFont = true;
-			this.simpleButtonGuardarPedido.Location = new System.Drawing.Point(1533, 89);
+			this.simpleButtonGuardarPedido.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonGuardarPedido.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonGuardarPedido.ImageOptions.Image")));
+			this.simpleButtonGuardarPedido.Location = new System.Drawing.Point(1525, 162);
 			this.simpleButtonGuardarPedido.Name = "simpleButtonGuardarPedido";
-			this.simpleButtonGuardarPedido.Size = new System.Drawing.Size(231, 80);
+			this.simpleButtonGuardarPedido.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+			this.simpleButtonGuardarPedido.Size = new System.Drawing.Size(107, 84);
 			this.simpleButtonGuardarPedido.TabIndex = 18;
-			this.simpleButtonGuardarPedido.Text = "GUARDAR EN\r\n NUEVO PEDIDO";
 			this.simpleButtonGuardarPedido.Click += new System.EventHandler(this.simpleButtonGenerarPedido_Click);
 			// 
 			// labelControl1
 			// 
-			this.labelControl1.Location = new System.Drawing.Point(259, 93);
+			this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl1.Appearance.Options.UseFont = true;
+			this.labelControl1.Location = new System.Drawing.Point(21, 26);
 			this.labelControl1.Name = "labelControl1";
-			this.labelControl1.Size = new System.Drawing.Size(99, 13);
+			this.labelControl1.Size = new System.Drawing.Size(126, 14);
 			this.labelControl1.TabIndex = 19;
 			this.labelControl1.Text = "Dirección de entrega";
 			// 
 			// labelControl3
 			// 
-			this.labelControl3.Location = new System.Drawing.Point(744, 89);
+			this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl3.Appearance.Options.UseFont = true;
+			this.labelControl3.Location = new System.Drawing.Point(498, 26);
 			this.labelControl3.Name = "labelControl3";
-			this.labelControl3.Size = new System.Drawing.Size(65, 13);
+			this.labelControl3.Size = new System.Drawing.Size(85, 14);
 			this.labelControl3.TabIndex = 20;
 			this.labelControl3.Text = "Código Postal";
 			// 
 			// labelControl4
 			// 
-			this.labelControl4.Location = new System.Drawing.Point(259, 156);
+			this.labelControl4.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl4.Appearance.Options.UseFont = true;
+			this.labelControl4.Location = new System.Drawing.Point(34, 89);
 			this.labelControl4.Name = "labelControl4";
-			this.labelControl4.Size = new System.Drawing.Size(45, 13);
+			this.labelControl4.Size = new System.Drawing.Size(59, 14);
 			this.labelControl4.TabIndex = 21;
 			this.labelControl4.Text = "Población";
 			// 
 			// labelControl5
 			// 
-			this.labelControl5.Location = new System.Drawing.Point(502, 156);
+			this.labelControl5.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl5.Appearance.Options.UseFont = true;
+			this.labelControl5.Location = new System.Drawing.Point(310, 89);
 			this.labelControl5.Name = "labelControl5";
-			this.labelControl5.Size = new System.Drawing.Size(43, 13);
+			this.labelControl5.Size = new System.Drawing.Size(55, 14);
 			this.labelControl5.TabIndex = 22;
 			this.labelControl5.Text = "Provincia";
 			// 
 			// labelControl6
 			// 
-			this.labelControl6.Location = new System.Drawing.Point(744, 156);
+			this.labelControl6.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl6.Appearance.Options.UseFont = true;
+			this.labelControl6.Location = new System.Drawing.Point(530, 88);
 			this.labelControl6.Name = "labelControl6";
-			this.labelControl6.Size = new System.Drawing.Size(42, 13);
+			this.labelControl6.Size = new System.Drawing.Size(53, 14);
 			this.labelControl6.TabIndex = 23;
 			this.labelControl6.Text = "Teléfono";
 			// 
 			// textEditDireccion
 			// 
-			this.textEditDireccion.Location = new System.Drawing.Point(370, 90);
+			this.textEditDireccion.Location = new System.Drawing.Point(153, 23);
 			this.textEditDireccion.Name = "textEditDireccion";
 			this.textEditDireccion.Size = new System.Drawing.Size(318, 20);
 			this.textEditDireccion.TabIndex = 1;
 			// 
 			// textEditProvincia
 			// 
-			this.textEditProvincia.Location = new System.Drawing.Point(588, 153);
+			this.textEditProvincia.Location = new System.Drawing.Point(371, 86);
 			this.textEditProvincia.Name = "textEditProvincia";
 			this.textEditProvincia.Size = new System.Drawing.Size(100, 20);
 			this.textEditProvincia.TabIndex = 4;
 			// 
 			// textEditTelefono
 			// 
-			this.textEditTelefono.Location = new System.Drawing.Point(868, 153);
+			this.textEditTelefono.Location = new System.Drawing.Point(589, 86);
 			this.textEditTelefono.Name = "textEditTelefono";
 			this.textEditTelefono.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.SimpleMaskManager));
 			this.textEditTelefono.Properties.MaskSettings.Set("MaskManagerSignature", "ignoreMaskBlank=True");
@@ -351,14 +370,14 @@
 			// 
 			// textEditPoblacion
 			// 
-			this.textEditPoblacion.Location = new System.Drawing.Point(370, 153);
+			this.textEditPoblacion.Location = new System.Drawing.Point(99, 86);
 			this.textEditPoblacion.Name = "textEditPoblacion";
 			this.textEditPoblacion.Size = new System.Drawing.Size(100, 20);
 			this.textEditPoblacion.TabIndex = 3;
 			// 
 			// textEditCodigoPostal
 			// 
-			this.textEditCodigoPostal.Location = new System.Drawing.Point(868, 86);
+			this.textEditCodigoPostal.Location = new System.Drawing.Point(589, 23);
 			this.textEditCodigoPostal.Name = "textEditCodigoPostal";
 			this.textEditCodigoPostal.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.RegularMaskManager));
 			this.textEditCodigoPostal.Properties.MaskSettings.Set("mask", "\\d\\d\\d\\d\\d");
@@ -367,7 +386,8 @@
 			// 
 			// listBoxControlPedidos
 			// 
-			this.listBoxControlPedidos.Location = new System.Drawing.Point(259, 718);
+			this.listBoxControlPedidos.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.listBoxControlPedidos.Location = new System.Drawing.Point(374, 809);
 			this.listBoxControlPedidos.Name = "listBoxControlPedidos";
 			this.listBoxControlPedidos.Size = new System.Drawing.Size(188, 130);
 			this.listBoxControlPedidos.TabIndex = 29;
@@ -375,69 +395,119 @@
 			// 
 			// simpleButtonModificarPedido
 			// 
-			this.simpleButtonModificarPedido.Location = new System.Drawing.Point(453, 764);
+			this.simpleButtonModificarPedido.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.simpleButtonModificarPedido.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonModificarPedido.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonModificarPedido.ImageOptions.Image")));
+			this.simpleButtonModificarPedido.Location = new System.Drawing.Point(312, 809);
 			this.simpleButtonModificarPedido.Name = "simpleButtonModificarPedido";
-			this.simpleButtonModificarPedido.Size = new System.Drawing.Size(102, 39);
+			this.simpleButtonModificarPedido.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+			this.simpleButtonModificarPedido.Size = new System.Drawing.Size(56, 54);
 			this.simpleButtonModificarPedido.TabIndex = 30;
-			this.simpleButtonModificarPedido.Text = "Modificar selección";
 			this.simpleButtonModificarPedido.Click += new System.EventHandler(this.simpleButtonModificarPedido_Click);
 			// 
 			// simpleButtonEliminarPedido
 			// 
-			this.simpleButtonEliminarPedido.Location = new System.Drawing.Point(453, 809);
+			this.simpleButtonEliminarPedido.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.simpleButtonEliminarPedido.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonEliminarPedido.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonEliminarPedido.ImageOptions.Image")));
+			this.simpleButtonEliminarPedido.Location = new System.Drawing.Point(312, 869);
 			this.simpleButtonEliminarPedido.Name = "simpleButtonEliminarPedido";
-			this.simpleButtonEliminarPedido.Size = new System.Drawing.Size(102, 39);
+			this.simpleButtonEliminarPedido.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+			this.simpleButtonEliminarPedido.Size = new System.Drawing.Size(56, 50);
 			this.simpleButtonEliminarPedido.TabIndex = 31;
-			this.simpleButtonEliminarPedido.Text = "Eliminar selección";
 			this.simpleButtonEliminarPedido.Click += new System.EventHandler(this.simpleButtonEliminarPedido_Click);
 			// 
 			// labelControl7
 			// 
-			this.labelControl7.Location = new System.Drawing.Point(259, 699);
+			this.labelControl7.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.labelControl7.Appearance.Font = new System.Drawing.Font("Lemon/Milk", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl7.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(179)))), ((int)(((byte)(53)))));
+			this.labelControl7.Appearance.Options.UseFont = true;
+			this.labelControl7.Appearance.Options.UseForeColor = true;
+			this.labelControl7.Location = new System.Drawing.Point(374, 782);
 			this.labelControl7.Name = "labelControl7";
-			this.labelControl7.Size = new System.Drawing.Size(95, 13);
+			this.labelControl7.Size = new System.Drawing.Size(163, 21);
 			this.labelControl7.TabIndex = 32;
-			this.labelControl7.Text = "Pedidos guardados:";
+			this.labelControl7.Text = "Pedidos guardados";
 			// 
 			// simpleButtonTraspaso
 			// 
-			this.simpleButtonTraspaso.Location = new System.Drawing.Point(453, 718);
+			this.simpleButtonTraspaso.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.simpleButtonTraspaso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonTraspaso.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonTraspaso.ImageOptions.Image")));
+			this.simpleButtonTraspaso.Location = new System.Drawing.Point(582, 835);
 			this.simpleButtonTraspaso.Name = "simpleButtonTraspaso";
-			this.simpleButtonTraspaso.Size = new System.Drawing.Size(102, 39);
+			this.simpleButtonTraspaso.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+			this.simpleButtonTraspaso.Size = new System.Drawing.Size(106, 84);
 			this.simpleButtonTraspaso.TabIndex = 33;
-			this.simpleButtonTraspaso.Text = "TRASPASAR A ICP";
 			this.simpleButtonTraspaso.Click += new System.EventHandler(this.simpleButtonTraspaso_Click);
+			// 
+			// simpleButtonActualizar
+			// 
+			this.simpleButtonActualizar.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.simpleButtonActualizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonActualizar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonActualizar.ImageOptions.Image")));
+			this.simpleButtonActualizar.Location = new System.Drawing.Point(64, 431);
+			this.simpleButtonActualizar.Name = "simpleButtonActualizar";
+			this.simpleButtonActualizar.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+			this.simpleButtonActualizar.Size = new System.Drawing.Size(55, 52);
+			this.simpleButtonActualizar.TabIndex = 34;
+			this.simpleButtonActualizar.Click += new System.EventHandler(this.simpleButtonActualizar_Click);
+			// 
+			// panel1
+			// 
+			this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(179)))), ((int)(((byte)(53)))));
+			this.panel1.Controls.Add(this.textEditTelefono);
+			this.panel1.Controls.Add(this.labelControl1);
+			this.panel1.Controls.Add(this.labelControl3);
+			this.panel1.Controls.Add(this.labelControl4);
+			this.panel1.Controls.Add(this.labelControl5);
+			this.panel1.Controls.Add(this.labelControl6);
+			this.panel1.Controls.Add(this.textEditDireccion);
+			this.panel1.Controls.Add(this.textEditCodigoPostal);
+			this.panel1.Controls.Add(this.textEditProvincia);
+			this.panel1.Controls.Add(this.textEditPoblacion);
+			this.panel1.Location = new System.Drawing.Point(135, 115);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(744, 123);
+			this.panel1.TabIndex = 35;
+			// 
+			// labelControl2
+			// 
+			this.labelControl2.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.labelControl2.Appearance.Font = new System.Drawing.Font("Lemon/Milk", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl2.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(179)))), ((int)(((byte)(53)))));
+			this.labelControl2.Appearance.Options.UseFont = true;
+			this.labelControl2.Appearance.Options.UseForeColor = true;
+			this.labelControl2.Location = new System.Drawing.Point(135, 49);
+			this.labelControl2.Name = "labelControl2";
+			this.labelControl2.Size = new System.Drawing.Size(119, 41);
+			this.labelControl2.TabIndex = 96;
+			this.labelControl2.Text = "PEDIDOS";
 			// 
 			// formPedidos
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoScroll = true;
-			this.ClientSize = new System.Drawing.Size(1829, 831);
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(34)))), ((int)(((byte)(64)))));
+			this.ClientSize = new System.Drawing.Size(1829, 963);
+			this.Controls.Add(this.labelControl2);
+			this.Controls.Add(this.panel1);
+			this.Controls.Add(this.simpleButtonActualizar);
 			this.Controls.Add(this.simpleButtonTraspaso);
 			this.Controls.Add(this.labelControl7);
 			this.Controls.Add(this.simpleButtonEliminarPedido);
 			this.Controls.Add(this.simpleButtonModificarPedido);
 			this.Controls.Add(this.listBoxControlPedidos);
-			this.Controls.Add(this.textEditCodigoPostal);
-			this.Controls.Add(this.textEditPoblacion);
-			this.Controls.Add(this.textEditTelefono);
-			this.Controls.Add(this.textEditProvincia);
-			this.Controls.Add(this.textEditDireccion);
-			this.Controls.Add(this.labelControl6);
-			this.Controls.Add(this.labelControl5);
-			this.Controls.Add(this.labelControl4);
-			this.Controls.Add(this.labelControl3);
-			this.Controls.Add(this.labelControl1);
 			this.Controls.Add(this.simpleButtonGuardarPedido);
-			this.Controls.Add(this.labelControl2);
 			this.Controls.Add(this.gridControlPedidos);
 			this.Controls.Add(this.gridControlReferencias);
 			this.Controls.Add(this.simpleButtonQuitarLinea);
 			this.Controls.Add(this.spinEditCantidad);
 			this.Controls.Add(this.simpleButtonAnadirLinea);
 			this.Name = "formPedidos";
-			this.Text = "Pedidos";
 			this.Load += new System.EventHandler(this.formPedidos_Load);
 			((System.ComponentModel.ISupportInitialize)(this.gridControlPedidos)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.lineaPedidoBindingSource)).EndInit();
@@ -452,14 +522,14 @@
 			((System.ComponentModel.ISupportInitialize)(this.textEditPoblacion.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditCodigoPostal.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.listBoxControlPedidos)).EndInit();
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
 		}
 
 		#endregion
-
-		private DevExpress.XtraEditors.LabelControl labelControl2;
 		private DevExpress.XtraGrid.GridControl gridControlPedidos;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewPedidos;
 		private DevExpress.XtraGrid.Columns.GridColumn colalbaran;
@@ -498,5 +568,8 @@
 		private DevExpress.XtraEditors.SimpleButton simpleButtonEliminarPedido;
 		private DevExpress.XtraEditors.LabelControl labelControl7;
 		private DevExpress.XtraEditors.SimpleButton simpleButtonTraspaso;
+		private DevExpress.XtraEditors.SimpleButton simpleButtonActualizar;
+		private System.Windows.Forms.Panel panel1;
+		private DevExpress.XtraEditors.LabelControl labelControl2;
 	}
 }

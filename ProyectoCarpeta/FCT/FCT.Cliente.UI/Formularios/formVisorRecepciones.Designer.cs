@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formVisorRecepciones));
 			this.gridControlCab = new DevExpress.XtraGrid.GridControl();
 			this.vRECEPCIONESCABBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -46,6 +47,8 @@
 			this.colCANTIDAD = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.colPRECIO = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.colSTOCK = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.simpleButtonActualizar = new DevExpress.XtraEditors.SimpleButton();
+			this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlCab)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.vRECEPCIONESCABBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -56,13 +59,12 @@
 			// 
 			// gridControlCab
 			// 
-			this.gridControlCab.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridControlCab.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.gridControlCab.DataSource = this.vRECEPCIONESCABBindingSource;
-			this.gridControlCab.Location = new System.Drawing.Point(238, 56);
+			this.gridControlCab.Location = new System.Drawing.Point(154, 90);
 			this.gridControlCab.MainView = this.gridView1;
 			this.gridControlCab.Name = "gridControlCab";
-			this.gridControlCab.Size = new System.Drawing.Size(536, 765);
+			this.gridControlCab.Size = new System.Drawing.Size(594, 765);
 			this.gridControlCab.TabIndex = 0;
 			this.gridControlCab.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -133,10 +135,9 @@
 			// 
 			// gridControlLin
 			// 
-			this.gridControlLin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.gridControlLin.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.gridControlLin.DataSource = this.vRECEPCIONESLINBindingSource;
-			this.gridControlLin.Location = new System.Drawing.Point(780, 56);
+			this.gridControlLin.Location = new System.Drawing.Point(754, 90);
 			this.gridControlLin.MainView = this.gridView2;
 			this.gridControlLin.Name = "gridControlLin";
 			this.gridControlLin.Size = new System.Drawing.Size(891, 765);
@@ -217,15 +218,42 @@
 			this.colSTOCK.VisibleIndex = 5;
 			this.colSTOCK.Width = 118;
 			// 
+			// simpleButtonActualizar
+			// 
+			this.simpleButtonActualizar.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.simpleButtonActualizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonActualizar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonActualizar.ImageOptions.Image")));
+			this.simpleButtonActualizar.Location = new System.Drawing.Point(86, 422);
+			this.simpleButtonActualizar.Name = "simpleButtonActualizar";
+			this.simpleButtonActualizar.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+			this.simpleButtonActualizar.Size = new System.Drawing.Size(62, 52);
+			this.simpleButtonActualizar.TabIndex = 2;
+			this.simpleButtonActualizar.Click += new System.EventHandler(this.simpleButtonActualizar_Click);
+			// 
+			// labelControl4
+			// 
+			this.labelControl4.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.labelControl4.Appearance.Font = new System.Drawing.Font("Lemon/Milk", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl4.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(179)))), ((int)(((byte)(53)))));
+			this.labelControl4.Appearance.Options.UseFont = true;
+			this.labelControl4.Appearance.Options.UseForeColor = true;
+			this.labelControl4.Location = new System.Drawing.Point(154, 12);
+			this.labelControl4.Name = "labelControl4";
+			this.labelControl4.Size = new System.Drawing.Size(334, 41);
+			this.labelControl4.TabIndex = 96;
+			this.labelControl4.Text = "VISOR DE RECEPCIONES";
+			// 
 			// formVisorRecepciones
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(34)))), ((int)(((byte)(64)))));
 			this.ClientSize = new System.Drawing.Size(1815, 889);
+			this.Controls.Add(this.labelControl4);
+			this.Controls.Add(this.simpleButtonActualizar);
 			this.Controls.Add(this.gridControlLin);
 			this.Controls.Add(this.gridControlCab);
 			this.Name = "formVisorRecepciones";
-			this.Text = "formVisorRecepciones";
 			((System.ComponentModel.ISupportInitialize)(this.gridControlCab)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.vRECEPCIONESCABBindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
@@ -233,6 +261,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.vRECEPCIONESLINBindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -255,5 +284,7 @@
 		private DevExpress.XtraGrid.Columns.GridColumn colCANTIDAD;
 		private DevExpress.XtraGrid.Columns.GridColumn colPRECIO;
 		private DevExpress.XtraGrid.Columns.GridColumn colSTOCK;
+		private DevExpress.XtraEditors.SimpleButton simpleButtonActualizar;
+		private DevExpress.XtraEditors.LabelControl labelControl4;
 	}
 }

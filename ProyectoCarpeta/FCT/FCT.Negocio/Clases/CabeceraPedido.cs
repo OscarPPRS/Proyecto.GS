@@ -9,7 +9,7 @@ namespace FCT.Negocio
 	public partial class CabeceraPedido
 	{
 
-		public CabeceraPedido(int cod_peticion, int estado, string nombre_cliente, string direccion_entrega, string cod_postal, 
+		public CabeceraPedido(int cod_peticion, int estado, int nombre_cliente, string direccion_entrega, string cod_postal, 
 		string poblacion, string provincia, string telefono, string fech_creacion, List<LineaPedido> lineasPedido)
 		{
 			this.cod_peticion = cod_peticion;
@@ -26,7 +26,7 @@ namespace FCT.Negocio
 
 		public int cod_peticion { get; set; }
 		public int estado { get; set; }
-		public string nombre_cliente { get; set; }
+		public int nombre_cliente { get; set; }
 		public string direccion_entrega { get; set; }
 		public string cod_postal { get; set;}
 		public string poblacion { get; set;}

@@ -17,6 +17,7 @@ namespace FCT.Negocio
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UBICACIONES()
         {
+            this.MOVIMIENTOS_PICKING_LOG = new HashSet<MOVIMIENTOS_PICKING_LOG>();
             this.PALETS = new HashSet<PALETS>();
         }
     
@@ -26,6 +27,8 @@ namespace FCT.Negocio
         public string POSICION { get; set; }
         public Nullable<bool> LLENA { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MOVIMIENTOS_PICKING_LOG> MOVIMIENTOS_PICKING_LOG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PALETS> PALETS { get; set; }
     }

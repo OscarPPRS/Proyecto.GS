@@ -17,16 +17,22 @@ namespace FCT.Negocio
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EMPRESAS()
         {
+            this.ORDEN_SALIDA_CAB = new HashSet<ORDEN_SALIDA_CAB>();
+            this.RECEPCIONES_CAB = new HashSet<RECEPCIONES_CAB>();
             this.REFERENCIAS = new HashSet<REFERENCIAS>();
-            this.USUARIOS = new HashSet<USUARIOS>();
         }
     
         public int ID_EMPRESA { get; set; }
         public string DES_EMPRESA { get; set; }
+        public string NOM_USUARIO { get; set; }
+        public string PASSWORD { get; set; }
+        public string LOGO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<REFERENCIAS> REFERENCIAS { get; set; }
+        public virtual ICollection<ORDEN_SALIDA_CAB> ORDEN_SALIDA_CAB { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USUARIOS> USUARIOS { get; set; }
+        public virtual ICollection<RECEPCIONES_CAB> RECEPCIONES_CAB { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<REFERENCIAS> REFERENCIAS { get; set; }
     }
 }

@@ -13,23 +13,25 @@ namespace FCT.Cliente.UI.Formularios
 {
 	public partial class formVisorRecepciones : Form
 	{
-
 		int albaranSeleccionado = 0;
 		public formVisorRecepciones()
 		{
 			InitializeComponent();
 			actualizarGrids();
 		}
-
 		private void actualizarGrids(){
-			vRECEPCIONESCABBindingSource.DataSource = Consultas.gridVisorCab(formContenedor.idEmpresa);
-			vRECEPCIONESLINBindingSource.DataSource = Consultas.gridVisorLin(albaranSeleccionado);
+			vRECEPCIONESCABBindingSource.DataSource = CargarGrids.visorRecepcionesCab(formContenedor.idEmpresa);
+			vRECEPCIONESLINBindingSource.DataSource = CargarGrids.visorRecepcionesLin(albaranSeleccionado);
 		}
-
 		private void gridView1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
 		{
 			V_RECEPCIONES_CAB vista = (V_RECEPCIONES_CAB)gridView1.GetRow(gridView1.FocusedRowHandle);
 			albaranSeleccionado = vista.ALBARAN;
+			actualizarGrids();
+		}
+
+		private void simpleButtonActualizar_Click(object sender, EventArgs e)
+		{
 			actualizarGrids();
 		}
 	}

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FCT.Negocio;
 
 namespace FCT.Cliente.UI
 {
@@ -23,13 +24,14 @@ namespace FCT.Cliente.UI
 		private void formContenedor_Load(object sender, EventArgs e)
 		{
 			this.WindowState = FormWindowState.Maximized;
+			Controls.OfType<MdiClient>().FirstOrDefault().BackColor = Color.FromArgb(10, 34, 64);
+			Controls.OfType<MdiClient>().FirstOrDefault().BackgroundImage =Image.FromFile("\\\\m2d96\\Publico"  + Consultas.logoEmpresa(idEmpresa));
 		}
 
 
 		public void cargarFrm(Type tipoFrm)
 		{
-			// Funcion para traer de nuevo el formulario sin cerrar el hijo anterior abierto
-			// asi el cliente puede abrir de nuevo el formulario requiere sin perder la información entre ellos
+			//Funcion para obtener los formularios y ocultarlos cuando se cambie entre ellos.
 			foreach (Form fhijo in MdiChildren)
 			{
 				if (fhijo.GetType() == tipoFrm)
@@ -49,8 +51,8 @@ namespace FCT.Cliente.UI
 
 		private void FrmInicio_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			// Pequeño mensaje para de confirmacion
-			DialogResult resul = MessageBox.Show("¿Está seguro que quiere salir de la aplicación?", "Salir de la aplicación", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+			
+			DialogResult resul = MessageBox.Show("¿Está seguro de que quiere salir de la aplicación?", "Salir de la aplicación", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
 			if (resul == DialogResult.Yes)
 				try
@@ -59,7 +61,7 @@ namespace FCT.Cliente.UI
 				}
 				catch (Exception)
 				{
-					MessageBox.Show("Prblema encontrado a la hora de cerrar la aplicación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+					MessageBox.Show("Problema encontrado a la hora de cerrar la aplicación.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
 				}
 			else
 				e.Cancel = true;
@@ -81,6 +83,11 @@ namespace FCT.Cliente.UI
 		private void navBarItemVisorRecepciones_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
 		{
 			cargarFrm(typeof(formVisorRecepciones));
+		}
+
+		private void navBarItemVisorPedidos_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+		{
+			cargarFrm(typeof(formVisorPedidos));
 		}
 	}
 }
