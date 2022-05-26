@@ -17,7 +17,7 @@ namespace FCT.Cliente.UI
 		public static int idEmpresa;
 
 		//Ruta de la carpeta en la que están los recursos del programa
-		public static string rutaCarpetaDatos = "D:\\Users\\ols17\\Desktop\\ProyectoCarpeta\\ProyectoCarpeta";
+		public static string rutaCarpetaDatos = "D:\\Users\\ols17\\Documents\\GitHub\\Proyecto.GS\\ProyectoCarpeta";
 
 		//Constructor que acepta un id de empresa para usar durante la ejecucion del programa
 		public formContenedor(int id)

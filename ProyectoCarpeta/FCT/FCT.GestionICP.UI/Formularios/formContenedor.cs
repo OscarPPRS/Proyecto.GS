@@ -16,7 +16,7 @@ namespace FCT.GestionICP.UI.Formularios
 	public partial class formContenedor : Form
 	{
 		//Ruta de la carpeta en la que están los recursos del programa
-		public static string rutaCarpetaDatos = "D:\\Users\\ols17\\Desktop\\ProyectoCarpeta\\ProyectoCarpeta";
+		public static string rutaCarpetaDatos = "D:\\Users\\ols17\\Documents\\GitHub\\Proyecto.GS\\ProyectoCarpeta";
 		public formContenedor()
 		{
 			InitializeComponent();

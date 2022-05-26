@@ -17,4 +17,4 @@ delete from PALETS;
 update UBICACIONES set LLENA = 0;
 
 delete from REFERENCIAS
-where COD_REFERENCIA > 'XI_00011'
+where COD_REFERENCIA > 'XI_00003'
