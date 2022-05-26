@@ -46,7 +46,9 @@
 			this.colDES_REFERENCIA = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.colCANTIDAD = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.colPRECIO = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.colSTOCK = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.colCANTIDAD_MAL_ESTADO = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.colEXCEDENTE = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.colFALTA = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.simpleButtonActualizar = new DevExpress.XtraEditors.SimpleButton();
 			this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlCab)).BeginInit();
@@ -75,6 +77,20 @@
 			// 
 			// gridView1
 			// 
+			this.gridView1.Appearance.GroupPanel.BackColor = System.Drawing.Color.Transparent;
+			this.gridView1.Appearance.GroupPanel.Options.UseBackColor = true;
+			this.gridView1.Appearance.GroupRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridView1.Appearance.GroupRow.Options.UseFont = true;
+			this.gridView1.Appearance.HeaderPanel.BackColor = System.Drawing.Color.Transparent;
+			this.gridView1.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridView1.Appearance.HeaderPanel.Options.UseBackColor = true;
+			this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
+			this.gridView1.Appearance.HeaderPanel.Options.UseTextOptions = true;
+			this.gridView1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridView1.Appearance.Row.Options.UseFont = true;
+			this.gridView1.Appearance.ViewCaption.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+			this.gridView1.Appearance.ViewCaption.Options.UseBackColor = true;
 			this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colALBARAN,
             this.colDES_ESTADO,
@@ -85,6 +101,7 @@
 			this.gridView1.Name = "gridView1";
 			this.gridView1.OptionsBehavior.Editable = false;
 			this.gridView1.OptionsBehavior.ReadOnly = true;
+			this.gridView1.OptionsCustomization.AllowColumnMoving = false;
 			this.gridView1.OptionsCustomization.AllowGroup = false;
 			this.gridView1.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView1_FocusedRowChanged);
 			// 
@@ -151,17 +168,34 @@
 			// 
 			// gridView2
 			// 
+			this.gridView2.Appearance.GroupPanel.BackColor = System.Drawing.Color.Transparent;
+			this.gridView2.Appearance.GroupPanel.Options.UseBackColor = true;
+			this.gridView2.Appearance.GroupRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridView2.Appearance.GroupRow.Options.UseFont = true;
+			this.gridView2.Appearance.HeaderPanel.BackColor = System.Drawing.Color.Transparent;
+			this.gridView2.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridView2.Appearance.HeaderPanel.Options.UseBackColor = true;
+			this.gridView2.Appearance.HeaderPanel.Options.UseFont = true;
+			this.gridView2.Appearance.HeaderPanel.Options.UseTextOptions = true;
+			this.gridView2.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridView2.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridView2.Appearance.Row.Options.UseFont = true;
+			this.gridView2.Appearance.ViewCaption.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+			this.gridView2.Appearance.ViewCaption.Options.UseBackColor = true;
 			this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colCOD_LINEA,
             this.colCOD_REFERENCIA,
             this.colDES_REFERENCIA,
             this.colCANTIDAD,
             this.colPRECIO,
-            this.colSTOCK});
+            this.colCANTIDAD_MAL_ESTADO,
+            this.colEXCEDENTE,
+            this.colFALTA});
 			this.gridView2.GridControl = this.gridControlLin;
 			this.gridView2.Name = "gridView2";
 			this.gridView2.OptionsBehavior.Editable = false;
 			this.gridView2.OptionsBehavior.ReadOnly = true;
+			this.gridView2.OptionsCustomization.AllowColumnMoving = false;
 			this.gridView2.OptionsCustomization.AllowGroup = false;
 			// 
 			// colCOD_LINEA
@@ -171,16 +205,16 @@
 			this.colCOD_LINEA.Name = "colCOD_LINEA";
 			this.colCOD_LINEA.Visible = true;
 			this.colCOD_LINEA.VisibleIndex = 0;
-			this.colCOD_LINEA.Width = 26;
+			this.colCOD_LINEA.Width = 41;
 			// 
 			// colCOD_REFERENCIA
 			// 
-			this.colCOD_REFERENCIA.Caption = "Código de Referencia";
+			this.colCOD_REFERENCIA.Caption = "Referencia";
 			this.colCOD_REFERENCIA.FieldName = "COD_REFERENCIA";
 			this.colCOD_REFERENCIA.Name = "colCOD_REFERENCIA";
 			this.colCOD_REFERENCIA.Visible = true;
 			this.colCOD_REFERENCIA.VisibleIndex = 1;
-			this.colCOD_REFERENCIA.Width = 179;
+			this.colCOD_REFERENCIA.Width = 116;
 			// 
 			// colDES_REFERENCIA
 			// 
@@ -189,7 +223,7 @@
 			this.colDES_REFERENCIA.Name = "colDES_REFERENCIA";
 			this.colDES_REFERENCIA.Visible = true;
 			this.colDES_REFERENCIA.VisibleIndex = 2;
-			this.colDES_REFERENCIA.Width = 339;
+			this.colDES_REFERENCIA.Width = 211;
 			// 
 			// colCANTIDAD
 			// 
@@ -198,25 +232,43 @@
 			this.colCANTIDAD.Name = "colCANTIDAD";
 			this.colCANTIDAD.Visible = true;
 			this.colCANTIDAD.VisibleIndex = 3;
-			this.colCANTIDAD.Width = 102;
+			this.colCANTIDAD.Width = 77;
 			// 
 			// colPRECIO
 			// 
-			this.colPRECIO.Caption = "Precio unitario";
+			this.colPRECIO.Caption = "Precio";
 			this.colPRECIO.FieldName = "PRECIO";
 			this.colPRECIO.Name = "colPRECIO";
 			this.colPRECIO.Visible = true;
 			this.colPRECIO.VisibleIndex = 4;
-			this.colPRECIO.Width = 102;
+			this.colPRECIO.Width = 98;
 			// 
-			// colSTOCK
+			// colCANTIDAD_MAL_ESTADO
 			// 
-			this.colSTOCK.Caption = "Stock en ICP";
-			this.colSTOCK.FieldName = "STOCK";
-			this.colSTOCK.Name = "colSTOCK";
-			this.colSTOCK.Visible = true;
-			this.colSTOCK.VisibleIndex = 5;
-			this.colSTOCK.Width = 118;
+			this.colCANTIDAD_MAL_ESTADO.Caption = "Mal estado";
+			this.colCANTIDAD_MAL_ESTADO.FieldName = "CANTIDAD_MAL_ESTADO";
+			this.colCANTIDAD_MAL_ESTADO.Name = "colCANTIDAD_MAL_ESTADO";
+			this.colCANTIDAD_MAL_ESTADO.Visible = true;
+			this.colCANTIDAD_MAL_ESTADO.VisibleIndex = 5;
+			this.colCANTIDAD_MAL_ESTADO.Width = 98;
+			// 
+			// colEXCEDENTE
+			// 
+			this.colEXCEDENTE.Caption = "Excedente";
+			this.colEXCEDENTE.FieldName = "EXCEDENTE";
+			this.colEXCEDENTE.Name = "colEXCEDENTE";
+			this.colEXCEDENTE.Visible = true;
+			this.colEXCEDENTE.VisibleIndex = 6;
+			this.colEXCEDENTE.Width = 98;
+			// 
+			// colFALTA
+			// 
+			this.colFALTA.Caption = "Falta";
+			this.colFALTA.FieldName = "FALTA";
+			this.colFALTA.Name = "colFALTA";
+			this.colFALTA.Visible = true;
+			this.colFALTA.VisibleIndex = 7;
+			this.colFALTA.Width = 127;
 			// 
 			// simpleButtonActualizar
 			// 
@@ -228,6 +280,7 @@
 			this.simpleButtonActualizar.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonActualizar.Size = new System.Drawing.Size(62, 52);
 			this.simpleButtonActualizar.TabIndex = 2;
+			this.simpleButtonActualizar.ToolTip = "Actualizar";
 			this.simpleButtonActualizar.Click += new System.EventHandler(this.simpleButtonActualizar_Click);
 			// 
 			// labelControl4
@@ -277,14 +330,16 @@
 		private DevExpress.XtraGrid.Columns.GridColumn colFECH_CREACION;
 		private DevExpress.XtraGrid.Columns.GridColumn colFECH_LLEGADA;
 		private DevExpress.XtraGrid.Columns.GridColumn colCANTIDAD_LINEAS;
+		private DevExpress.XtraEditors.SimpleButton simpleButtonActualizar;
+		private DevExpress.XtraEditors.LabelControl labelControl4;
 		private System.Windows.Forms.BindingSource vRECEPCIONESLINBindingSource;
 		private DevExpress.XtraGrid.Columns.GridColumn colCOD_LINEA;
 		private DevExpress.XtraGrid.Columns.GridColumn colCOD_REFERENCIA;
 		private DevExpress.XtraGrid.Columns.GridColumn colDES_REFERENCIA;
 		private DevExpress.XtraGrid.Columns.GridColumn colCANTIDAD;
 		private DevExpress.XtraGrid.Columns.GridColumn colPRECIO;
-		private DevExpress.XtraGrid.Columns.GridColumn colSTOCK;
-		private DevExpress.XtraEditors.SimpleButton simpleButtonActualizar;
-		private DevExpress.XtraEditors.LabelControl labelControl4;
+		private DevExpress.XtraGrid.Columns.GridColumn colCANTIDAD_MAL_ESTADO;
+		private DevExpress.XtraGrid.Columns.GridColumn colEXCEDENTE;
+		private DevExpress.XtraGrid.Columns.GridColumn colFALTA;
 	}
 }

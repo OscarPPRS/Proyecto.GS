@@ -20,123 +20,168 @@ namespace FCT.GestionICP.UI.Formularios
 			InitializeComponent();
 		}
 
-		BindingList<V_RECEPCIONES_LIN> vistaAvisos = new BindingList<V_RECEPCIONES_LIN>();
-		public void actualizarGrids()
-		{
-			vRECEPCIONESLINBindingSource.DataSource = vistaAvisos;
-		}
 		private void formRecepcionar_Load(object sender, EventArgs e)
 		{
 			this.WindowState = FormWindowState.Maximized;
-			textEditDescripcionReferencia.Enabled = false;
-			textEditPrecio.Enabled = false;
-			spinEditExcedente.Enabled = false;
-			spinEditFalta.Enabled = false;
 			checkButtonAniadirReferencia.Appearance.BackColor = Color.LightBlue;
 			checkButtonAniadirReferencia.Appearance.BackColor2 = Color.DarkBlue;
-			checkButtonExcedenteFalta.Appearance.BackColor = Color.LightBlue;
-			checkButtonExcedenteFalta.Appearance.BackColor2 = Color.DarkBlue;
+			checkButtonFalta.Appearance.BackColor = Color.LightBlue;
+			checkButtonFalta.Appearance.BackColor2 = Color.DarkBlue;
+			checkButtonExcedente.Appearance.BackColor = Color.LightBlue;
+			checkButtonExcedente.Appearance.BackColor2 = Color.DarkBlue;
 		}
 
+		//Variables para guardar la informacion del aviso
 
+		BindingList<V_RECEPCIONES_LIN> vistaAvisos = new BindingList<V_RECEPCIONES_LIN>();
+		V_RECEPCIONES_LIN lineaGrid = new V_RECEPCIONES_LIN();
+		BindingList<V_RECEPCIONES_LIN> lineasRecepcionadas = new BindingList<V_RECEPCIONES_LIN>();
+
+		//Actualizar grids
+		public void actualizarGrids()
+		{
+			vRECEPCIONESLINBindingSource.DataSource = vistaAvisos;
+			vRECEPCIONESLINBindingSource1.DataSource = lineasRecepcionadas;
+		}
+
+		//Comportamiento de botones
+		#region
+
+		//Busca el numero de albaran introducido entre los albaranes de la base de datos y muestra los datos del aviso
 		private void simpleButtonBuscar_Click(object sender, EventArgs e)
 		{
 
-			//Busca el numero de albaran introducido entre los albaranes de la base de datos y muestra los datos del aviso
+			
 			try
 			{
 				RECEPCIONES_CAB aviso = Consultas.buscarAviso(Convert.ToInt32(textEditAlbaran.Text));
 
-				textEditNombreEmpresa.Text = Consultas.nombreEmpresa((int)aviso.ID_EMPRESA);
-				textEditFechaCreacionAviso.EditValue = Convert.ToDateTime(aviso.FECH_CREACION);
+				labelControlNombreEmpresa.Text = Consultas.nombreEmpresa((int)aviso.ID_EMPRESA);
+				labelControlFechaCreacion.Text = Convert.ToDateTime(aviso.FECH_CREACION).Date.ToString("dd/MM/yyyy");
 				textEditFechaLlegada.EditValue = Convert.ToDateTime(aviso.FECH_LLEGADA);
 
 				vistaAvisos = CargarGrids.recepcionarAvisos(Convert.ToInt32(textEditAlbaran.Text));
-				lineasRecibidas.Clear();
-
+				lineasRecepcionadas.Clear();
+				
 				actualizarGrids();
 			}
 			catch (Exception)
 			{
-				MessageBox.Show("El número de albarán no ha sido encontrado entre los avisos.", "Error");
+				MessageBox.Show("El número de albarán no ha sido encontrado entre los avisos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}																
 		}
-
 		
-
-		private void checkButtonAniadirReferencia_CheckedChanged(object sender, EventArgs e)
-		{
-				
-
-			if (checkButtonAniadirReferencia.Checked)
-			{
-				textEditDescripcionReferencia.Enabled = true;
-				textEditPrecio.Enabled = true;
-				checkButtonAniadirReferencia.Appearance.BackColor = Color.LightGreen;
-				checkButtonAniadirReferencia.Appearance.BackColor2 = Color.DarkGreen;
-			}
-
-			else {
-				textEditDescripcionReferencia.Enabled = false;
-				textEditPrecio.Enabled = false;
-				checkButtonAniadirReferencia.Appearance.BackColor = Color.LightBlue;
-				checkButtonAniadirReferencia.Appearance.BackColor2 = Color.DarkBlue;
-			}
-		}
-
-		List<LineaAviso> lineasRecibidas = new List<LineaAviso>();
 		private void simpleButtonConfirmarLinea_Click(object sender, EventArgs e)
 		{
-			
-			//Si hay referencia nueva, la genera y posteriormente añade una linea con ella.
-
-			if (checkButtonAniadirReferencia.Checked)
+			var result = MessageBox.Show("¿Estás seguro de que deseas confirmar la línea?.", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+			if (result == DialogResult.Yes)
 			{
-				if (textEditDescripcionReferencia.Text == "" | textEditPrecio.Text == "")
-				{ MessageBox.Show("Por favor rellena los campos de la referencia.");}
-				else{
-					string codRefe = ProcedimientosAlmacenados.referencias(0,null,Consultas.idEmpresa(textEditNombreEmpresa.Text), textEditDescripcionReferencia.Text,
-					decimal.Parse(textEditPrecio.Text.Replace(".", ",")), null, true);
+				//Si hay referencia nueva, la genera y posteriormente añade una linea con ella.
 
-					LineaAviso linea = new LineaAviso(Convert.ToInt32(textEditAlbaran.Text), 0, codRefe, 
-					Convert.ToInt32(spinEditCantidadBuena.Value), Convert.ToInt32(spinEditCantidadMala.Value), 0,0,textEditDescripcionReferencia.Text);
-
-					lineasRecibidas.Add(linea);
-
-					spinEditCantidadBuena.Value = 0;
-					spinEditCantidadMala.Value = 0;
-					spinEditExcedente.Value = 0;
-					spinEditFalta.Value = 0;
-
-					textEditDescripcionReferencia.Text = "";
-					textEditPrecio.Text = "";
-				}
-			}	
-
-			//Añade los datos de la referencia del aviso
-
-			else{
-				if (gridViewAviso.SelectedRowsCount > 0)
+				if (checkButtonAniadirReferencia.Checked)
 				{
-					V_RECEPCIONES_LIN lineaGrid = (V_RECEPCIONES_LIN)gridViewAviso.GetRow(gridViewAviso.FocusedRowHandle);
-					LineaAviso linea = new LineaAviso(lineaGrid.ALBARAN, 0, lineaGrid.COD_REFERENCIA,
-					Convert.ToInt32(spinEditCantidadBuena.Value), Convert.ToInt32(spinEditCantidadMala.Value), Convert.ToInt32(spinEditExcedente.Value),
-					Convert.ToInt32(spinEditFalta.Value),lineaGrid.DES_REFERENCIA);				
+					if (textEditDescripcionReferencia.Text == "" | textEditPrecio.Text == "")
+					{ MessageBox.Show("Por favor rellena los campos de la referencia.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+					else
+					{
+						try
+						{
+							//Introducimos la referencia en l abase de datos
+							ProcedimientosAlmacenados.referencias(0, null, Consultas.idEmpresa(labelControlNombreEmpresa.Text), textEditDescripcionReferencia.Text,
+										decimal.Parse(textEditPrecio.Text.Replace(" €", "")), null, true);
 
-					lineasRecibidas.Add(linea);
+							//Obtenemos el codigo de esa referencia
+							string codRefe = Consultas.referenciaInsertada(textEditDescripcionReferencia.Text);
 
-					vistaAvisos.Remove(lineaGrid);
-					actualizarGrids();
+							V_RECEPCIONES_LIN linea = new V_RECEPCIONES_LIN();
 
-					spinEditCantidadBuena.Value = 0;
-					spinEditCantidadMala.Value = 0;
-					spinEditExcedente.Value = 0;
-					spinEditFalta.Value = 0;
+							linea.ALBARAN = Convert.ToInt32(textEditAlbaran.Text);
+							linea.COD_LINEA = 0;
+							linea.COD_REFERENCIA = codRefe;
+							linea.CANTIDAD = Convert.ToInt32(spinEditCantidadBuena.Value);
+							linea.CANTIDAD_MAL_ESTADO = Convert.ToInt32(spinEditCantidadMala.Value);
+							linea.EXCEDENTE = Convert.ToInt32(spinEditExcedente.Value);
+							linea.FALTA = Convert.ToInt32(spinEditFalta.Value);
+							linea.DES_REFERENCIA = textEditDescripcionReferencia.Text;
+
+							//La añadimos al grid
+							lineasRecepcionadas.Add(linea);
+
+							spinEditCantidadBuena.Value = 0;
+							spinEditCantidadMala.Value = 0;
+							spinEditExcedente.Value = 0;
+							spinEditFalta.Value = 0;
+
+
+							textEditDescripcionReferencia.Text = "";
+							textEditPrecio.Text = "";
+
+						}
+						catch (Exception ex)
+						{
+
+							MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						}
+
+						checkButtonAniadirReferencia.Checked = false;
+						checkButtonFalta.Checked = false;
+						checkButtonExcedente.Checked = false;
+					}
 				}
+
+
+				//Añade los datos de la referencia del aviso
+
 				else
 				{
-					MessageBox.Show("Seleccione una línea para confirmar");
+					if (gridViewAviso.SelectedRowsCount > 0)
+					{
+						try
+						{
+							//Añadimos los datos del grid del aviso a la linea confirmada
+							V_RECEPCIONES_LIN linea = new V_RECEPCIONES_LIN();
+
+							linea.ALBARAN = lineaGrid.ALBARAN;
+							linea.COD_LINEA = 0;
+							linea.COD_REFERENCIA = lineaGrid.COD_REFERENCIA;
+							linea.CANTIDAD = Convert.ToInt32(spinEditCantidadBuena.Value);
+							linea.CANTIDAD_MAL_ESTADO = Convert.ToInt32(spinEditCantidadMala.Value);
+							linea.EXCEDENTE = Convert.ToInt32(spinEditExcedente.Value);
+							linea.FALTA = Convert.ToInt32(spinEditFalta.Value);
+							linea.DES_REFERENCIA = lineaGrid.DES_REFERENCIA;
+
+							lineasRecepcionadas.Add(linea);
+
+							//La quitamos del grid de aviso
+							vistaAvisos.Remove(lineaGrid);
+							actualizarGrids();
+
+							spinEditCantidadBuena.Value = 0;
+							spinEditCantidadMala.Value = 0;
+							spinEditExcedente.Value = 0;
+							spinEditFalta.Value = 0;
+							if (gridViewAviso.DataRowCount == 0) { simpleButtonConfirmarRecepcion.Enabled = true; }
+						}
+						catch (Exception ex)
+						{
+							MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						}
+
+						checkButtonAniadirReferencia.Checked = false;
+						checkButtonFalta.Checked = false;
+						checkButtonExcedente.Checked = false;
+
+					}
+					else
+					{
+						MessageBox.Show("Seleccione una línea para confirmar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+
+
 				}
+
+				
+
 			}
 			
 			
@@ -144,77 +189,73 @@ namespace FCT.GestionICP.UI.Formularios
 
 		private void simpleButtonConfirmarRecepcion_Click(object sender, EventArgs e)
 		{
-			if (textEditAlbaran.Text == "" | textEditNombreEmpresa.Text == "" | textEditFechaCreacionAviso.Text == "" |
-			textEditFechaLlegada.Text == "") { MessageBox.Show("Por favor rellene todos los campos de la cabecera del aviso."); }
+			if (textEditAlbaran.Text == ""  |
+			textEditFechaLlegada.Text == "") { MessageBox.Show("Por favor rellene todos los campos de la cabecera del aviso.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
-			else if (gridViewAviso.RowCount > 0) { MessageBox.Show("Por favor, confirme todas las líneas."); }
+			else if (gridViewAviso.RowCount > 0) { MessageBox.Show("Por favor, confirme todas las líneas.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
 			else 
 			{
-				var result = MessageBox.Show("¿Estás seguro de que deseas confirmar la recepción?.", "Aviso", MessageBoxButtons.YesNo);
+				var result = MessageBox.Show("¿Estás seguro de que deseas confirmar la recepción?.", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 				if (result == DialogResult.Yes)
 				{
 					
 					//Modificar Cabecera
-					ProcedimientosAlmacenados.recepcionesCabeceras(1,Convert.ToInt32(textEditAlbaran.Text), 2, Consultas.idEmpresa(textEditNombreEmpresa.Text),
-					(DateTime)textEditFechaCreacionAviso.EditValue, (DateTime)textEditFechaLlegada.EditValue);
+					ProcedimientosAlmacenados.recepcionesCabeceras(1,Convert.ToInt32(textEditAlbaran.Text), 2, Consultas.idEmpresa(labelControlNombreEmpresa.Text),
+					Convert.ToDateTime(labelControlFechaCreacion.Text), (DateTime)textEditFechaLlegada.EditValue);
 
 					//Borrar Lineas antiguas
-					ProcedimientosAlmacenados.recepcionesLineas(2,Convert.ToInt32(textEditAlbaran.Text), 0, null, 0);
+					ProcedimientosAlmacenados.recepcionesLineas(2,Convert.ToInt32(textEditAlbaran.Text), 0, null, 0, 0, 0, 0 );
 				
 					int numerador = 0;
 
-					foreach (LineaAviso l in lineasRecibidas)
+					foreach (V_RECEPCIONES_LIN l in lineasRecepcionadas)
 					{
 						numerador++;
 
 						//Insertar lineas, insertar palets y enviar correo
 
-						ProcedimientosAlmacenados.recepcionesLineas(0,l.albaran, numerador, l.cod_referencia, (int)l.cantidadBuena);
+						ProcedimientosAlmacenados.recepcionesLineas(0,l.ALBARAN, numerador, l.COD_REFERENCIA, (int)l.CANTIDAD,
+						(int)l.CANTIDAD_MAL_ESTADO, (int)l.EXCEDENTE, (int)l.FALTA);
 
-						if (l.cantidadBuena > 0) { ProcedimientosAlmacenados.palets(0, l.cod_referencia, 3, (int)l.cantidadBuena, l.albaran); }
+						if (l.CANTIDAD > 0) { ProcedimientosAlmacenados.palets(0, l.COD_REFERENCIA, 3, (int)l.CANTIDAD, l.ALBARAN); }
 
-						if (l.cantidadMala > 0) { ProcedimientosAlmacenados.palets(0, l.cod_referencia, 6, (int)l.cantidadMala, l.albaran); }
+						if (l.CANTIDAD_MAL_ESTADO > 0) { ProcedimientosAlmacenados.palets(0, l.COD_REFERENCIA, 6, (int)l.CANTIDAD_MAL_ESTADO, l.ALBARAN); }
 
-						if (l.excedente > 0) { ProcedimientosAlmacenados.palets(0, l.cod_referencia, 3, (int)l.excedente, l.albaran); }
-
-						if (l.falta > 0) { 
-						
-								
-						
-						}
+						if (l.EXCEDENTE > 0) { ProcedimientosAlmacenados.palets(0, l.COD_REFERENCIA, 3, (int)l.EXCEDENTE, l.ALBARAN); }
 					}
 
 					ProcedimientosAlmacenados.enviarCorreo("ols17697@gmail.com", "Material recibido en ICP " + textEditAlbaran.Text, Convert.ToInt32(textEditAlbaran.Text));
 
 					//Generacion de etiquetas
 
-					using (StreamWriter escribir = new StreamWriter("\\\\m2d96\\Publico\\Recursos\\eti\\imprimir.bat"))
-					{
-						escribir.WriteLine("copy \\\\m2d96\\Publico\\Recursos\\eti\\etiquetaPalet.eti \\\\AWORK344\\ETI_ICP");
-					}
+					//using (StreamWriter escribir = new StreamWriter(formContenedor.rutaCarpetaDatos + "\\Recursos\\eti\\imprimir.bat"))
+					//{
+					//	escribir.WriteLine("copy " + formContenedor.rutaCarpetaDatos + "\\Recursos\\eti\\etiquetaPalet.eti \\\\AWORK344\\ETI_ICP");
+					//}
 
-					foreach (string etiqueta in Consultas.etiquetasRecepcion(Convert.ToInt32(textEditAlbaran.Text))) {
-						
-						using (StreamWriter escribir = new StreamWriter("\\\\m2d96\\Publico\\Recursos\\eti\\etiquetaPalet.eti"))
-						{
-							escribir.WriteLine(etiqueta);
-							
-						}
-						//System.Diagnostics.Process proc = new System.Diagnostics.Process();
-						//proc.StartInfo.UseShellExecute = false;
-						//proc.StartInfo.FileName = "\\\\m2d96\\Publico" + "\\Recursos\\eti\\imprimir.bat";
-						//proc.Start();
-						//proc.WaitForExit();
-						//proc.Close();
+					//foreach (string etiqueta in Consultas.etiquetasRecepcion(Convert.ToInt32(textEditAlbaran.Text)))
+					//{
 
-					}
+					//	using (StreamWriter escribir = new StreamWriter(formContenedor.rutaCarpetaDatos + "\\Recursos\\eti\\etiquetaPalet.eti"))
+					//	{
+					//		escribir.WriteLine(etiqueta);
+
+					//	}
+					//	System.Diagnostics.Process proc = new System.Diagnostics.Process();
+					//	proc.StartInfo.UseShellExecute = false;
+					//	proc.StartInfo.FileName = formContenedor.rutaCarpetaDatos + "\\Recursos\\eti\\imprimir.bat";
+					//	proc.Start();
+					//	proc.WaitForExit();
+					//	proc.Close();
+
+					//}
 
 				}
 
 				//Limpieza de controles
-
-				lineasRecibidas.Clear();
+				simpleButtonConfirmarRecepcion.Enabled = false;
+				lineasRecepcionadas.Clear();
 							
 				
 				foreach (var textboxitem in this.Controls.OfType<TextEdit>())
@@ -225,79 +266,245 @@ namespace FCT.GestionICP.UI.Formularios
 			}
 		}
 
-		private void simpleButtonEliminarLinea_Click(object sender, EventArgs e)
-		{
-			var result = MessageBox.Show("¿Estás seguro de que deseas eliminar la línea?.", "Aviso", MessageBoxButtons.YesNo);
-			if (result == DialogResult.Yes)
-			{
-				V_RECEPCIONES_LIN lineaGrid = (V_RECEPCIONES_LIN)gridViewAviso.GetRow(gridViewAviso.FocusedRowHandle);
-				vistaAvisos.Remove(lineaGrid);
-				actualizarGrids();
-			}
-		}
 
-		private void checkButtonExcedenteFalta_CheckedChanged(object sender, EventArgs e)
+		#endregion
+
+		//Comportamiento checkbuttons, activan o desactivan otros controles dependiendo de lo que haya activado, excedente y falta no pueden estar activos a la vez
+		#region
+		private void checkButtonAniadirReferencia_CheckedChanged(object sender, EventArgs e)
 		{
 
-			if (checkButtonExcedenteFalta.Checked)
+
+			if (checkButtonAniadirReferencia.Checked)
 			{
-				spinEditExcedente.Enabled = true;
-				spinEditFalta.Enabled = true;
-				checkButtonExcedenteFalta.Appearance.BackColor = Color.LightGreen;
-				checkButtonExcedenteFalta.Appearance.BackColor2 = Color.DarkGreen;
+
+				textEditDescripcionReferencia.Enabled = true;
+				textEditPrecio.Enabled = true;
+				checkButtonAniadirReferencia.Appearance.BackColor = Color.LightGreen;
+				checkButtonAniadirReferencia.Appearance.BackColor2 = Color.DarkGreen;
+				cantidadTotal = 0;
+				panelReferenciaDesconocida.Visible = true;
 			}
 
 			else
 			{
-				spinEditExcedente.Enabled = false;
-				spinEditFalta.Enabled = false;
-				checkButtonExcedenteFalta.Appearance.BackColor = Color.LightBlue;
-				checkButtonExcedenteFalta.Appearance.BackColor2 = Color.DarkBlue;
+
+				textEditDescripcionReferencia.Enabled = false;
+				textEditPrecio.Enabled = false;
+				checkButtonAniadirReferencia.Appearance.BackColor = Color.LightBlue;
+				checkButtonAniadirReferencia.Appearance.BackColor2 = Color.DarkBlue;
+
+				try
+				{
+					cantidadTotal = Convert.ToInt32(lineaGrid.CANTIDAD);
+				}
+				catch (Exception) { }
+
+				spinEditCantidadBuena.Value = cantidadTotal;
+				panelReferenciaDesconocida.Visible = false;
+
 			}
 		}
+
+		private void checkButtonFalta_CheckedChanged(object sender, EventArgs e)
+		{
+			if (checkButtonFalta.Checked)
+			{
+				panelFalta.Visible = true;
+				checkButtonExcedente.Checked = false;
+				checkButtonFalta.Appearance.BackColor = Color.LightGreen;
+				checkButtonFalta.Appearance.BackColor2 = Color.DarkGreen;
+			}
+
+			else
+			{
+				panelFalta.Visible = false;
+				spinEditFalta.Value = 0;
+				checkButtonFalta.Appearance.BackColor = Color.LightBlue;
+				checkButtonFalta.Appearance.BackColor2 = Color.DarkBlue;
+			}
+		}
+
+		private void checkButtonExcedente_CheckedChanged(object sender, EventArgs e)
+		{
+			if (checkButtonExcedente.Checked)
+			{
+				panelExcedente.Visible = true;
+				checkButtonFalta.Checked = false;
+				checkButtonExcedente.Appearance.BackColor = Color.LightGreen;
+				checkButtonExcedente.Appearance.BackColor2 = Color.DarkGreen;
+			}
+
+			else
+			{
+				panelExcedente.Visible = false;
+				spinEditExcedente.Value = 0;
+				checkButtonExcedente.Appearance.BackColor = Color.LightBlue;
+				checkButtonExcedente.Appearance.BackColor2 = Color.DarkBlue;
+			}
+		}
+
+		#endregion
+
+		//Comportamiento spinedits
+		#region
 		int cantidadTotal = 0;
+		int diferencia = 0;
 		private void spinEditCantidadBuena_EditValueChanged(object sender, EventArgs e)
 		{
-			if (spinEditCantidadBuena.Value > cantidadTotal | spinEditCantidadBuena.Value < 0)
-			{
-				spinEditCantidadBuena.Value = cantidadTotal;
+			//Primero revisa si la cantidad de la linea es 0, esto seria por ejemplo al añadir referencia desconocida que no recibimos una linea, aqui 
+			// el codigo ignora el control de cantidad
+			if (cantidadTotal != 0){
+
+				//Si escribimos mas cantidad de la que trae la linea, fija el total 
+				if (spinEditCantidadBuena.Value > cantidadTotal)
+				{
+					spinEditCantidadBuena.Value = cantidadTotal;
+					spinEditCantidadMala.Value = 0;
+				}
+
+				//Si baja de 0, lo pone en 0
+				else if (spinEditCantidadBuena.Value < 0)
+				{
+					spinEditCantidadBuena.Value = 0;
+				}
+
+				//Si escribimos mas del limite actual que podemos escribir, lo escribe en ese limite
+				else if (spinEditCantidadBuena.Value > diferencia)
+				{
+					spinEditCantidadBuena.Value = diferencia;
+					spinEditCantidadMala.Value = 0;
+				}
+
+				//Al cambiar la cantidad, escribe la cantidad cambiada en el otro spinedit
+				spinEditCantidadMala.Value = diferencia - spinEditCantidadBuena.Value;
+
 			}
-			else { spinEditCantidadMala.Value = cantidadTotal - spinEditCantidadBuena.Value; }
+
+			//Esto gestiona el texto de la cantidad total recibida, dependiendo de si es referencia desconocida o no
+			if (checkButtonAniadirReferencia.Checked) {
+				labelControlDiferencia.Text = (spinEditCantidadBuena.Value + spinEditCantidadMala.Value + spinEditExcedente.Value).ToString();
+			}
+			else{
+				labelControlDiferencia.Text = (diferencia + (int)spinEditExcedente.Value).ToString();
+			}
+			
+
 		}
 
 		private void spinEditCantidadMala_EditValueChanged(object sender, EventArgs e)
 		{
-			if (spinEditCantidadMala.Value > cantidadTotal | spinEditCantidadMala.Value < 0)
+
+			
+
+			if (cantidadTotal != 0)
 			{
-				spinEditCantidadMala.Value = cantidadTotal;
+				if (spinEditCantidadMala.Value > cantidadTotal)
+				{
+					spinEditCantidadMala.Value = cantidadTotal;
+					spinEditCantidadBuena.Value = 0;
+				}
+
+				else if (spinEditCantidadMala.Value < 0)
+				{
+					spinEditCantidadMala.Value = 0;
+				}
+
+				else if (spinEditCantidadMala.Value > diferencia)
+				{
+					spinEditCantidadMala.Value = diferencia;
+					spinEditCantidadBuena.Value = 0;
+				}
+
+				spinEditCantidadBuena.Value = diferencia - spinEditCantidadMala.Value;
 			}
-			else { spinEditCantidadBuena.Value = cantidadTotal - spinEditCantidadMala.Value; }
+
+			if(checkButtonAniadirReferencia.Checked) {
+				labelControlDiferencia.Text = (spinEditCantidadBuena.Value + spinEditCantidadMala.Value + spinEditExcedente.Value).ToString();
+			}
+			else
+			{
+				labelControlDiferencia.Text = (diferencia + (int)spinEditExcedente.Value).ToString();
+			}
+
+
 		}
 
 		private void spinEditFalta_EditValueChanged(object sender, EventArgs e)
 		{
-			V_RECEPCIONES_LIN lineaGrid = (V_RECEPCIONES_LIN)gridViewAviso.GetRow(gridViewAviso.FocusedRowHandle);
 
-			if (spinEditFalta.Value > cantidadTotal | spinEditFalta.Value < 0)
+
+			if (cantidadTotal != 0)
 			{
-				spinEditFalta.Value = (int)lineaGrid.CANTIDAD;
+
+				diferencia = cantidadTotal - (int)spinEditFalta.Value;
+
+				if (spinEditFalta.Value > cantidadTotal)
+				{
+					spinEditFalta.Value = cantidadTotal;
+					spinEditCantidadBuena.Value = 0;
+					spinEditCantidadMala.Value = 0;
+				}
+
+				else if (spinEditFalta.Value < 0)
+				{
+					spinEditFalta.Value = 0;
+					spinEditCantidadBuena.Value = cantidadTotal;
+					spinEditCantidadMala.Value = 0;
+				}
+
+				spinEditCantidadBuena.Value = diferencia;
 			}
 
-			try { cantidadTotal = (int)lineaGrid.CANTIDAD - Convert.ToInt32(spinEditFalta.Value); }
-			catch (Exception ex) { cantidadTotal = 0; }
+			if (checkButtonAniadirReferencia.Checked)
+			{
+				labelControlDiferencia.Text = (spinEditCantidadBuena.Value + spinEditCantidadMala.Value + spinEditExcedente.Value).ToString();
+			}
+			else
+			{
+				labelControlDiferencia.Text = (diferencia + (int)spinEditExcedente.Value).ToString();
+			}
 
-			spinEditCantidadBuena.Value = cantidadTotal - spinEditCantidadMala.Value;
+
 		}
 
+		private void spinEditExcedente_EditValueChanged(object sender, EventArgs e)
+		{
+			if (checkButtonAniadirReferencia.Checked)
+			{
+				labelControlDiferencia.Text = (spinEditCantidadBuena.Value + spinEditCantidadMala.Value + spinEditExcedente.Value).ToString();
+			}
+			else
+			{
+				labelControlDiferencia.Text = (diferencia + (int)spinEditExcedente.Value).ToString();
+			}
+		}
+		#endregion
+
+		//Obtener datos de la linea del aviso seleccionada
 		private void gridViewAviso_FocusedRowObjectChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventArgs e)
 		{
-			V_RECEPCIONES_LIN lineaGrid = (V_RECEPCIONES_LIN)gridViewAviso.GetRow(gridViewAviso.FocusedRowHandle);
+			lineaGrid = (V_RECEPCIONES_LIN)gridViewAviso.GetRow(gridViewAviso.FocusedRowHandle);
 
 			spinEditCantidadBuena.Value = 0;
 			spinEditCantidadMala.Value = 0;
 
-			cantidadTotal = Convert.ToInt32(lineaGrid.CANTIDAD);
-			spinEditCantidadBuena.Value = cantidadTotal;
+			try { 
+				cantidadTotal = Convert.ToInt32(lineaGrid.CANTIDAD);
+				diferencia = Convert.ToInt32(lineaGrid.CANTIDAD);
+				spinEditCantidadBuena.Value = cantidadTotal;
+			}
+			catch (Exception ex) { }
+			
+		}
+
+		//Para buscar al darle al enter
+		private void textEditAlbaran_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				simpleButtonBuscar_Click(this, new EventArgs());
+			}
 		}
 
 		

@@ -47,6 +47,7 @@
 			this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
 			this.simpleButtonUbicacionDisponible = new DevExpress.XtraEditors.SimpleButton();
 			this.simpleButtonConfirmarUbicacion = new DevExpress.XtraEditors.SimpleButton();
+			this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlPalets)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.vPALETSBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewPalets)).BeginInit();
@@ -75,6 +76,12 @@
 			// 
 			// gridViewPalets
 			// 
+			this.gridViewPalets.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridViewPalets.Appearance.HeaderPanel.Options.UseFont = true;
+			this.gridViewPalets.Appearance.HeaderPanel.Options.UseTextOptions = true;
+			this.gridViewPalets.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridViewPalets.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridViewPalets.Appearance.Row.Options.UseFont = true;
 			this.gridViewPalets.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colCOD_PALET,
             this.colDESC_ESTADO,
@@ -86,10 +93,12 @@
 			this.gridViewPalets.Name = "gridViewPalets";
 			this.gridViewPalets.OptionsBehavior.Editable = false;
 			this.gridViewPalets.OptionsBehavior.ReadOnly = true;
+			this.gridViewPalets.OptionsCustomization.AllowColumnMoving = false;
 			this.gridViewPalets.OptionsCustomization.AllowGroup = false;
 			// 
 			// colCOD_PALET
 			// 
+			this.colCOD_PALET.Caption = "Código de palet";
 			this.colCOD_PALET.FieldName = "COD_PALET";
 			this.colCOD_PALET.Name = "colCOD_PALET";
 			this.colCOD_PALET.Visible = true;
@@ -97,6 +106,7 @@
 			// 
 			// colDESC_ESTADO
 			// 
+			this.colDESC_ESTADO.Caption = "Estado";
 			this.colDESC_ESTADO.FieldName = "DESC_ESTADO";
 			this.colDESC_ESTADO.Name = "colDESC_ESTADO";
 			this.colDESC_ESTADO.Visible = true;
@@ -104,6 +114,7 @@
 			// 
 			// colCOD_REFERENCIA
 			// 
+			this.colCOD_REFERENCIA.Caption = "Referencia";
 			this.colCOD_REFERENCIA.FieldName = "COD_REFERENCIA";
 			this.colCOD_REFERENCIA.Name = "colCOD_REFERENCIA";
 			this.colCOD_REFERENCIA.Visible = true;
@@ -111,6 +122,7 @@
 			// 
 			// colCANTIDAD
 			// 
+			this.colCANTIDAD.Caption = "Cantidad";
 			this.colCANTIDAD.FieldName = "CANTIDAD";
 			this.colCANTIDAD.Name = "colCANTIDAD";
 			this.colCANTIDAD.Visible = true;
@@ -118,6 +130,7 @@
 			// 
 			// colFECH_INSERT
 			// 
+			this.colFECH_INSERT.Caption = "Fecha de creación";
 			this.colFECH_INSERT.FieldName = "FECH_INSERT";
 			this.colFECH_INSERT.Name = "colFECH_INSERT";
 			this.colFECH_INSERT.Visible = true;
@@ -125,6 +138,7 @@
 			// 
 			// colALBARAN_RECEPCION
 			// 
+			this.colALBARAN_RECEPCION.Caption = "Albarán";
 			this.colALBARAN_RECEPCION.FieldName = "ALBARAN_RECEPCION";
 			this.colALBARAN_RECEPCION.Name = "colALBARAN_RECEPCION";
 			this.colALBARAN_RECEPCION.Visible = true;
@@ -134,11 +148,12 @@
 			// 
 			this.simpleButtonActualizar.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.simpleButtonActualizar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonActualizar.ImageOptions.Image")));
-			this.simpleButtonActualizar.Location = new System.Drawing.Point(75, 217);
+			this.simpleButtonActualizar.Location = new System.Drawing.Point(95, 161);
 			this.simpleButtonActualizar.Name = "simpleButtonActualizar";
 			this.simpleButtonActualizar.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonActualizar.Size = new System.Drawing.Size(58, 60);
 			this.simpleButtonActualizar.TabIndex = 36;
+			this.simpleButtonActualizar.ToolTip = "Actualizar";
 			this.simpleButtonActualizar.Click += new System.EventHandler(this.simpleButtonActualizar_Click);
 			// 
 			// textEditPosicion
@@ -194,28 +209,53 @@
 			// simpleButtonUbicacionDisponible
 			// 
 			this.simpleButtonUbicacionDisponible.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.simpleButtonUbicacionDisponible.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(179)))), ((int)(((byte)(53)))));
+			this.simpleButtonUbicacionDisponible.Appearance.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.simpleButtonUbicacionDisponible.Appearance.ForeColor = System.Drawing.Color.Black;
+			this.simpleButtonUbicacionDisponible.Appearance.Options.UseBackColor = true;
+			this.simpleButtonUbicacionDisponible.Appearance.Options.UseFont = true;
+			this.simpleButtonUbicacionDisponible.Appearance.Options.UseForeColor = true;
 			this.simpleButtonUbicacionDisponible.Location = new System.Drawing.Point(1118, 136);
 			this.simpleButtonUbicacionDisponible.Name = "simpleButtonUbicacionDisponible";
 			this.simpleButtonUbicacionDisponible.Size = new System.Drawing.Size(289, 89);
 			this.simpleButtonUbicacionDisponible.TabIndex = 41;
-			this.simpleButtonUbicacionDisponible.Text = "UBICACION DISPONIBLE";
+			this.simpleButtonUbicacionDisponible.Text = "UBICACIÓN\r\nDISPONIBLE";
+			this.simpleButtonUbicacionDisponible.ToolTip = "Obtener siguiente \r\nubicación disponible";
 			this.simpleButtonUbicacionDisponible.Click += new System.EventHandler(this.simpleButtonUbicacionDisponible_Click);
 			// 
 			// simpleButtonConfirmarUbicacion
 			// 
 			this.simpleButtonConfirmarUbicacion.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.simpleButtonConfirmarUbicacion.Location = new System.Drawing.Point(1118, 582);
+			this.simpleButtonConfirmarUbicacion.Enabled = false;
+			this.simpleButtonConfirmarUbicacion.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonConfirmarUbicacion.ImageOptions.Image")));
+			this.simpleButtonConfirmarUbicacion.Location = new System.Drawing.Point(1201, 570);
 			this.simpleButtonConfirmarUbicacion.Name = "simpleButtonConfirmarUbicacion";
-			this.simpleButtonConfirmarUbicacion.Size = new System.Drawing.Size(289, 89);
+			this.simpleButtonConfirmarUbicacion.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+			this.simpleButtonConfirmarUbicacion.Size = new System.Drawing.Size(103, 102);
 			this.simpleButtonConfirmarUbicacion.TabIndex = 42;
-			this.simpleButtonConfirmarUbicacion.Text = "CONFIRMAR UBICACION";
+			this.simpleButtonConfirmarUbicacion.ToolTip = "Confirmar palet ubicado";
 			this.simpleButtonConfirmarUbicacion.Click += new System.EventHandler(this.simpleButtonConfirmarUbicacion_Click);
+			// 
+			// labelControl5
+			// 
+			this.labelControl5.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.labelControl5.Appearance.Font = new System.Drawing.Font("Lemon/Milk", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl5.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(179)))), ((int)(((byte)(53)))));
+			this.labelControl5.Appearance.Options.UseFont = true;
+			this.labelControl5.Appearance.Options.UseForeColor = true;
+			this.labelControl5.Location = new System.Drawing.Point(159, 12);
+			this.labelControl5.Name = "labelControl5";
+			this.labelControl5.Size = new System.Drawing.Size(437, 41);
+			this.labelControl5.TabIndex = 98;
+			this.labelControl5.Text = "UBICAR PALETS EN RECEPCIÓN";
 			// 
 			// formUbicarRecepciones
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(34)))), ((int)(((byte)(64)))));
 			this.ClientSize = new System.Drawing.Size(1566, 783);
+			this.Controls.Add(this.labelControl5);
 			this.Controls.Add(this.simpleButtonConfirmarUbicacion);
 			this.Controls.Add(this.simpleButtonUbicacionDisponible);
 			this.Controls.Add(this.textEditPosicion);
@@ -225,7 +265,6 @@
 			this.Controls.Add(this.simpleButtonActualizar);
 			this.Controls.Add(this.gridControlPalets);
 			this.Name = "formUbicarRecepciones";
-			this.Text = "formUbicarRecepciones";
 			((System.ComponentModel.ISupportInitialize)(this.gridControlPalets)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.vPALETSBindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewPalets)).EndInit();
@@ -252,7 +291,8 @@
 		private DevExpress.XtraEditors.TextEdit textEditCalle;
 		private DevExpress.XtraEditors.LabelControl labelControl2;
 		private DevExpress.XtraEditors.LabelControl labelControl1;
-		private DevExpress.XtraEditors.SimpleButton simpleButtonUbicacionDisponible;
 		private DevExpress.XtraEditors.SimpleButton simpleButtonConfirmarUbicacion;
+		private DevExpress.XtraEditors.SimpleButton simpleButtonUbicacionDisponible;
+		private DevExpress.XtraEditors.LabelControl labelControl5;
 	}
 }

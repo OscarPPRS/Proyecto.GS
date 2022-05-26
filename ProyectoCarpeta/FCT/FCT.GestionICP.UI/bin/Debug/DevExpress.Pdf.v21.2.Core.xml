@@ -1305,13 +1305,17 @@
       <param name="rect">A <see cref="T:DevExpress.Pdf.PdfRectangle"/> object that represents a rectangle inside which check box field is located on a page.</param>
     </member>
     <member name="M:DevExpress.Pdf.PdfAcroFormCheckBoxField.AddWidget(DevExpress.Pdf.PdfRectangle)">
-      <summary />
-      <param name="rectangle"></param>
+      <summary>
+        <para>Adds a widget annotation related to the check box. The widget is added to the page where the form field is located.</para>
+      </summary>
+      <param name="rectangle">The page rectangle where the widget annotation should be added.</param>
     </member>
     <member name="M:DevExpress.Pdf.PdfAcroFormCheckBoxField.AddWidget(System.Int32,DevExpress.Pdf.PdfRectangle)">
-      <summary />
-      <param name="pageNumber"></param>
-      <param name="rectangle"></param>
+      <summary>
+        <para>Adds a widget annotation related to the check box. Allows you to specify a page to which the widget should be added.</para>
+      </summary>
+      <param name="pageNumber">The number of a page to which to add the widget annotation (starting with 1).</param>
+      <param name="rectangle">The page rectangle where to add the widget annotation.</param>
     </member>
     <member name="P:DevExpress.Pdf.PdfAcroFormCheckBoxField.ButtonStyle">
       <summary>
@@ -1320,7 +1324,9 @@
       <value>A <see cref="T:DevExpress.Pdf.PdfAcroFormButtonStyle"/> enumeration value that determines the button style applied to a check box field.</value>
     </member>
     <member name="M:DevExpress.Pdf.PdfAcroFormCheckBoxField.ClearWidgets">
-      <summary />
+      <summary>
+        <para>Removes all additional widget annotations.</para>
+      </summary>
     </member>
     <member name="P:DevExpress.Pdf.PdfAcroFormCheckBoxField.ExportValue">
       <summary>
@@ -1359,13 +1365,17 @@
       <param name="exportValue">A <see cref="T:System.String"/> that is an export value.</param>
     </member>
     <member name="M:DevExpress.Pdf.PdfAcroFormChoiceField.AddWidget(DevExpress.Pdf.PdfRectangle)">
-      <summary />
-      <param name="rectangle"></param>
+      <summary>
+        <para>Adds a widget annotation related to the choice form field (combo box or list box). The widget is added to the page where the form field is located.</para>
+      </summary>
+      <param name="rectangle">The page rectangle where the widget annotation should be added.</param>
     </member>
     <member name="M:DevExpress.Pdf.PdfAcroFormChoiceField.AddWidget(System.Int32,DevExpress.Pdf.PdfRectangle)">
-      <summary />
-      <param name="pageNumber"></param>
-      <param name="rectangle"></param>
+      <summary>
+        <para>Adds a widget annotation related to the choice form field (combo box or list box). Allows you to specify a page to which the widget should be added.</para>
+      </summary>
+      <param name="pageNumber">The number of a page to which to add the widget annotation (starting with 1).</param>
+      <param name="rectangle">The page rectangle where the widget annotation should be added.</param>
     </member>
     <member name="M:DevExpress.Pdf.PdfAcroFormChoiceField.ClearSelection">
       <summary>
@@ -1378,7 +1388,9 @@
       </summary>
     </member>
     <member name="M:DevExpress.Pdf.PdfAcroFormChoiceField.ClearWidgets">
-      <summary />
+      <summary>
+        <para>Removes all additional widget annotations.</para>
+      </summary>
     </member>
     <member name="M:DevExpress.Pdf.PdfAcroFormChoiceField.SelectValue(System.String)">
       <summary>
@@ -1810,16 +1822,18 @@
     </member>
     <member name="M:DevExpress.Pdf.PdfAcroFormRadioGroupField.AddButton(System.String,DevExpress.Pdf.PdfRectangle)">
       <summary>
-        <para>Adds a radio button to the radio group field using the radio button name and a rectangle that specifies the location of this button on a PDF page.</para>
+        <para>Adds a radio button to the radio group field. The button is added to the page where the form field is located.</para>
       </summary>
-      <param name="name">A <see cref="T:System.String"/> that specifies the name of a radio button.</param>
-      <param name="rect">A <see cref="T:DevExpress.Pdf.PdfRectangle"/> object that represents a rectangle inside which a radio button is located on a page.</param>
+      <param name="name">The name of a radio button.</param>
+      <param name="rect">A page area where the radio button should be located.</param>
     </member>
     <member name="M:DevExpress.Pdf.PdfAcroFormRadioGroupField.AddButton(System.String,System.Int32,DevExpress.Pdf.PdfRectangle)">
-      <summary />
-      <param name="name"></param>
-      <param name="pageNumber"></param>
-      <param name="rect"></param>
+      <summary>
+        <para>Adds a radio button to the radio group field. Allows you to specify a page where the button should be located.</para>
+      </summary>
+      <param name="name">The name of a radio button.</param>
+      <param name="pageNumber">The number of the page where the radio button should be located.</param>
+      <param name="rect">A page area where the radio button should be located.</param>
     </member>
     <member name="P:DevExpress.Pdf.PdfAcroFormRadioGroupField.ButtonStyle">
       <summary>
@@ -1934,16 +1948,22 @@
       <param name="rectangle">A <see cref="T:DevExpress.Pdf.PdfRectangle"/> object that represents a rectangle in user coordinate system used to place a text box field.</param>
     </member>
     <member name="M:DevExpress.Pdf.PdfAcroFormTextBoxField.AddWidget(DevExpress.Pdf.PdfRectangle)">
-      <summary />
-      <param name="rectangle"></param>
+      <summary>
+        <para>Adds a widget annotation related to the text box. The widget is added to the page where the form field is located.</para>
+      </summary>
+      <param name="rectangle">The page rectangle where to add the widget annotation.</param>
     </member>
     <member name="M:DevExpress.Pdf.PdfAcroFormTextBoxField.AddWidget(System.Int32,DevExpress.Pdf.PdfRectangle)">
-      <summary />
-      <param name="pageNumber"></param>
-      <param name="rectangle"></param>
+      <summary>
+        <para>Adds a widget annotation related to the text box. Allows you to specify a page to which the widget should be added.</para>
+      </summary>
+      <param name="pageNumber">The number of a page to which to add the widget annotation (starting with 1).</param>
+      <param name="rectangle">The page rectangle where to add the widget annotation.</param>
     </member>
     <member name="M:DevExpress.Pdf.PdfAcroFormTextBoxField.ClearWidgets">
-      <summary />
+      <summary>
+        <para>Removes all additional widget annotations.</para>
+      </summary>
     </member>
     <member name="P:DevExpress.Pdf.PdfAcroFormTextBoxField.MaxLength">
       <summary>
@@ -3415,7 +3435,7 @@
     </member>
     <member name="P:DevExpress.Pdf.PdfClearContentOptions.ClearGraphics">
       <summary>
-        <para>Gets or sets whether to clear graphics ().</para>
+        <para>Gets or sets whether to clear graphics.</para>
       </summary>
       <value>true to remove graphics; otherwise, false.</value>
     </member>
@@ -3998,7 +4018,7 @@
     </member>
     <member name="P:DevExpress.Pdf.PdfDocument.Pages">
       <summary>
-        <para>Provides access to the collection of document pages.</para>
+        <para>Obtains to the collection of document pages.</para>
       </summary>
       <value>A collection of <see cref="T:DevExpress.Pdf.PdfPage"/> objects.</value>
     </member>
@@ -11400,6 +11420,11 @@
     <member name="F:DevExpress.Pdf.PdfZugferdConformanceLevel.None">
       <summary>
         <para>No conformance level is specified.</para>
+      </summary>
+    </member>
+    <member name="F:DevExpress.Pdf.PdfZugferdConformanceLevel.XRechnung">
+      <summary>
+        <para>XRechnung level (a binding requirement for the receipt of electronic invoices for all public sector customers in Germany).</para>
       </summary>
     </member>
     <member name="T:DevExpress.Pdf.PdfZugferdVersion">

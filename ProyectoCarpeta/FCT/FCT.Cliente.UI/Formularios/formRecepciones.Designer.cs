@@ -47,40 +47,39 @@
 			this.colSTOCK = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridControlReferencias = new DevExpress.XtraGrid.GridControl();
 			this.gridControlPedidos = new DevExpress.XtraGrid.GridControl();
-			this.lineaAvisoBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.gridViewRecepciones1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-			this.colalbaran = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.colcod_linea = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.colcod_referencia1 = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.colcantidad = new DevExpress.XtraGrid.Columns.GridColumn();
-			this.coldescripcion_referencia = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.gridViewRecepciones = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.textEditFechaLlegada = new DevExpress.XtraEditors.TextEdit();
 			this.simpleButtonActualizar = new DevExpress.XtraEditors.SimpleButton();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+			this.colCOD_REFERENCIA1 = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.colDES_REFERENCIA1 = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.colCANTIDAD = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.vRECEPCIONESLINBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			((System.ComponentModel.ISupportInitialize)(this.spinEditCantidad.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.vISTAREFERENCIASBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewReferencias)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlReferencias)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlPedidos)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.lineaAvisoBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewRecepciones1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewRecepciones)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditFechaLlegada.Properties)).BeginInit();
 			this.panel1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.vRECEPCIONESLINBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// simpleButtonAnadirLinea
 			// 
 			this.simpleButtonAnadirLinea.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.simpleButtonAnadirLinea.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonAnadirLinea.ImageOptions.Image")));
-			this.simpleButtonAnadirLinea.Location = new System.Drawing.Point(842, 526);
+			this.simpleButtonAnadirLinea.Location = new System.Drawing.Point(861, 524);
 			this.simpleButtonAnadirLinea.Name = "simpleButtonAnadirLinea";
 			this.simpleButtonAnadirLinea.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonAnadirLinea.Size = new System.Drawing.Size(99, 67);
 			this.simpleButtonAnadirLinea.TabIndex = 2;
 			this.simpleButtonAnadirLinea.Text = " ";
+			this.simpleButtonAnadirLinea.ToolTip = "Añadir línea de la referencia\r\nseleccionada al aviso";
 			this.simpleButtonAnadirLinea.Click += new System.EventHandler(this.simpleButtonAnadirLinea_Click);
 			// 
 			// spinEditCantidad
@@ -90,23 +89,28 @@
             0,
             0,
             0});
-			this.spinEditCantidad.Location = new System.Drawing.Point(842, 500);
+			this.spinEditCantidad.Location = new System.Drawing.Point(861, 498);
 			this.spinEditCantidad.Name = "spinEditCantidad";
 			this.spinEditCantidad.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.spinEditCantidad.Properties.IsFloatValue = false;
+			this.spinEditCantidad.Properties.MaskSettings.Set("mask", "d");
+			this.spinEditCantidad.Properties.MaxLength = 4;
 			this.spinEditCantidad.Size = new System.Drawing.Size(99, 20);
 			this.spinEditCantidad.TabIndex = 3;
 			// 
 			// simpleButtonQuitarLinea
 			// 
 			this.simpleButtonQuitarLinea.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonQuitarLinea.Enabled = false;
 			this.simpleButtonQuitarLinea.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonQuitarLinea.ImageOptions.Image")));
-			this.simpleButtonQuitarLinea.Location = new System.Drawing.Point(1635, 526);
+			this.simpleButtonQuitarLinea.Location = new System.Drawing.Point(1654, 524);
 			this.simpleButtonQuitarLinea.Name = "simpleButtonQuitarLinea";
 			this.simpleButtonQuitarLinea.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonQuitarLinea.Size = new System.Drawing.Size(57, 56);
 			this.simpleButtonQuitarLinea.TabIndex = 4;
 			this.simpleButtonQuitarLinea.Text = " ";
+			this.simpleButtonQuitarLinea.ToolTip = "Eliminar línea seleccionada";
 			this.simpleButtonQuitarLinea.Click += new System.EventHandler(this.simpleButtonQuitarLinea_Click);
 			// 
 			// simpleButtonGenerarAviso
@@ -115,12 +119,13 @@
 			this.simpleButtonGenerarAviso.Appearance.Options.UseFont = true;
 			this.simpleButtonGenerarAviso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.simpleButtonGenerarAviso.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonGenerarAviso.ImageOptions.Image")));
-			this.simpleButtonGenerarAviso.Location = new System.Drawing.Point(1520, 143);
+			this.simpleButtonGenerarAviso.Location = new System.Drawing.Point(1539, 141);
 			this.simpleButtonGenerarAviso.Name = "simpleButtonGenerarAviso";
 			this.simpleButtonGenerarAviso.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonGenerarAviso.Size = new System.Drawing.Size(109, 101);
 			this.simpleButtonGenerarAviso.TabIndex = 5;
 			this.simpleButtonGenerarAviso.Text = " ";
+			this.simpleButtonGenerarAviso.ToolTip = "Generar aviso y enviar a ICP";
 			this.simpleButtonGenerarAviso.Click += new System.EventHandler(this.simpleButtonGenerarAviso_Click);
 			// 
 			// labelControl1
@@ -139,6 +144,12 @@
 			// 
 			// gridViewReferencias
 			// 
+			this.gridViewReferencias.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridViewReferencias.Appearance.HeaderPanel.Options.UseFont = true;
+			this.gridViewReferencias.Appearance.HeaderPanel.Options.UseTextOptions = true;
+			this.gridViewReferencias.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridViewReferencias.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridViewReferencias.Appearance.Row.Options.UseFont = true;
 			this.gridViewReferencias.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colID_EMPRESA,
             this.colCOD_REFERENCIA,
@@ -152,6 +163,7 @@
 			this.gridViewReferencias.Name = "gridViewReferencias";
 			this.gridViewReferencias.OptionsBehavior.Editable = false;
 			this.gridViewReferencias.OptionsBehavior.ReadOnly = true;
+			this.gridViewReferencias.OptionsCustomization.AllowColumnMoving = false;
 			this.gridViewReferencias.OptionsCustomization.AllowGroup = false;
 			// 
 			// colID_EMPRESA
@@ -170,7 +182,7 @@
 			// 
 			// colDES_REFERENCIA
 			// 
-			this.colDES_REFERENCIA.Caption = "Descripción de la referencia";
+			this.colDES_REFERENCIA.Caption = "Producto";
 			this.colDES_REFERENCIA.FieldName = "DES_REFERENCIA";
 			this.colDES_REFERENCIA.Name = "colDES_REFERENCIA";
 			this.colDES_REFERENCIA.Visible = true;
@@ -213,7 +225,7 @@
 			// gridControlReferencias
 			// 
 			this.gridControlReferencias.DataSource = this.vISTAREFERENCIASBindingSource;
-			this.gridControlReferencias.Location = new System.Drawing.Point(133, 265);
+			this.gridControlReferencias.Location = new System.Drawing.Point(152, 263);
 			this.gridControlReferencias.MainView = this.gridViewReferencias;
 			this.gridControlReferencias.Name = "gridControlReferencias";
 			this.gridControlReferencias.Size = new System.Drawing.Size(666, 611);
@@ -223,8 +235,8 @@
 			// 
 			// gridControlPedidos
 			// 
-			this.gridControlPedidos.DataSource = this.lineaAvisoBindingSource;
-			this.gridControlPedidos.Location = new System.Drawing.Point(991, 265);
+			this.gridControlPedidos.DataSource = this.vRECEPCIONESLINBindingSource;
+			this.gridControlPedidos.Location = new System.Drawing.Point(1010, 263);
 			this.gridControlPedidos.MainView = this.gridViewRecepciones1;
 			this.gridControlPedidos.Name = "gridControlPedidos";
 			this.gridControlPedidos.Size = new System.Drawing.Size(638, 611);
@@ -233,57 +245,25 @@
             this.gridViewRecepciones1,
             this.gridViewRecepciones});
 			// 
-			// lineaAvisoBindingSource
-			// 
-			this.lineaAvisoBindingSource.DataSource = typeof(FCT.Negocio.LineaAviso);
-			// 
 			// gridViewRecepciones1
 			// 
+			this.gridViewRecepciones1.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridViewRecepciones1.Appearance.HeaderPanel.Options.UseFont = true;
+			this.gridViewRecepciones1.Appearance.HeaderPanel.Options.UseTextOptions = true;
+			this.gridViewRecepciones1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridViewRecepciones1.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridViewRecepciones1.Appearance.Row.Options.UseFont = true;
 			this.gridViewRecepciones1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colalbaran,
-            this.colcod_linea,
-            this.colcod_referencia1,
-            this.colcantidad,
-            this.coldescripcion_referencia});
+            this.colCOD_REFERENCIA1,
+            this.colDES_REFERENCIA1,
+            this.colCANTIDAD});
 			this.gridViewRecepciones1.GridControl = this.gridControlPedidos;
 			this.gridViewRecepciones1.Name = "gridViewRecepciones1";
 			this.gridViewRecepciones1.OptionsBehavior.Editable = false;
 			this.gridViewRecepciones1.OptionsBehavior.ReadOnly = true;
+			this.gridViewRecepciones1.OptionsCustomization.AllowColumnMoving = false;
 			this.gridViewRecepciones1.OptionsCustomization.AllowGroup = false;
 			this.gridViewRecepciones1.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gridViewRecepciones1_SelectionChanged);
-			// 
-			// colalbaran
-			// 
-			this.colalbaran.FieldName = "albaran";
-			this.colalbaran.Name = "colalbaran";
-			// 
-			// colcod_linea
-			// 
-			this.colcod_linea.FieldName = "cod_linea";
-			this.colcod_linea.Name = "colcod_linea";
-			// 
-			// colcod_referencia1
-			// 
-			this.colcod_referencia1.FieldName = "cod_referencia";
-			this.colcod_referencia1.Name = "colcod_referencia1";
-			// 
-			// colcantidad
-			// 
-			this.colcantidad.Caption = "Cantidad";
-			this.colcantidad.FieldName = "cantidad";
-			this.colcantidad.Name = "colcantidad";
-			this.colcantidad.Visible = true;
-			this.colcantidad.VisibleIndex = 1;
-			this.colcantidad.Width = 143;
-			// 
-			// coldescripcion_referencia
-			// 
-			this.coldescripcion_referencia.Caption = "Descripción de la referencia";
-			this.coldescripcion_referencia.FieldName = "descripcion_referencia";
-			this.coldescripcion_referencia.Name = "coldescripcion_referencia";
-			this.coldescripcion_referencia.Visible = true;
-			this.coldescripcion_referencia.VisibleIndex = 0;
-			this.coldescripcion_referencia.Width = 470;
 			// 
 			// gridViewRecepciones
 			// 
@@ -302,17 +282,19 @@
 			this.textEditFechaLlegada.Properties.UseMaskAsDisplayFormat = true;
 			this.textEditFechaLlegada.Size = new System.Drawing.Size(111, 20);
 			this.textEditFechaLlegada.TabIndex = 12;
+			this.textEditFechaLlegada.Leave += new System.EventHandler(this.textEditFechaLlegada_Leave);
 			// 
 			// simpleButtonActualizar
 			// 
 			this.simpleButtonActualizar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.simpleButtonActualizar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonActualizar.ImageOptions.Image")));
-			this.simpleButtonActualizar.Location = new System.Drawing.Point(65, 526);
+			this.simpleButtonActualizar.Location = new System.Drawing.Point(84, 524);
 			this.simpleButtonActualizar.Name = "simpleButtonActualizar";
 			this.simpleButtonActualizar.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonActualizar.Size = new System.Drawing.Size(62, 56);
 			this.simpleButtonActualizar.TabIndex = 13;
 			this.simpleButtonActualizar.Text = " ";
+			this.simpleButtonActualizar.ToolTip = "Actualizar";
 			this.simpleButtonActualizar.Click += new System.EventHandler(this.simpleButtonActualizar_Click);
 			// 
 			// panel1
@@ -320,7 +302,7 @@
 			this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(179)))), ((int)(((byte)(53)))));
 			this.panel1.Controls.Add(this.textEditFechaLlegada);
 			this.panel1.Controls.Add(this.labelControl1);
-			this.panel1.Location = new System.Drawing.Point(731, 109);
+			this.panel1.Location = new System.Drawing.Point(750, 107);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(322, 119);
 			this.panel1.TabIndex = 14;
@@ -332,11 +314,39 @@
 			this.labelControl4.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(179)))), ((int)(((byte)(53)))));
 			this.labelControl4.Appearance.Options.UseFont = true;
 			this.labelControl4.Appearance.Options.UseForeColor = true;
-			this.labelControl4.Location = new System.Drawing.Point(133, 40);
+			this.labelControl4.Location = new System.Drawing.Point(152, 38);
 			this.labelControl4.Name = "labelControl4";
 			this.labelControl4.Size = new System.Drawing.Size(293, 41);
 			this.labelControl4.TabIndex = 95;
 			this.labelControl4.Text = "AVISOS DE LLEGADA";
+			// 
+			// colCOD_REFERENCIA1
+			// 
+			this.colCOD_REFERENCIA1.Caption = "Código de la referencia";
+			this.colCOD_REFERENCIA1.FieldName = "COD_REFERENCIA";
+			this.colCOD_REFERENCIA1.Name = "colCOD_REFERENCIA1";
+			this.colCOD_REFERENCIA1.Visible = true;
+			this.colCOD_REFERENCIA1.VisibleIndex = 0;
+			// 
+			// colDES_REFERENCIA1
+			// 
+			this.colDES_REFERENCIA1.Caption = "Producto";
+			this.colDES_REFERENCIA1.FieldName = "DES_REFERENCIA";
+			this.colDES_REFERENCIA1.Name = "colDES_REFERENCIA1";
+			this.colDES_REFERENCIA1.Visible = true;
+			this.colDES_REFERENCIA1.VisibleIndex = 1;
+			// 
+			// colCANTIDAD
+			// 
+			this.colCANTIDAD.Caption = "Cantidad";
+			this.colCANTIDAD.FieldName = "CANTIDAD";
+			this.colCANTIDAD.Name = "colCANTIDAD";
+			this.colCANTIDAD.Visible = true;
+			this.colCANTIDAD.VisibleIndex = 2;
+			// 
+			// vRECEPCIONESLINBindingSource
+			// 
+			this.vRECEPCIONESLINBindingSource.DataSource = typeof(FCT.Negocio.V_RECEPCIONES_LIN);
 			// 
 			// formRecepciones
 			// 
@@ -360,12 +370,12 @@
 			((System.ComponentModel.ISupportInitialize)(this.gridViewReferencias)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlReferencias)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlPedidos)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.lineaAvisoBindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewRecepciones1)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewRecepciones)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.textEditFechaLlegada.Properties)).EndInit();
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.vRECEPCIONESLINBindingSource)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -388,18 +398,16 @@
 		private DevExpress.XtraGrid.Columns.GridColumn colESTADO;
 		private DevExpress.XtraGrid.GridControl gridControlReferencias;
 		private DevExpress.XtraGrid.GridControl gridControlPedidos;
-		private System.Windows.Forms.BindingSource lineaAvisoBindingSource;
 		private DevExpress.XtraGrid.Columns.GridColumn colSTOCK;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewRecepciones;
 		private DevExpress.XtraGrid.Views.Grid.GridView gridViewRecepciones1;
-		private DevExpress.XtraGrid.Columns.GridColumn colalbaran;
-		private DevExpress.XtraGrid.Columns.GridColumn colcod_linea;
-		private DevExpress.XtraGrid.Columns.GridColumn colcod_referencia1;
-		private DevExpress.XtraGrid.Columns.GridColumn colcantidad;
-		private DevExpress.XtraGrid.Columns.GridColumn coldescripcion_referencia;
 		private DevExpress.XtraEditors.TextEdit textEditFechaLlegada;
 		private DevExpress.XtraEditors.SimpleButton simpleButtonActualizar;
 		private System.Windows.Forms.Panel panel1;
 		private DevExpress.XtraEditors.LabelControl labelControl4;
+		private DevExpress.XtraGrid.Columns.GridColumn colCOD_REFERENCIA1;
+		private DevExpress.XtraGrid.Columns.GridColumn colDES_REFERENCIA1;
+		private DevExpress.XtraGrid.Columns.GridColumn colCANTIDAD;
+		private System.Windows.Forms.BindingSource vRECEPCIONESLINBindingSource;
 	}
 }

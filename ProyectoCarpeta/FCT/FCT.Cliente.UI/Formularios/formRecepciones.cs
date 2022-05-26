@@ -17,8 +17,9 @@ namespace FCT.Cliente.UI.Formularios
 {
 	public partial class formRecepciones : Form
 	{
-
-		public BindingList<LineaAviso> lineasGrid = new BindingList<LineaAviso>();
+		
+		//Lineas que vamos a añadir al aviso
+		public BindingList<V_RECEPCIONES_LIN> lineasGridAviso = new BindingList<V_RECEPCIONES_LIN>();
 	
 		public formRecepciones()
 		{
@@ -29,20 +30,29 @@ namespace FCT.Cliente.UI.Formularios
 		{
 			this.WindowState = FormWindowState.Maximized;
 			actualizarGrids();
-			spinEditCantidad.Properties.Mask.EditMask = "f0";
-			simpleButtonQuitarLinea.Enabled = false;
 		}
 
+		//Actualizacion de grids
 		private void actualizarGrids() {
 
-			vISTAREFERENCIASBindingSource.DataSource = CargarGrids.referenciasAvisos(formContenedor.idEmpresa);
-			lineaAvisoBindingSource.DataSource = lineasGrid;	
+			vISTAREFERENCIASBindingSource.DataSource = CargarGrids.referenciasDisponibles(formContenedor.idEmpresa);
+			vRECEPCIONESLINBindingSource.DataSource = lineasGridAviso;	
 		}
 
+		//Gestion de los botones
+		#region
+
+		//Actualizar grid
+		private void simpleButtonActualizar_Click(object sender, EventArgs e)
+		{
+			actualizarGrids();
+		}
+
+		//Añade la referencia a la linea de aviso
 		private void simpleButtonAnadirLinea_Click(object sender, EventArgs e)
 		{
 			
-			if (spinEditCantidad.Value <= 0) { MessageBox.Show("Introduce un número mayor que 0."); }
+			if (spinEditCantidad.Value <= 0) { MessageBox.Show("Introduce un número mayor que 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 			else
 			{
 				V_REFERENCIAS referencia = (V_REFERENCIAS)gridViewReferencias.GetRow(gridViewReferencias.FocusedRowHandle);
@@ -50,12 +60,12 @@ namespace FCT.Cliente.UI.Formularios
 
 				//Bucle que comprueba si estamos añadiendo una referencia que ya existe y suma la cantidad en vez de generar una linea nueva
 
-				foreach (LineaAviso l in lineasGrid)
+				foreach (V_RECEPCIONES_LIN l in lineasGridAviso)
 				{
-					if (l.cod_referencia == referencia.COD_REFERENCIA)
+					if (l.COD_REFERENCIA == referencia.COD_REFERENCIA)
 					{
 						lineaRepetida = true;
-						l.cantidad += Convert.ToInt32(spinEditCantidad.Value);
+						l.CANTIDAD += Convert.ToInt32(spinEditCantidad.Value);
 						gridViewRecepciones1.RefreshData();
 						actualizarGrids();
 						break;
@@ -64,8 +74,18 @@ namespace FCT.Cliente.UI.Formularios
 
 				if (!lineaRepetida)
 				{
-					LineaAviso linea = new LineaAviso(0, 0, referencia.COD_REFERENCIA, Convert.ToInt32(spinEditCantidad.Value), referencia.DES_REFERENCIA);
-					lineasGrid.Add(linea);
+
+					V_RECEPCIONES_LIN linea = new V_RECEPCIONES_LIN();
+					linea.ALBARAN = 0;
+					linea.COD_LINEA = 0;
+					linea.COD_REFERENCIA = referencia.COD_REFERENCIA;
+					linea.CANTIDAD = Convert.ToInt32(spinEditCantidad.Value);
+					linea.CANTIDAD_MAL_ESTADO = 0;
+					linea.EXCEDENTE = 0;
+					linea.FALTA = 0;
+					linea.DES_REFERENCIA = referencia.DES_REFERENCIA;
+
+					lineasGridAviso.Add(linea);
 				}
 
 				spinEditCantidad.Value = 0;
@@ -73,75 +93,74 @@ namespace FCT.Cliente.UI.Formularios
 			}
 		}
 
+		//Elimina la linea seleccionada del grid
 		private void simpleButtonQuitarLinea_Click(object sender, EventArgs e)
 		{
 			//Quita una linea del grid
-			LineaAviso linea = (LineaAviso)gridViewRecepciones1.GetRow(gridViewRecepciones1.FocusedRowHandle);
+			V_RECEPCIONES_LIN linea = (V_RECEPCIONES_LIN)gridViewRecepciones1.GetRow(gridViewRecepciones1.FocusedRowHandle);
 
-			lineasGrid.Remove(linea);
+			lineasGridAviso.Remove(linea);
 			int n = 0;
 
-			foreach (LineaAviso l in lineasGrid) {
+			foreach (V_RECEPCIONES_LIN l in lineasGridAviso) {
 				n++;
-				l.cod_linea = n;		
+				l.COD_LINEA = n;		
 			}
 		}
-
+		
+		//Genera el aviso con las lineas del grid
 		private void simpleButtonGenerarAviso_Click(object sender, EventArgs e)
 		{
 
-			var result = MessageBox.Show("¿Estás seguro de que deseas generar el aviso?", "Aviso", MessageBoxButtons.YesNo);
+			var result = MessageBox.Show("¿Estás seguro de que deseas generar el aviso?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 			if (result == DialogResult.Yes)
 			{
 
-				if (textEditFechaLlegada.Text == "") { MessageBox.Show("Por favor escribe una fecha de llegada"); }
-				else if (lineasGrid.Count == 0) { MessageBox.Show("Las lineas del aviso de recepción no pueden estar vacías."); }
+				if (textEditFechaLlegada.Text == "") { MessageBox.Show("Por favor escribe una fecha de llegada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+				else if (lineasGridAviso.Count == 0) { MessageBox.Show("Las lineas del aviso de recepción no pueden estar vacías.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }				
 				else
 				{
 					//Numera las lineas
 					int n = 0;
-					foreach (LineaAviso l in lineasGrid)
+					foreach (V_RECEPCIONES_LIN l in lineasGridAviso)
 					{
 						n++;
-						l.cod_linea = n;
+						l.COD_LINEA = n;
 					}
 					//Genera en un archivo de texto los datos de la recepcion
 
 					Random r = new Random();
-					string pedido;
+					string textoPedido;
 					string albaran = r.Next(999999999).ToString();
 					int proveedor = formContenedor.idEmpresa;
 
-					pedido = albaran + "#" + "1" + "#" + proveedor.ToString() + "#" + DateTime.Now.ToShortDateString() + "#" + textEditFechaLlegada.Text;
+					textoPedido = albaran + "#" + "1" + "#" + proveedor.ToString() + "#" + DateTime.Now.ToShortDateString() + "#" + textEditFechaLlegada.Text;
 
 					try
 					{
-						using (StreamWriter escribir = new StreamWriter("\\\\m2d96\\Publico" + "\\Recursos\\data\\avisos\\pendientes\\" + albaran + ".txt"))
+						using (StreamWriter escribir = new StreamWriter(formContenedor.rutaCarpetaDatos + "\\Recursos\\data\\avisos\\pendientes\\" + albaran + ".txt"))
 						{
-							escribir.WriteLine(pedido);
-							foreach (LineaAviso l in lineasGrid)
+							escribir.WriteLine(textoPedido);
+							foreach (V_RECEPCIONES_LIN l in lineasGridAviso)
 							{
-								string linea = l.cod_linea + "#" + l.cod_referencia + "#" + l.cantidad + "#" + l.descripcion_referencia;
+								string linea = l.COD_LINEA + "#" + l.COD_REFERENCIA + "#" + l.CANTIDAD + "#" + l.DES_REFERENCIA;
 								escribir.WriteLine(linea);
 							}
 						}
 					}
-					catch (Exception)
-					{
+					catch (Exception){}
 
-						throw;
-					}
-
-					lineasGrid.Clear();
+					lineasGridAviso.Clear();
 					textEditFechaLlegada.Text = "";
 				}
 			}
 		}
 
+		#endregion
+
+		//Se encarga de activar los botones solamente si hay una fila seleccionada
 		private void gridViewRecepciones1_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
-		{
-			
-				//Se encarga de activar los botones solamente si hay una fila seleccionada
+		{	
 
 				if (gridViewRecepciones1.SelectedRowsCount > 0)
 				{
@@ -152,11 +171,21 @@ namespace FCT.Cliente.UI.Formularios
 					simpleButtonQuitarLinea.Enabled = false;
 				}
 			
-		}
+		}		
 
-		private void simpleButtonActualizar_Click(object sender, EventArgs e)
+
+		//Comprobación de la fecha de llegada al clickar fuera del textedit
+		private void textEditFechaLlegada_Leave(object sender, EventArgs e)
 		{
-			actualizarGrids();
+			try
+			{
+				if (Convert.ToDateTime(textEditFechaLlegada.Text) < DateTime.Now)
+				{
+					MessageBox.Show("La fecha no puede ser inferior a la fecha actual.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					textEditFechaLlegada.Text = "";
+				}
+			}
+			catch (Exception){}
 		}
 	}
 }

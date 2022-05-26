@@ -8,6 +8,9 @@ namespace FCT.Negocio
 {[Serializable]
 	public partial class CabeceraPedido
 	{
+		public CabeceraPedido()
+		{
+		}
 
 		public CabeceraPedido(int cod_peticion, int estado, int nombre_cliente, string direccion_entrega, string cod_postal, 
 		string poblacion, string provincia, string telefono, string fech_creacion, List<LineaPedido> lineasPedido)

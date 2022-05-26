@@ -105,6 +105,12 @@
 			// 
 			// gridViewPedidos
 			// 
+			this.gridViewPedidos.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridViewPedidos.Appearance.HeaderPanel.Options.UseFont = true;
+			this.gridViewPedidos.Appearance.HeaderPanel.Options.UseTextOptions = true;
+			this.gridViewPedidos.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridViewPedidos.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridViewPedidos.Appearance.Row.Options.UseFont = true;
 			this.gridViewPedidos.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colalbaran,
             this.colcod_linea,
@@ -115,6 +121,7 @@
 			this.gridViewPedidos.Name = "gridViewPedidos";
 			this.gridViewPedidos.OptionsBehavior.Editable = false;
 			this.gridViewPedidos.OptionsBehavior.ReadOnly = true;
+			this.gridViewPedidos.OptionsCustomization.AllowColumnMoving = false;
 			this.gridViewPedidos.OptionsCustomization.AllowGroup = false;
 			this.gridViewPedidos.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gridViewPedidos_SelectionChanged);
 			// 
@@ -169,6 +176,12 @@
 			// 
 			// gridViewReferencias
 			// 
+			this.gridViewReferencias.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridViewReferencias.Appearance.HeaderPanel.Options.UseFont = true;
+			this.gridViewReferencias.Appearance.HeaderPanel.Options.UseTextOptions = true;
+			this.gridViewReferencias.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridViewReferencias.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridViewReferencias.Appearance.Row.Options.UseFont = true;
 			this.gridViewReferencias.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colID_EMPRESA,
             this.colCOD_REFERENCIA,
@@ -182,6 +195,7 @@
 			this.gridViewReferencias.Name = "gridViewReferencias";
 			this.gridViewReferencias.OptionsBehavior.Editable = false;
 			this.gridViewReferencias.OptionsBehavior.ReadOnly = true;
+			this.gridViewReferencias.OptionsCustomization.AllowColumnMoving = false;
 			this.gridViewReferencias.OptionsCustomization.AllowGroup = false;
 			// 
 			// colID_EMPRESA
@@ -244,12 +258,14 @@
 			// 
 			this.simpleButtonQuitarLinea.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.simpleButtonQuitarLinea.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonQuitarLinea.Enabled = false;
 			this.simpleButtonQuitarLinea.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonQuitarLinea.ImageOptions.Image")));
 			this.simpleButtonQuitarLinea.Location = new System.Drawing.Point(1648, 460);
 			this.simpleButtonQuitarLinea.Name = "simpleButtonQuitarLinea";
 			this.simpleButtonQuitarLinea.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonQuitarLinea.Size = new System.Drawing.Size(54, 58);
 			this.simpleButtonQuitarLinea.TabIndex = 14;
+			this.simpleButtonQuitarLinea.ToolTip = "Elimina la línea seleccionada";
 			this.simpleButtonQuitarLinea.Click += new System.EventHandler(this.simpleButtonQuitarLinea_Click);
 			// 
 			// spinEditCantidad
@@ -264,6 +280,9 @@
 			this.spinEditCantidad.Name = "spinEditCantidad";
 			this.spinEditCantidad.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+			this.spinEditCantidad.Properties.IsFloatValue = false;
+			this.spinEditCantidad.Properties.MaskSettings.Set("mask", "d");
+			this.spinEditCantidad.Properties.MaxLength = 4;
 			this.spinEditCantidad.Size = new System.Drawing.Size(108, 20);
 			this.spinEditCantidad.TabIndex = 13;
 			// 
@@ -278,6 +297,7 @@
 			this.simpleButtonAnadirLinea.ShowFocusRectangle = DevExpress.Utils.DefaultBoolean.False;
 			this.simpleButtonAnadirLinea.Size = new System.Drawing.Size(108, 45);
 			this.simpleButtonAnadirLinea.TabIndex = 12;
+			this.simpleButtonAnadirLinea.ToolTip = "Añade la referencia\r\nseleccionada al pedido";
 			this.simpleButtonAnadirLinea.Click += new System.EventHandler(this.simpleButtonAnadirLinea_Click);
 			// 
 			// simpleButtonGuardarPedido
@@ -292,6 +312,7 @@
 			this.simpleButtonGuardarPedido.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonGuardarPedido.Size = new System.Drawing.Size(107, 84);
 			this.simpleButtonGuardarPedido.TabIndex = 18;
+			this.simpleButtonGuardarPedido.ToolTip = "Guardar como nuevo\r\npedido en la lista";
 			this.simpleButtonGuardarPedido.Click += new System.EventHandler(this.simpleButtonGenerarPedido_Click);
 			// 
 			// labelControl1
@@ -348,6 +369,7 @@
 			// 
 			this.textEditDireccion.Location = new System.Drawing.Point(153, 23);
 			this.textEditDireccion.Name = "textEditDireccion";
+			this.textEditDireccion.Properties.MaxLength = 200;
 			this.textEditDireccion.Size = new System.Drawing.Size(318, 20);
 			this.textEditDireccion.TabIndex = 1;
 			// 
@@ -355,6 +377,7 @@
 			// 
 			this.textEditProvincia.Location = new System.Drawing.Point(371, 86);
 			this.textEditProvincia.Name = "textEditProvincia";
+			this.textEditProvincia.Properties.MaxLength = 80;
 			this.textEditProvincia.Size = new System.Drawing.Size(100, 20);
 			this.textEditProvincia.TabIndex = 4;
 			// 
@@ -372,6 +395,7 @@
 			// 
 			this.textEditPoblacion.Location = new System.Drawing.Point(99, 86);
 			this.textEditPoblacion.Name = "textEditPoblacion";
+			this.textEditPoblacion.Properties.MaxLength = 80;
 			this.textEditPoblacion.Size = new System.Drawing.Size(100, 20);
 			this.textEditPoblacion.TabIndex = 3;
 			// 
@@ -397,24 +421,29 @@
 			// 
 			this.simpleButtonModificarPedido.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.simpleButtonModificarPedido.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonModificarPedido.Enabled = false;
 			this.simpleButtonModificarPedido.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonModificarPedido.ImageOptions.Image")));
-			this.simpleButtonModificarPedido.Location = new System.Drawing.Point(312, 809);
+			this.simpleButtonModificarPedido.Location = new System.Drawing.Point(1439, 192);
 			this.simpleButtonModificarPedido.Name = "simpleButtonModificarPedido";
 			this.simpleButtonModificarPedido.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonModificarPedido.Size = new System.Drawing.Size(56, 54);
 			this.simpleButtonModificarPedido.TabIndex = 30;
+			this.simpleButtonModificarPedido.ToolTip = "Modifica el pedido seleccionado\r\ncon los datos de la cabecera escritos\r\ny las lín" +
+    "eas de la tabla";
 			this.simpleButtonModificarPedido.Click += new System.EventHandler(this.simpleButtonModificarPedido_Click);
 			// 
 			// simpleButtonEliminarPedido
 			// 
 			this.simpleButtonEliminarPedido.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.simpleButtonEliminarPedido.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonEliminarPedido.Enabled = false;
 			this.simpleButtonEliminarPedido.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonEliminarPedido.ImageOptions.Image")));
-			this.simpleButtonEliminarPedido.Location = new System.Drawing.Point(312, 869);
+			this.simpleButtonEliminarPedido.Location = new System.Drawing.Point(312, 852);
 			this.simpleButtonEliminarPedido.Name = "simpleButtonEliminarPedido";
 			this.simpleButtonEliminarPedido.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonEliminarPedido.Size = new System.Drawing.Size(56, 50);
 			this.simpleButtonEliminarPedido.TabIndex = 31;
+			this.simpleButtonEliminarPedido.ToolTip = "Elimina el pedido seleccionado";
 			this.simpleButtonEliminarPedido.Click += new System.EventHandler(this.simpleButtonEliminarPedido_Click);
 			// 
 			// labelControl7
@@ -434,12 +463,14 @@
 			// 
 			this.simpleButtonTraspaso.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.simpleButtonTraspaso.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+			this.simpleButtonTraspaso.Enabled = false;
 			this.simpleButtonTraspaso.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonTraspaso.ImageOptions.Image")));
 			this.simpleButtonTraspaso.Location = new System.Drawing.Point(582, 835);
 			this.simpleButtonTraspaso.Name = "simpleButtonTraspaso";
 			this.simpleButtonTraspaso.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonTraspaso.Size = new System.Drawing.Size(106, 84);
 			this.simpleButtonTraspaso.TabIndex = 33;
+			this.simpleButtonTraspaso.ToolTip = "Traspasa el pedido seleccionado a ICP";
 			this.simpleButtonTraspaso.Click += new System.EventHandler(this.simpleButtonTraspaso_Click);
 			// 
 			// simpleButtonActualizar
@@ -452,6 +483,7 @@
 			this.simpleButtonActualizar.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonActualizar.Size = new System.Drawing.Size(55, 52);
 			this.simpleButtonActualizar.TabIndex = 34;
+			this.simpleButtonActualizar.ToolTip = "Actualizar";
 			this.simpleButtonActualizar.Click += new System.EventHandler(this.simpleButtonActualizar_Click);
 			// 
 			// panel1

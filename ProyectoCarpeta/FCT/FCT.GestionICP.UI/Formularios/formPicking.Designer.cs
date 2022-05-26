@@ -48,6 +48,7 @@
 			this.colCOD_REFERENCIA = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.colDES_REFERENCIA = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.colCANTIDAD = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.colUBICACION = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.simpleButtonConfirmarMovimiento = new DevExpress.XtraEditors.SimpleButton();
 			this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
 			this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
@@ -57,7 +58,6 @@
 			this.textEditCantidad = new DevExpress.XtraEditors.TextEdit();
 			this.simpleButtonActualizar = new DevExpress.XtraEditors.SimpleButton();
 			this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
-			this.colUBICACION = new DevExpress.XtraGrid.Columns.GridColumn();
 			((System.ComponentModel.ISupportInitialize)(this.gridControlPedidos)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.vORDENSALIDACABBindingSource)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gridViewPedidos)).BeginInit();
@@ -86,6 +86,12 @@
 			// 
 			// gridViewPedidos
 			// 
+			this.gridViewPedidos.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridViewPedidos.Appearance.HeaderPanel.Options.UseFont = true;
+			this.gridViewPedidos.Appearance.HeaderPanel.Options.UseTextOptions = true;
+			this.gridViewPedidos.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridViewPedidos.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridViewPedidos.Appearance.Row.Options.UseFont = true;
 			this.gridViewPedidos.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colCOD_PETICION,
             this.colDES_EMPRESA,
@@ -97,10 +103,12 @@
 			this.gridViewPedidos.Name = "gridViewPedidos";
 			this.gridViewPedidos.OptionsBehavior.Editable = false;
 			this.gridViewPedidos.OptionsBehavior.ReadOnly = true;
+			this.gridViewPedidos.OptionsCustomization.AllowColumnMoving = false;
 			this.gridViewPedidos.OptionsCustomization.AllowGroup = false;
 			// 
 			// colCOD_PETICION
 			// 
+			this.colCOD_PETICION.Caption = "Petición";
 			this.colCOD_PETICION.FieldName = "COD_PETICION";
 			this.colCOD_PETICION.Name = "colCOD_PETICION";
 			this.colCOD_PETICION.Visible = true;
@@ -108,6 +116,7 @@
 			// 
 			// colDES_EMPRESA
 			// 
+			this.colDES_EMPRESA.Caption = "Empresa";
 			this.colDES_EMPRESA.FieldName = "DES_EMPRESA";
 			this.colDES_EMPRESA.Name = "colDES_EMPRESA";
 			this.colDES_EMPRESA.Visible = true;
@@ -115,6 +124,7 @@
 			// 
 			// colPOBLACION
 			// 
+			this.colPOBLACION.Caption = "Población";
 			this.colPOBLACION.FieldName = "POBLACION";
 			this.colPOBLACION.Name = "colPOBLACION";
 			this.colPOBLACION.Visible = true;
@@ -122,6 +132,7 @@
 			// 
 			// colPROVINCIA
 			// 
+			this.colPROVINCIA.Caption = "Provincia";
 			this.colPROVINCIA.FieldName = "PROVINCIA";
 			this.colPROVINCIA.Name = "colPROVINCIA";
 			this.colPROVINCIA.Visible = true;
@@ -129,6 +140,7 @@
 			// 
 			// colFECH_CREACION
 			// 
+			this.colFECH_CREACION.Caption = "Fecha de creación";
 			this.colFECH_CREACION.FieldName = "FECH_CREACION";
 			this.colFECH_CREACION.Name = "colFECH_CREACION";
 			this.colFECH_CREACION.Visible = true;
@@ -136,6 +148,7 @@
 			// 
 			// colCANTIDAD_LINEAS
 			// 
+			this.colCANTIDAD_LINEAS.Caption = "Cantidad de líneas";
 			this.colCANTIDAD_LINEAS.FieldName = "CANTIDAD_LINEAS";
 			this.colCANTIDAD_LINEAS.Name = "colCANTIDAD_LINEAS";
 			this.colCANTIDAD_LINEAS.Visible = true;
@@ -169,6 +182,12 @@
 			// 
 			// gridViewMovimientos
 			// 
+			this.gridViewMovimientos.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridViewMovimientos.Appearance.HeaderPanel.Options.UseFont = true;
+			this.gridViewMovimientos.Appearance.HeaderPanel.Options.UseTextOptions = true;
+			this.gridViewMovimientos.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridViewMovimientos.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridViewMovimientos.Appearance.Row.Options.UseFont = true;
 			this.gridViewMovimientos.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colCOD_MOVIMIENTO,
             this.colCOD_PALET,
@@ -180,6 +199,7 @@
 			this.gridViewMovimientos.Name = "gridViewMovimientos";
 			this.gridViewMovimientos.OptionsBehavior.Editable = false;
 			this.gridViewMovimientos.OptionsBehavior.ReadOnly = true;
+			this.gridViewMovimientos.OptionsCustomization.AllowColumnMoving = false;
 			this.gridViewMovimientos.OptionsCustomization.AllowGroup = false;
 			this.gridViewMovimientos.RowStyle += new DevExpress.XtraGrid.Views.Grid.RowStyleEventHandler(this.gridView1_RowStyle);
 			this.gridViewMovimientos.FocusedRowObjectChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowObjectChangedEventHandler(this.gridViewMovimientos_FocusedRowObjectChanged);
@@ -209,7 +229,7 @@
 			this.colCOD_REFERENCIA.Name = "colCOD_REFERENCIA";
 			this.colCOD_REFERENCIA.Visible = true;
 			this.colCOD_REFERENCIA.VisibleIndex = 3;
-			this.colCOD_REFERENCIA.Width = 123;
+			this.colCOD_REFERENCIA.Width = 151;
 			// 
 			// colDES_REFERENCIA
 			// 
@@ -218,7 +238,7 @@
 			this.colDES_REFERENCIA.Name = "colDES_REFERENCIA";
 			this.colDES_REFERENCIA.Visible = true;
 			this.colDES_REFERENCIA.VisibleIndex = 4;
-			this.colDES_REFERENCIA.Width = 332;
+			this.colDES_REFERENCIA.Width = 311;
 			// 
 			// colCANTIDAD
 			// 
@@ -227,18 +247,29 @@
 			this.colCANTIDAD.Name = "colCANTIDAD";
 			this.colCANTIDAD.Visible = true;
 			this.colCANTIDAD.VisibleIndex = 5;
-			this.colCANTIDAD.Width = 127;
+			this.colCANTIDAD.Width = 120;
+			// 
+			// colUBICACION
+			// 
+			this.colUBICACION.Caption = "Ubicación del palet";
+			this.colUBICACION.FieldName = "UBICACION";
+			this.colUBICACION.Name = "colUBICACION";
+			this.colUBICACION.Visible = true;
+			this.colUBICACION.VisibleIndex = 2;
+			this.colUBICACION.Width = 122;
 			// 
 			// simpleButtonConfirmarMovimiento
 			// 
 			this.simpleButtonConfirmarMovimiento.Appearance.Font = new System.Drawing.Font("Tahoma", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.simpleButtonConfirmarMovimiento.Appearance.Options.UseFont = true;
+			this.simpleButtonConfirmarMovimiento.Enabled = false;
 			this.simpleButtonConfirmarMovimiento.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonConfirmarMovimiento.ImageOptions.Image")));
 			this.simpleButtonConfirmarMovimiento.Location = new System.Drawing.Point(1379, 678);
 			this.simpleButtonConfirmarMovimiento.Name = "simpleButtonConfirmarMovimiento";
 			this.simpleButtonConfirmarMovimiento.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonConfirmarMovimiento.Size = new System.Drawing.Size(127, 124);
 			this.simpleButtonConfirmarMovimiento.TabIndex = 3;
+			this.simpleButtonConfirmarMovimiento.ToolTip = "Confirmar línea\r\nseleccionada como picada";
 			this.simpleButtonConfirmarMovimiento.Click += new System.EventHandler(this.simpleButtonConfirmarMovimiento_Click);
 			// 
 			// labelControl1
@@ -318,6 +349,7 @@
 			this.simpleButtonActualizar.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonActualizar.Size = new System.Drawing.Size(55, 52);
 			this.simpleButtonActualizar.TabIndex = 35;
+			this.simpleButtonActualizar.ToolTip = "Actualizar";
 			this.simpleButtonActualizar.Click += new System.EventHandler(this.simpleButtonActualizar_Click);
 			// 
 			// labelControl4
@@ -332,15 +364,6 @@
 			this.labelControl4.Size = new System.Drawing.Size(117, 41);
 			this.labelControl4.TabIndex = 96;
 			this.labelControl4.Text = "PICKING";
-			// 
-			// colUBICACION
-			// 
-			this.colUBICACION.Caption = "Ubicación del palet";
-			this.colUBICACION.FieldName = "UBICACION";
-			this.colUBICACION.Name = "colUBICACION";
-			this.colUBICACION.Visible = true;
-			this.colUBICACION.VisibleIndex = 2;
-			this.colUBICACION.Width = 122;
 			// 
 			// formPicking
 			// 

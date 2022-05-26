@@ -317,8 +317,10 @@
       <param name="container">An IContainer descendant that owns this <see cref="T:DevExpress.XtraEditors.XtraSaveFileDialog"/>.</param>
     </member>
     <member name="P:DevExpress.XtraEditors.XtraSaveFileDialog.CheckWritePermission">
-      <summary />
-      <value></value>
+      <summary>
+        <para>Gets or sets whether the dialog checks a user’s permission to save files in the selected folder when the user confirms his/her selection. If the user does not have write access for the selected folder, the dialog displays a warning message box.</para>
+      </summary>
+      <value>True or Default if the dialog checks a user’s write access for the selected folder; False if the dialog does not check the user’s permission to write to the folder.</value>
     </member>
     <member name="P:DevExpress.XtraEditors.XtraSaveFileDialog.CreatePrompt">
       <summary>

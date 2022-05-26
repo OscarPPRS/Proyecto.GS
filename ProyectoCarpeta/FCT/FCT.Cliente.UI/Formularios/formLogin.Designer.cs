@@ -46,6 +46,7 @@
 			// 
 			this.textEditUsuario.Location = new System.Drawing.Point(116, 21);
 			this.textEditUsuario.Name = "textEditUsuario";
+			this.textEditUsuario.Properties.MaxLength = 20;
 			this.textEditUsuario.Size = new System.Drawing.Size(100, 20);
 			this.textEditUsuario.TabIndex = 0;
 			// 
@@ -53,6 +54,7 @@
 			// 
 			this.textEditContrasena.Location = new System.Drawing.Point(116, 61);
 			this.textEditContrasena.Name = "textEditContrasena";
+			this.textEditContrasena.Properties.MaxLength = 20;
 			this.textEditContrasena.Properties.Name = "textEditContrasena";
 			this.textEditContrasena.Properties.PasswordChar = '●';
 			this.textEditContrasena.Size = new System.Drawing.Size(100, 20);

@@ -15,17 +15,23 @@ namespace FCT.Cliente.UI
 	public partial class formContenedor : Form
 	{
 		public static int idEmpresa;
+
+		//Ruta de la carpeta en la que están los recursos del programa
+		public static string rutaCarpetaDatos = "D:\\Users\\ols17\\Desktop\\ProyectoCarpeta\\ProyectoCarpeta";
+
+		//Constructor que acepta un id de empresa para usar durante la ejecucion del programa
 		public formContenedor(int id)
 		{
 			InitializeComponent();
 			idEmpresa = id;
 		}
 
+		//Cambiar el fondo de la aplicacion al logo de la empresa y el color azul
 		private void formContenedor_Load(object sender, EventArgs e)
 		{
 			this.WindowState = FormWindowState.Maximized;
 			Controls.OfType<MdiClient>().FirstOrDefault().BackColor = Color.FromArgb(10, 34, 64);
-			Controls.OfType<MdiClient>().FirstOrDefault().BackgroundImage =Image.FromFile("\\\\m2d96\\Publico"  + Consultas.logoEmpresa(idEmpresa));
+			Controls.OfType<MdiClient>().FirstOrDefault().BackgroundImage =Image.FromFile(rutaCarpetaDatos + Consultas.logoEmpresa(idEmpresa));
 		}
 
 
@@ -48,7 +54,7 @@ namespace FCT.Cliente.UI
 		}
 
 		
-
+		//Confirmacion de cierre de la aplicacion
 		private void FrmInicio_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			
@@ -66,28 +72,35 @@ namespace FCT.Cliente.UI
 			else
 				e.Cancel = true;
 		}
-		private void navBarItemReferencias_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+
+		//Funciones para abrir los distintos formularios dentro del contenedor MDI
+		private void navBarItemReferencias_LinkClicked(object sender, DevExpress.XtraEditors.TileItemEventArgs e)
 		{
 			cargarFrm(typeof(formReferencias));
+			tileNavPane1.HideDropDownWindow();
 		}
-		private void navBarItemRecepciones_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+		private void navBarItemRecepciones_LinkClicked(object sender, DevExpress.XtraEditors.TileItemEventArgs e)
 		{
 			cargarFrm(typeof(formRecepciones));
+			tileNavPane1.HideDropDownWindow();
 		}
 
-		private void navBarItemPedidos_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+		private void navBarItemPedidos_LinkClicked(object sender, DevExpress.XtraEditors.TileItemEventArgs e)
 		{
 			cargarFrm(typeof(formPedidos));
+			tileNavPane1.HideDropDownWindow();
 		}
 
-		private void navBarItemVisorRecepciones_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+		private void navBarItemVisorRecepciones_LinkClicked(object sender, DevExpress.XtraEditors.TileItemEventArgs e)
 		{
 			cargarFrm(typeof(formVisorRecepciones));
+			tileNavPane1.HideDropDownWindow();
 		}
 
-		private void navBarItemVisorPedidos_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
+		private void navBarItemVisorPedidos_LinkClicked(object sender, DevExpress.XtraEditors.TileItemEventArgs e)
 		{
 			cargarFrm(typeof(formVisorPedidos));
+			tileNavPane1.HideDropDownWindow();
 		}
 	}
 }

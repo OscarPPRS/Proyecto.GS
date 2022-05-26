@@ -78,6 +78,12 @@
 			// 
 			// gridView2
 			// 
+			this.gridView2.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridView2.Appearance.HeaderPanel.Options.UseFont = true;
+			this.gridView2.Appearance.HeaderPanel.Options.UseTextOptions = true;
+			this.gridView2.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridView2.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridView2.Appearance.Row.Options.UseFont = true;
 			this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colCOD_LINEA,
             this.colCOD_REFERENCIA,
@@ -88,6 +94,7 @@
 			this.gridView2.Name = "gridView2";
 			this.gridView2.OptionsBehavior.Editable = false;
 			this.gridView2.OptionsBehavior.ReadOnly = true;
+			this.gridView2.OptionsCustomization.AllowColumnMoving = false;
 			this.gridView2.OptionsCustomization.AllowGroup = false;
 			// 
 			// colCOD_LINEA
@@ -97,7 +104,7 @@
 			this.colCOD_LINEA.Name = "colCOD_LINEA";
 			this.colCOD_LINEA.Visible = true;
 			this.colCOD_LINEA.VisibleIndex = 0;
-			this.colCOD_LINEA.Width = 38;
+			this.colCOD_LINEA.Width = 40;
 			// 
 			// colCOD_REFERENCIA
 			// 
@@ -106,7 +113,7 @@
 			this.colCOD_REFERENCIA.Name = "colCOD_REFERENCIA";
 			this.colCOD_REFERENCIA.Visible = true;
 			this.colCOD_REFERENCIA.VisibleIndex = 1;
-			this.colCOD_REFERENCIA.Width = 197;
+			this.colCOD_REFERENCIA.Width = 153;
 			// 
 			// colDES_REFERENCIA
 			// 
@@ -115,7 +122,7 @@
 			this.colDES_REFERENCIA.Name = "colDES_REFERENCIA";
 			this.colDES_REFERENCIA.Visible = true;
 			this.colDES_REFERENCIA.VisibleIndex = 2;
-			this.colDES_REFERENCIA.Width = 261;
+			this.colDES_REFERENCIA.Width = 191;
 			// 
 			// colCANTIDAD
 			// 
@@ -124,7 +131,7 @@
 			this.colCANTIDAD.Name = "colCANTIDAD";
 			this.colCANTIDAD.Visible = true;
 			this.colCANTIDAD.VisibleIndex = 3;
-			this.colCANTIDAD.Width = 81;
+			this.colCANTIDAD.Width = 64;
 			// 
 			// colPRECIO
 			// 
@@ -133,7 +140,7 @@
 			this.colPRECIO.Name = "colPRECIO";
 			this.colPRECIO.Visible = true;
 			this.colPRECIO.VisibleIndex = 4;
-			this.colPRECIO.Width = 111;
+			this.colPRECIO.Width = 101;
 			// 
 			// gridControlCab
 			// 
@@ -153,6 +160,12 @@
 			// 
 			// gridView1
 			// 
+			this.gridView1.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
+			this.gridView1.Appearance.HeaderPanel.Options.UseTextOptions = true;
+			this.gridView1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+			this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridView1.Appearance.Row.Options.UseFont = true;
 			this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colCOD_PETICION,
             this.colDES_ESTADO,
@@ -167,6 +180,7 @@
 			this.gridView1.Name = "gridView1";
 			this.gridView1.OptionsBehavior.Editable = false;
 			this.gridView1.OptionsBehavior.ReadOnly = true;
+			this.gridView1.OptionsCustomization.AllowColumnMoving = false;
 			this.gridView1.OptionsCustomization.AllowGroup = false;
 			this.gridView1.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView1_FocusedRowChanged);
 			// 
@@ -177,7 +191,7 @@
 			this.colCOD_PETICION.Name = "colCOD_PETICION";
 			this.colCOD_PETICION.Visible = true;
 			this.colCOD_PETICION.VisibleIndex = 0;
-			this.colCOD_PETICION.Width = 86;
+			this.colCOD_PETICION.Width = 90;
 			// 
 			// colDES_ESTADO
 			// 
@@ -186,7 +200,7 @@
 			this.colDES_ESTADO.Name = "colDES_ESTADO";
 			this.colDES_ESTADO.Visible = true;
 			this.colDES_ESTADO.VisibleIndex = 1;
-			this.colDES_ESTADO.Width = 95;
+			this.colDES_ESTADO.Width = 99;
 			// 
 			// colDIRECCION_ENTREGA
 			// 
@@ -195,7 +209,7 @@
 			this.colDIRECCION_ENTREGA.Name = "colDIRECCION_ENTREGA";
 			this.colDIRECCION_ENTREGA.Visible = true;
 			this.colDIRECCION_ENTREGA.VisibleIndex = 2;
-			this.colDIRECCION_ENTREGA.Width = 189;
+			this.colDIRECCION_ENTREGA.Width = 198;
 			// 
 			// colCOD_POSTAL
 			// 
@@ -204,7 +218,7 @@
 			this.colCOD_POSTAL.Name = "colCOD_POSTAL";
 			this.colCOD_POSTAL.Visible = true;
 			this.colCOD_POSTAL.VisibleIndex = 3;
-			this.colCOD_POSTAL.Width = 93;
+			this.colCOD_POSTAL.Width = 97;
 			// 
 			// colPOBLACION
 			// 
@@ -213,7 +227,7 @@
 			this.colPOBLACION.Name = "colPOBLACION";
 			this.colPOBLACION.Visible = true;
 			this.colPOBLACION.VisibleIndex = 4;
-			this.colPOBLACION.Width = 81;
+			this.colPOBLACION.Width = 85;
 			// 
 			// colPROVINCIA
 			// 
@@ -222,7 +236,6 @@
 			this.colPROVINCIA.Name = "colPROVINCIA";
 			this.colPROVINCIA.Visible = true;
 			this.colPROVINCIA.VisibleIndex = 5;
-			this.colPROVINCIA.Width = 72;
 			// 
 			// colTELEFONO
 			// 
@@ -231,7 +244,7 @@
 			this.colTELEFONO.Name = "colTELEFONO";
 			this.colTELEFONO.Visible = true;
 			this.colTELEFONO.VisibleIndex = 6;
-			this.colTELEFONO.Width = 106;
+			this.colTELEFONO.Width = 89;
 			// 
 			// colFECH_CREACION
 			// 
@@ -240,7 +253,7 @@
 			this.colFECH_CREACION.Name = "colFECH_CREACION";
 			this.colFECH_CREACION.Visible = true;
 			this.colFECH_CREACION.VisibleIndex = 7;
-			this.colFECH_CREACION.Width = 99;
+			this.colFECH_CREACION.Width = 116;
 			// 
 			// colCANTIDAD_LINEAS
 			// 
@@ -249,7 +262,6 @@
 			this.colCANTIDAD_LINEAS.Name = "colCANTIDAD_LINEAS";
 			this.colCANTIDAD_LINEAS.Visible = true;
 			this.colCANTIDAD_LINEAS.VisibleIndex = 8;
-			this.colCANTIDAD_LINEAS.Width = 57;
 			// 
 			// simpleButtonActualizar
 			// 
@@ -261,6 +273,7 @@
 			this.simpleButtonActualizar.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonActualizar.Size = new System.Drawing.Size(58, 54);
 			this.simpleButtonActualizar.TabIndex = 4;
+			this.simpleButtonActualizar.ToolTip = "Actualizar";
 			this.simpleButtonActualizar.Click += new System.EventHandler(this.simpleButtonActualizar_Click);
 			// 
 			// labelControl4

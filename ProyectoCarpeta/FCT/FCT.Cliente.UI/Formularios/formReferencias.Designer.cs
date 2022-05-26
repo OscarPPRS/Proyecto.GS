@@ -90,18 +90,16 @@
 			this.gridControlReferencias.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
 			// 
-			// vISTAREFERENCIASBindingSource
-			// 
-			this.vISTAREFERENCIASBindingSource.DataSource = typeof(FCT.Negocio.V_REFERENCIAS);
-			// 
 			// gridView1
 			// 
 			this.gridView1.Appearance.Empty.BackColor = System.Drawing.Color.Transparent;
 			this.gridView1.Appearance.Empty.Options.UseBackColor = true;
-			this.gridView1.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridView1.Appearance.HeaderPanel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
+			this.gridView1.Appearance.HeaderPanel.Options.UseTextOptions = true;
+			this.gridView1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
 			this.gridView1.Appearance.Row.BackColor = System.Drawing.Color.Transparent;
-			this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.gridView1.Appearance.Row.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.gridView1.Appearance.Row.Options.UseBackColor = true;
 			this.gridView1.Appearance.Row.Options.UseFont = true;
 			this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
@@ -117,7 +115,10 @@
 			this.gridView1.Name = "gridView1";
 			this.gridView1.OptionsBehavior.Editable = false;
 			this.gridView1.OptionsBehavior.ReadOnly = true;
+			this.gridView1.OptionsCustomization.AllowColumnMoving = false;
 			this.gridView1.OptionsCustomization.AllowGroup = false;
+			this.gridView1.OptionsMenu.EnableColumnMenu = false;
+			this.gridView1.OptionsMenu.EnableFooterMenu = false;
 			this.gridView1.RowStyle += new DevExpress.XtraGrid.Views.Grid.RowStyleEventHandler(this.gridView1_RowStyle);
 			this.gridView1.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView1_FocusedRowChanged);
 			// 
@@ -150,7 +151,7 @@
 			this.colPRECIO.FieldName = "PRECIO";
 			this.colPRECIO.Name = "colPRECIO";
 			this.colPRECIO.Visible = true;
-			this.colPRECIO.VisibleIndex = 2;
+			this.colPRECIO.VisibleIndex = 3;
 			this.colPRECIO.Width = 80;
 			// 
 			// colFECH_CREACION
@@ -159,7 +160,7 @@
 			this.colFECH_CREACION.FieldName = "FECH_CREACION";
 			this.colFECH_CREACION.Name = "colFECH_CREACION";
 			this.colFECH_CREACION.Visible = true;
-			this.colFECH_CREACION.VisibleIndex = 3;
+			this.colFECH_CREACION.VisibleIndex = 2;
 			this.colFECH_CREACION.Width = 117;
 			// 
 			// colIMAGEN
@@ -184,22 +185,22 @@
 			// labelControl3
 			// 
 			this.labelControl3.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.labelControl3.Appearance.Font = new System.Drawing.Font("Lemon/Milk", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl3.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.labelControl3.Appearance.Options.UseFont = true;
 			this.labelControl3.Location = new System.Drawing.Point(74, 387);
 			this.labelControl3.Name = "labelControl3";
-			this.labelControl3.Size = new System.Drawing.Size(69, 27);
+			this.labelControl3.Size = new System.Drawing.Size(54, 24);
 			this.labelControl3.TabIndex = 85;
 			this.labelControl3.Text = "Precio";
 			// 
 			// labelControl2
 			// 
 			this.labelControl2.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.labelControl2.Appearance.Font = new System.Drawing.Font("Lemon/Milk", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl2.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.labelControl2.Appearance.Options.UseFont = true;
 			this.labelControl2.Location = new System.Drawing.Point(74, 330);
 			this.labelControl2.Name = "labelControl2";
-			this.labelControl2.Size = new System.Drawing.Size(125, 27);
+			this.labelControl2.Size = new System.Drawing.Size(100, 24);
 			this.labelControl2.TabIndex = 84;
 			this.labelControl2.Text = "Descripción";
 			// 
@@ -213,7 +214,7 @@
 			this.pictureEditVisualizar.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
 			this.pictureEditVisualizar.Properties.NullText = " ";
 			this.pictureEditVisualizar.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-			this.pictureEditVisualizar.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+			this.pictureEditVisualizar.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
 			this.pictureEditVisualizar.Size = new System.Drawing.Size(363, 570);
 			this.pictureEditVisualizar.TabIndex = 83;
 			// 
@@ -224,8 +225,11 @@
 			this.textEditPrecio.Name = "textEditPrecio";
 			this.textEditPrecio.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.NumericMaskManager));
 			this.textEditPrecio.Properties.MaskSettings.Set("mask", "c");
+			this.textEditPrecio.Properties.MaskSettings.Set("culture", "es-ES");
+			this.textEditPrecio.Properties.MaxLength = 9;
+			this.textEditPrecio.Properties.UseMaskAsDisplayFormat = true;
 			this.textEditPrecio.Size = new System.Drawing.Size(124, 20);
-			this.textEditPrecio.TabIndex = 79;
+			this.textEditPrecio.TabIndex = 78;
 			// 
 			// simpleButtonCambiarEstado
 			// 
@@ -237,6 +241,7 @@
 			this.simpleButtonCambiarEstado.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonCambiarEstado.Size = new System.Drawing.Size(57, 65);
 			this.simpleButtonCambiarEstado.TabIndex = 82;
+			this.simpleButtonCambiarEstado.ToolTip = "Deshabilita la referencia seleccionada";
 			this.simpleButtonCambiarEstado.Click += new System.EventHandler(this.clickCambiarEstadoReferencia);
 			// 
 			// simpleButtonModificar
@@ -249,6 +254,7 @@
 			this.simpleButtonModificar.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonModificar.Size = new System.Drawing.Size(58, 61);
 			this.simpleButtonModificar.TabIndex = 81;
+			this.simpleButtonModificar.ToolTip = "Modifica los datos de la\r\nreferencia seleccionada\r\ncon los datos introducidos";
 			this.simpleButtonModificar.Click += new System.EventHandler(this.simpleButtonModificar_Click);
 			// 
 			// simpleButtonAnadir
@@ -261,6 +267,7 @@
 			this.simpleButtonAnadir.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonAnadir.Size = new System.Drawing.Size(55, 57);
 			this.simpleButtonAnadir.TabIndex = 80;
+			this.simpleButtonAnadir.ToolTip = "Añade una nueva referencia\r\n con los datos escritos";
 			this.simpleButtonAnadir.Click += new System.EventHandler(this.simpleButtonAnadir_Click);
 			// 
 			// xtraOpenFileDialog1
@@ -272,8 +279,9 @@
 			this.textEditDescripcion.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.textEditDescripcion.Location = new System.Drawing.Point(223, 337);
 			this.textEditDescripcion.Name = "textEditDescripcion";
+			this.textEditDescripcion.Properties.MaxLength = 100;
 			this.textEditDescripcion.Size = new System.Drawing.Size(124, 20);
-			this.textEditDescripcion.TabIndex = 88;
+			this.textEditDescripcion.TabIndex = 77;
 			// 
 			// pictureEditCambiar
 			// 
@@ -281,7 +289,7 @@
 			this.pictureEditCambiar.Location = new System.Drawing.Point(138, 46);
 			this.pictureEditCambiar.Name = "pictureEditCambiar";
 			this.pictureEditCambiar.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
-			this.pictureEditCambiar.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+			this.pictureEditCambiar.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
 			this.pictureEditCambiar.Size = new System.Drawing.Size(157, 232);
 			this.pictureEditCambiar.TabIndex = 89;
 			// 
@@ -295,6 +303,7 @@
 			this.simpleButtonActualizar.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
 			this.simpleButtonActualizar.Size = new System.Drawing.Size(55, 56);
 			this.simpleButtonActualizar.TabIndex = 90;
+			this.simpleButtonActualizar.ToolTip = "Actualizar";
 			this.simpleButtonActualizar.Click += new System.EventHandler(this.simpleButtonActualizar_Click);
 			// 
 			// panel1
@@ -315,39 +324,39 @@
 			// labelControl1
 			// 
 			this.labelControl1.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.labelControl1.Appearance.Font = new System.Drawing.Font("Lemon/Milk", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl1.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.labelControl1.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(179)))), ((int)(((byte)(53)))));
 			this.labelControl1.Appearance.Options.UseFont = true;
 			this.labelControl1.Appearance.Options.UseForeColor = true;
 			this.labelControl1.Location = new System.Drawing.Point(211, 222);
 			this.labelControl1.Name = "labelControl1";
-			this.labelControl1.Size = new System.Drawing.Size(88, 41);
+			this.labelControl1.Size = new System.Drawing.Size(67, 33);
 			this.labelControl1.TabIndex = 93;
 			this.labelControl1.Text = "Visor";
 			// 
 			// labelControl4
 			// 
 			this.labelControl4.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.labelControl4.Appearance.Font = new System.Drawing.Font("Lemon/Milk", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl4.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.labelControl4.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(179)))), ((int)(((byte)(53)))));
 			this.labelControl4.Appearance.Options.UseFont = true;
 			this.labelControl4.Appearance.Options.UseForeColor = true;
 			this.labelControl4.Location = new System.Drawing.Point(1368, 222);
 			this.labelControl4.Name = "labelControl4";
-			this.labelControl4.Size = new System.Drawing.Size(297, 41);
+			this.labelControl4.Size = new System.Drawing.Size(229, 33);
 			this.labelControl4.TabIndex = 94;
 			this.labelControl4.Text = "Editar referencias";
 			// 
 			// labelControl5
 			// 
 			this.labelControl5.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.labelControl5.Appearance.Font = new System.Drawing.Font("Lemon/Milk", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.labelControl5.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.labelControl5.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(179)))), ((int)(((byte)(53)))));
 			this.labelControl5.Appearance.Options.UseFont = true;
 			this.labelControl5.Appearance.Options.UseForeColor = true;
-			this.labelControl5.Location = new System.Drawing.Point(161, 40);
+			this.labelControl5.Location = new System.Drawing.Point(252, 82);
 			this.labelControl5.Name = "labelControl5";
-			this.labelControl5.Size = new System.Drawing.Size(189, 41);
+			this.labelControl5.Size = new System.Drawing.Size(205, 33);
 			this.labelControl5.TabIndex = 96;
 			this.labelControl5.Text = "REFERENCIAS";
 			// 

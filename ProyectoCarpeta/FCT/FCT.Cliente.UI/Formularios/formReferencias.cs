@@ -31,16 +31,32 @@ namespace FCT.Cliente.UI
 			this.WindowState = FormWindowState.Maximized;
 			actualizarGrid();
 		}
-	
+
+		//Actualizar grid
+		public void actualizarGrid()
+		{
+			vISTAREFERENCIASBindingSource.DataSource = CargarGrids.catalogoReferencias(formContenedor.idEmpresa);
+		}
+
+
 		//Botones de datos de referencias
 
+		#region
+
+		//Actualiza el grid
+		private void simpleButtonActualizar_Click(object sender, EventArgs e)
+		{
+			actualizarGrid();
+		}
+
+		//Crea una referencia nueva
 		private void simpleButtonAnadir_Click(object sender, EventArgs e)
 		{
 			if (textEditDescripcion.Text == "" | textEditPrecio.Text == "")
-			{ MessageBox.Show("Por favor rellene todos los campos de la referencia."); }
+			{ MessageBox.Show("Por favor rellene todos los campos de la referencia.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 			else
 			{
-				ProcedimientosAlmacenados.referencias(0, null, formContenedor.idEmpresa, textEditDescripcion.Text, decimal.Parse(textEditPrecio.Text.Replace(".", ",")), rutaGuardado, true);
+				ProcedimientosAlmacenados.referencias(0, null, formContenedor.idEmpresa, textEditDescripcion.Text, decimal.Parse(textEditPrecio.Text.Replace(" €", "")), rutaGuardado, true);
 				textEditPrecio.Text = "";
 				textEditDescripcion.Text = "";
 				actualizarGrid();
@@ -49,13 +65,9 @@ namespace FCT.Cliente.UI
 
 				try
 				{
-					File.Copy(xtraOpenFileDialog1.FileName.ToString(), "\\\\m2d96\\Publico" + rutaGuardado);
+					File.Copy(xtraOpenFileDialog1.FileName.ToString(), formContenedor.rutaCarpetaDatos + rutaGuardado);
 				}
-				catch (Exception)
-				{
-
-
-				}
+				catch (Exception){}
 
 				rutaGuardado = null;
 				pictureEditCambiar.Image = null;
@@ -63,44 +75,48 @@ namespace FCT.Cliente.UI
 			}
 		}
 
+		//Modifica la referencia seleccionada
 		private void simpleButtonModificar_Click(object sender, EventArgs e)
 		{
 			V_REFERENCIAS vista = (V_REFERENCIAS)gridView1.GetRow(gridView1.FocusedRowHandle);
+
 			if (vista != null)
 			{
 				string desc, ruta;
 				decimal precio;
 				
+				//Si los campos estan vacios, simplemente deja la referencia igual que antes.
 
 				if (String.IsNullOrEmpty(textEditDescripcion.Text)) { desc = vista.DES_REFERENCIA; }
 				else { desc = textEditDescripcion.Text; }
 
-				if (String.IsNullOrEmpty(textEditPrecio.Text)) { precio = decimal.Parse(vista.PRECIO.ToString().Replace(".", ","));  }
-				else { precio = decimal.Parse(textEditPrecio.Text.Replace(".", ",")); }
+				if (String.IsNullOrEmpty(textEditPrecio.Text)) { precio = decimal.Parse(vista.PRECIO.ToString());  }
+				else { precio = decimal.Parse(textEditPrecio.Text.Replace(" €","")); }
 
 				if (String.IsNullOrEmpty(xtraOpenFileDialog1.FileName.ToString())) { ruta = vista.IMAGEN; }
 				else { ruta = rutaGuardado; }
+
 
 				ProcedimientosAlmacenados.referencias(1,vista.COD_REFERENCIA, 0, desc, precio, ruta, true);
 				
 				actualizarGrid();
 				textEditPrecio.Text = "";
 				textEditDescripcion.Text = "";
-				try
-				{
-					File.Copy(xtraOpenFileDialog1.FileName.ToString(), "\\\\m2d96\\Publico" + rutaGuardado);
-						pictureEditVisualizar.Image = Image.FromFile("\\\\m2d96\\Publico" + ruta);
-				}
-						catch
-				{
 
+
+				try{
+					File.Copy(xtraOpenFileDialog1.FileName.ToString(), formContenedor.rutaCarpetaDatos + rutaGuardado);
+						pictureEditVisualizar.Image = Image.FromFile(formContenedor.rutaCarpetaDatos + ruta);
 				}
-			rutaGuardado = null;
-						pictureEditCambiar.Image = null;
-						xtraOpenFileDialog1.FileName = "";
+				catch{}
+
+				rutaGuardado = null;
+				pictureEditCambiar.Image = null;
+				xtraOpenFileDialog1.FileName = "";
 			}
 		}
 
+		//Cambia el estado de la referencia para deshabilitarla.
 		private void clickCambiarEstadoReferencia(object sender, EventArgs e)
 		{
 			V_REFERENCIAS vista = (V_REFERENCIAS)gridView1.GetRow(gridView1.FocusedRowHandle);
@@ -109,31 +125,51 @@ namespace FCT.Cliente.UI
 			actualizarGrid();
 		}
 
+		//Añade la imagen al editor 
 		private void simpleButtonImagen_Click(object sender, EventArgs e)
 		{
 			//Codigo para introducir la imagen
 			xtraOpenFileDialog1.FileName = "";
 			xtraOpenFileDialog1.ShowDialog();
-			if (!String.IsNullOrEmpty(xtraOpenFileDialog1.FileName.ToString()))
-			{
-				pictureEditCambiar.Image = Image.FromFile(xtraOpenFileDialog1.FileName.ToString());
-				rutaGuardado = "\\Recursos\\img\\" + FuncionesAuxiliares.randomString(8) + ".jpeg";
+			if (!String.IsNullOrEmpty(xtraOpenFileDialog1.FileName.ToString())){
+
+				try{
+					Random random = new Random();
+
+					//Codigo para generar un nombre de imagen aleatorio
+
+					const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+					string nombreArchivoImagen = new string(Enumerable.Repeat(chars, 8).Select(s => s[random.Next(s.Length)]).ToArray());
+
+					pictureEditCambiar.Image = Image.FromFile(xtraOpenFileDialog1.FileName.ToString());
+					rutaGuardado = "\\Recursos\\img\\" + nombreArchivoImagen + ".jpeg";
+				}
+				catch (Exception){
+					MessageBox.Show("Seleccione un archivo de imagen válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
 			}
 
 		}
 
-		//Eventos del gridview
+		#endregion
+
+		//Codigo para mostrar los datos de la fila que pinchamos en el grid
 		private void gridView1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
-		{
-			
-			//Codigo para mostrar los datos de la fila que pinchamos en el grid
+		{					
 			
 			V_REFERENCIAS vista = (V_REFERENCIAS)gridView1.GetRow(gridView1.FocusedRowHandle);
 
-				try
-				{
-				if (vista.IMAGEN != null) { pictureEditVisualizar.Image = Image.FromFile("\\\\m2d96\\Publico" + vista.IMAGEN); }
-				else { pictureEditVisualizar.Image = null; }
+				try	{
+					if (vista.IMAGEN != null) { 
+					pictureEditVisualizar.Image = Image.FromFile(formContenedor.rutaCarpetaDatos + vista.IMAGEN);
+					}
+
+					else { 
+					pictureEditVisualizar.Image = null;
+					}
+
+					textEditDescripcion.Text = vista.DES_REFERENCIA;
+					textEditPrecio.Text = vista.PRECIO.ToString();
 				}
 				catch (Exception)
 				{
@@ -145,10 +181,11 @@ namespace FCT.Cliente.UI
 
 		}
 
+		//Codigo para colorear las filas dependiendo de si la referencia esta habilitada o no	
 		private void gridView1_RowStyle(object sender, RowStyleEventArgs e)
 		{
 
-			//Codigo para colorear las filas dependiendo de si la referencia esta habilitada o no	
+			
 
 			if (e.RowHandle < 0) return;
 			GridView view = sender as GridView;
@@ -163,17 +200,7 @@ namespace FCT.Cliente.UI
 			}
 		}
 
-		//Funciones auxiliares
 		
-
-		public void actualizarGrid()
-		{
-			vISTAREFERENCIASBindingSource.DataSource = CargarGrids.catalogoReferencias(formContenedor.idEmpresa);
-		}
-
-		private void simpleButtonActualizar_Click(object sender, EventArgs e)
-		{
-			actualizarGrid();
-		}
+		
 	}
 }

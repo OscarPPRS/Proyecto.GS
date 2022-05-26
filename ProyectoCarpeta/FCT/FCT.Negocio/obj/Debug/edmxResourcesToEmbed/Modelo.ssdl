@@ -97,17 +97,9 @@
     <Property Name="FECH_INSERT" Type="date" />
     <Property Name="CANTIDAD" Type="int" />
     <Property Name="ALBARAN_RECEPCION" Type="int" />
-    <Property Name="ETIQUETA" Type="varchar" MaxLength="4000" />
     <Property Name="PETICION_SALIDA" Type="int" />
     <Property Name="PALET_PADRE" Type="int" />
-  </EntityType>
-  <EntityType Name="PALETS_INCIDENCIAS">
-    <Key>
-      <PropertyRef Name="ID_INCIDENCIA" />
-    </Key>
-    <Property Name="ID_INCIDENCIA" Type="int" Nullable="false" />
-    <Property Name="COD_PALET" Type="int" />
-    <Property Name="DESC_INCIDENCIA" Type="varchar" MaxLength="500" />
+    <Property Name="ETIQUETA" Type="varchar" MaxLength="4000" />
   </EntityType>
   <EntityType Name="RECEPCIONES_CAB">
     <Key>
@@ -128,6 +120,9 @@
     <Property Name="COD_LINEA" Type="int" Nullable="false" />
     <Property Name="COD_REFERENCIA" Type="varchar" MaxLength="30" />
     <Property Name="CANTIDAD" Type="int" />
+    <Property Name="CANTIDAD_MAL_ESTADO" Type="int" />
+    <Property Name="EXCEDENTE" Type="int" />
+    <Property Name="FALTA" Type="int" />
   </EntityType>
   <EntityType Name="REFERENCIAS">
     <Key>
@@ -151,11 +146,12 @@
     <Property Name="POSICION" Type="varchar" MaxLength="30" />
     <Property Name="LLENA" Type="bit" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_MOVIMIENTOS_PICKING' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HERMES.dbo.V_MOVIMIENTOS_PICKING' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="V_MOVIMIENTOS_PICKING">
     <Key>
       <PropertyRef Name="COD_MOVIMIENTO" />
+      <PropertyRef Name="UBICACION" />
     </Key>
     <Property Name="COD_MOVIMIENTO" Type="int" Nullable="false" />
     <Property Name="COD_PETICION" Type="int" />
@@ -168,8 +164,8 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_MOVIMIENTOS_PICKING' no t
     <Property Name="CANTIDAD" Type="int" />
     <Property Name="REALIZADO" Type="bit" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_ORDEN_SALIDA_CAB' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HERMES.dbo.V_ORDEN_SALIDA_CAB' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="V_ORDEN_SALIDA_CAB">
     <Key>
       <PropertyRef Name="COD_PETICION" />
@@ -187,8 +183,8 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_ORDEN_SALIDA_CAB' no tien
     <Property Name="FECH_CREACION" Type="date" />
     <Property Name="CANTIDAD_LINEAS" Type="int" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_ORDEN_SALIDA_INCIDENCIAS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HERMES.dbo.V_ORDEN_SALIDA_INCIDENCIAS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="V_ORDEN_SALIDA_INCIDENCIAS">
     <Key>
       <PropertyRef Name="ID_INCIDENCIA" />
@@ -202,8 +198,8 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_ORDEN_SALIDA_INCIDENCIAS'
     <Property Name="COD_POSTAL" Type="varchar" MaxLength="10" />
     <Property Name="POBLACION" Type="varchar" MaxLength="100" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_ORDEN_SALIDA_LIN' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HERMES.dbo.V_ORDEN_SALIDA_LIN' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="V_ORDEN_SALIDA_LIN">
     <Key>
       <PropertyRef Name="COD_PETICION" />
@@ -217,28 +213,35 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_ORDEN_SALIDA_LIN' no tien
     <Property Name="PRECIO" Type="float" />
     <Property Name="STOCK" Type="int" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_PALETS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HERMES.dbo.V_PALETS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="V_PALETS">
     <Key>
       <PropertyRef Name="COD_PALET" />
+      <PropertyRef Name="UBICACION" />
+      <PropertyRef Name="DESC_UBICACION" />
+      <PropertyRef Name="CALLE" />
+      <PropertyRef Name="POSICION" />
+      <PropertyRef Name="ALBARAN_RECEPCION" />
+      <PropertyRef Name="PETICION_SALIDA" />
+      <PropertyRef Name="PALET_PADRE" />
     </Key>
     <Property Name="COD_PALET" Type="int" Nullable="false" />
     <Property Name="DESC_ESTADO" Type="varchar" MaxLength="200" />
     <Property Name="COD_ESTADO" Type="int" />
     <Property Name="COD_REFERENCIA" Type="varchar" MaxLength="30" />
     <Property Name="CANTIDAD" Type="int" />
-    <Property Name="UBICACION" Type="varchar" MaxLength="30" />
-    <Property Name="DESC_UBICACION" Type="varchar" MaxLength="200" />
-    <Property Name="CALLE" Type="varchar" MaxLength="60" />
-    <Property Name="POSICION" Type="varchar" MaxLength="30" />
+    <Property Name="UBICACION" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="DESC_UBICACION" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="CALLE" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="POSICION" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="FECH_INSERT" Type="date" />
-    <Property Name="ALBARAN_RECEPCION" Type="int" />
-    <Property Name="PETICION_SALIDA" Type="int" />
-    <Property Name="PALET_PADRE" Type="int" />
+    <Property Name="ALBARAN_RECEPCION" Type="int" Nullable="false" />
+    <Property Name="PETICION_SALIDA" Type="int" Nullable="false" />
+    <Property Name="PALET_PADRE" Type="int" Nullable="false" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_RECEPCIONES_CAB' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HERMES.dbo.V_RECEPCIONES_CAB' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="V_RECEPCIONES_CAB">
     <Key>
       <PropertyRef Name="ALBARAN" />
@@ -252,8 +255,8 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_RECEPCIONES_CAB' no tiene
     <Property Name="FECH_LLEGADA" Type="date" />
     <Property Name="CANTIDAD_LINEAS" Type="int" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_RECEPCIONES_LIN' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HERMES.dbo.V_RECEPCIONES_LIN' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="V_RECEPCIONES_LIN">
     <Key>
       <PropertyRef Name="ALBARAN" />
@@ -264,11 +267,14 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_RECEPCIONES_LIN' no tiene
     <Property Name="COD_REFERENCIA" Type="varchar" MaxLength="30" />
     <Property Name="DES_REFERENCIA" Type="varchar" MaxLength="500" />
     <Property Name="CANTIDAD" Type="int" />
+    <Property Name="CANTIDAD_MAL_ESTADO" Type="int" />
+    <Property Name="EXCEDENTE" Type="int" />
+    <Property Name="FALTA" Type="int" />
     <Property Name="PRECIO" Type="float" />
     <Property Name="STOCK" Type="int" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_REFERENCIAS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HERMES.dbo.V_REFERENCIAS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="V_REFERENCIAS">
     <Key>
       <PropertyRef Name="COD_REFERENCIA" />
@@ -282,73 +288,6 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_REFERENCIAS' no tiene def
     <Property Name="ESTADO" Type="bit" />
     <Property Name="STOCK" Type="int" />
   </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-  <EntityType Name="V_SQL">
-    <Key>
-      <PropertyRef Name="ID" />
-      <PropertyRef Name="TABLA" />
-      <PropertyRef Name="DESCRIPCION" />
-      <PropertyRef Name="DIMENSION" />
-      <PropertyRef Name="PERMITE_NULOS" />
-      <PropertyRef Name="DEFECTO" />
-      <PropertyRef Name="CLAVE" />
-      <PropertyRef Name="INDICES" />
-      <PropertyRef Name="COLLATE" />
-      <PropertyRef Name="GRUPO_FICHEROS" />
-      <PropertyRef Name="GRUPO" />
-      <PropertyRef Name="TRIGGERS" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="TABLA" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="CAMPO" Type="nvarchar" MaxLength="128" />
-    <Property Name="DESCRIPCION" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="POSICION" Type="int" />
-    <Property Name="TIPO" Type="nvarchar" MaxLength="128" />
-    <Property Name="DIMENSION" Type="int" Nullable="false" />
-    <Property Name="PERMITE_NULOS" Type="int" Nullable="false" />
-    <Property Name="DEFECTO" Type="nvarchar" MaxLength="4000" Nullable="false" />
-    <Property Name="CLAVE" Type="varchar" MaxLength="11" Nullable="false" />
-    <Property Name="INDICES" Type="int" Nullable="false" />
-    <Property Name="COLLATE" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="GRUPO_FICHEROS" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="KBYTES" Type="int" />
-    <Property Name="MBYTES" Type="int" />
-    <Property Name="GROWTH" Type="int" />
-    <Property Name="N_FILES" Type="int" />
-    <Property Name="GRUPO" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="TRIGGERS" Type="varchar" MaxLength="3" Nullable="false" />
-    <Property Name="name" Type="nvarchar" MaxLength="128" />
-    <Property Name="object_id" Type="int" />
-    <Property Name="data_space_id" Type="int" />
-  </EntityType>
-  <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-  <EntityType Name="V_SQL_FICHEROS">
-    <Key>
-      <PropertyRef Name="FICHERO" />
-      <PropertyRef Name="RUTA_FICHERO" />
-    </Key>
-    <Property Name="BBDD" Type="nvarchar" MaxLength="128" />
-    <Property Name="FICHERO" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="RUTA_FICHERO" Type="nvarchar" MaxLength="260" Nullable="false" />
-    <Property Name="GRUPO_FICHERO" Type="nvarchar" MaxLength="128" />
-    <Property Name="TOTAL_MB" Type="int" />
-    <Property Name="LIBRE_MB" Type="int" />
-    <Property Name="PORCENTAJE_LIBRE" Type="int" />
-  </EntityType>
-  <Association Name="INCIDENCIAS_PALETS_fk0">
-    <End Role="PALETS" Type="Self.PALETS" Multiplicity="0..1" />
-    <End Role="PALETS_INCIDENCIAS" Type="Self.PALETS_INCIDENCIAS" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PALETS">
-        <PropertyRef Name="COD_PALET" />
-      </Principal>
-      <Dependent Role="PALETS_INCIDENCIAS">
-        <PropertyRef Name="COD_PALET" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="MOVIMIENTOS_PICKING_fk0">
     <End Role="ORDEN_SALIDA_CAB" Type="Self.ORDEN_SALIDA_CAB" Multiplicity="0..1" />
     <End Role="MOVIMIENTOS_PICKING" Type="Self.MOVIMIENTOS_PICKING" Multiplicity="*" />
@@ -577,50 +516,27 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="COMPROBAR_DISPONIBILIDAD_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
+  <Function Name="FN_COMPROBAR_DISPONIBILIDAD_PEDIDO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="bit">
     <Parameter Name="PETICION" Type="int" Mode="In" />
   </Function>
-  <Function Name="CONSULTAR_STOCK_REFERENCIA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+  <Function Name="FN_CONSULTAR_STOCK_REFERENCIA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
     <Parameter Name="COD_REFERENCIA" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="FN_CONEXION_ACTUAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-  <Function Name="FN_ENTORNO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar" />
-  <Function Name="FN_FECHA_GT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="FECHA" Type="datetime" Mode="In" />
-    <Parameter Name="TIME_ZONE_DESTINO" Type="varchar" Mode="In" />
-    <ReturnType>
-      <CollectionType>
-        <RowType>
-          <Property Name="FECHA" Type="datetime" />
-        </RowType>
-      </CollectionType>
-    </ReturnType>
   </Function>
   <Function Name="PA_EMAIL_RECEPCIONES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="DESTINATARIOS" Type="varchar" Mode="In" />
     <Parameter Name="ASUNTO_EMAIL" Type="varchar" Mode="In" />
     <Parameter Name="ALBARAN" Type="int" Mode="In" />
     <Parameter Name="INVOKER" Type="int" Mode="In" />
+    <Parameter Name="USUARIO" Type="varchar" Mode="In" />
+    <Parameter Name="CULTURA" Type="varchar" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
-  </Function>
-  <Function Name="PA_ENVIAR_DBMAIL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="DESTINATARIOS" Type="varchar" Mode="In" />
-    <Parameter Name="TEXTO_EMAIL" Type="nvarchar(max)" Mode="In" />
-    <Parameter Name="ASUNTO_EMAIL" Type="varchar" Mode="In" />
-    <Parameter Name="PERFIL_EMAIL" Type="varchar" Mode="In" />
-    <Parameter Name="DESTINATARIOS_CC" Type="varchar" Mode="In" />
-    <Parameter Name="DESTINATARIOS_CCO" Type="varchar" Mode="In" />
-    <Parameter Name="FORMATO_EMAIL" Type="varchar" Mode="In" />
-    <Parameter Name="IMPORTANCIA_EMAIL" Type="varchar" Mode="In" />
-    <Parameter Name="CONFIDENCIALIDAD" Type="varchar" Mode="In" />
-    <Parameter Name="ARCHIVOS_ADJUNTOS" Type="varchar" Mode="In" />
-    <Parameter Name="OCULTAR_TEXTO" Type="bit" Mode="In" />
-    <Parameter Name="REPLY_TO" Type="varchar" Mode="In" />
   </Function>
   <Function Name="PA_GENERAR_ETIQUETA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="COD_PALET" Type="int" Mode="In" />
     <Parameter Name="INVOKER" Type="int" Mode="In" />
+    <Parameter Name="USUARIO" Type="varchar" Mode="In" />
+    <Parameter Name="CULTURA" Type="varchar" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
   </Function>
@@ -630,17 +546,18 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
     <Parameter Name="COD_PALET_ABSORBIDO" Type="int" Mode="In" />
     <Parameter Name="CANTIDAD_PARTIDA" Type="int" Mode="In" />
     <Parameter Name="INVOKER" Type="int" Mode="In" />
+    <Parameter Name="USUARIO" Type="varchar" Mode="In" />
+    <Parameter Name="CULTURA" Type="varchar" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
-  </Function>
-  <Function Name="PA_INF_TABLA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="objname" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="PA_MOVIMIENTOS_PICKING" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="COD_PETICION" Type="int" Mode="In" />
     <Parameter Name="COD_LINEA" Type="int" Mode="In" />
     <Parameter Name="COD_MOVIMIENTO" Type="int" Mode="In" />
     <Parameter Name="INVOKER" Type="int" Mode="In" />
+    <Parameter Name="USUARIO" Type="varchar" Mode="In" />
+    <Parameter Name="CULTURA" Type="varchar" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
   </Function>
@@ -655,6 +572,8 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
     <Parameter Name="TELEFONO" Type="varchar" Mode="In" />
     <Parameter Name="FECH_CREACION" Type="date" Mode="In" />
     <Parameter Name="INVOKER" Type="int" Mode="In" />
+    <Parameter Name="USUARIO" Type="varchar" Mode="In" />
+    <Parameter Name="CULTURA" Type="varchar" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
   </Function>
@@ -662,6 +581,8 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
     <Parameter Name="COD_PETICION" Type="int" Mode="In" />
     <Parameter Name="DESCRIPCION" Type="varchar" Mode="In" />
     <Parameter Name="INVOKER" Type="int" Mode="In" />
+    <Parameter Name="USUARIO" Type="varchar" Mode="In" />
+    <Parameter Name="CULTURA" Type="varchar" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
   </Function>
@@ -671,6 +592,8 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
     <Parameter Name="COD_REFERENCIA" Type="varchar" Mode="In" />
     <Parameter Name="CANTIDAD" Type="int" Mode="In" />
     <Parameter Name="INVOKER" Type="int" Mode="In" />
+    <Parameter Name="USUARIO" Type="varchar" Mode="In" />
+    <Parameter Name="CULTURA" Type="varchar" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
   </Function>
@@ -682,6 +605,8 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
     <Parameter Name="PETICION" Type="int" Mode="In" />
     <Parameter Name="COD_PALET_PADRE" Type="int" Mode="In" />
     <Parameter Name="INVOKER" Type="int" Mode="In" />
+    <Parameter Name="USUARIO" Type="varchar" Mode="In" />
+    <Parameter Name="CULTURA" Type="varchar" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
   </Function>
@@ -692,6 +617,8 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
     <Parameter Name="FECH_CREACION" Type="date" Mode="In" />
     <Parameter Name="FECH_LLEGADA" Type="date" Mode="In" />
     <Parameter Name="INVOKER" Type="int" Mode="In" />
+    <Parameter Name="USUARIO" Type="varchar" Mode="In" />
+    <Parameter Name="CULTURA" Type="varchar" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
   </Function>
@@ -700,7 +627,12 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
     <Parameter Name="COD_LINEA" Type="int" Mode="In" />
     <Parameter Name="COD_REFERENCIA" Type="varchar" Mode="In" />
     <Parameter Name="CANTIDAD" Type="int" Mode="In" />
+    <Parameter Name="CANTIDAD_MAL_ESTADO" Type="int" Mode="In" />
+    <Parameter Name="EXCEDENTE" Type="int" Mode="In" />
+    <Parameter Name="FALTA" Type="int" Mode="In" />
     <Parameter Name="INVOKER" Type="int" Mode="In" />
+    <Parameter Name="USUARIO" Type="varchar" Mode="In" />
+    <Parameter Name="CULTURA" Type="varchar" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
   </Function>
@@ -712,38 +644,10 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
     <Parameter Name="IMAGEN" Type="varchar" Mode="In" />
     <Parameter Name="ESTADO" Type="bit" Mode="In" />
     <Parameter Name="INVOKER" Type="int" Mode="In" />
+    <Parameter Name="USUARIO" Type="varchar" Mode="In" />
+    <Parameter Name="CULTURA" Type="varchar" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
-  </Function>
-  <Function Name="PA_SQLD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="NOMBRE_PA" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="PAB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="TEXTO_BUSCAR" Type="varchar" Mode="In" />
-    <Parameter Name="TEXTO_BUSCAR_2" Type="varchar" Mode="In" />
-    <Parameter Name="TEXTO_BUSCAR_3" Type="varchar" Mode="In" />
-    <Parameter Name="TEXTO_BUSCAR_4" Type="varchar" Mode="In" />
-    <Parameter Name="TEXTO_BUSCAR_5" Type="varchar" Mode="In" />
-    <Parameter Name="INVOKER" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PACE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="BUSQUEDA" Type="varchar(max)" Mode="In" />
-    <Parameter Name="INVOKER" Type="int" Mode="In" />
-  </Function>
-  <Function Name="PAF" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="ENTRADA" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="PAH" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="TEXTO" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="PAP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="NOMBRE_PA" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="PASE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="TABLA" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="PAT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="TABLA" Type="varchar" Mode="In" />
   </Function>
   <EntityContainer Name="BDModelStoreContainer">
     <EntitySet Name="EMPRESAS" EntityType="Self.EMPRESAS" Schema="dbo" store:Type="Tables" />
@@ -756,7 +660,6 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
     <EntitySet Name="ORDEN_SALIDA_INCIDENCIAS" EntityType="Self.ORDEN_SALIDA_INCIDENCIAS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ORDEN_SALIDA_LIN" EntityType="Self.ORDEN_SALIDA_LIN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PALETS" EntityType="Self.PALETS" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PALETS_INCIDENCIAS" EntityType="Self.PALETS_INCIDENCIAS" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RECEPCIONES_CAB" EntityType="Self.RECEPCIONES_CAB" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RECEPCIONES_LIN" EntityType="Self.RECEPCIONES_LIN" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="REFERENCIAS" EntityType="Self.REFERENCIAS" Schema="dbo" store:Type="Tables" />
@@ -850,6 +753,9 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
     [V_RECEPCIONES_LIN].[COD_REFERENCIA] AS [COD_REFERENCIA], 
     [V_RECEPCIONES_LIN].[DES_REFERENCIA] AS [DES_REFERENCIA], 
     [V_RECEPCIONES_LIN].[CANTIDAD] AS [CANTIDAD], 
+    [V_RECEPCIONES_LIN].[CANTIDAD_MAL_ESTADO] AS [CANTIDAD_MAL_ESTADO], 
+    [V_RECEPCIONES_LIN].[EXCEDENTE] AS [EXCEDENTE], 
+    [V_RECEPCIONES_LIN].[FALTA] AS [FALTA], 
     [V_RECEPCIONES_LIN].[PRECIO] AS [PRECIO], 
     [V_RECEPCIONES_LIN].[STOCK] AS [STOCK]
     FROM [dbo].[V_RECEPCIONES_LIN] AS [V_RECEPCIONES_LIN]</DefiningQuery>
@@ -866,47 +772,6 @@ advertencia 6002: La tabla o vista 'FCT_SOPORTE2.dbo.V_SQL_FICHEROS' no tiene de
     [V_REFERENCIAS].[STOCK] AS [STOCK]
     FROM [dbo].[V_REFERENCIAS] AS [V_REFERENCIAS]</DefiningQuery>
     </EntitySet>
-    <EntitySet Name="V_SQL" EntityType="Self.V_SQL" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [V_SQL].[ID] AS [ID], 
-    [V_SQL].[TABLA] AS [TABLA], 
-    [V_SQL].[CAMPO] AS [CAMPO], 
-    [V_SQL].[DESCRIPCION] AS [DESCRIPCION], 
-    [V_SQL].[POSICION] AS [POSICION], 
-    [V_SQL].[TIPO] AS [TIPO], 
-    [V_SQL].[DIMENSION] AS [DIMENSION], 
-    [V_SQL].[PERMITE_NULOS] AS [PERMITE_NULOS], 
-    [V_SQL].[DEFECTO] AS [DEFECTO], 
-    [V_SQL].[CLAVE] AS [CLAVE], 
-    [V_SQL].[INDICES] AS [INDICES], 
-    [V_SQL].[COLLATE] AS [COLLATE], 
-    [V_SQL].[GRUPO_FICHEROS] AS [GRUPO_FICHEROS], 
-    [V_SQL].[KBYTES] AS [KBYTES], 
-    [V_SQL].[MBYTES] AS [MBYTES], 
-    [V_SQL].[GROWTH] AS [GROWTH], 
-    [V_SQL].[N_FILES] AS [N_FILES], 
-    [V_SQL].[GRUPO] AS [GRUPO], 
-    [V_SQL].[TRIGGERS] AS [TRIGGERS], 
-    [V_SQL].[name] AS [name], 
-    [V_SQL].[object_id] AS [object_id], 
-    [V_SQL].[data_space_id] AS [data_space_id]
-    FROM [dbo].[V_SQL] AS [V_SQL]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="V_SQL_FICHEROS" EntityType="Self.V_SQL_FICHEROS" store:Type="Views" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [V_SQL_FICHEROS].[BBDD] AS [BBDD], 
-    [V_SQL_FICHEROS].[FICHERO] AS [FICHERO], 
-    [V_SQL_FICHEROS].[RUTA_FICHERO] AS [RUTA_FICHERO], 
-    [V_SQL_FICHEROS].[GRUPO_FICHERO] AS [GRUPO_FICHERO], 
-    [V_SQL_FICHEROS].[TOTAL_MB] AS [TOTAL_MB], 
-    [V_SQL_FICHEROS].[LIBRE_MB] AS [LIBRE_MB], 
-    [V_SQL_FICHEROS].[PORCENTAJE_LIBRE] AS [PORCENTAJE_LIBRE]
-    FROM [dbo].[V_SQL_FICHEROS] AS [V_SQL_FICHEROS]</DefiningQuery>
-    </EntitySet>
-    <AssociationSet Name="INCIDENCIAS_PALETS_fk0" Association="Self.INCIDENCIAS_PALETS_fk0">
-      <End Role="PALETS" EntitySet="PALETS" />
-      <End Role="PALETS_INCIDENCIAS" EntitySet="PALETS_INCIDENCIAS" />
-    </AssociationSet>
     <AssociationSet Name="MOVIMIENTOS_PICKING_fk0" Association="Self.MOVIMIENTOS_PICKING_fk0">
       <End Role="ORDEN_SALIDA_CAB" EntitySet="ORDEN_SALIDA_CAB" />
       <End Role="MOVIMIENTOS_PICKING" EntitySet="MOVIMIENTOS_PICKING" />

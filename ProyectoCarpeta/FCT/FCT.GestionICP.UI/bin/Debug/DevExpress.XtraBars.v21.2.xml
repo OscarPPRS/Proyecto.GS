@@ -294,6 +294,10 @@
       <param name="info">An <see cref="T:DevExpress.XtraBars.Alerter.AlertInfo"/> object passed to the event.</param>
       <param name="form">An AlertFormCore object passed to the event.</param>
     </member>
+    <member name="M:DevExpress.XtraBars.Alerter.AlertControl.RaiseClosing(DevExpress.XtraBars.Alerter.IAlertClosingEventArgs)">
+      <summary />
+      <param name="args"></param>
+    </member>
     <member name="M:DevExpress.XtraBars.Alerter.AlertControl.RaiseFormClosing(DevExpress.XtraBars.Alerter.AlertFormClosingEventArgs)">
       <summary>
         <para>Raises the <see cref="E:DevExpress.XtraBars.Alerter.AlertControl.FormClosing"/> event.</para>
@@ -316,20 +320,6 @@
     <member name="M:DevExpress.XtraBars.Alerter.AlertControl.RaiseHyperlinkClick(DevExpress.Utils.HyperlinkClickEventArgs)">
       <summary />
       <param name="e"></param>
-    </member>
-    <member name="M:DevExpress.XtraBars.Alerter.AlertControl.RaiseMouseFromEnter(DevExpress.XtraBars.Alerter.AlertEventArgs)">
-      <summary>
-        <para>Raises the <see cref="E:DevExpress.XtraBars.Alerter.AlertControl.MouseFormEnter"/> event.</para>
-      </summary>
-      <param name="args">An AlertEventArgs object passed to the event.</param>
-      <returns>The value of the Cancel event parameter.</returns>
-    </member>
-    <member name="M:DevExpress.XtraBars.Alerter.AlertControl.RaiseMouseFromLeave(DevExpress.XtraBars.Alerter.AlertEventArgs)">
-      <summary>
-        <para>Raises the <see cref="E:DevExpress.XtraBars.Alerter.AlertControl.MouseFormLeave"/> event.</para>
-      </summary>
-      <param name="args">An AlertEventArgs object passed to the event.</param>
-      <returns>The value of the Cancel event parameter.</returns>
     </member>
     <member name="M:DevExpress.XtraBars.Alerter.AlertControl.Show(System.Windows.Forms.Form)">
       <summary>
@@ -1529,6 +1519,10 @@
         <para>Gets or sets whether clicking the current <see cref="T:DevExpress.XtraBars.BarButtonItem"/>‘s link within a <see cref="T:DevExpress.XtraBars.Ribbon.RadialMenu"/> should close this menu.</para>
       </summary>
       <value>true if clicking the current <see cref="T:DevExpress.XtraBars.BarButtonItem"/>‘s link within a <see cref="T:DevExpress.XtraBars.Ribbon.RadialMenu"/> should close this menu; otherwise, false.</value>
+    </member>
+    <member name="P:DevExpress.XtraBars.BarButtonItem.DefaultDropDownLink">
+      <summary />
+      <value></value>
     </member>
     <member name="P:DevExpress.XtraBars.BarButtonItem.Description">
       <summary>
@@ -2825,6 +2819,10 @@
         <para>Gets or sets the bar item’s name which is used by accessibility client applications.</para>
       </summary>
       <value>A string which specifies the name of the bar item used by accessibility client applications.</value>
+    </member>
+    <member name="P:DevExpress.XtraBars.BarItem.AccessibleRole">
+      <summary />
+      <value></value>
     </member>
     <member name="P:DevExpress.XtraBars.BarItem.Alignment">
       <summary>
@@ -6081,6 +6079,10 @@
         <para>Represents the Total category. This member supports the internal infrastructure.</para>
       </summary>
       <value>A <see cref="T:DevExpress.XtraBars.BarManagerCategory"/> object.</value>
+    </member>
+    <member name="P:DevExpress.XtraBars.BarManagerCategory.UnusedCategory">
+      <summary />
+      <value></value>
     </member>
     <member name="P:DevExpress.XtraBars.BarManagerCategory.Visible">
       <summary>
@@ -18695,6 +18697,9 @@
         <para>Return value: (Unassigned Items)</para>
       </summary>
     </member>
+    <member name="F:DevExpress.XtraBars.Localization.BarString.BarUnusedItems">
+      <summary />
+    </member>
     <member name="F:DevExpress.XtraBars.Localization.BarString.CancelButton">
       <summary>
         <para>The caption of a Cancel button.</para>
@@ -20386,6 +20391,10 @@ The DefaultBoolean.Default value is equivalent to DefaultBoolean.True if the sta
       <value></value>
     </member>
     <member name="P:DevExpress.XtraBars.Navigation.AccordionControlElementBase.AccessibleName">
+      <summary />
+      <value></value>
+    </member>
+    <member name="P:DevExpress.XtraBars.Navigation.AccordionControlElementBase.AccessibleRole">
       <summary />
       <value></value>
     </member>
@@ -26454,6 +26463,16 @@ The DefaultBoolean.Default value is equivalent to DefaultBoolean.True if the sta
         <para>Starts the runtime initialization of the <see cref="T:DevExpress.XtraBars.Ribbon.GalleryControl"/> component.</para>
       </summary>
     </member>
+    <member name="M:DevExpress.XtraBars.Ribbon.GalleryControl.CalcGallerySize">
+      <summary />
+      <returns></returns>
+    </member>
+    <member name="M:DevExpress.XtraBars.Ribbon.GalleryControl.CalcGallerySize(System.Int32,System.Int32)">
+      <summary />
+      <param name="row"></param>
+      <param name="column"></param>
+      <returns></returns>
+    </member>
     <member name="M:DevExpress.XtraBars.Ribbon.GalleryControl.CalcHitInfo(System.Drawing.Point)">
       <summary>
         <para>Returns information on the <see cref="T:DevExpress.XtraBars.Ribbon.GalleryControl"/>‘s elements located at the specified point.</para>
@@ -26763,6 +26782,10 @@ The DefaultBoolean.Default value is equivalent to DefaultBoolean.True if the sta
       <value></value>
     </member>
     <member name="P:DevExpress.XtraBars.Ribbon.GalleryItem.AccessibleName">
+      <summary />
+      <value></value>
+    </member>
+    <member name="P:DevExpress.XtraBars.Ribbon.GalleryItem.AccessibleRole">
       <summary />
       <value></value>
     </member>
@@ -35262,6 +35285,10 @@ The DefaultBoolean.Default value is equivalent to DefaultBoolean.True if the sta
       <param name="editValue">A value to be formatted.</param>
       <returns>A string that specifies the value’s formatted text representation.</returns>
     </member>
+    <member name="P:DevExpress.XtraEditors.Repository.RepositoryItemPopupGalleryEdit.KeepDropDownGallerySize">
+      <summary />
+      <value></value>
+    </member>
     <member name="E:DevExpress.XtraEditors.Repository.RepositoryItemPopupGalleryEdit.QueryDisplayText">
       <summary>
         <para>Enables you to provide custom display text for the editor.</para>
@@ -36636,6 +36663,10 @@ The DefaultBoolean.Default value is equivalent to DefaultBoolean.True if the sta
         <para>Initializes a new instance of the <see cref="T:DevExpress.XtraToolbox.ToolboxOptionsView"/> class.</para>
       </summary>
     </member>
+    <member name="P:DevExpress.XtraToolbox.ToolboxOptionsView.CollapsedMenuButtonViewMode">
+      <summary />
+      <value></value>
+    </member>
     <member name="P:DevExpress.XtraToolbox.ToolboxOptionsView.ColumnCount">
       <summary>
         <para>Gets or sets the number of columns into which the <see cref="T:DevExpress.XtraToolbox.ToolboxControl"/> items are arranged.</para>
@@ -36682,11 +36713,23 @@ The DefaultBoolean.Default value is equivalent to DefaultBoolean.True if the sta
       </summary>
       <value>An <see cref="T:System.Drawing.Image"/> object that specifies the image for the menu button.</value>
     </member>
+    <member name="P:DevExpress.XtraToolbox.ToolboxOptionsView.MenuButtonImageOptions">
+      <summary />
+      <value></value>
+    </member>
+    <member name="P:DevExpress.XtraToolbox.ToolboxOptionsView.MenuButtonViewMode">
+      <summary />
+      <value></value>
+    </member>
     <member name="P:DevExpress.XtraToolbox.ToolboxOptionsView.MoreItemsButtonImage">
       <summary>
         <para>Gets or sets an icon for the button that invokes a popup panel containing currently active group items hidden in the <see cref="T:DevExpress.XtraToolbox.ToolboxControl"/> minimized state.</para>
       </summary>
       <value>An <see cref="T:System.Drawing.Image"/> object that specifies an icon for the More items button.</value>
+    </member>
+    <member name="P:DevExpress.XtraToolbox.ToolboxOptionsView.MoreItemsButtonImageOptions">
+      <summary />
+      <value></value>
     </member>
     <member name="P:DevExpress.XtraToolbox.ToolboxOptionsView.ScrollBarMode">
       <summary />

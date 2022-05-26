@@ -4,11 +4,11 @@
     <EntitySetMapping Name="EMPRESAS">
       <EntityTypeMapping TypeName="BDModel.EMPRESAS">
         <MappingFragment StoreEntitySet="EMPRESAS">
-          <ScalarProperty Name="LOGO" ColumnName="LOGO" />
-          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
-          <ScalarProperty Name="NOM_USUARIO" ColumnName="NOM_USUARIO" />
           <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
           <ScalarProperty Name="DES_EMPRESA" ColumnName="DES_EMPRESA" />
+          <ScalarProperty Name="NOM_USUARIO" ColumnName="NOM_USUARIO" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="LOGO" ColumnName="LOGO" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -105,18 +105,9 @@
           <ScalarProperty Name="FECH_INSERT" ColumnName="FECH_INSERT" />
           <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
           <ScalarProperty Name="ALBARAN_RECEPCION" ColumnName="ALBARAN_RECEPCION" />
-          <ScalarProperty Name="ETIQUETA" ColumnName="ETIQUETA" />
           <ScalarProperty Name="PETICION_SALIDA" ColumnName="PETICION_SALIDA" />
           <ScalarProperty Name="PALET_PADRE" ColumnName="PALET_PADRE" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="PALETS_INCIDENCIAS">
-      <EntityTypeMapping TypeName="BDModel.PALETS_INCIDENCIAS">
-        <MappingFragment StoreEntitySet="PALETS_INCIDENCIAS">
-          <ScalarProperty Name="ID_INCIDENCIA" ColumnName="ID_INCIDENCIA" />
-          <ScalarProperty Name="COD_PALET" ColumnName="COD_PALET" />
-          <ScalarProperty Name="DESC_INCIDENCIA" ColumnName="DESC_INCIDENCIA" />
+          <ScalarProperty Name="ETIQUETA" ColumnName="ETIQUETA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -138,6 +129,9 @@
           <ScalarProperty Name="COD_LINEA" ColumnName="COD_LINEA" />
           <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
           <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+          <ScalarProperty Name="CANTIDAD_MAL_ESTADO" ColumnName="CANTIDAD_MAL_ESTADO" />
+          <ScalarProperty Name="EXCEDENTE" ColumnName="EXCEDENTE" />
+          <ScalarProperty Name="FALTA" ColumnName="FALTA" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -199,6 +193,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="V_ORDEN_SALIDA_INCIDENCIAS">
+      <EntityTypeMapping TypeName="BDModel.V_ORDEN_SALIDA_INCIDENCIAS">
+        <MappingFragment StoreEntitySet="V_ORDEN_SALIDA_INCIDENCIAS">
+          <ScalarProperty Name="ID_INCIDENCIA" ColumnName="ID_INCIDENCIA" />
+          <ScalarProperty Name="DES_INCIDENCIA" ColumnName="DES_INCIDENCIA" />
+          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+          <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
+          <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+          <ScalarProperty Name="DIRECCION_ENTREGA" ColumnName="DIRECCION_ENTREGA" />
+          <ScalarProperty Name="COD_POSTAL" ColumnName="COD_POSTAL" />
+          <ScalarProperty Name="POBLACION" ColumnName="POBLACION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="V_ORDEN_SALIDA_LIN">
       <EntityTypeMapping TypeName="BDModel.V_ORDEN_SALIDA_LIN">
         <MappingFragment StoreEntitySet="V_ORDEN_SALIDA_LIN">
@@ -209,6 +217,25 @@
           <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
           <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
           <ScalarProperty Name="STOCK" ColumnName="STOCK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="V_PALETS">
+      <EntityTypeMapping TypeName="BDModel.V_PALETS">
+        <MappingFragment StoreEntitySet="V_PALETS">
+          <ScalarProperty Name="COD_PALET" ColumnName="COD_PALET" />
+          <ScalarProperty Name="DESC_ESTADO" ColumnName="DESC_ESTADO" />
+          <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
+          <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
+          <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+          <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
+          <ScalarProperty Name="DESC_UBICACION" ColumnName="DESC_UBICACION" />
+          <ScalarProperty Name="CALLE" ColumnName="CALLE" />
+          <ScalarProperty Name="POSICION" ColumnName="POSICION" />
+          <ScalarProperty Name="FECH_INSERT" ColumnName="FECH_INSERT" />
+          <ScalarProperty Name="ALBARAN_RECEPCION" ColumnName="ALBARAN_RECEPCION" />
+          <ScalarProperty Name="PETICION_SALIDA" ColumnName="PETICION_SALIDA" />
+          <ScalarProperty Name="PALET_PADRE" ColumnName="PALET_PADRE" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -234,6 +261,9 @@
           <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
           <ScalarProperty Name="DES_REFERENCIA" ColumnName="DES_REFERENCIA" />
           <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+          <ScalarProperty Name="CANTIDAD_MAL_ESTADO" ColumnName="CANTIDAD_MAL_ESTADO" />
+          <ScalarProperty Name="EXCEDENTE" ColumnName="EXCEDENTE" />
+          <ScalarProperty Name="FALTA" ColumnName="FALTA" />
           <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
           <ScalarProperty Name="STOCK" ColumnName="STOCK" />
         </MappingFragment>
@@ -253,58 +283,9 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="V_SQL">
-      <EntityTypeMapping TypeName="BDModel.V_SQL">
-        <MappingFragment StoreEntitySet="V_SQL">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="TABLA" ColumnName="TABLA" />
-          <ScalarProperty Name="CAMPO" ColumnName="CAMPO" />
-          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-          <ScalarProperty Name="POSICION" ColumnName="POSICION" />
-          <ScalarProperty Name="TIPO" ColumnName="TIPO" />
-          <ScalarProperty Name="DIMENSION" ColumnName="DIMENSION" />
-          <ScalarProperty Name="PERMITE_NULOS" ColumnName="PERMITE_NULOS" />
-          <ScalarProperty Name="DEFECTO" ColumnName="DEFECTO" />
-          <ScalarProperty Name="CLAVE" ColumnName="CLAVE" />
-          <ScalarProperty Name="INDICES" ColumnName="INDICES" />
-          <ScalarProperty Name="COLLATE" ColumnName="COLLATE" />
-          <ScalarProperty Name="GRUPO_FICHEROS" ColumnName="GRUPO_FICHEROS" />
-          <ScalarProperty Name="KBYTES" ColumnName="KBYTES" />
-          <ScalarProperty Name="MBYTES" ColumnName="MBYTES" />
-          <ScalarProperty Name="GROWTH" ColumnName="GROWTH" />
-          <ScalarProperty Name="N_FILES" ColumnName="N_FILES" />
-          <ScalarProperty Name="GRUPO" ColumnName="GRUPO" />
-          <ScalarProperty Name="TRIGGERS" ColumnName="TRIGGERS" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="object_id" ColumnName="object_id" />
-          <ScalarProperty Name="data_space_id" ColumnName="data_space_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="V_SQL_FICHEROS">
-      <EntityTypeMapping TypeName="BDModel.V_SQL_FICHEROS">
-        <MappingFragment StoreEntitySet="V_SQL_FICHEROS">
-          <ScalarProperty Name="BBDD" ColumnName="BBDD" />
-          <ScalarProperty Name="FICHERO" ColumnName="FICHERO" />
-          <ScalarProperty Name="RUTA_FICHERO" ColumnName="RUTA_FICHERO" />
-          <ScalarProperty Name="GRUPO_FICHERO" ColumnName="GRUPO_FICHERO" />
-          <ScalarProperty Name="TOTAL_MB" ColumnName="TOTAL_MB" />
-          <ScalarProperty Name="LIBRE_MB" ColumnName="LIBRE_MB" />
-          <ScalarProperty Name="PORCENTAJE_LIBRE" ColumnName="PORCENTAJE_LIBRE" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <FunctionImportMapping FunctionName="BDModel.Store.FN_FECHA_GT" FunctionImportName="FN_FECHA_GT">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="BDModel.FN_FECHA_GT_Result">
-          <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="PA_EMAIL_RECEPCIONES" FunctionName="BDModel.Store.PA_EMAIL_RECEPCIONES" />
-    <FunctionImportMapping FunctionImportName="PA_ENVIAR_DBMAIL" FunctionName="BDModel.Store.PA_ENVIAR_DBMAIL" />
     <FunctionImportMapping FunctionImportName="PA_GENERAR_ETIQUETA" FunctionName="BDModel.Store.PA_GENERAR_ETIQUETA" />
-    <FunctionImportMapping FunctionImportName="PA_INF_TABLA" FunctionName="BDModel.Store.PA_INF_TABLA" />
+    <FunctionImportMapping FunctionImportName="PA_GESTIONAR_PALETS" FunctionName="BDModel.Store.PA_GESTIONAR_PALETS" />
     <FunctionImportMapping FunctionImportName="PA_MOVIMIENTOS_PICKING" FunctionName="BDModel.Store.PA_MOVIMIENTOS_PICKING" />
     <FunctionImportMapping FunctionImportName="PA_ORDEN_SALIDA_CAB" FunctionName="BDModel.Store.PA_ORDEN_SALIDA_CAB" />
     <FunctionImportMapping FunctionImportName="PA_ORDEN_SALIDA_INCIDENCIAS" FunctionName="BDModel.Store.PA_ORDEN_SALIDA_INCIDENCIAS" />
@@ -313,71 +294,5 @@
     <FunctionImportMapping FunctionImportName="PA_RECEPCIONES_CAB" FunctionName="BDModel.Store.PA_RECEPCIONES_CAB" />
     <FunctionImportMapping FunctionImportName="PA_RECEPCIONES_LIN" FunctionName="BDModel.Store.PA_RECEPCIONES_LIN" />
     <FunctionImportMapping FunctionImportName="PA_REFERENCIAS" FunctionName="BDModel.Store.PA_REFERENCIAS" />
-    <FunctionImportMapping FunctionImportName="PA_SQLD" FunctionName="BDModel.Store.PA_SQLD" />
-    <FunctionImportMapping FunctionImportName="PAB" FunctionName="BDModel.Store.PAB" />
-    <FunctionImportMapping FunctionImportName="PACE" FunctionName="BDModel.Store.PACE" />
-    <FunctionImportMapping FunctionImportName="PAF" FunctionName="BDModel.Store.PAF" />
-    <FunctionImportMapping FunctionImportName="PAH" FunctionName="BDModel.Store.PAH" />
-    <FunctionImportMapping FunctionImportName="PAP" FunctionName="BDModel.Store.PAP" />
-    <FunctionImportMapping FunctionImportName="PASE" FunctionName="BDModel.Store.PASE" />
-    <FunctionImportMapping FunctionImportName="PAT" FunctionName="BDModel.Store.PAT">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="BDModel.PAT_Result">
-          <ScalarProperty Name="TABLA" ColumnName="TABLA" />
-          <ScalarProperty Name="CAMPO" ColumnName="CAMPO" />
-          <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-          <ScalarProperty Name="POSICION" ColumnName="POSICION" />
-          <ScalarProperty Name="TIPO" ColumnName="TIPO" />
-          <ScalarProperty Name="DIMENSION" ColumnName="DIMENSION" />
-          <ScalarProperty Name="PERMITE_NULOS" ColumnName="PERMITE_NULOS" />
-          <ScalarProperty Name="DEFECTO" ColumnName="DEFECTO" />
-          <ScalarProperty Name="CLAVE" ColumnName="CLAVE" />
-          <ScalarProperty Name="INDICES" ColumnName="INDICES" />
-          <ScalarProperty Name="COLLATE" ColumnName="COLLATE" />
-          <ScalarProperty Name="GRUPO_FICHEROS" ColumnName="GRUPO_FICHEROS" />
-          <ScalarProperty Name="KBYTES" ColumnName="KBYTES" />
-          <ScalarProperty Name="MBYTES" ColumnName="MBYTES" />
-          <ScalarProperty Name="GROWTH" ColumnName="GROWTH" />
-          <ScalarProperty Name="N_FILES" ColumnName="N_FILES" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="object_id" ColumnName="object_id" />
-          <ScalarProperty Name="data_space_id" ColumnName="data_space_id" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="PA_GESTIONAR_PALETS" FunctionName="BDModel.Store.PA_GESTIONAR_PALETS" />
-    <EntitySetMapping Name="V_PALETS">
-      <EntityTypeMapping TypeName="BDModel.V_PALETS">
-        <MappingFragment StoreEntitySet="V_PALETS">
-          <ScalarProperty Name="PALET_PADRE" ColumnName="PALET_PADRE" />
-          <ScalarProperty Name="PETICION_SALIDA" ColumnName="PETICION_SALIDA" />
-          <ScalarProperty Name="ALBARAN_RECEPCION" ColumnName="ALBARAN_RECEPCION" />
-          <ScalarProperty Name="FECH_INSERT" ColumnName="FECH_INSERT" />
-          <ScalarProperty Name="POSICION" ColumnName="POSICION" />
-          <ScalarProperty Name="CALLE" ColumnName="CALLE" />
-          <ScalarProperty Name="DESC_UBICACION" ColumnName="DESC_UBICACION" />
-          <ScalarProperty Name="UBICACION" ColumnName="UBICACION" />
-          <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
-          <ScalarProperty Name="COD_REFERENCIA" ColumnName="COD_REFERENCIA" />
-          <ScalarProperty Name="DESC_ESTADO" ColumnName="DESC_ESTADO" />
-          <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
-          <ScalarProperty Name="COD_PALET" ColumnName="COD_PALET" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="V_ORDEN_SALIDA_INCIDENCIAS">
-      <EntityTypeMapping TypeName="BDModel.V_ORDEN_SALIDA_INCIDENCIAS">
-        <MappingFragment StoreEntitySet="V_ORDEN_SALIDA_INCIDENCIAS">
-          <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
-          <ScalarProperty Name="DES_INCIDENCIA" ColumnName="DES_INCIDENCIA" />
-          <ScalarProperty Name="POBLACION" ColumnName="POBLACION" />
-          <ScalarProperty Name="COD_POSTAL" ColumnName="COD_POSTAL" />
-          <ScalarProperty Name="DIRECCION_ENTREGA" ColumnName="DIRECCION_ENTREGA" />
-          <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
-          <ScalarProperty Name="COD_PETICION" ColumnName="COD_PETICION" />
-          <ScalarProperty Name="ID_INCIDENCIA" ColumnName="ID_INCIDENCIA" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
